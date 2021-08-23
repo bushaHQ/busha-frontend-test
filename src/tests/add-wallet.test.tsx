@@ -18,14 +18,16 @@ test("clicking 'Add new wallet' button opens the modal", async () => {
   await waitFor(() => screen.getByTestId("modal"));
 });
 
-test.only("'Add new wallet' form", async () => {
+test("'Add new wallet' form", async () => {
   renderRoot();
 
   await waitForElementToBeRemoved(() => screen.getByLabelText("Loading..."));
 
   userEvent.click(screen.getByText(/Add new wallet/i));
 
-  const withinModal = within(screen.getByTestId("modal"));
+  const modal = await screen.findByTestId("modal");
+
+  const withinModal = within(modal);
 
   // fetch available wallets
   await waitForElementToBeRemoved(() =>

@@ -5,7 +5,13 @@ import App from "../App";
 /*
  *  render
  */
-export const renderRoot = () => render(<App />);
+export const renderRoot = () =>
+  render(
+    <>
+      <div id="modal-root" />
+      <App />
+    </>
+  );
 
 // /**
 //  * setupApp

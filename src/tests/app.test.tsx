@@ -8,7 +8,7 @@ test("renders user's full name", () => {
 
 test("renders sidebar links", () => {
   renderRoot();
-  const sidebsrLinks = [
+  const sidebarLinks = [
     "Wallets",
     "Prices",
     "Peer2Peer",
@@ -16,7 +16,7 @@ test("renders sidebar links", () => {
     "Settings",
   ];
 
-  sidebsrLinks.forEach((link) => {
+  sidebarLinks.forEach((link) => {
     const linkElement = screen.getByText(RegExp(link, "i"));
     expect(linkElement).toBeInTheDocument();
   });
