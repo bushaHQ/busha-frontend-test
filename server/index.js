@@ -46,6 +46,7 @@ server.use("/accounts", (req, res, next) => {
     req.body.currency = wallet.currency;
     req.body.name = wallet.name;
     req.body.type = wallet.type;
+    req.body.imgURL = wallet.imgURL;
 
     router.db.getState().wallets.splice(walletIndex, 1);
     router.db.write();
