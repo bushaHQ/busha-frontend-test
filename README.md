@@ -1,45 +1,74 @@
-# Getting Started with Create React App
+# Busha Frontend test
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Requirements
+
+Create the screens for a Busha MVP application.
+
+| View              | Links                                                                                |
+| ----------------- | ------------------------------------------------------------------------------------ |
+| Account List  | [Issue](issues/account-list.md) • [Tests](src/tests/account-list.test.tsx)   |
+| Add Account    | [Issue](issues/add-wallet.md) • [Tests](src/tests/add-wallet.test.tsx)       |
+
+## Guidelines
+
+- Satisfy the requirements using TypeScript and React.
+
+- Make use of, but don't change, the dependencies in [`package.json`](package.json).
+
+- Make use of, but don't change, the components in [`src/components/shared`](src/components/shared/index.ts). See examples in [`src/stories`](src/stories).
+
+- Don't change the tests in [`src/tests`](src/tests).
+
+## Submission
+
+When the tests pass, and the UI resembles the figma design, archive your work in a `.zip` file and send it to bolaji@busha.co with your CV. _Do not include `node_modules` in the `.zip` file._
+
+## Feedback
+
+Something we can improve? Email bolaji@busha.com.
 
 ## Available Scripts
+### Setup
 
-In the project directory, you can run:
+```sh
+yarn install
+```
 
-### `yarn start`
+Requires [Node](https://nodejs.org) and [NPM](https://www.npmjs.com/).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Develop
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```sh
+yarn start
+```
 
-### `yarn test`
+[JSON Server](https://github.com/typicode/json-server) will start on port 3090 and [Create React App](https://github.com/facebook/create-react-app) will start on port 3000.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Reset Database
+```sh
+yarn run db:reset
+```
+You might want to reset the database if the request to `GET /wallets`  returns an empty list 🙂.
 
-### `yarn build`
+### Storybook
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```sh
+yarn run storybook
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+[Storybook](https://storybook.js.org) will start on port 6006.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Test
 
-### `yarn eject`
+```sh
+yarn test
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Tests are written with [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/).
 
 ## Learn More
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and Typescript.
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
