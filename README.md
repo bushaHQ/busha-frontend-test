@@ -15,7 +15,7 @@ Create the screens for a Busha MVP application.
 
 - Make use of, but don't change, the dependencies in [`package.json`](package.json).
 
-- Make use of, but don't change, the components in [`src/components/shared`](src/components/shared/index.ts). See examples in [`src/stories`](src/stories).
+- Make use of, but don't change, the components in [`src/components/shared`](src/components/shared). See examples in [`src/stories`](src/stories).
 
 - Don't change the tests in [`src/tests`](src/tests).
 
