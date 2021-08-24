@@ -32,18 +32,14 @@
       "type": "digital",
       "deposit": true,
       "payout": true
-    },
-    {
-      "currency": "XLM",
-      "hold": "0",
-      "pending_balance": "0",
-      "balance": "0",
-      "name": "Stellar",
-      "type": "digital",
-      "id": "6r-E8Lx"
     }
   ],
   "wallets": [
+    {
+      "currency": "XLM",
+      "name": "Stellar",
+      "type": "digital"
+    },
     {
       "currency": "LTC",
       "name": "Litecoin",

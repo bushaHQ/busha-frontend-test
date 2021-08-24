@@ -18,13 +18,17 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server:dev": "nodemon server/index.js",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "db:reset": "node scripts/db-reset.js",
+    "start:client": "react-scripts start",
+    "start:server": "node server/index.js",
+    "wait-on:server": "wait-on http://localhost:3090/",
+    "start": "concurrently  \"npm run start:server\" \"npm run wait-on:server && npm run start:client\""
   },
   "eslintConfig": {
     "extends": [
@@ -62,8 +66,10 @@
     "@storybook/preset-create-react-app": "^3.2.0",
     "@storybook/react": "^6.3.7",
     "@types/styled-components": "^5.1.12",
+    "concurrently": "^6.2.1",
     "json-server": "^0.16.3",
     "msw": "^0.34.0",
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.12",
+    "wait-on": "^6.0.0"
   }
 }
