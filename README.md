@@ -21,7 +21,7 @@ Create the screens for a Busha MVP application.
 
 ## Submission
 
-When the tests pass, and the UI resembles the figma design, submit a PR and include a live url to your solution.
+When the tests pass, and the UI resembles the figma design, submit a PR and include a live url 🚀 to your solution .
 
 ## Feedback
 
