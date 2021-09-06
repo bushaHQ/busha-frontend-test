@@ -11,7 +11,7 @@ Create the screens for a Busha MVP application.
 
 ## Guidelines
 
-- Satisfy the requirements using TypeScript and React.
+- Fulfil the requirements using TypeScript and React.
 
 - Make use of, but don't change, the dependencies in [`package.json`](package.json).
 
@@ -21,11 +21,11 @@ Create the screens for a Busha MVP application.
 
 ## Submission
 
-When the tests pass, and the UI resembles the figma design, archive your work in a `.zip` file and send it to bolaji@busha.co with your CV. _Do not include `node_modules` in the `.zip` file._
+When the tests pass, and the UI resembles the figma design, submit a PR and include a live url to your solution.
 
 ## Feedback
 
-Something we can improve? Email bolaji@busha.com.
+Something we can improve? Email bolaji@busha.co or create an issue.
 
 ## Available Scripts
 ### Setup
