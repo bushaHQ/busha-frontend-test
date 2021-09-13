@@ -24,7 +24,12 @@ const Sidebar = () => {
               key={pos}
               style={{ background: item?.isCurrent ? "#f5f7fa" : "white" }}
             >
-              <Text color={"black"} position={"left"} size={0.85}>
+              <Text
+                color={item?.isCurrent ? "black" : "#3E4C59"}
+                position={"left"}
+                size={0.85}
+                heavy={item?.isCurrent ? true : false}
+              >
                 {item?.text}
               </Text>
             </SidebarItems>

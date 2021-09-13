@@ -79,6 +79,7 @@ export const Card = styled("div")<{
   textAlign?: string;
   verticalCenter?: boolean;
   spaceBetween?: boolean;
+  animateZoom?: boolean;
 }>`
   width: ${(props) => (props.width ? `${props.width}em` : "100%")};
   height: ${(props) => (props.height ? `${props.height}em` : "100%")};
@@ -97,6 +98,10 @@ export const Card = styled("div")<{
   align-items: ${(props) => (props.verticalCenter ? "center" : "none")};
   justify-content: ${(props) =>
     props.spaceBetween ? "space-between" : "none"};
+  transition: 0.5s zoom;
+  &:hover {
+    zoom: ${(props) => props.animateZoom && 1.1};
+  }
 `;
 
 export const Text = styled("p")<{

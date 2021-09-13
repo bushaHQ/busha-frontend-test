@@ -71,7 +71,7 @@ export const LayoutTitle = styled.h3`
   font-family: Aribau Grotesk;
   font-style: normal;
   font-weight: bold;
-  font-size: 2em;
+  font-size: 32px;
   line-height: 32px;
   color: #000000;
 `;

@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { PageTransition } from "./AppStyles";
 
 import { WalletPage } from "./pages/accountList";
 
@@ -70,11 +71,13 @@ function App() {
         handleAddAccount,
       }}
     >
-      <Router>
-        <Switch>
-          <Route exact path="*" component={WalletPage} />
-        </Switch>
-      </Router>
+      <PageTransition>
+        <Router>
+          <Switch>
+            <Route exact path="*" component={WalletPage} />
+          </Switch>
+        </Router>
+      </PageTransition>
     </AppContext.Provider>
   );
 }

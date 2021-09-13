@@ -20,6 +20,7 @@ const Wallets = () => {
             radius={0.9}
             bgImg={"linear-gradient(-210deg, #111111, rgba(41, 41, 41, 0.3))"}
             shadow
+            // animateZoom
           >
             <div style={{ padding: "1.5em 1em" }}>
               <Card height={3} background={"none"} flex>
@@ -43,7 +44,13 @@ const Wallets = () => {
                 top={1}
                 bottom={1}
               >
-                {eachWallet?.currency} {eachWallet?.balance}
+                {eachWallet?.name === "Naira" ? (
+                  <>₦ {eachWallet?.balance}</>
+                ) : (
+                  <>
+                    {eachWallet?.balance} {eachWallet?.currency}
+                  </>
+                )}
               </Text>
 
               <ArrowRight

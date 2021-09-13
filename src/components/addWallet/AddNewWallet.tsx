@@ -60,6 +60,7 @@ const AddNewWallet = () => {
             transparent
             color={"#D72C0D"}
             onClick={handleClose}
+            label="Close button"
             pointer
           />
         </Card>

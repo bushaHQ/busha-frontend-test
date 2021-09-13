@@ -14,7 +14,7 @@ const NetworkHorzError = () => {
         >
           <CancelIcon transparent color={"#D72C0D"} />
           <Text color={"#D72C0D"} size={0.8}>
-            Network Error!
+            Network Error
           </Text>
         </div>
         <div>

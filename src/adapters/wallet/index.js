@@ -26,10 +26,11 @@ export const getAccounts = async (
       setIsError(true);
       setIsFetching(false);
       return { errorMessage, isError };
+    } else {
+      setIsFetching(false);
+      setAccountsList(data);
     }
 
-    setIsFetching(false);
-    setAccountsList(data);
     return { data: data };
   };
 
@@ -57,10 +58,11 @@ export const getWallets = async (setWalletsList, setIsError, setIsFetching) => {
       setIsError(true);
       setIsFetching(false);
       return { errorMessage, isError };
+    } else {
+      setIsFetching(false);
+      setWalletsList(data);
     }
 
-    setIsFetching(false);
-    setWalletsList(data);
     return { data: data };
   };
 
@@ -94,11 +96,12 @@ export const createWallet = async (
       setIsError(true);
       setIsLoading(false);
       return { errorMessage, isError };
+    } else {
+      handleAddAccount(data);
+      handleClose();
+      setIsLoading(false);
     }
 
-    handleAddAccount(data);
-    handleClose();
-    setIsLoading(false);
     return { data: data };
   };
 

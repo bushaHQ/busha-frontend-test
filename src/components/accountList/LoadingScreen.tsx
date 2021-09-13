@@ -11,6 +11,7 @@ const LoadingScreen: React.FC = () => {
         verticalCenter
         // top={5}
       >
+        <label htmlFor="loading..."></label>
         <Loader />
       </Card>
     </>

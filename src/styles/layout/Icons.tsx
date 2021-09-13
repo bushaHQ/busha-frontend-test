@@ -21,6 +21,14 @@ export const Avatar = styled.div`
   border-radius: 50%;
   width: 2.5em;
   height: 2.5em;
+  display: flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  &::before {
+    content: "O";
+    font-weight: bold;
+  }
 `;
 
 export const NetworkErrorIcon = styled("div")<{
@@ -29,21 +37,51 @@ export const NetworkErrorIcon = styled("div")<{
   top?: number;
   bottom?: number;
   center?: boolean;
+  right?: boolean;
+  pointer?: boolean;
 }>`
-  border-radius: 50%;
-  border: 5px solid #ffbdbd;
   width: ${(props) => (props.width ? `${props.width}em` : "3em")};
   height: ${(props) => (props.height ? `${props.height}em` : "3em")};
   margin-top: ${(props) => (props.top ? `${props.top}em` : "0em")};
   margin-bottom: ${(props) => (props.bottom ? `${props.bottom}em` : "0em")};
   margin-left: ${(props) => (props.center ? "auto" : "0em")};
   margin-right: ${(props) => (props.center ? "auto" : "0em")};
+  color: ${(props) => (props.color ? `${props.color}` : "rgba(0,0,0,1)")};
+  float: ${(props) => (props.right ? "right" : "left")};
+  border-radius: 50%;
+  display: flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  cursor: ${(props) => (props.pointer ? "pointer" : "none")};
+  background-image: url("${networkImg}");
   &::before {
-    content: url(${networkImg});
-    color: white;
+    content: "E";
     font-weight: bold;
-    font-size: 1.2em;
   }
+`;
+// content: url("${networkImg}");
+
+// --- placeholder (E) because svg didn't render at my end
+
+export const NetworkCircleIcon = styled("div")<{
+  width?: number;
+  height?: number;
+  top?: number;
+  bottom?: number;
+  center?: boolean;
+  pointer?: boolean;
+}>`
+  width: ${(props) => (props.width ? `${props.width}em` : "3em")};
+  height: ${(props) => (props.height ? `${props.height}em` : "3em")};
+  margin-top: ${(props) => (props.top ? `${props.top}em` : "0em")};
+  margin-bottom: ${(props) => (props.bottom ? `${props.bottom}em` : "0em")};
+  margin-left: ${(props) => (props.center ? "auto" : "0em")};
+  margin-right: ${(props) => (props.center ? "auto" : "0em")};
+  color: ${(props) => (props.color ? `${props.color}` : "rgba(0,0,0,1)")};
+  border-radius: 50%;
+  border: 5px solid #ffbdbd;
+  cursor: ${(props) => (props.pointer ? "pointer" : "none")};
 `;
 
 export const ImgIcon = styled("img")<{
@@ -70,6 +108,7 @@ export const ArrowRight = styled("div")<{
   background?: string;
   color?: string;
   right?: boolean;
+  transparent?: boolean;
 }>`
   width: ${(props) => (props.width ? `${props.width}em` : "3em")};
   height: ${(props) => (props.height ? `${props.height}em` : "3em")};
@@ -81,6 +120,7 @@ export const ArrowRight = styled("div")<{
     props.background ? `${props.background}` : "white"};
   color: ${(props) => (props.color ? `${props.color}` : "rgba(0,0,0,1)")};
   float: ${(props) => (props.right ? "right" : "left")};
+  background: ${(props) => props.transparent && "none"};
   border-radius: 50%;
   display: flex;
   align-self: center;
@@ -187,7 +227,6 @@ export const AddIcon = styled("div")<{
   justify-content: center;
   &::before {
     content: "+";
-    color: white;
     font-weight: bold;
     font-size: 1.2em;
   }
@@ -205,6 +244,7 @@ export const CancelIcon = styled("div")<{
   transparent?: boolean;
   size?: number;
   pointer?: boolean;
+  label?: string;
 }>`
   width: ${(props) => (props.width ? `${props.width}em` : "3em")};
   height: ${(props) => (props.height ? `${props.height}em` : "3em")};
@@ -231,4 +271,4 @@ export const CancelIcon = styled("div")<{
   }
 `;
 
-// content: url('data:image/svg+xml;utf8,${cancelImg}');
+// --- Please, I could not properly create the icons because the svgs are not working with content css at my end ---

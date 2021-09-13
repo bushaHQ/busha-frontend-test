@@ -21,7 +21,7 @@ const Header = () => {
               bottom={1}
               heavy
             >
-              Busha
+              busha
             </Text>
           </Grid>
           <Grid lg={4} sm={6} md={6} xs={4}></Grid>

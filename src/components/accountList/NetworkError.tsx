@@ -1,6 +1,6 @@
 import React from "react";
 import { getAccounts, getWallets } from "../../adapters/wallet";
-import { NetworkErrorIcon } from "../../styles/layout/Icons";
+import { NetworkCircleIcon } from "../../styles/layout/Icons";
 import { Button, Card, Text } from "../../styles/layout/UtilStyles";
 
 interface MainProps {
@@ -38,9 +38,9 @@ const NetworkError = (props: MainProps) => {
         verticalCenter
       >
         <div>
-          <NetworkErrorIcon center />
+          <NetworkCircleIcon center />
           <Text color={"#3E4C59"} position={"center"} size={0.9} top={1}>
-            Network Error!
+            Network Error
           </Text>
           <Button
             width={10}

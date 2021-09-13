@@ -27,7 +27,7 @@ const Layout: FC<MainProps> = (props) => {
         <LayoutContainer>
           <Grid flex spacing={2}>
             <Grid lg={6} md={6} xs={6} sm={6}>
-              <LayoutTitle>Wallet</LayoutTitle>
+              <LayoutTitle>Wallets</LayoutTitle>
             </Grid>
             <Grid lg={6} md={6} xs={6} sm={6}>
               {props?.addWallet && (
@@ -42,8 +42,8 @@ const Layout: FC<MainProps> = (props) => {
                   <AddIcon
                     height={1.5}
                     width={1.5}
-                    background={"#303030"}
-                    color={"white"}
+                    background={"white"}
+                    color={"#303030"}
                     top={2.5}
                   />
                   <Text left={2} top={3} bottom={0} size={0.9}>
