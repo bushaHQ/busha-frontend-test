@@ -1,5 +1,9 @@
+import DesignSystem from "./pages/DesignSystem";
+
 function App() {
-  return <h1>Busha</h1>;
+  return (
+    <DesignSystem />
+  );
 }
 
 export default App;
