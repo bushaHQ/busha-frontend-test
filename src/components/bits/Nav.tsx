@@ -8,7 +8,7 @@ export const Nav = styled.nav((props) => ({
 	height: '56px',
 	background: '#FFFFFF',
 	boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.05)',
-	zIndex: 1000,
+	zIndex: 999,
 	'+ main': {
 		marginTop: '56px'
 	}

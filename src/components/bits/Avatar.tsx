@@ -24,9 +24,9 @@ export const Avatar = styled.div<AvatarProps>((props) => ({
 	'span, p, div, img': {
 		textAlign: 'center',
 		fontSize: `${(props.size || 42) - 24}px`,
-		width: `${(props.size || 42) - 24}px`,
-		height: `${(props.size || 42) - 24}px`,
-		lineHeight: `${(props.size || 42) - 24}px`,
+		width: `${(props.size || 42) - 14}px`,
+		height: `${(props.size || 42) - 14}px`,
+		lineHeight: `${(props.size || 42) - 14}px`,
 		fontWeight: 'bold',
 		color: props.color || 'rgba(62, 76, 89, 1)',
 	},
