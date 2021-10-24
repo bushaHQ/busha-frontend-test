@@ -1,5 +1,6 @@
 import { MainLayout } from "./layouts";
 import DesignSystem from "./pages/DesignSystem";
+import WalletPage from "./pages/Wallet";
 
 function App() {
   return (
@@ -8,7 +9,7 @@ function App() {
         {
           link: '/wallet',
           name: 'Wallet',
-          render: () => <DesignSystem />,
+          render: () => <WalletPage />,
         },
         {
           link: '/prices',

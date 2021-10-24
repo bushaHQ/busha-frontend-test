@@ -66,9 +66,6 @@ export const MainLayout = (props: MainLayoutProps) => {
     const dehydate = hydrate();
 
     window.addEventListener("locationchange", function () {
-      console.log("location changed!");
-      console.log(window.location.pathname);
-
       const i = routes.findIndex(
         (route) => route.link === window.location.pathname
       );
@@ -104,7 +101,7 @@ export const MainLayout = (props: MainLayoutProps) => {
                 </Col>
                 <Col xs={8}>
                   <Text mode="span" size={1} truncate>
-                    Isaac Oluwatemilorun
+                    Oluwatobi Akindunjoye
                   </Text>
                 </Col>
               </Row>
