@@ -4,3 +4,6 @@ export * from './Col';
 export * from './Text';
 export * from './Button';
 export * from './Card';
+export * from './List';
+export * from './Nav';
+export * from './Avatar';
