@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { MouseEventHandler, ReactNode } from "react";
 import styled from "styled-components";
 import Loader from "../shared/Loader";
 
@@ -7,6 +7,7 @@ export interface ButtonProps {
 	disabled?: boolean
 	text?: boolean
 	children?: ReactNode
+	onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
 export const Button = (props: ButtonProps) => {
@@ -52,7 +53,7 @@ const LoaderWrapper = styled.div({
 
 export const BaseButton = styled.button<ButtonProps>((props) => ({
 	display: 'inline-flex',
-	padding: '0px 16px',
+	padding: '0px 36px',
 	background: props.text ? 'transparent' : props.disabled ? '#CBD2D9' : '#000000',
 	borderRadius: '40px',
 	height: '54px',
