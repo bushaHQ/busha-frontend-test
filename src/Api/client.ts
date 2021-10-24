@@ -8,6 +8,8 @@ export class ApiClient {
 
 	public getWalletAccounts = async () => this._instance.get<IAccount[]>('/accounts')
 
+	public createWallet = async (b: { currency: string }) => this._instance.post<{ currency: string }, IAccount>('/accounts', b)
+
 	public getWalletCurrencies = async () => this._instance.get<IWallet[]>('/wallets')
 
 }
