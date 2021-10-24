@@ -19,7 +19,7 @@ export const Container = styled.div<ContainerProps>((props) => ({
 		maxWidth: '1185px',
 	},
 	'@media (min-width: 960px)': {
-		maxWidth: '900px'
+		maxWidth: '950px'
 	},
 
 	...(props.fluid && {

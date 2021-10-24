@@ -5,6 +5,7 @@ import Loader from "../shared/Loader";
 export interface ButtonProps {
 	loading?: boolean
 	disabled?: boolean
+	text?: boolean
 	children?: ReactNode
 }
 
@@ -18,7 +19,7 @@ export const Button = (props: ButtonProps) => {
 						<Loader size={28} width={5} />
 					</LoaderWrapper>
 				)}
-				<span style={{ opacity: props.loading ? 0 : 1 }}>{props.children}</span>
+				<div style={{ opacity: props.loading ? 0 : 1, display: 'block' }}>{props.children}</div>
 			</ButtonContentWrapper>
 		</BaseButton>
 	);
@@ -26,11 +27,15 @@ export const Button = (props: ButtonProps) => {
 
 const ButtonContentWrapper = styled.div({
 	display: 'flex',
+	flex: '1 0 auto',
 	flexDirection: 'row',
 	alignItems: 'center',
 	justifyContent: 'center',
 	position: "relative",
-	height: '54px'
+	height: '54px',
+	minWidth: '54px',
+	width: 'auto',
+	transitionProperty: 'opacity',
 })
 
 const LoaderWrapper = styled.div({
@@ -46,11 +51,12 @@ const LoaderWrapper = styled.div({
 })
 
 export const BaseButton = styled.button<ButtonProps>((props) => ({
-	display: 'flex',
-	padding: props.loading ? '0px 54px' : '0px 54px',
-	background: props.disabled ? '#CBD2D9' : '#000000',
+	display: 'inline-flex',
+	padding: '0px 16px',
+	background: props.text ? 'transparent' : props.disabled ? '#CBD2D9' : '#000000',
 	borderRadius: '40px',
 	height: '54px',
+	minWidth: '64px',
 	color: '#fff',
 	fontSize: '18px',
 	lineHeight: '18px',
