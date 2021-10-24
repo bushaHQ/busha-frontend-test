@@ -7,3 +7,4 @@ export * from './Card';
 export * from './List';
 export * from './Nav';
 export * from './Avatar';
+export * from './Error';
