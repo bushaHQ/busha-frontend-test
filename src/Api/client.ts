@@ -1,5 +1,5 @@
 import { Fetch } from "../lib/fetch";
-import { IAccount } from "./types";
+import { IAccount, IWallet } from "./types";
 
 export class ApiClient {
 	private _instance: Fetch = new Fetch('http://localhost:3090', {
@@ -7,5 +7,7 @@ export class ApiClient {
 	});
 
 	public getWalletAccounts = async () => this._instance.get<IAccount[]>('/accounts')
+
+	public getWalletCurrencies = async () => this._instance.get<IWallet[]>('/wallets')
 
 }
