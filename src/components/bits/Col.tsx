@@ -27,6 +27,9 @@ export interface ColProps {
   md?: number;
   lg?: number;
   xl?: number;
+  cols?: boolean;
+  shrink?: boolean;
+  grow?: boolean;
   alignSelf?: "start" | "end" | "center" | "auto" | "baseline" | "stretch";
 }
 
@@ -36,6 +39,22 @@ export const Col = styled.div<ColProps>((props) => ({
   flex: "0 0 100%",
   padding: '12px',
   boxSizing: 'border-box',
+
+  ...(props.cols && {
+    flexBasis: 0,
+    flexGrow: 1,
+    maxWidth: '100%',
+  }),
+
+  ...(props.grow && {
+    flexGrow: 1,
+    flexShrink: 0,
+  }),
+
+  ...(props.shrink && {
+      flexGrow: 0,
+      flexShrink: 1,
+  }),
 
   ...(props.xs && getFlexGrid("xs", props.xs)),
   ...(props.sm && getFlexGrid("sm", props.sm)),
