@@ -4,7 +4,10 @@ export interface TextBaseProps {
 	align?: 'center' | 'right' | 'left';
 	weight?: CSSProperties['fontWeight'];
 	size?: number;
+	lineHeight?: number;
+	letterSpacing?: string;
 	color?: string;
+	truncate?: boolean;
 	children?: any;
 	style?: CSSObject;
 }
@@ -15,11 +18,19 @@ export interface TextProps extends TextBaseProps {
 
 
 const getBaseStyle = (props: TextBaseProps): CSSObject | TemplateStringsArray => ({
-	fontSize: `${props.size || 0.8}em`,
+	fontSize: `${props.size || 0.8}rem`,
+	lineHeight: `${props.lineHeight || 0.8}rem`,
+	letterSpacing: props.letterSpacing || '.03125em',
 	fontWeight: props.weight || 'normal',
 	textAlign: props.align || 'left',
 	color: props.color || 'rgba(0, 0, 0, 1)',
-	lineHeight: '16px',
+	
+	...(props.truncate && {
+		display: 'block',
+		whiteSpace: 'nowrap',
+		overflow: 'hidden',
+		textOverflow: 'ellipsis',
+	})
 });
 
 export const Text = (props: TextProps) => {
@@ -53,43 +64,55 @@ export const Text = (props: TextProps) => {
 }
 
 export const H1 = styled.h1<TextBaseProps>((props) => getBaseStyle({
-	size: 2,
-	weight: 'bolder',
+	size: 6,
+	lineHeight: 6,
+	letterSpacing: '-.015625em',
+	weight: 'lighter',
 	...props
 }));
 
 export const H2 = styled.h2<TextBaseProps>((props) => getBaseStyle({
-	size: 1.8,
-	weight: 'bolder',
+	size: 3.75,
+	lineHeight: 3.75,
+	letterSpacing: '-.0083333333em',
+	weight: 'lighter',
 	...props,
 }));
 
 export const H3 = styled.h3<TextBaseProps>((props) => getBaseStyle({
-	size: 1.6,
-	weight: 'bold',
+	size: 3,
+	lineHeight: 3.125,
+	letterSpacing: 'normal',
+	weight: 'normal',
 	...props,
 }));
 
 export const H4 = styled.h4<TextBaseProps>((props) => getBaseStyle({
-	size: 1.4,
-	weight: 'bold',
+	size: 2.125,
+	lineHeight: 2.5,
+	letterSpacing: '.0073529412em',
+	weight: 'normal',
 	...props,
 }));
 
 export const H5 = styled.h5<TextBaseProps>((props) => getBaseStyle({
-	size: 1.2,
+	size: 1.5,
+	lineHeight: 2,
 	weight: 'bold',
 	...props,
 }));
 
 export const H6 = styled.h6<TextBaseProps>((props) => getBaseStyle({
-	size: 1,
+	size: 1.25,
+	lineHeight: 2,
+	letterSpacing: '.0125em',
 	weight: 'bold',
 	...props,
 }));
 
 export const P = styled.p<TextBaseProps>((props) => getBaseStyle({
-	size: 0.8,
+	size: 1,
+	lineHeight: 1.5,
 	weight: 'normal',
 	...props,
 }));
