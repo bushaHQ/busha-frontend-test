@@ -4,6 +4,7 @@ import Loader from "../shared/Loader";
 
 export interface ButtonProps {
 	loading?: boolean
+	loadingLabel?: boolean
 	disabled?: boolean
 	text?: boolean
 	children?: ReactNode
@@ -24,7 +25,11 @@ export const Button = (props: ButtonProps) => {
 						<Loader size={28} width={5} />
 					</LoaderWrapper>
 				)}
-				<div style={{ opacity: props.loading ? 0 : 1, display: 'block' }}>{props.loading ? "Loading..." : props.children}</div>
+				<div style={{ opacity: props.loading ? 0 : 1, display: 'block' }}>
+					{props.loading && props.loadingLabel ? 
+						<span aria-label="Loading...">Loading</span>
+					: props.children}
+				</div>
 			</ButtonContentWrapper>
 		</BaseButton>
 	);

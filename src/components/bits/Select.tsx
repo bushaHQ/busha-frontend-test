@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-export const Select = styled.select<{}>((props) => ({
+export const Select = styled.select.attrs({
+  role: "combobox"
+})<{}>((props) => ({
   border: "1px solid #cbd2d9",
   boxSizing: "border-box",
   borderRadius: "5px",

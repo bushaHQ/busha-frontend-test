@@ -132,7 +132,10 @@ function WalletPage(props: WalletPageProps) {
 													</Row>
 												</Col>
 												<Col xs={12} style={{ paddingTop: 0 }}>
-													<Text color="rgba(255, 255, 255, 1)" style={{ margin: 0 }}>{`${account.balance} ${account.currency}`}</Text>
+													<Text color="rgba(255, 255, 255, 1)" style={{ margin: 0 }}>
+														{account.balance}
+														<span style={{ paddingLeft: '7px' }}>{account.currency}</span>
+													</Text>
 												</Col>
 												<Col xs={12}>
 													<Row justify="end">
@@ -152,63 +155,70 @@ function WalletPage(props: WalletPageProps) {
 			</Row>
 
 			<Modal isOpen={modalOpen}>
-				<Container fillHeight={loading.wallet || hasError.wallet}>
-					{loading.wallet && (
-						<Row justify="center" align="center">
-							<Loader size={83} />
-						</Row>
-					)}
+				<Container>
+					<Row noGutters align="start" justify="start">
+						<Col xs={12}>
+							<Row justify="space-between">
+								<Col cols>
+									<Text mode="h5" style={{ marginBottom: 0, marginTop: 0 }}>Add new wallet</Text>
+								</Col>
+								<Col cols shrink>
+									<CloseButton onClick={() => setModalOpen(false)}>
+										<Text weight="bold">X</Text>
+									</CloseButton>
+								</Col>
+							</Row>
+						</Col>
 
-					{hasError.wallet && (
-						<Row justify="center" align="center">
-							<ErrorView onRetry={getCurrencies} />
-						</Row>
-					)}
-					
-					{!loading.wallet && !hasError.wallet && (
-						<Row noGutters align="start" justify="start">
-							<Col xs={12}>
-								<Row justify="space-between">
-									<Col cols>
-										<Text mode="h5" style={{ marginBottom: 0, marginTop: 0 }}>Add new wallet</Text>
-									</Col>
-									<Col cols shrink>
-										<CloseButton onClick={() => setModalOpen(false)}>
-											<Text weight="bold">X</Text>
-										</CloseButton>
-									</Col>
+						{loading.wallet && (
+							<Col xs={12} style={{ height: '100%' }}>
+								<Row justify="center" align="center">
+									<Loader size={83} />
 								</Row>
 							</Col>
-							<Col xs={12}>
-								<Text>The crypto wallet will be created instantly and be available in your list of wallets.</Text>
-							</Col>
-							<Col xs={12}>
-								<Text mode="span" style={{ marginBottom: 0 }}>Select wallet</Text>
-							</Col>
-							<Col xs={12}>
-								<Select onChange={(e) => setSelectedWallet(e.target.value)} value={selectedWallet}>
-									{wallets.map((wallet) => (
-										<Option key={wallet.currency} value={wallet.currency}>{wallet.name}</Option>
-									))}
-								</Select>
-							</Col>
-							<Col xs={12}>
-								<Row justify="center">
-									<Button loading={loading.addWallet} onClick={handleCreateWallet}>Create Wallet</Button>
+						)}
+
+						{hasError.wallet && (
+							<Col xs={12} style={{ height: '100%' }}>
+								<Row justify="center" align="center">
+									<ErrorView onRetry={getCurrencies} />
 								</Row>
 							</Col>
+						)}
 
-							{hasError.addWallet && (
-								<Col xs={12} style={{ marginTop: '30px' }}>
+						{!loading.wallet && !hasError.wallet && (
+							<>
+								<Col xs={12}>
+									<Text>The crypto wallet will be created instantly and be available in your list of wallets.</Text>
+								</Col>
+								<Col xs={12}>
+									<Text mode="span" style={{ marginBottom: 0 }}>Select wallet</Text>
+								</Col>
+								<Col xs={12}>
+									<Select onChange={(e) => setSelectedWallet(e.target.value)} value={selectedWallet}>
+										{wallets.map((wallet) => (
+											<Option key={wallet.currency} value={wallet.currency}>{wallet.name}</Option>
+										))}
+									</Select>
+								</Col>
+								<Col xs={12}>
 									<Row justify="center">
-										<div style={{ padding: 10, borderRadius: '8px', border: '1px solid #E0B3B2', width: '100%', background: '#FFF4F4' }}>
-											<Text mode="span" weight="bold" style={{ color: 'rgba(215, 44, 13, 1)' }}>Network Error</Text>
-										</div>
+										<Button loading={loading.addWallet} loadingLabel onClick={handleCreateWallet}>Create Wallet</Button>
 									</Row>
 								</Col>
-							)}
-						</Row>
-					)}
+
+								{hasError.addWallet && (
+									<Col xs={12} style={{ marginTop: '30px' }}>
+										<Row justify="center">
+											<div style={{ padding: 10, borderRadius: '8px', border: '1px solid #E0B3B2', width: '100%', background: '#FFF4F4' }}>
+												<Text mode="span" weight="bold" style={{ color: 'rgba(215, 44, 13, 1)' }}>Network Error</Text>
+											</div>
+										</Row>
+									</Col>
+								)}
+							</>
+						)}
+					</Row>
 				</Container>
 			</Modal>
 		</Container>
