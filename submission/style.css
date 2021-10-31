@@ -1,0 +1,503 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+ul,
+li,
+a,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style-type: none;
+}
+
+.header {
+    /* display: flex; */
+    width: 100%;
+    height: 70px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.12);
+}
+
+.img {
+    width: 88%;
+    height: 100%;
+    display: flex;
+    margin: 0 auto;
+    position: relative;
+}
+
+.img .logo {
+    height: 70px;
+    width: 80px;
+    float: left;
+}
+
+.img .logo img {
+    width: 100%;
+    height: 100%;
+}
+
+.img .account {
+    float: right;
+    position: absolute;
+    right: 10px;
+}
+
+.img .account .person {
+    display: flex;
+    text-align: center;
+    padding: 30px;
+    /* padding-top: 35px; */
+}
+
+.img .account .person .name .name-string {
+    height: 30px;
+    text-align: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.full {
+    width: 100%;
+    height: 100vh;
+    margin-top: 70px;
+}
+
+.full .bars {
+    width: 90%;
+    height: 100%;
+    display: flex;
+    margin: 0 auto;
+}
+
+.full .bars .sidebar {
+    width: 20%;
+    height: 100%;
+    background: white;
+    transition: all .10s ease !important;
+}
+
+.full .bars .sidebar ul a {
+    display: inline-block;
+    letter-spacing: 2px;
+    transition: .4s;
+    height: 100%;
+    width: 100%;
+    line-height: 50px;
+    font-size: 20px;
+    color: #354c59;
+    padding-left: 30px;
+    box-sizing: border-box;
+}
+
+ul a.active {
+    display: inline-block;
+    letter-spacing: 2px;
+    transition: .4s;
+    height: 100%;
+    width: 100%;
+    line-height: 50px;
+    font-size: 20px;
+    padding-left: -30px !important;
+    box-sizing: border-box;
+    color: black;
+    background-color: whitesmoke;
+}
+
+.full .bars .sidebar ul a:hover {
+    display: inline-block;
+    letter-spacing: 2px;
+    transition: .4s;
+    height: 100%;
+    width: 100%;
+    line-height: 50px;
+    font-size: 20px;
+    padding-left: 35px !important;
+    box-sizing: border-box;
+    color: black;
+    background-color: whitesmoke;
+}
+
+.full .bars .mainbar {
+    width: 80%;
+    height: 90%;
+    background: white;
+    position: relative;
+}
+
+
+/* loader */
+
+.loader-bg {
+    position: absolute;
+    z-index: 1;
+    background-color: #354c59;
+    width: 100%;
+    height: 100%;
+}
+
+.loading {
+    position: relative;
+}
+
+.loader {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    top: calc(50vh - 75px);
+    left: 400px;
+}
+
+.loader::before,
+.loader::after {
+    content: '';
+    border: 1em solid #fff;
+    border-radius: 50%;
+    height: inherit;
+    width: inherit;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: loader 2s linear infinite;
+    opacity: 0;
+}
+
+.loader::before {
+    animation-delay: .5s;
+}
+
+@keyframes loader {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+.full .bars .mainbar .heading {
+    margin: 10px 30px;
+    font-size: 15px;
+    color: #354c59;
+    display: flex;
+}
+
+.full .bars .mainbar .heading {
+    margin: 10px 30px;
+    font-size: 15px;
+    color: #354c59;
+    display: flex;
+    position: relative;
+}
+
+.full .bars .mainbar .headings {
+    width: 50%;
+}
+
+.full .bars .mainbar .headingss {
+    width: 50%;
+    position: relative;
+}
+
+.full .bars .mainbar .headingss p {
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    font-size: 15px;
+}
+
+.full .bars .mainbar .main-body {
+    margin: 10px 30px;
+    font-size: 15px;
+    padding-top: 150px;
+    color: red;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    height: 70vh;
+}
+
+.full .bars .mainbar .main-body .error {
+    padding-top: 30px;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.full .bars .mainbar .main-body .error i {
+    font-size: 80px;
+    margin-bottom: 20px;
+}
+
+.full .bars .mainbar .main-body .error p {
+    font-size: 20px;
+    color: #000;
+}
+
+.redirect a {
+    color: whitesmoke;
+    background-color: #000;
+    padding: 10px 30px;
+    border-radius: 30px;
+    font-size: 13px;
+}
+
+.main-body .coins {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 10px;
+    padding: 5px;
+    margin-top: -120px;
+}
+
+.main-body .coins .coin-card {
+    background: linear-gradient(to top right, rgb(17, 17, 17), rgb(41, 41, 41));
+    /* box-shadow: 1px 20px 50px rgb(182, 179, 179); */
+    text-align: center;
+    padding: 20px 0;
+    font-size: 30px;
+    border-radius: 10px;
+}
+
+.main-body .coins .coin-card .card-top {
+    display: flex;
+    padding: 7px;
+}
+
+.main-body .coins .coin-card .card-top .card-logo {
+    margin-right: 10px;
+    height: 30px;
+    width: 50px;
+    border-radius: 50%;
+    /* border: 2px solid red; */
+}
+
+.main-body .coins .coin-card .card-top .card-logo img {
+    width: 80%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.main-body .coins .coin-card .card-top .card-name {
+    font-size: 15px;
+    padding-top: 10px;
+    color: grey;
+    /* border: 2px solid black; */
+}
+
+.main-body .coins .coin-card .card-middle {
+    display: flex;
+    padding: 10px;
+    font-size: 17px;
+    color: #fff;
+}
+
+.main-body .coins .coin-card .card-bottom {
+    position: relative;
+    padding: 10px;
+    font-size: 15px;
+    /* border: 2px solid red; */
+}
+
+.main-body .coins .coin-card .card-bottom .right {
+    float: right;
+    background-color: rgb(54, 53, 53);
+    padding: 5px 10px;
+    border-radius: 50%;
+    color: #fff;
+}
+
+.nav {
+    position: relative;
+}
+
+.nav .nav-load {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    height: 100vh;
+    background-color: whitesmoke;
+    width: 25%;
+}
+
+.nav .new-loader {
+    background-color: #fff !important;
+}
+
+.nav .newer-loader {
+    border: 0px solid red;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    top: calc(50vh - 75px);
+    left: 145px;
+}
+
+.newer-loader::before,
+.newer-loader::after {
+    content: '';
+    border: 1em solid #354c59;
+    border-radius: 50%;
+    height: inherit;
+    width: inherit;
+    position: absolute;
+    top: 0;
+    right: 0;
+    animation: loader 2s linear infinite;
+    opacity: 0;
+}
+
+.newer-loader::before {
+    animation-delay: .5s;
+}
+
+@keyframes newer-loader {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+.nav-links {
+    position: absolute;
+    width: 100%;
+    height: 60vh;
+    top: 100px;
+    text-align: center;
+    justify-content: center;
+    border: 2px solid white;
+    transition-delay: 3s;
+}
+
+.nav-links .error {
+    padding-top: 30px;
+    justify-content: center;
+    margin-top: 100px;
+    margin-bottom: 40px;
+}
+
+.nav-links .error i {
+    font-size: 40px;
+    color: red;
+    margin-bottom: 20px;
+}
+
+.wallet-add {
+    width: 80%;
+    padding: 1px 0;
+    margin: 100px auto;
+}
+
+.wallet-add .wallet-top {
+    display: flex;
+    padding: 5px 5px;
+    position: relative;
+}
+
+.wallet-add .wallet-top .wallet-heading {
+    width: 70%;
+    padding: 0px;
+}
+
+.wallet-add .wallet-top .wallet-heading h2 {
+    font-size: 17px;
+    color: black;
+}
+
+.wallet-add .wallet-top .wallet-close {
+    width: 50%;
+    text-align: right;
+    padding: 0px;
+}
+
+.wallet-add .wallet-top .wallet-close i {
+    color: black;
+}
+
+.wallet-add .wallet-middle {
+    padding: 20px 5px;
+    position: relative;
+    font-size: 14px;
+    color: rgba(62, 76, 89, 1);
+}
+
+.wallet-add .wallet-bottom {
+    margin-top: 2px;
+    padding: 10px 5px;
+    position: relative;
+}
+
+.wallet-add .wallet-bottom .wallet-title h4 {
+    font-size: 13px;
+    margin-bottom: 10px;
+    color: rgba(62, 76, 89, 1);
+}
+
+.wallet-add .wallet-bottom .now {
+    justify-content: center !important;
+    text-align: center !important;
+    margin-top: 30px;
+}
+
+.wallet-bottom .network-error {
+    margin-top: 40px;
+    display: flex;
+    padding: 5px;
+    border-radius: 5px;
+    color: #D8000C;
+    background-color: #FFD2D2;
+}
+
+.wallet-bottom .network-error .network-alert {
+    width: 10%;
+    font-size: 12px;
+}
+
+.wallet-bottom .network-error .network-message {
+    width: 80%;
+    font-size: 12px;
+}
+
+.wallet-bottom .network-error .network-close {
+    width: 10%;
+    font-size: 12px;
+}
+
+.nav-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgb(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+    display: none;
+    opacity: 0;
+    z-index: 10;
+}
