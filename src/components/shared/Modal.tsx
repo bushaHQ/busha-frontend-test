@@ -5,6 +5,7 @@ import styled from "styled-components";
 export interface ModalProps {
   isOpen: boolean;
 }
+
 export default function Modal(props: React.PropsWithChildren<ModalProps>) {
   const { isOpen } = props;
 
