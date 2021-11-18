@@ -89,6 +89,11 @@ export function AddWallet(props: WalletModalProps) {
     return (
         <Container>
             {
+                !walletList?.length &&
+                <Image src={closeIcon} alt={""} onClick={props.closeModal} rootClose aria-label="Close button" />
+            }
+
+            {
                 flags.isLoading ?
                     <CenterContainer>
                         <Loader />
@@ -138,12 +143,14 @@ export function AddWallet(props: WalletModalProps) {
 
 interface ImageProps {
     pointer?: boolean;
-    danger?: boolean
+    danger?: boolean;
+    rootClose?: boolean;
 }
 
 const Container = styled.div`
    width: 100%;
    height: 100%;
+   position: relative;
 `
 
 const CenterContainer = styled.div`
@@ -222,7 +229,10 @@ const AlertText = styled.p`
 const Image = styled.img<ImageProps>`
     cursor: ${props => props.pointer ? "pointer" : "default"};
     display: ${props => props.danger ? "flex" : "block"};
-    margin-left: ${props => props.danger ? "auto" : "unset"} 
+    margin-left: ${props => props.danger ? "auto" : "unset"};
+    position: ${props => props.rootClose ? "absolute" : "relative"};
+    top: ${props => props.rootClose ? "20px" : "0"};
+    right: ${props => props.rootClose ? "20px" : "0"};
 `
 
 const FormGroup = styled.div`
