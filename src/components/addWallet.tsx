@@ -89,7 +89,7 @@ export function AddWallet(props: WalletModalProps) {
     return (
         <Container>
             {
-                !walletList?.length &&
+                (flags.isLoading || flags.isError) &&
                 <Image src={closeIcon} alt={""} onClick={props.closeModal} rootClose aria-label="Close button" />
             }
 
@@ -115,7 +115,7 @@ export function AddWallet(props: WalletModalProps) {
                             <form onSubmit={addNewWallet}>
                                 <FormGroup>
                                     <Text>Select Wallet</Text>
-                                    <WalletSelect required value={selectedWallet} onChange={handleChange}>
+                                    <WalletSelect required value={selectedWallet} onChange={handleChange} role={"combobox"}>
                                         <option value={""} key={Math.random()}>Select</option>
                                         {
                                             walletList.length &&

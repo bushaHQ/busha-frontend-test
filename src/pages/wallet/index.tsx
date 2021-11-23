@@ -35,13 +35,34 @@ export function Wallet() {
             .then(data => setAccountList(data))
             .catch(() => setFlags(prevS => ({ ...prevS, isError: true })))
             .finally(() => setFlags(prevS => ({ ...prevS, isLoading: false })));
+
     }, []);
 
     useEffect(() => {
-        fetchAccounts();
+        let isMounted = true;
 
-        return () => new AbortController().abort();
-    }, [fetchAccounts]);
+        setAccountList([]);
+        setFlags(prevS => ({
+            ...prevS,
+            isLoading: true,
+            isError: false,
+        }));
+
+        fetch("http://localhost:3090/accounts")
+            .then(res => res.json())
+            .then(data => {
+                if (isMounted) setAccountList(data)
+            })
+            .catch(() => {
+                if (isMounted) setFlags(prevS => ({ ...prevS, isError: true }))
+            })
+            .finally(() => {
+                if (isMounted) setFlags(prevS => ({ ...prevS, isLoading: false }))
+            });
+
+        return () => { isMounted = false }
+
+    }, []);
 
     return (
         <>
@@ -64,7 +85,7 @@ export function Wallet() {
                 }
             </PageHeader>
 
-            <MainBody removeMargin={!!accountList.length}>
+            <MainBody removeMargin={!!accountList.length} >
                 {
                     flags.isLoading ?
                         <Loader />
@@ -198,6 +219,7 @@ const AccountBalance = styled.p`
 
 const AccountImage = styled.img`
     width: 34px;
+    background-color: #303030;
     height: 34px;
     border-radius: 17px;
 `
