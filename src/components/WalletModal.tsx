@@ -95,24 +95,23 @@ const WalletModal = ({
           ) : (
             <span>All wallets have been added</span>
           )}
-
-          {accountErr && (
-            <div className="submit-error">
-              <h5>
-                <span>
-                  <img src={infoIcon} alt="close" className="mr-2" />
-                </span>
-                <span>Network error</span>
-              </h5>
-              <img
-                src={closeIcon2}
-                alt="close"
-                className="close-icon"
-                onClick={() => setErr(false)}
-              />
-            </div>
-          )}
         </form>
+      )}
+      {accountErr && (
+        <div className="submit-error">
+          <h5>
+            <span>
+              <img src={infoIcon} alt="close" className="mr-2" />
+            </span>
+            <span>Network error</span>
+          </h5>
+          <img
+            src={closeIcon2}
+            alt="close"
+            className="close-icon"
+            onClick={() => setErr(false)}
+          />
+        </div>
       )}
       <img
         src={closeIcon}
