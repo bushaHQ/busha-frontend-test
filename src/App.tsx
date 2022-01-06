@@ -7,7 +7,6 @@ function App() {
     <div>
       <Navbar />
       <div className="container">
-        <h1>Wallets</h1>
         <div className="row mt-4 pt-4">
           <div className="col-sm-3">
             <Sidebar />

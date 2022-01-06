@@ -1,27 +1,26 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 const Sidebar: React.FC = () => (
   <SidebarWrapper>
     <li className="active">
-      <Link
-        to={"/"}
+      <a
+        href="/"
         className={window.location.pathname === "/" ? "font-weight-bold" : ""}
       >
         Wallets
-      </Link>
+      </a>
     </li>
     <li>
-      <Link to={"/"}>Prices</Link>
+      <a href="/">Prices</a>
     </li>
     <li>
-      <Link to={"/"}>Peer2peer</Link>
+      <a href="/">Peer2peer</a>
     </li>
     <li>
-      <Link to={"/"}>Activity</Link>
+      <a href="/">Activity</a>
     </li>
     <li>
-      <Link to={"/"}>Settings</Link>
+      <a href="/">Settings</a>
     </li>
   </SidebarWrapper>
 );

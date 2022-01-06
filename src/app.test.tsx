@@ -1,7 +1,7 @@
 import "@testing-library/react";
 import { render, screen } from "@testing-library/react";
 import App from "./App";
-import Account from "./pages/Account";
+// import Account from "./pages/Account";
 
 // render(<Account />);
 render(<App />);
