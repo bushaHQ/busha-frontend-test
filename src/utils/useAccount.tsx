@@ -7,6 +7,7 @@ export const useAccount = (loadAccount: boolean) => {
 
   const getAccounts = () => {
     setIsLoading(true);
+    setErr(false);
     setTimeout(async () => {
       try {
         const res: any = await fetch("http://localhost:3090/accounts");
@@ -15,6 +16,7 @@ export const useAccount = (loadAccount: boolean) => {
         setIsLoading(false);
       } catch (error) {
         setErr(true);
+        setIsLoading(false);
       }
     }, 2000);
   };

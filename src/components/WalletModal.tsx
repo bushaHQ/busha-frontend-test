@@ -55,7 +55,7 @@ const WalletModal = ({
           </div>
         </div>
       )}
-      {isLoading ? (
+      {isLoading && (
         <div className="message-div">
           <div>
             <Loader />
@@ -63,8 +63,9 @@ const WalletModal = ({
             <h5 className="ml-3">Loading...</h5>
           </div>
         </div>
-      ) : (
-        <form className="wallet-form" onSubmit={(e) => handleAddAccount(e)}>
+      )}
+      {!accountErr && !isLoading && (
+        <form className="wallet-form " onSubmit={(e) => handleAddAccount(e)}>
           <h3>Add new wallet</h3>
           <p>
             The crypto wallet will be created instantly and be available in your

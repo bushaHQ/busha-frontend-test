@@ -46,4 +46,7 @@ const SidebarWrapper = styled.ul`
   .active {
     background: #f5f7fa;
   }
+  @media screen and (max-width: 500px) {
+    display: none;
+  }
 `;

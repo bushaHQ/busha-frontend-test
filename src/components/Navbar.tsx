@@ -9,7 +9,9 @@ const Navbar: React.FC = () => (
       </div>
       <div className="user">
         <span>O</span>
-        <p>Oluwatobi Akindunjoye</p>
+        <p>
+          Oluwatobi <span>Akindunjoye</span>
+        </p>
       </div>
     </div>
   </NavbarWrapper>
@@ -28,7 +30,7 @@ const NavbarWrapper = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      span {
+      > span {
         font-size: 20px;
         font-weight: 800;
         background: rgba(154, 165, 177, 0.3);
@@ -47,6 +49,18 @@ const NavbarWrapper = styled.div`
         margin: 0;
         color: #3e4c59;
         font-style: normal;
+      }
+    }
+  }
+  @media screen and (max-width: 500px) {
+    .container {
+      .user {
+        p {
+          font-size: 10px;
+          > span {
+            display: none;
+          }
+        }
       }
     }
   }

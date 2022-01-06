@@ -48,8 +48,8 @@ const Wallets: React.FunctionComponent = () => {
         </div>
       ) : (
         <div className="card-container mt-4">
-          {accounts.length &&
-            accounts.map((account, index) => (
+          {
+            accounts?.map((account, index) => (
               <Card key={index} account={account} />
             ))}
         </div>

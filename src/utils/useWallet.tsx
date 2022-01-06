@@ -11,6 +11,7 @@ export const useWallet = (): {
   const [err, setErr] = useState(false);
 
   const getWallets = () => {
+    setErr(false);
     setIsLoading(true);
     setTimeout(async () => {
       try {
@@ -20,6 +21,7 @@ export const useWallet = (): {
         setIsLoading(false);
       } catch (error) {
         setErr(true);
+        setIsLoading(false);
       }
     }, 2000);
   };

@@ -84,5 +84,6 @@ const CardWrapper = styled.div`
   @media screen and (max-width: 500px) {
     height: 150px;
     width: 100%;
+    margin-right: 0;
   }
 `;
