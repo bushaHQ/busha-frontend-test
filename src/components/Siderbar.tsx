@@ -1,37 +1,38 @@
 import React from "react";
 import styled from "styled-components";
-const Sidebar: React.FC = () => (
-  <SidebarWrapper>
-    <li className="active">
-      <a
-        href="/"
-        className={window.location.pathname === "/" ? "font-weight-bold" : ""}
-      >
-        <span>Wallets</span>
-      </a>
-    </li>
-    <li>
-      <a href="/">
-        <span>Prices</span>
-      </a>
-    </li>
-    <li>
-      <a href="/">
-        <span>Peer2Peer</span>
-      </a>
-    </li>
-    <li>
-      <a href="/">
-        <span>Activity</span>
-      </a>
-    </li>
-    <li>
-      <a href="/">
-        <span>Settings</span>
-      </a>
-    </li>
-  </SidebarWrapper>
-);
+const Sidebar: React.FC = () => {
+  const sidebarLinks = [
+    "Wallets",
+    "Prices",
+    "Peer2Peer",
+    "Activity",
+    "Settings",
+  ];
+  return (
+    <SidebarWrapper>
+      <li className="active">
+        <a
+          href="/"
+          className={window.location.pathname === "/" ? "font-weight-bold" : ""}
+        >
+          Wallets
+        </a>
+      </li>
+      <li>
+        <a href="/">Prices</a>
+      </li>
+      <li>
+        <a href="/">Peer2Peer</a>
+      </li>
+      <li>
+        <a href="/">Activity</a>
+      </li>
+      <li>
+        <a href="/">Settings</a>
+      </li>
+    </SidebarWrapper>
+  );
+};
 
 export default Sidebar;
 
