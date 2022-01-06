@@ -5,20 +5,18 @@ export const useAccount = (loadAccount: boolean) => {
   const [accounts, setAccounts] = useState<AcountType[]>([]);
   const [err, setErr] = useState(false);
 
-  const getAccounts = () => {
+  const getAccounts = async () => {
     setIsLoading(true);
     setErr(false);
-    setTimeout(async () => {
-      try {
-        const res: any = await fetch("http://localhost:3090/accounts");
-        const response = await res.json();
-        setAccounts(response);
-        setIsLoading(false);
-      } catch (error) {
-        setErr(true);
-        setIsLoading(false);
-      }
-    }, 2000);
+    try {
+      const res: any = await fetch("http://localhost:3090/accounts");
+      const response = await res.json();
+      setAccounts(response);
+      setIsLoading(false);
+    } catch (error) {
+      setErr(true);
+      setIsLoading(false);
+    }
   };
   const addAccount = async (data: any, cb: any) => {
     setIsLoading(true);
@@ -42,6 +40,11 @@ export const useAccount = (loadAccount: boolean) => {
   };
   useEffect(() => {
     loadAccount && getAccounts();
+    return () => {
+      setAccounts([]);
+      setErr(false);
+      setIsLoading(false);
+    };
   }, [loadAccount]);
   return {
     isLoading,

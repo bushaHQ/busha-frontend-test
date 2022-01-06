@@ -6,7 +6,6 @@ import errorIcon from "../assets/img/warning.svg";
 import closeIcon from "../assets/img/close.svg";
 import infoIcon from "../assets/img/info.svg";
 import closeIcon2 from "../assets/img/close-icon-red.svg";
-import Dropdown from "./DropDown";
 import { useAccount } from "../utils/useAccount";
 import { useState } from "react";
 
@@ -44,6 +43,7 @@ const WalletModal = ({
     };
     addAccount({ currency: newAccount ?? wallets[0].currency }, resolveSuccess);
   };
+
   return (
     <WalletModalWrapper>
       {err && (
@@ -65,24 +65,22 @@ const WalletModal = ({
         </div>
       )}
       {!accountErr && !isLoading && (
-        <form className="wallet-form " onSubmit={(e) => handleAddAccount(e)}>
+        <form
+          className="wallet-form "
+          onSubmit={(e) => wallets.length && handleAddAccount(e)}
+        >
           <h3>Add new wallet</h3>
           <p>
             The crypto wallet will be created instantly and be available in your
             list of wallets.
           </p>
-          <Dropdown
-            defaultText="Select Wallet"
-            dropDownItems={wallets.map((wallet) => ({
-              label: wallet.name,
-              value: wallet.currency,
-            }))}
-            onSelect={(item) =>
-              onValueChange({
-                target: { name: "frequency", value: item.value },
-              })
-            }
-          />
+          <select onChange={(e) => onValueChange(e)}>
+            {wallets.map((dt, i) => (
+              <option key={i} value={dt.currency}>
+                {dt.name}
+              </option>
+            ))}
+          </select>
           <div className="d-flex">
             <Button
               styleClass="mt-20"
@@ -116,6 +114,9 @@ const WalletModal = ({
         className="close-icon"
         onClick={() => closeNav(false)}
       />
+      {/* <button className="close-icon" onClick={() => closeNav(false)}>
+        Close button
+      </button> */}
     </WalletModalWrapper>
   );
 };
@@ -150,6 +151,7 @@ const WalletModalWrapper = styled.div`
       margin-top: 30px;
       justify-content: center;
     }
+
     .submit-error {
       background: #fff4f4;
       border: 1px solid #e0b3b2;

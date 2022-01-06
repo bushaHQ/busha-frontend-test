@@ -10,7 +10,7 @@ interface ButtonTypes {
   disabled?: boolean;
   loading?: boolean;
   text?: string;
-  type?: string;
+  type?: "button" | "reset" | "submit" | undefined;
   rounded?: boolean;
 }
 const Button = (props: ButtonTypes) => {
@@ -34,21 +34,17 @@ const Button = (props: ButtonTypes) => {
       border={border}
       text={text}
       rounded={rounded}
+      onClick={(e) => func && func(e)}
+      type={type ? type : "button"}
+      className={` ${styleClass}`}
     >
-      <input
-        type={type ? type : "button"}
-        className={` ${styleClass}`}
-        // className={`m-2 ${styleClass}`}
-        value={loading ? "Loading..." : label}
-        disabled={disabled}
-        onClick={(e) => func && func(e)}
-      />
+      
+      {loading ? "Loading..." : label}
     </Button.Wrapper>
   );
 };
 
-Button.Wrapper = styled.div<ButtonTypes>`
-  input {
+Button.Wrapper = styled.button<ButtonTypes>`
     padding: 12px 30.2px;
     ${(props) => props.fullwidth && "width: -webkit-fill-available;"}
     background: #000000;
@@ -61,7 +57,6 @@ Button.Wrapper = styled.div<ButtonTypes>`
     :hover {
       opacity: 0.8;
     }
-  }
   @media (max-width: 520px) {
     input {
       padding: 12px 30.2px;

@@ -14,7 +14,7 @@ const Sidebar: React.FC = () => (
       <a href="/">Prices</a>
     </li>
     <li>
-      <a href="/">Peer2peer</a>
+      <a href="/">Peer2Peer</a>
     </li>
     <li>
       <a href="/">Activity</a>

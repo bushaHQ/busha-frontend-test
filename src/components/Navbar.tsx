@@ -9,9 +9,8 @@ const Navbar: React.FC = () => (
       </div>
       <div className="user">
         <span>O</span>
-        <p>
-          Oluwatobi <span>Akindunjoye</span>
-        </p>
+        <p className="name-full">Oluwatobi Akindunjoye</p>
+        <p className="name-short">Oluwatobi</p>
       </div>
     </div>
   </NavbarWrapper>
@@ -50,16 +49,22 @@ const NavbarWrapper = styled.div`
         color: #3e4c59;
         font-style: normal;
       }
+      .name-full {
+        display: block;
+      }
+      .name-short {
+        display: none;
+      }
     }
   }
   @media screen and (max-width: 500px) {
     .container {
       .user {
-        p {
-          font-size: 10px;
-          > span {
-            display: none;
-          }
+        .name-full {
+          display: none;
+        }
+        .name-short {
+          display: block;
         }
       }
     }

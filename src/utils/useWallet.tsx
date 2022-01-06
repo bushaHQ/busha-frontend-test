@@ -10,23 +10,26 @@ export const useWallet = (): {
   const [wallets, setWallets] = useState<WalletType[]>([]);
   const [err, setErr] = useState(false);
 
-  const getWallets = () => {
+  const getWallets = async () => {
     setErr(false);
     setIsLoading(true);
-    setTimeout(async () => {
-      try {
-        const res: any = await fetch("http://localhost:3090/wallets");
-        const response = await res.json();
-        setWallets(response);
-        setIsLoading(false);
-      } catch (error) {
-        setErr(true);
-        setIsLoading(false);
-      }
-    }, 2000);
+    try {
+      const res: any = await fetch("http://localhost:3090/wallets");
+      const response = await res.json();
+      setWallets(response);
+      setIsLoading(false);
+    } catch (error) {
+      setErr(true);
+      setIsLoading(false);
+    }
   };
   useEffect(() => {
     getWallets();
+    return () => {
+      setIsLoading(false);
+      setErr(false);
+      setWallets([]);
+    };
   }, []);
   return {
     isLoading,

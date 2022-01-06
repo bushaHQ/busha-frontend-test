@@ -1,183 +1,128 @@
-import React, { useEffect, useRef, useState } from "react";
-import styled from "@emotion/styled";
-import { ReactComponent as DownArrow } from "../assets/img/downArrow.svg";
+import styled from "styled-components";
 
-export interface DropDownObj {
-  label: string;
-  value: string | number;
+interface DataTypes {
+  name: string;
+  value: string;
 }
-
-interface DropdownProps {
-  defaultText: string;
-  dropDownItems: Array<DropDownObj>;
-  onSelect: (selected: DropDownObj) => void;
-  value?: string;
+interface SelectTypes {
+  label?: string;
+  options: any[];
+  fullWidth?: boolean;
+  required?: boolean;
+  placeholder?: string;
+  name?: string;
+  ref?: any;
+  onChange?: any;
 }
-
-const useClickOutside = (handler: any) => {
-  const domNode = useRef<any>();
-
-  useEffect(() => {
-    const maybeHandler = (event: any) => {
-      if (!domNode?.current?.contains(event.target)) {
-        handler();
-      }
-    };
-
-    document.addEventListener("mousedown", maybeHandler);
-
-    return () => {
-      document.removeEventListener("mousedown", maybeHandler);
-    };
-  });
-
-  return domNode;
-};
-
-const Dropdown = (props: DropdownProps) => {
-  const { defaultText, dropDownItems, onSelect, value } = props;
-  const [isActive, setIsActive] = useState(false);
-  const [selected, setSelected] = useState(
-    value ? value : dropDownItems[0]?.label
-  );
-  const domNode = useClickOutside(() => {
-    setIsActive(false);
-  });
-
-  const handleSelection = (selectedItem: DropDownObj) => {
-    setSelected(selectedItem.label);
-    onSelect(selectedItem);
-  };
-
+const DropDown = ({
+  label,
+  //   value,
+  options,
+  fullWidth,
+  required,
+  placeholder,
+  name,
+  ref,
+  onChange,
+}: SelectTypes) => {
   return (
-    <Wrapper>
-      <label htmlFor={defaultText}>{defaultText} </label>
-      <div ref={domNode} onClick={() => setIsActive(!isActive)}>
-        <div className={"select-box"}>
-          <div className={`${isActive ? "active" : ""} options-container`}>
-            {dropDownItems.map((item, index) => {
-              const { label } = item;
-
-              return (
-                <div
-                  key={index}
-                  className="option"
-                  onClick={() => handleSelection(item)}
-                >
-                  <input
-                    type="radio"
-                    className="radio"
-                    id={label}
-                    name="defaultName"
-                  />
-                  <label htmlFor={label}>{label} </label>
-                </div>
-              );
-            })}
-          </div>
-          <div
-            className={`
-          ${isActive ? "active" : ""}
-          ${selected === defaultText ? "" : "item-selected"}
-           selected`}
-          >
-            {selected}
-            <DownArrow className="icon text-dark" />
-          </div>
-        </div>
+    <DropDown.Wrapper fullWidth={fullWidth}>
+      <div className="form-group mb-4">
+        {label && (
+          <label>
+            {label}
+            <span className="text-danger">{required && "*"}</span>{" "}
+          </label>
+        )}
+        <select
+          onChange={(e) => onChange && onChange(e)}
+          name={name}
+          ref={ref}
+          required={required}
+          className="custom-select  mb-3"
+        >
+          <option>{placeholder}</option>
+          {options.map((data: DataTypes, i) => (
+            <option key={i} value={data.value}>
+              {data.name}
+            </option>
+          ))}
+        </select>
       </div>
-    </Wrapper>
+    </DropDown.Wrapper>
   );
 };
 
-const Wrapper = styled.div`
-  font-family: inherit;
-  margin-top: 2rem;
-  .select-box {
-    position: relative;
-  }
+DropDown.Wrapper = styled.div<any>`
+  .form-group {
+    label {
+      font-size: 14px;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.35;
+      letter-spacing: 0.14px;
+      text-align: left;
+      color: #000000;
+      margin-bottom: 5px;
+    }
+    select {
+      width: ${(props) => (props.fullWidth ? props.fullWidth : "500.3px")};
+      font-size: 14px;
+      line-height: 17px;
+      font-family: Orkney;
+      color: #7b7b7b;
+      padding: 1rem;
+      padding-left: 2rem;
+      border-radius: 1rem;
+      border: 1px solid #bec6df;
+      width: 100%;
+      display: block;
+      transition: all 0.3s;
+      box-shadow: 0px 3px 6px #0000000d;
+      // height: 4.9rem;
+      height: 60px;
+      background: #f9fffb;
+      &:focus {
+        outline: none;
+        border: 0.5px solid #bec6df;
+        background-color: none;
+      }
 
-  .select-box .options-container {
-    position: absolute;
-    top: 120%;
-    z-index: 10;
-    background: white;
-    color: black;
-    max-height: 0;
-    width: 100%;
-    opacity: 0;
-    transition: all 0.4s;
-    overflow: hidden;
-    box-shadow: 0px 3px 10px rgba(122, 122, 122, 0.2);
-    border: 1px solid #cbd2d9;
-    box-sizing: border-box;
-    border-radius: 5px;
-  }
+      &:focus:invalid {
+        border: 1px solid red;
+      }
 
-  .selected {
-    background: #ffffff;
-    border: 1px solid #a5a8a3;
-    box-sizing: border-box;
-    border-radius: 8px;
-    height: 64px;
-    font-size: 16px;
-    color: gray;
-    justify-content: space-between;
-    .icon {
-      color: #08cb7b;
+      &::-webkit-input-placeholder {
+        font-family: Orkney;
+        color: #47486b;
+        opacity: 0.4;
+      }
+      &:disabled {
+        background-color: #dadceb;
+        color: #47486b;
+        cursor: not-allowed;
+      }
     }
   }
-  .selected.active {
-    background-color: #e8eaff;
-    /* border: 1px solid #1A4CFF; */
-    border: none;
+  @media (max-width: 1280px) {
+    .form-group {
+      input {
+        width: 100%;
+      }
+    }
   }
-  .selected.item-selected {
-    border: 0.5px solid #bec6df;
-  }
-
-  .select-box .options-container.active {
-    max-height: 200px;
-    opacity: 1;
-    overflow-y: scroll;
-  }
-
-  .select-box .options-container.active + .selected::after {
-    transform: rotateX(180deg);
-  }
-
-  .select-box .options-container::-webkit-scrollbar {
-    width: 8px;
-    background: white;
-    border-radius: 0 8px 8px 0;
-  }
-
-  .select-box .options-container::-webkit-scrollbar-thumb {
-    border-radius: 0 8px 8px 0;
-  }
-
-  .select-box .option,
-  .selected {
-    display: flex;
-    align-items: center;
-    padding: 10px 12px;
-    cursor: pointer;
-  }
-
-  .select-box .option:hover {
-    background: #f2f2f2;
-    color: black;
-  }
-
-  .select-box label {
-    cursor: pointer;
-    font-size: 16px;
-    color: #47486b;
-  }
-
-  .select-box .option .radio {
-    display: none;
+  @media (max-width: 520px) {
+    .form-group {
+      label {
+        font-size: 13px !important;
+      }
+      select {
+        width: 100%;
+        height: 30px;
+        padding-left: 10px;
+        font-size: 13px;
+      }
+    }
   }
 `;
-
-export default Dropdown;
+export default DropDown;

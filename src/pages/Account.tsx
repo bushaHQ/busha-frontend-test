@@ -13,54 +13,55 @@ const Wallets: React.FunctionComponent = () => {
   const [openNav, setOpenNav] = useState(false);
   return (
     <WalletsWrapper>
-      <div className="header">
-        <div>
-          <h3>Wallets</h3>
-        </div>
-        {!isLoading && (
+      <div className="wrapper">
+        <div className="header">
           <div>
-            <button
-              className="btn font-weight-bold"
-              onClick={() => setOpenNav(true)}
-            >
-              +Add New Wallet
-            </button>
+            <h3>Wallets</h3>
+          </div>
+          {!isLoading && (
+            <div>
+              <button
+                className="btn font-weight-bold"
+                onClick={() => setOpenNav(true)}
+              >
+                +Add New Wallet
+              </button>
+            </div>
+          )}
+        </div>
+        <hr />
+        {err && (
+          <div className="message-div">
+            <div>
+              <img src={errorIcon} alt="error" width={100} />
+              <h5 className="text-center mt-4">Network error</h5>
+              <Button styleClass="mt-4" label="Try again" func={getAccounts} />
+            </div>
           </div>
         )}
-      </div>
-      <hr />
-      {err && (
-        <div className="message-div">
-          <div>
-            <img src={errorIcon} alt="error" width={100} />
-            <h5 className="text-center mt-4">Network error</h5>
-            <Button styleClass="mt-4" label="Try again" func={getAccounts} />
+        {isLoading ? (
+          <div className="message-div">
+            <div>
+              <Loader />
+              <br />
+              <h5 className="ml-3">Loading...</h5>
+            </div>
           </div>
-        </div>
-      )}
-      {isLoading ? (
-        <div className="message-div">
-          <div>
-            <Loader />
-            <br />
-            <h5 className="ml-3">Loading...</h5>
-          </div>
-        </div>
-      ) : (
-        <div className="card-container mt-4">
-          {
-            accounts?.map((account, index) => (
+        ) : (
+          <div className="card-container mt-4">
+            {accounts?.map((account, index) => (
               <Card key={index} account={account} />
             ))}
-        </div>
-      )}
-      <Modal isOpen={openNav}>
-        <WalletModal
-          closeNav={setOpenNav}
-          setAccounts={setAccounts}
-          accounts={accounts}
-        />
-      </Modal>
+          </div>
+        )}
+        <Modal isOpen={openNav}>
+          <WalletModal
+            closeNav={setOpenNav}
+            setAccounts={setAccounts}
+            accounts={accounts}
+          />
+        </Modal>
+      </div>
     </WalletsWrapper>
   );
 };
