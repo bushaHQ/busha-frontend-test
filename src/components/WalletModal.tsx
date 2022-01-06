@@ -30,7 +30,7 @@ const WalletModal = ({
     err: accountErr,
     setErr,
     addAccount,
-  } = useAccount(false);
+  } = useAccount(true);
   const [newAccount, setNewAccount] = useState(null);
   const onValueChange = (e: any) => {
     setNewAccount(e.target.value);
