@@ -35,6 +35,7 @@ export const useAccount = (loadAccount: boolean) => {
       }
       setIsLoading(false);
     } catch (error) {
+      // setErr(true);
       setIsLoading(false);
       setErr(true);
     }

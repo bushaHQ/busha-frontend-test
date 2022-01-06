@@ -70,25 +70,31 @@ const WalletModal = ({
           onSubmit={(e) => wallets.length && handleAddAccount(e)}
         >
           <h3>Add new wallet</h3>
-          <p>
-            The crypto wallet will be created instantly and be available in your
-            list of wallets.
-          </p>
-          <select onChange={(e) => onValueChange(e)}>
-            {wallets.map((dt, i) => (
-              <option key={i} value={dt.currency}>
-                {dt.name}
-              </option>
-            ))}
-          </select>
-          <div className="d-flex">
-            <Button
-              styleClass="mt-20"
-              label="Create wallet"
-              type="submit"
-              loading={accountLoading}
-            />
-          </div>
+          {wallets.length ? (
+            <>
+              <p>
+                The crypto wallet will be created instantly and be available in
+                your list of wallets.
+              </p>
+              <select onChange={(e) => onValueChange(e)}>
+                {wallets.map((dt, i) => (
+                  <option key={i} value={dt.currency}>
+                    {dt.name}
+                  </option>
+                ))}
+              </select>
+              <div className="d-flex">
+                <Button
+                  styleClass="mt-20"
+                  label="Create wallet"
+                  type="submit"
+                  loading={accountLoading}
+                />
+              </div>
+            </>
+          ) : (
+            <span>All wallets have been added</span>
+          )}
 
           {accountErr && (
             <div className="submit-error">
@@ -96,7 +102,7 @@ const WalletModal = ({
                 <span>
                   <img src={infoIcon} alt="close" className="mr-2" />
                 </span>
-                Network Error
+                <span>Network error</span>
               </h5>
               <img
                 src={closeIcon2}

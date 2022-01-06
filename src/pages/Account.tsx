@@ -10,7 +10,7 @@ import WalletModal from "../components/WalletModal";
 const Wallets: React.FunctionComponent = () => {
   const { isLoading, accounts, err, getAccounts, setAccounts } =
     useAccount(true);
-  const [openNav, setOpenNav] = useState(false);
+  const [openNav, setOpenNav] = useState(true);
   return (
     <WalletsWrapper>
       <div className="wrapper">
