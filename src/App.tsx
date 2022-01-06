@@ -12,7 +12,11 @@ function App() {
             <Sidebar />
           </div>
           <div className="col-sm-9">
-            <Wallets />
+            {window.location.pathname === "/" ? (
+              <Wallets />
+            ) : (
+              <h4>Page Not Available ⛔️</h4>
+            )}
           </div>
         </div>
       </div>

@@ -1,35 +1,46 @@
 import React from "react";
 import styled from "styled-components";
+interface sideLinkType {
+  link: string;
+  name: string;
+}
 const Sidebar: React.FC = () => {
-  const sidebarLinks = [
-    "Wallets",
-    "Prices",
-    "Peer2Peer",
-    "Activity",
-    "Settings",
+  const sidebarLinks: sideLinkType[] = [
+    {
+      link: "/",
+      name: "Wallet",
+    },
+    {
+      link: "/prices",
+      name: "Prices",
+    },
+    {
+      link: "/peer-2-peer",
+      name: "Peer2Peer",
+    },
+    {
+      link: "/activity",
+      name: "Activity",
+    },
+    {
+      link: "/settings",
+      name: "Settings",
+    },
   ];
   return (
     <SidebarWrapper>
-      <li className="active">
-        <a
-          href="/"
-          className={window.location.pathname === "/" ? "font-weight-bold" : ""}
-        >
-          Wallets
-        </a>
-      </li>
-      <li>
-        <a href="/">Prices</a>
-      </li>
-      <li>
-        <a href="/">Peer2Peer</a>
-      </li>
-      <li>
-        <a href="/">Activity</a>
-      </li>
-      <li>
-        <a href="/">Settings</a>
-      </li>
+      {sidebarLinks.map((link, i) => (
+        <li className="active" key={i}>
+          <a
+            href={link.link}
+            className={
+              window.location.pathname === link.link ? "font-weight-bold" : ""
+            }
+          >
+            {link.name}
+          </a>
+        </li>
+      ))}
     </SidebarWrapper>
   );
 };
