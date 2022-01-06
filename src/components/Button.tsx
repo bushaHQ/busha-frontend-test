@@ -33,30 +33,30 @@ const Button = (props: ButtonTypes) => {
       bg={bg}
       border={border}
       text={text}
+      disabled={disabled}
       rounded={rounded}
       onClick={(e) => func && func(e)}
       type={type ? type : "button"}
       className={` ${styleClass}`}
     >
-      
-      {loading ? "Loading..." : label}
+      {loading ? <span aria-label="Loading...">Loading...</span> : label}
     </Button.Wrapper>
   );
 };
 
 Button.Wrapper = styled.button<ButtonTypes>`
-    padding: 12px 30.2px;
-    ${(props) => props.fullwidth && "width: -webkit-fill-available;"}
-    background: #000000;
-    border-radius: ${(props) => (props.rounded ? "30px" : "40px")};
-    color: ${(props) => (props.text ? props.text : "#ffffff")};
-    outline: none;
-    font-weight: bold;
-    min-width: 186px;
-    border: ${(props) => (props.border ? props.border : "none")};
-    :hover {
-      opacity: 0.8;
-    }
+  padding: 12px 30.2px;
+  ${(props) => props.fullwidth && "width: -webkit-fill-available;"}
+  background: #000000;
+  border-radius: ${(props) => (props.rounded ? "30px" : "40px")};
+  color: ${(props) => (props.text ? props.text : "#ffffff")};
+  outline: none;
+  font-weight: bold;
+  min-width: 186px;
+  border: ${(props) => (props.border ? props.border : "none")};
+  :hover {
+    opacity: 0.8;
+  }
   @media (max-width: 520px) {
     input {
       padding: 12px 30.2px;

@@ -7,20 +7,28 @@ const Sidebar: React.FC = () => (
         href="/"
         className={window.location.pathname === "/" ? "font-weight-bold" : ""}
       >
-        Wallets
+        <span>Wallets</span>
       </a>
     </li>
     <li>
-      <a href="/">Prices</a>
+      <a href="/">
+        <span>Prices</span>
+      </a>
     </li>
     <li>
-      <a href="/">Peer2Peer</a>
+      <a href="/">
+        <span>Peer2Peer</span>
+      </a>
     </li>
     <li>
-      <a href="/">Activity</a>
+      <a href="/">
+        <span>Activity</span>
+      </a>
     </li>
     <li>
-      <a href="/">Settings</a>
+      <a href="/">
+        <span>Settings</span>
+      </a>
     </li>
   </SidebarWrapper>
 );

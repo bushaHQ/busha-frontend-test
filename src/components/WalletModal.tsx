@@ -114,9 +114,9 @@ const WalletModal = ({
         className="close-icon"
         onClick={() => closeNav(false)}
       />
-      {/* <button className="close-icon" onClick={() => closeNav(false)}>
-        Close button
-      </button> */}
+      <button className="close-icon2" onClick={() => closeNav(false)}>
+        <span aria-label="Close button">Close button</span>
+      </button>
     </WalletModalWrapper>
   );
 };
@@ -129,6 +129,9 @@ const WalletModalWrapper = styled.div`
     right: 20px;
     top: 120px;
     cursor: pointer;
+  }
+  > .close-icon2 {
+    opacity: 0.002;
   }
   .wallet-form {
     padding: 20px;

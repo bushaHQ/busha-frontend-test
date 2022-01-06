@@ -16,8 +16,7 @@ const Card = (props: { account: AcountType }) => {
         <p className="text-light">
           {/* formating the amount will fail a test case. */}
           {/* {formatNumber(parseFloat(account.balance)) || "0.00"}{" "} */}
-          {account.balance}
-          {account.currency}
+          {`${account.balance} `} <span>{account.currency}</span>
         </p>
       </div>
       <img src={nextIcon} alt="next" />
