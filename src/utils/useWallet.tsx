@@ -14,7 +14,7 @@ export const useWallet = (): {
     setIsLoading(true);
     setTimeout(async () => {
       try {
-        const res: any = await fetch("/wallets");
+        const res: any = await fetch("http://localhost:3090/wallets");
         const response = await res.json();
         setWallets(response);
         setIsLoading(false);
