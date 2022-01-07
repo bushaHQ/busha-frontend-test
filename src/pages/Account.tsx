@@ -8,7 +8,7 @@ import Modal from "../components/shared/Modal";
 import { useAccount } from "../utils/useAccount";
 import WalletModal from "../components/WalletModal";
 const Wallets: React.FunctionComponent = () => {
-  // I used hooks are used to simulate RTK Query in larger applications
+  // I used hooks to simulate RTK Query in larger applications
   const { isLoading, accounts, err, getAccounts, setAccounts } =
     useAccount(true);
   const [openNav, setOpenNav] = useState(false);
