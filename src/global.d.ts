@@ -17,3 +17,24 @@ interface WalletType {
   type: string;
   imgURL: string;
 }
+interface AccountHookType {
+  isLoading: boolean;
+  accounts: AcountType[];
+  err: boolean;
+  getAccounts: () => Promise<void>;
+  addAccount: (data: any, cb: any) => Promise<void>;
+  setAccounts: React.Dispatch<React.SetStateAction<AcountType[]>>;
+  setErr: React.Dispatch<React.SetStateAction<boolean>>;
+}
+interface WalletHookType {
+  isLoading: boolean;
+  wallets: WalletType[];
+  err: boolean;
+  getWallets: () => Promise<void>;
+}
+
+interface WalletModalType {
+  closeNav: (bool: boolean) => void;
+  setAccounts: any;
+  accounts: AcountType[];
+}

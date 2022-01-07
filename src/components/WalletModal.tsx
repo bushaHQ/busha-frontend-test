@@ -10,15 +10,8 @@ import { useAccount } from "../utils/useAccount";
 import { useState } from "react";
 import DropDown from "./DropDown";
 
-const WalletModal = ({
-  closeNav,
-  setAccounts,
-  accounts,
-}: {
-  closeNav: (bool: boolean) => void;
-  setAccounts: any;
-  accounts: AcountType[];
-}) => {
+const WalletModal = ({ closeNav, setAccounts, accounts }: WalletModalType) => {
+  // I used hooks are used to simulate RTK Query in larger applications
   const { isLoading, wallets, err, getWallets } = useWallet();
   const {
     isLoading: accountLoading,
@@ -32,7 +25,7 @@ const WalletModal = ({
   };
   const handleAddAccount = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    const resolveSuccess = (data: AcountType) => {
+    const resolveSuccess = (data: AcountType): void => {
       closeNav(false);
       setAccounts([data, ...accounts]);
     };
@@ -41,6 +34,7 @@ const WalletModal = ({
 
   return (
     <WalletModalWrapper>
+      {/* display errors if fetching wallet failed */}
       {err && (
         <div className="message-div">
           <div>
@@ -50,6 +44,8 @@ const WalletModal = ({
           </div>
         </div>
       )}
+
+      {/* show spinner while loading*/}
       {isLoading && (
         <div className="message-div">
           <div>
@@ -65,6 +61,7 @@ const WalletModal = ({
           onSubmit={(e) => wallets.length && handleAddAccount(e)}
         >
           <h3>Add new wallet</h3>
+          {/* display dropdown of wallets if not created */}
           {wallets.length ? (
             <>
               <p>
@@ -91,6 +88,7 @@ const WalletModal = ({
             <span>All wallets have been added</span>
           )}
 
+          {/* display errors if adding account failed */}
           {accountErr && (
             <div className="submit-error">
               <h5>
@@ -109,6 +107,7 @@ const WalletModal = ({
           )}
         </form>
       )}
+      {/* close icon closes the modal*/}
       <img
         src={closeIcon}
         alt="close"

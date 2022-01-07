@@ -9,7 +9,9 @@ interface BurgerType {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   open: boolean;
 }
-export const Burger = ({ open, setOpen }: BurgerType) => {
+
+// hambuger menu
+const Burger = ({ open, setOpen }: BurgerType) => {
   return (
     <StyledBurger open={open} onClick={() => setOpen(!open)}>
       <div />

@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
+import { baseUrl } from "./helper";
 
-export const useAccount = (loadAccount: boolean) => {
+// this hooks handles all logics about account
+export const useAccount = (loadAccount: boolean): AccountHookType => {
   const [isLoading, setIsLoading] = useState(false);
   const [accounts, setAccounts] = useState<AcountType[]>([]);
   const [err, setErr] = useState(false);
 
+  // get list of accounts
   const getAccounts = async () => {
     setIsLoading(true);
     setErr(false);
     try {
-      const res: Response = await fetch("http://localhost:3090/accounts");
+      const res: Response = await fetch(`${baseUrl}/accounts`);
       const response = await res.json();
       setAccounts(response);
       setIsLoading(false);
@@ -18,10 +21,12 @@ export const useAccount = (loadAccount: boolean) => {
       setIsLoading(false);
     }
   };
+
+  // add account to list of accounts
   const addAccount = async (data: any, cb: any) => {
     setIsLoading(true);
     try {
-      const res: Response = await fetch("http://localhost:3090/accounts", {
+      const res: Response = await fetch(`${baseUrl}/accounts`, {
         method: "POST",
 
         body: JSON.stringify(data),
@@ -39,6 +44,8 @@ export const useAccount = (loadAccount: boolean) => {
       setErr(true);
     }
   };
+
+  // fetch accounts on page load
   useEffect(() => {
     loadAccount && getAccounts();
     return () => {
@@ -47,6 +54,8 @@ export const useAccount = (loadAccount: boolean) => {
       setIsLoading(false);
     };
   }, [loadAccount]);
+
+  // these object can be reused in any components
   return {
     isLoading,
     accounts,

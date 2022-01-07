@@ -8,6 +8,7 @@ import Modal from "../components/shared/Modal";
 import { useAccount } from "../utils/useAccount";
 import WalletModal from "../components/WalletModal";
 const Wallets: React.FunctionComponent = () => {
+  // I used hooks are used to simulate RTK Query in larger applications
   const { isLoading, accounts, err, getAccounts, setAccounts } =
     useAccount(true);
   const [openNav, setOpenNav] = useState(false);
@@ -30,6 +31,8 @@ const Wallets: React.FunctionComponent = () => {
           )}
         </div>
         <hr />
+
+        {/* display errors if any */}
         {err && (
           <div className="message-div">
             <div>
@@ -39,6 +42,8 @@ const Wallets: React.FunctionComponent = () => {
             </div>
           </div>
         )}
+
+        {/* show spinner while loading, else show account details */}
         {isLoading ? (
           <div className="message-div">
             <div>
@@ -54,6 +59,7 @@ const Wallets: React.FunctionComponent = () => {
             ))}
           </div>
         )}
+        {/* Modal */}
         <Modal isOpen={openNav}>
           <WalletModal
             closeNav={setOpenNav}

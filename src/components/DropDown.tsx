@@ -105,7 +105,8 @@ DropDown.Wrapper = styled.div<{ fullWidth?: boolean }>`
       }
       select {
         width: 100%;
-        height: 30px;
+        height: 50px;
+        padding: 0.6rem;
         padding-left: 10px;
         font-size: 13px;
       }
