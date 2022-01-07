@@ -45,6 +45,16 @@
       "type": "digital",
       "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/RMT.svg",
       "id": "JnITaQd"
+    },
+    {
+      "currency": "DOGE",
+      "hold": "0",
+      "pending_balance": "0",
+      "balance": "0",
+      "name": "Dogecoin",
+      "type": "digital",
+      "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1619043964/alice_v3/DOGE.svg",
+      "id": "WzV2Gzp"
     }
   ],
   "wallets": [
@@ -71,12 +81,6 @@
       "name": "Ripple",
       "type": "digital",
       "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1606747749/alice_v3/XRP.svg"
-    },
-    {
-      "currency": "DOGE",
-      "name": "Dogecoin",
-      "type": "digital",
-      "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1619043964/alice_v3/DOGE.svg"
     },
     {
       "currency": "TRX",

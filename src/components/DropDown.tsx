@@ -1,29 +1,23 @@
+import { ReactNode } from "react";
 import styled from "styled-components";
 
-interface DataTypes {
-  name: string;
-  value: string;
-}
 interface SelectTypes {
   label?: string;
-  options: any[];
   fullWidth?: boolean;
   required?: boolean;
-  placeholder?: string;
   name?: string;
   ref?: any;
   onChange?: any;
+  children: ReactNode;
 }
 const DropDown = ({
   label,
-  //   value,
-  options,
   fullWidth,
   required,
-  placeholder,
   name,
   ref,
   onChange,
+  children,
 }: SelectTypes) => {
   return (
     <DropDown.Wrapper fullWidth={fullWidth}>
@@ -41,19 +35,14 @@ const DropDown = ({
           required={required}
           className="custom-select  mb-3"
         >
-          <option>{placeholder}</option>
-          {options.map((data: DataTypes, i) => (
-            <option key={i} value={data.value}>
-              {data.name}
-            </option>
-          ))}
+          {children}
         </select>
       </div>
     </DropDown.Wrapper>
   );
 };
 
-DropDown.Wrapper = styled.div<any>`
+DropDown.Wrapper = styled.div<{ fullWidth?: boolean }>`
   .form-group {
     label {
       font-size: 14px;
@@ -66,22 +55,21 @@ DropDown.Wrapper = styled.div<any>`
       margin-bottom: 5px;
     }
     select {
-      width: ${(props) => (props.fullWidth ? props.fullWidth : "500.3px")};
+      width: ${(props) => (props.fullWidth ? "100%" : "500.3px")};
       font-size: 14px;
       line-height: 17px;
-      font-family: Orkney;
       color: #7b7b7b;
       padding: 1rem;
       padding-left: 2rem;
-      border-radius: 1rem;
-      border: 1px solid #bec6df;
       width: 100%;
       display: block;
       transition: all 0.3s;
       box-shadow: 0px 3px 6px #0000000d;
-      // height: 4.9rem;
       height: 60px;
-      background: #f9fffb;
+      background: #ffffff;
+      border: 1px solid #cbd2d9;
+      box-sizing: border-box;
+      border-radius: 5px;
       &:focus {
         outline: none;
         border: 0.5px solid #bec6df;
@@ -93,7 +81,6 @@ DropDown.Wrapper = styled.div<any>`
       }
 
       &::-webkit-input-placeholder {
-        font-family: Orkney;
         color: #47486b;
         opacity: 0.4;
       }

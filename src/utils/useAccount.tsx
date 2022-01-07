@@ -9,7 +9,7 @@ export const useAccount = (loadAccount: boolean) => {
     setIsLoading(true);
     setErr(false);
     try {
-      const res: any = await fetch("http://localhost:3090/accounts");
+      const res: Response = await fetch("http://localhost:3090/accounts");
       const response = await res.json();
       setAccounts(response);
       setIsLoading(false);
@@ -21,7 +21,7 @@ export const useAccount = (loadAccount: boolean) => {
   const addAccount = async (data: any, cb: any) => {
     setIsLoading(true);
     try {
-      const res: any = await fetch("http://localhost:3090/accounts", {
+      const res: Response = await fetch("http://localhost:3090/accounts", {
         method: "POST",
 
         body: JSON.stringify(data),
@@ -35,7 +35,6 @@ export const useAccount = (loadAccount: boolean) => {
       }
       setIsLoading(false);
     } catch (error) {
-      // setErr(true);
       setIsLoading(false);
       setErr(true);
     }

@@ -8,13 +8,8 @@ import infoIcon from "../assets/img/info.svg";
 import closeIcon2 from "../assets/img/close-icon-red.svg";
 import { useAccount } from "../utils/useAccount";
 import { useState } from "react";
+import DropDown from "./DropDown";
 
-// interface CustomEventType {
-//   target: {
-//     name: string;
-//     value: string | number;
-//   };
-// }
 const WalletModal = ({
   closeNav,
   setAccounts,
@@ -76,13 +71,13 @@ const WalletModal = ({
                 The crypto wallet will be created instantly and be available in
                 your list of wallets.
               </p>
-              <select onChange={(e) => onValueChange(e)}>
+              <DropDown onChange={onValueChange}>
                 {wallets.map((dt, i) => (
                   <option key={i} value={dt.currency}>
                     {dt.name}
                   </option>
                 ))}
-              </select>
+              </DropDown>
               <div className="d-flex">
                 <Button
                   styleClass="mt-20"
