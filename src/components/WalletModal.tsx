@@ -55,7 +55,7 @@ const WalletModal = ({ closeNav, setAccounts, accounts }: WalletModalType) => {
           </div>
         </div>
       )}
-      {!isLoading && (
+      {!isLoading && !err && (
         <form
           className="wallet-form "
           onSubmit={(e) => wallets.length && handleAddAccount(e)}
