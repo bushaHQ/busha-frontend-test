@@ -88,7 +88,7 @@ const Sidebar: React.FC = () => {
       <div className="menu">
         <Burger open={show} setOpen={setShow} />
       </div>
-      <ul className={`shadow ${show && "show"}`}>
+      <ul className={`${show && "show"}`}>
         {sidebarLinks.map((link, i) => (
           <li
             className={window.location.pathname === link.link ? "active" : ""}
@@ -148,6 +148,7 @@ const SidebarWrapper = styled.div<{ show: boolean }>`
       border-radius: 10px;
       background: #ffffff;
       margin-left: -300px;
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
     }
     .show {
       margin-left: 0;
