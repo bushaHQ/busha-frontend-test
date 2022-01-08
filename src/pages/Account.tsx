@@ -46,11 +46,7 @@ const Wallets: React.FunctionComponent = () => {
         {/* show spinner while loading, else show account details */}
         {isLoading ? (
           <div className="message-div">
-            <div>
-              <Loader />
-              <br />
-              <h5 className="ml-3">Loading...</h5>
-            </div>
+            <Loader />
           </div>
         ) : (
           <div className="card-container mt-4">

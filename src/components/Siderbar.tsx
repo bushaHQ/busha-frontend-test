@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import Navlink from "./Navlink";
 interface sideLinkType {
   link: string;
   name: string;
@@ -90,19 +91,7 @@ const Sidebar: React.FC = () => {
       </div>
       <ul className={`${show && "show"}`}>
         {sidebarLinks.map((link, i) => (
-          <li
-            className={window.location.pathname === link.link ? "active" : ""}
-            key={i}
-          >
-            <a
-              href={link.link}
-              className={
-                window.location.pathname === link.link ? "font-weight-bold" : ""
-              }
-            >
-              {link.name}
-            </a>
-          </li>
+          <Navlink key={i} link={link} />
         ))}
       </ul>
     </SidebarWrapper>
@@ -120,21 +109,6 @@ const SidebarWrapper = styled.div<{ show: boolean }>`
     list-style-type: none;
     padding: 0;
     transition: all 0.3s linear;
-    li {
-      border-radius: 3px;
-      padding: 10px 15px;
-      margin-bottom: 5px;
-      a {
-        text-decoration: none;
-        color: #000000;
-      }
-      :hover {
-        background: #f5f7fa;
-      }
-    }
-    .active {
-      background: #f5f7fa;
-    }
   }
   @media screen and (max-width: 590px) {
     position: fixed;

@@ -48,11 +48,7 @@ const WalletModal = ({ closeNav, setAccounts, accounts }: WalletModalType) => {
       {/* show spinner while loading*/}
       {isLoading && (
         <div className="message-div">
-          <div>
-            <Loader />
-            <br />
-            <h5 className="ml-3">Loading...</h5>
-          </div>
+          <Loader />
         </div>
       )}
       {!isLoading && !err && (
