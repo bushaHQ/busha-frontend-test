@@ -38,3 +38,8 @@ interface WalletModalType {
   setAccounts: any;
   accounts: AcountType[];
 }
+
+interface sideLinkType {
+  link: string;
+  name: string;
+}

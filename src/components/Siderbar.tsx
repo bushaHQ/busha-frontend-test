@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Navlink from "./Navlink";
-interface sideLinkType {
-  link: string;
-  name: string;
-}
 
 interface BurgerType {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;

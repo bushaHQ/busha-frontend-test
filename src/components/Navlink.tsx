@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Navlink = ({ link }: any) => {
+const Navlink = ({ link }: { link: sideLinkType }) => {
   return (
     <NavlinkWrapper isActive={window.location.pathname === link.link}>
       <a
