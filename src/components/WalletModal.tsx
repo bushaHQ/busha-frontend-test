@@ -11,7 +11,7 @@ import { useState } from "react";
 import DropDown from "./DropDown";
 
 const WalletModal = ({ closeNav, setAccounts, accounts }: WalletModalType) => {
-  // I used hooks are used to simulate RTK Query in larger applications
+  // I used hooks to simulate RTK Query in larger applications
   const { isLoading, wallets, err, getWallets } = useWallet();
   const {
     isLoading: accountLoading,
