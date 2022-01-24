@@ -1,6 +1,19 @@
+@font-face {
+  font-family: 'Aribau Grotesk';
+  src: local('Aribau Grotesk'), url('./assets/fonts/Aribau/Aribau Grotesk Regular.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Aribau Grotesk Medium';
+  src: local('Aribau Grotesk Medium'), url('./assets/fonts/Aribau/Aribau Grotesk Medium.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Aribau Grotesk Bold';
+  src: local('Aribau Grotesk Bold'), url('./assets/fonts/Aribau/Aribau Grotesk Bold.otf') format('opentype');
+}
+
 body {
   margin: 0;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Aribau Grotesk', sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -8,4 +21,45 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+h1, h2, h3, h4, h5, h6{
+  font-family: "Aribau Grotesk Medium" !important;
+}
+a{
+  color: #000000 !important;
+  text-decoration: none !important;
+}
+.btn-busha{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 10px 30px !important;
+  background: #000000 !important;
+  border-radius: 40px !important;
+  border: 0 !important;
+  font-size: 18px !important;
+}
+.btn-close{
+  // background: none !important;
+  color: #000 !important;
+  opacity: 1 !important;
+  float: right;
+  font-size: 0.8rem !important;
+  &hover{
+    background-color: none !important;
+    border: 0 !important;
+  }
+}
+form label{
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 16px;
+  color: #3E4C59;
+}
+.alert{
+  padding: 10px 15px !important;
+  .btn-close{
+    color: #D72C0D !important;
+  }
 }
