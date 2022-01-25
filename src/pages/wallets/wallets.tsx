@@ -1,5 +1,5 @@
-import React, { useState, FormEvent, useContext, useEffect } from 'react';
-import { Alert, Button, Col, Container, Nav, NavDropdown, Row } from 'react-bootstrap';
+import { useState, useEffect } from 'react';
+import { Alert, Button, Col, Container, Row } from 'react-bootstrap';
 import verification from '../../assets/images/verification.svg';
 import error from '../../assets/images/error.svg';
 import enter from '../../assets/images/enter.svg';
@@ -43,7 +43,7 @@ const WalletsPage = () => {
     const [accounts, setAccounts] = useState<Account[]>([]);
     const [wallets, setWallets] = useState<Wallet[]>([]);
     const currencyPosition = (curr: string, amount: number) => {
-        if(curr == 'NGN'){
+        if(curr === 'NGN'){
             return `₦ ${amount}`;
         } else {
             return `${amount} ${curr}`;
@@ -76,19 +76,20 @@ const WalletsPage = () => {
             setLoading(false); 
             setFailure(true);
         });
-    }
-    
-      
+    }  
 
-    async function postData() {
-        setwalletsLoading(true); 
+    const postData = async () => {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ currency: selectedWallet })
         };
-
-        fetch(`http://localhost:3090/accounts`, requestOptions)
+        await fetch(`http://localhost:3090/accounts`, requestOptions).then((response) => {
+            if (response.status >= 400 && response.status < 600) {
+              throw new Error("Bad response from server");
+            }
+            return response;
+        })
         .then(response => response.json())
         .then(data => {
             setmodalActive(false);
@@ -101,12 +102,19 @@ const WalletsPage = () => {
             // }
         })
         .catch(error => {
+            setwalletsLoading(false); 
             setsubmitError(true);
         });
     }
-    async function fetchWallets() {
+
+    const fetchWallets = async () => {
         setwalletsLoading(true); 
-        fetch(`http://localhost:3090/wallets`)
+        await fetch(`http://localhost:3090/wallets`).then((response) => {
+            if (response.status >= 400 && response.status < 600) {
+              throw new Error("Bad response from server");
+            }
+            return response;
+        })
         .then(response => response.json())
         .then(data => {
             if (Array.isArray(data)) {
@@ -115,13 +123,16 @@ const WalletsPage = () => {
             }
         })
         .catch(error => {
+            console.log(error)
+            setwalletsLoading(false); 
             setWalletFailure(true);
         });
     }
     const submitForm = () => {
-        if(selectedWallet == undefined || selectedWallet == ''){
+        if(selectedWallet === undefined || selectedWallet === ''){
             setValidation('Please select an option');
         }else{
+            setwalletsLoading(true); 
             postData();
         }
     }
@@ -159,7 +170,7 @@ const WalletsPage = () => {
                         failure ? (
                             <div className="d-flex justify-content-center align-items-center mt-5">
                                 <Row>
-                                    <Col xs={12} className="text-center"><img src={verification} className="img-responsive" /></Col>
+                                    <Col xs={12} className="text-center"><img src={verification} className="img-responsive" alt="" /></Col>
                                     <Col xs={12} className="text-center mt-3">
                                         <p aria-label="Network error">Network error</p>
                                     </Col>
@@ -174,11 +185,11 @@ const WalletsPage = () => {
                                     <Col md={4} key={idx}>
                                         <div className="busha-wallet-card">
                                             <div>
-                                                <img src={data.imgURL} className="currency-icon" /> <span className="currency-name">{data.name}</span>
+                                                <img src={data.imgURL} className="currency-icon" alt="" /> <span className="currency-name">{data.name}</span>
                                             </div>
                                             <div className="text-white balance">{currencyPosition(data.currency, data.balance)}</div>
                                             <div className="card-detail-icon">
-                                                <img src={enter} className="detail-icon" />
+                                                <img src={enter} className="detail-icon" alt="" />
                                             </div>
                                         </div>
                                     </Col>
@@ -201,7 +212,7 @@ const WalletsPage = () => {
                         </Col>
                         <Col xs={2} className="mt-auto">
                             {/* <h4 className="text-lg-end mt-auto">x</h4> */}
-                            <Button className="text-lg-end btn-close" onClick={() => setmodalActive(false)} />
+                            <Button className="text-lg-end btn-close" aria-label="Close button" onClick={() => setmodalActive(false)} />
                         </Col>
                     </Row>
                     {walletsLoading ? (
@@ -212,7 +223,7 @@ const WalletsPage = () => {
                         walletFailure ? (
                             <div className="d-flex justify-content-center align-items-center mt-5">
                                 <Row>
-                                    <Col xs={12} className="text-center"><img src={verification} className="img-responsive" /></Col>
+                                    <Col xs={12} className="text-center"><img src={verification} className="img-responsive" alt="" /></Col>
                                     <Col xs={12} className="text-center mt-3"><p>Network Error</p></Col>
                                     <Col xs={12} className="text-center mt-1">
                                         <Button variant="primary" size="lg" className="btn-busha" onClick={() => fetchWallets()}>Try again</Button>
@@ -231,7 +242,7 @@ const WalletsPage = () => {
                                         onChange={(e) => handleChange(e.target.value)}>
                                             <option>--------</option>
                                             {wallets.map((data, idx) => (
-                                                <option value={data.currency}>{data.name}</option>
+                                                <option value={data.currency} key={idx}>{data.name}</option>
                                             ))}
                                         </select>
                                         <div className="text-danger">{validation}</div>
@@ -243,7 +254,7 @@ const WalletsPage = () => {
                                 {submitError && (
                                     <Col xs={12} className="mt-5">
                                         <Alert variant="danger" onClose={() => setsubmitError(false)} dismissible>
-                                                <img src={error} />
+                                                <img src={error} alt="" />
                                                 <span className="ms-2" aria-label="Network error">Network error</span>
                                         </Alert>
                                     </Col>

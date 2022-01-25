@@ -1,9 +1,4 @@
-import React, { useState, FormEvent, useContext, useEffect } from 'react';
-import { Container, Nav, NavDropdown, NavLink } from 'react-bootstrap';
-import Navbar from 'react-bootstrap/Navbar';
-import NavBar from 'react-bootstrap/Navbar';
-import logo from '../../../assets/images/logo.svg';
-import Avatar from 'react-avatar';
+import { Nav } from 'react-bootstrap';
 import './index.scss';
 import { Link } from 'react-router-dom';
 

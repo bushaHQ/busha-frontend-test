@@ -1,5 +1,4 @@
-import React, { useState, FormEvent, useContext, useEffect } from 'react';
-import { Container, Nav, NavDropdown } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import Navbar from 'react-bootstrap/Navbar';
 import NavBar from 'react-bootstrap/Navbar';
 import logo from '../../../assets/images/logo.svg';
@@ -11,7 +10,7 @@ const BushaNavBar = () => {
         <Navbar bg="light" expand="lg" style={{background: "f0f0f0"}}>
         <Container>
             <Navbar.Brand href="#">
-                <img src={logo} />
+                <img src={logo} alt="" />
             </Navbar.Brand>
             <NavBar.Text className="text-lg-end">
                 <Avatar name="Oluwatobi" size="34" color="#9AA5B14D" fgColor="#000" round={true} textSizeRatio={2} style={{marginRight: '5px' }} /><span className="display-name">Oluwatobi Akindunjoye</span>
