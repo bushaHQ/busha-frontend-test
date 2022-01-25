@@ -73,7 +73,8 @@ const WalletsPage = () => {
             }
         })
         .catch((error) => {
-          setFailure(true);
+            setLoading(false); 
+            setFailure(true);
         });
     }
     
