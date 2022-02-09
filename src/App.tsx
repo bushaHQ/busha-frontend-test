@@ -1,9 +1,7 @@
+import React from 'react';
 import { useState, useEffect } from 'react';
 import Loader from './components/shared/Loader';
 import Modal from './components/shared/Modal';
-
-import { useApi } from './api';
-
 import { ReactComponent as Logo} from './icons/logo.svg'
 import { ReactComponent as Arrow} from './icons/right-arrow.svg'
 import { ReactComponent as Close} from './icons/close.svg'
@@ -12,59 +10,102 @@ import { ReactComponent as NetworkError} from './icons/networkError.svg'
 import { ReactComponent as CloseError} from './icons/closeError.svg'
 
 function App() {
- 
+  const [accounts, setAccounts] = useState({
+    isLoaded: false,
+    items: [],
+    failed: false
+
+  })
+
+  const [wallets, setWallets] = useState({
+    isLoaded: false,
+    items: [],
+    failed: false,
+    createWalletError: false,
+  })
+
+
   const [selectedCurrency, setSelectedCurrency] = useState("")
-  const [errorIsOpen, setErrorIsOpen] = useState(false)
-
-  const accounts = useApi(
-    `${process.env.REACT_APP_PROXY}/accounts`,
-    "GET",
-  )
-
-  const wallets = useApi(
-    `${process.env.REACT_APP_PROXY}/wallets`,
-    "GET",
-  )
-
-  const createWallet = useApi(
-    `${process.env.REACT_APP_PROXY}/accounts`,
-    "POST",
-    {currency: selectedCurrency}
-  )
 
   const [isOpen, setIsOpen] = useState(false)
 
-  useEffect(() => {
-    accounts.execute()
-  }, [accounts])
 
   useEffect(() => {
+    setAccounts({...accounts, isLoaded: false, items: [], failed: false})
+
+    fetchAccounts();
+
     if(isOpen){
-      wallets.execute()
+      fetchWallets();
     }
-  }, [isOpen, wallets])
+  }, [isOpen])
 
-  const handleWalletCreate = async () => {
-    createWallet.execute()
-    accounts.execute()
-    if(createWallet.apiState === "failed"){
-      setErrorIsOpen(true)
-    }
+  const fetchWallets = () => {
+    fetch(`${process.env.REACT_APP_PROXY}/wallets`)
+      .then(res => {
+        if(!res.ok){
+          setWallets({...wallets, isLoaded: true, items: [], failed: true})
+          throw Error(res.statusText)
+        }
+        return res.json()
+      })
+      .then(
+        (result) => {
+          setWallets({...wallets, isLoaded: true, items: result, failed: false})
+        })
+        .catch((err)=> console.log(err))
   }
- 
-  
+
+  const fetchAccounts = () => {
+    fetch(`${process.env.REACT_APP_PROXY}/accounts`)
+    .then(res => {
+      if(!res.ok){
+        setAccounts({...accounts, failed: true, items: [], isLoaded: true})
+        throw Error(res.statusText)
+      }
+      return res.json()
+    })
+    .then((result) => {
+      setAccounts({...accounts, isLoaded: true, items: result, failed: false})
+    }).catch((err) => console.log(err))
+  }
+
+  const handleWalletCreate = (e: any) => {
+    e.preventDefault();
+
+    fetch(`${process.env.REACT_APP_PROXY}/accounts`, 
+    {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({currency: selectedCurrency})
+    }).then((res) => {
+      if(!res.ok){
+        setWallets({...wallets, createWalletError: true})
+        setIsOpen(true)
+        throw Error(res.statusText)
+      }
+
+      return res.json()
+    })
+      .then((result) => {
+        setIsOpen(!isOpen)
+      }).catch((err) => console.log(err))
+  }
 
   return (
     <>
       <Modal isOpen={isOpen}>
         {
-          wallets.apiState === "loading" && 
+          !wallets.isLoaded && 
           <div className='center'>
             <Loader size={100} width={8}/>
           </div>
         }
         { 
-          (wallets.apiState === "done" && wallets.data)  &&
+          (wallets.isLoaded && !wallets.failed && wallets.items) &&
           <div className="modal-content">
             <div className='modal-content-header'>
               <h3>Add new wallet</h3>
@@ -83,7 +124,7 @@ function App() {
               <h4>Select wallet</h4>
               <select defaultValue="DEFAULT" onChange={(e) => setSelectedCurrency(e.target.value)}>
                 <option value="DEFAULT" disabled>Select currency</option>
-                {wallets.data.map((wallet: any, i) => 
+                {wallets.items.map((wallet: any, i) => 
                 <option key={i} value={wallet.currency}>{wallet.name}</option>
                   )}
               </select>
@@ -95,22 +136,20 @@ function App() {
             </div>
 
             {
-              
-              (createWallet.apiState === "failed" || errorIsOpen) &&
+              wallets.createWalletError &&
               <div className="create-wallet-error">
                 <div>
                   <NetworkError />
                   <span>Network Error</span>
                 </div>
-                <CloseError onClick={() => setErrorIsOpen(!errorIsOpen)}/>
+                <CloseError onClick={() => setWallets({...wallets, createWalletError: false})}/>
               </div>
-              
             }
           </div>
         }
 
         {
-          wallets.apiState === "failed" &&
+          (wallets.isLoaded && wallets.failed) &&
           <div className='center'>
             <div className='network-error'>
               <div className='error-logo'>
@@ -118,7 +157,7 @@ function App() {
               </div>
               <h3>Network Error</h3>
               <div className="btn-container">
-                <button className="btn-submit" onClick={wallets.execute}>
+                <button className="btn-submit" onClick={fetchWallets}>
                   Try again
                 </button>
               </div>
@@ -158,21 +197,21 @@ function App() {
             <div className='right-section'>
               <div className='right-section-header'>
                 <h1>Wallets</h1>
-                <span onClick={() => setIsOpen(!isOpen)} className={accounts.apiState === "failed" ? "hide" : ""}>
+                <span onClick={() => setIsOpen(!isOpen)} className={accounts.failed || !accounts.isLoaded ? "hide" : ""}>
                   + Add new wallet
                 </span>
               </div>
-              <div className={accounts.apiState === "failed" ? "hide" : "separator"}></div>
+              <div className={accounts.failed || !accounts.isLoaded ? "hide" : "separator"}></div>
               <div className='right-section-content'>
                 { 
-                  accounts.apiState === "loading" && 
+                  !accounts.isLoaded && 
                   <div className='center'>
                     <Loader size={100} width={8}/>
                   </div>
                 }
 
                 {
-                  accounts.apiState === "failed" &&
+                  accounts.failed &&
                   <div className='center'>
                     <div className='network-error'>
                       <div className='error-logo'>
@@ -180,7 +219,7 @@ function App() {
                       </div>
                       <h3>Network Error</h3>
                       <div className="btn-container">
-                        <button className="btn-submit" onClick={accounts.execute}>
+                        <button className="btn-submit" onClick={fetchAccounts}>
                           Try again
                         </button>
                       </div>
@@ -189,10 +228,10 @@ function App() {
                   
                 }
                 {
-                  (accounts.apiState === "done" && accounts.data) &&
+                  (accounts.isLoaded && !accounts.failed && accounts.items) &&
                   <div className='accounts-cards'>
-                      { accounts.data.length &&
-                        accounts.data.map((account: any, i) => 
+                      { accounts.items.length &&
+                        accounts.items.map((account: any, i) => 
                           <div className='card' key={i}>
                             <div className='card-header'>
                               <img src={account.imgURL} alt={account.name} />
