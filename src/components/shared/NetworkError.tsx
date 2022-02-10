@@ -1,13 +1,18 @@
-import React from "react";
 import styled from "styled-components";
 import { ReactComponent as ErrorSVG } from "../../assets/error.svg";
 
-export default function NetworkError() {
+interface NetworkErrorProps {
+  retryRequest: () => void;
+}
+
+export default function NetworkError({ retryRequest }: NetworkErrorProps) {
   return (
     <ErrorContainer>
       <ErrorSVG className="icon" />
       <p className="text">Network Error</p>
-      <button className="action__btn">Try again</button>
+      <button className="action__btn" onClick={retryRequest}>
+        Try again
+      </button>
     </ErrorContainer>
   );
 }

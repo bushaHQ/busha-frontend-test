@@ -92,7 +92,7 @@ export default function App() {
               <Loader width={4} size={50} />
             </div>
           ) : accountsError ? (
-            <NetworkError />
+            <NetworkError retryRequest={fetchAccounts} />
           ) : (
             <div className="wallets__grid">
               {accounts.map((account) => (

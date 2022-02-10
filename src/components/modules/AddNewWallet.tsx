@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Modal from "../shared/Modal";
 import Loader from "../shared/Loader";
 import { ReactComponent as Close } from "../../assets/close.svg";
+import NetworkError from "../shared/NetworkError";
 
 interface AddNewWalletProps {
   isOpen: boolean;
@@ -100,6 +101,10 @@ export default function AddNewWallet({
 
   if (wallets.loading) {
     return <Loader width={4} size={50} />;
+  }
+
+  if (wallets.error) {
+    return <NetworkError retryRequest={fetchWallets} />;
   }
 
   return (
