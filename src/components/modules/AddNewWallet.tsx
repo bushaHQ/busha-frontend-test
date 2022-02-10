@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Modal from "../shared/Modal";
 import Loader from "../shared/Loader";
 import { ReactComponent as Close } from "../../assets/close.svg";
+import { ReactComponent as Warning } from "../../assets/warning.svg";
 import NetworkError from "../shared/NetworkError";
 
 interface AddNewWalletProps {
@@ -133,9 +134,6 @@ export default function AddNewWallet({
               </option>
             ))}
           </select>
-          {Boolean(createWallet.error) && (
-            <div className="error">{createWallet.error}</div>
-          )}
 
           <button
             className="submit__wallet"
@@ -145,6 +143,19 @@ export default function AddNewWallet({
             Create wallet
           </button>
         </form>
+
+        {Boolean(createWallet.error) && (
+          <div className="error">
+            <Warning className="warning" />
+            <span>Network Error</span>
+            <Close
+              className="close"
+              onClick={() =>
+                setCreateWallet((info) => ({ ...info, error: "" }))
+              }
+            />
+          </div>
+        )}
       </AddNewWalletContent>
     </Modal>
   );
@@ -199,12 +210,6 @@ const AddNewWalletContent = styled.div`
       margin-top: 7px;
       cursor: pointer;
     }
-    .error {
-      color: crimson;
-      font-size: 0.7rem;
-      font-weight: 500;
-      text-align: left;
-    }
     .submit__wallet {
       background: #000;
       border-radius: 40px;
@@ -212,6 +217,36 @@ const AddNewWalletContent = styled.div`
       border-color: #000;
       padding: 0.6rem 1.7rem;
       margin-top: 1rem;
+    }
+  }
+
+  .error {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem;
+    background: #fff4f4;
+    border: 1px solid #e0b3b2;
+    border-radius: 8px;
+    margin-top: 2rem;
+
+    span {
+      display: inline-block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-left: 1rem;
+    }
+    .warning {
+      width: 1.3rem;
+      fill: #d72c0d;
+    }
+    .close {
+      margin-left: auto;
+      width: 0.7rem;
+      cursor: pointer;
+
+      path {
+        fill: #d72c0d;
+      }
     }
   }
 `;
