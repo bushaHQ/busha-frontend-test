@@ -37,9 +37,10 @@ export default function App() {
           throw new Error("Error fetching accounts");
         }
 
-        return res.json().then((data) => {
-          setAccounts(data);
-        });
+        return res.json();
+      })
+      .then((data) => {
+        setAccounts(data);
       })
       .catch((error) => {
         setAccountsError(error.message);
@@ -55,11 +56,13 @@ export default function App() {
 
   return (
     <StyledHome>
-      <AddNewWallet
-        isOpen={isModalOpen}
-        closeModal={() => setModalOpen(false)}
-        onWalletCreate={fetchAccounts}
-      ></AddNewWallet>
+      {isModalOpen && (
+        <AddNewWallet
+          isOpen={isModalOpen}
+          closeModal={() => setModalOpen(false)}
+          onWalletCreate={fetchAccounts}
+        ></AddNewWallet>
+      )}
       <header className="header">
         <div className="container top-bar">
           <Logo className="logo" />
@@ -103,15 +106,8 @@ export default function App() {
                   </div>
 
                   <div className="currency">
-                    <span>
-                      {account.type === "fiat"
-                        ? new Intl.NumberFormat("en-US", {
-                            style: "currency",
-                            currency: account.currency,
-                            minimumFractionDigits: 2,
-                          }).format(Number(account.balance))
-                        : account.balance}
-                    </span>{" "}
+                    {account.type === "fiat" && <span>&#8358;</span>}{" "}
+                    <span>{account.balance} </span>
                     <span>
                       {account.type === "digital" && account.currency}
                     </span>
@@ -195,7 +191,8 @@ const StyledHome = styled.div`
 
     .loader {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
     }
     .wallets__header {
       display: flex;
