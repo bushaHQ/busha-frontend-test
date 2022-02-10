@@ -1,6 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 
+import AddNewWallet from "./components/modules/AddNewWallet";
 import Loader from "./components/shared/Loader";
 import NetworkError from "./components/shared/NetworkError";
 import { ReactComponent as Logo } from "./assets/logo.svg";
@@ -25,8 +26,9 @@ export default function App() {
   const [loading, setLoading] = React.useState(false);
   const [accounts, setAccounts] = React.useState<Account[]>([]);
   const [accountsError, setAccountsError] = React.useState(null);
+  const [isModalOpen, setModalOpen] = React.useState(false);
 
-  React.useEffect(() => {
+  const fetchAccounts = React.useCallback(() => {
     setLoading(true);
 
     fetch("http://localhost:3090/accounts")
@@ -47,10 +49,17 @@ export default function App() {
       });
   }, []);
 
-  console.log(accounts);
+  React.useEffect(() => {
+    fetchAccounts();
+  }, [fetchAccounts]);
 
   return (
     <StyledHome>
+      <AddNewWallet
+        isOpen={isModalOpen}
+        closeModal={() => setModalOpen(false)}
+        onWalletCreate={fetchAccounts}
+      ></AddNewWallet>
       <header className="header">
         <div className="container top-bar">
           <Logo className="logo" />
@@ -74,7 +83,9 @@ export default function App() {
         <section>
           <div className="wallets__header">
             <h1>Wallets</h1>
-            <p className="new__item">+ Add new item</p>
+            <button className="new__item" onClick={() => setModalOpen(true)}>
+              + Add new wallet
+            </button>
           </div>
           {loading ? (
             <div className="loader">
@@ -85,7 +96,7 @@ export default function App() {
           ) : (
             <div className="wallets__grid">
               {accounts.map((account) => (
-                <div className="wallet">
+                <div className="wallet" key={account.id}>
                   <div className="name">
                     <img src={account.imgURL} alt="" />
                     <p>{account.name}</p>
@@ -199,6 +210,8 @@ const StyledHome = styled.div`
       }
 
       .new__item {
+        background: none;
+        border: none;
         color: #000;
         font-weight: 500;
         font-size: 0.875rem;
