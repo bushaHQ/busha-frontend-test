@@ -46,7 +46,7 @@ const Main: React.FC = () => {
         <h2 className="main__title">Wallet</h2>
         <button
           onClick={handleSlider}
-          className={`add__btn ${loading || (error && "hide")}`}
+          className={`add__btn ${(loading || error) && "hide"}`}
         >
           + Add new wallet
         </button>
