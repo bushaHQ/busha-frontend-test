@@ -56,6 +56,10 @@ const Main: React.FC = () => {
         <div className="loader__icon">
           <Loader size={100} width={2} />
         </div>
+      ) : error ? (
+        <div style={{ margin: "2rem 0" }}>
+          <ErrorPage func={getAccounts} />
+        </div>
       ) : (
         <div className="main__account__box">
           {accounts.length
@@ -63,12 +67,6 @@ const Main: React.FC = () => {
                 return <Card item={item} key={item?.id} />;
               })
             : ""}
-        </div>
-      )}
-
-      {error && (
-        <div style={{ margin: "2rem 0" }}>
-          <ErrorPage func={getAccounts} />
         </div>
       )}
 
