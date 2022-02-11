@@ -5,23 +5,23 @@ import { flexBox } from "./style";
 const Sidebar = () => {
   return (
     <SidebarWrapper>
-      <a href="0#" className="sidebar__links active">
+      <a href="0#" className="sidebar__links active disable">
         Wallets
       </a>
 
-      <a href="0#" className="sidebar__links">
+      <a href="0#" className="sidebar__links disable">
         Prices
       </a>
 
-      <a href="0#" className="sidebar__links">
+      <a href="0#" className="sidebar__links disable">
         Peer2Peer
       </a>
 
-      <a href="0#" className="sidebar__links">
+      <a href="0#" className="sidebar__links disable">
         Activity
       </a>
 
-      <a href="#0" className="sidebar__links">
+      <a href="#0" className="sidebar__links disable">
         Settings
       </a>
     </SidebarWrapper>
@@ -53,6 +53,11 @@ const SidebarWrapper = styled.div`
       font-weight: 600;
       width: 100%;
     }
+  }
+
+  .disable {
+    pointer-events: none;
+    cursor: default;
   }
 
   @media screen and (max-width: 767px) {

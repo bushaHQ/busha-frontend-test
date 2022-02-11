@@ -7,8 +7,7 @@ import { Item } from "./types";
 import { flexBox } from "./style";
 import ErrorPage from "./ErrorPage";
 import Sliderbar from "./Sliderbar";
-const Main: React.FC = (props) => {
-  console.log(props);
+const Main: React.FC = () => {
   const [accounts, setAccounts] = useState<Item[]>([]);
   const [loading, setloading] = useState(true);
   const [error, setError] = useState(false);
@@ -20,7 +19,6 @@ const Main: React.FC = (props) => {
     try {
       const response = await fetch(requestUrls.accounts);
       const data = await response.json();
-      // throw "err";
       setAccounts(data);
       setError(false);
       setloading(false);
