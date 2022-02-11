@@ -22,33 +22,42 @@ interface Account {
   imgURL: string;
 }
 
+interface AccountState {
+  loading: boolean;
+  data: Account[];
+  error: boolean;
+}
+
+const SERVER_BASE_URL = process.env.REACT_APP_BASE_URL;
+
 export default function App() {
-  const [loading, setLoading] = React.useState(false);
-  const [accounts, setAccounts] = React.useState<Account[]>([]);
-  const [accountsError, setAccountsError] = React.useState(null);
   const [isModalOpen, setModalOpen] = React.useState(false);
+  const [triggerFetch, setTriggerFetch] = React.useState(true);
+  const [accounts, setAccounts] = React.useState<AccountState>({
+    loading: false,
+    data: [],
+    error: false,
+  });
 
-  const fetchAccounts = React.useCallback(() => {
-    setLoading(true);
+  const fetchAccounts = React.useCallback(async () => {
+    if (!triggerFetch) return;
 
-    fetch("http://localhost:3090/accounts")
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Error fetching accounts");
-        }
+    setAccounts((info) => ({ ...info, loading: true, error: false }));
 
-        return res.json();
-      })
-      .then((data) => {
-        setAccounts(data);
-      })
-      .catch((error) => {
-        setAccountsError(error.message);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
+    try {
+      const response = await fetch(SERVER_BASE_URL + "/accounts");
+      if (!response.ok) {
+        throw new Error("Error fetching accounts");
+      }
+
+      const data = await response.json();
+      setTriggerFetch(false);
+      setAccounts((info) => ({ ...info, data, loading: false }));
+    } catch (error) {
+      setTriggerFetch(false);
+      setAccounts((info) => ({ ...info, loading: false, error: true }));
+    }
+  }, [triggerFetch]);
 
   React.useEffect(() => {
     fetchAccounts();
@@ -57,9 +66,10 @@ export default function App() {
   return (
     <StyledHome>
       <AddNewWallet
+        key={String(isModalOpen)}
         isOpen={isModalOpen}
         closeModal={() => setModalOpen(false)}
-        onWalletCreate={fetchAccounts}
+        onWalletCreate={() => setTriggerFetch(true)}
       ></AddNewWallet>
       <header className="header">
         <div className="container top-bar">
@@ -83,7 +93,7 @@ export default function App() {
 
         <section>
           <div className="wallets__header">
-            {Boolean(!loading && !accountsError) && (
+            {Boolean(!accounts.loading && !accounts.error) && (
               <>
                 <h1>Wallets</h1>
                 <button
@@ -95,15 +105,15 @@ export default function App() {
               </>
             )}
           </div>
-          {loading ? (
+          {accounts.loading ? (
             <div className="loader">
               <Loader width={4} size={50} />
             </div>
-          ) : accountsError ? (
-            <NetworkError retryRequest={fetchAccounts} />
+          ) : accounts.error ? (
+            <NetworkError retryRequest={() => setTriggerFetch(true)} />
           ) : (
             <div className="wallets__grid">
-              {accounts.map((account) => (
+              {accounts.data.map((account) => (
                 <div className="wallet" key={account.id}>
                   <div className="name">
                     <img src={account.imgURL} alt="" />

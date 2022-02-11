@@ -26,15 +26,18 @@ interface WalletState {
   error: boolean;
 }
 
+const SERVER_BASE_URL = process.env.REACT_APP_BASE_URL;
+
 export default function AddNewWallet({
   isOpen,
   closeModal,
   onWalletCreate,
 }: AddNewWalletProps) {
   const formRef = React.useRef<HTMLFormElement>(null);
+  const [triggerFetch, setTriggerFetch] = React.useState(true);
   const [createWallet, setCreateWallet] = React.useState({
     loading: false,
-    error: "",
+    error: false,
   });
   const [wallets, setWallets] = React.useState<WalletState>({
     loading: false,
@@ -42,119 +45,126 @@ export default function AddNewWallet({
     error: false,
   });
 
-  const fetchWallets = React.useCallback(() => {
+  const fetchWallets = React.useCallback(async () => {
+    if (!triggerFetch) return;
+
     setWallets((wallets) => ({ ...wallets, loading: true, error: false }));
 
-    fetch("http://localhost:3090/wallets")
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Error fetching accounts");
-        }
+    try {
+      const response = await fetch(SERVER_BASE_URL + "/wallets");
+      if (!response.ok) {
+        throw new Error("Error fetching wallets");
+      }
 
-        return res.json().then((data) => {
-          setWallets((wallets) => ({ ...wallets, data }));
-        });
-      })
-      .catch(() => {
-        setWallets((wallets) => ({ ...wallets, error: true }));
-      })
-      .finally(() => {
-        setWallets((wallets) => ({ ...wallets, loading: false }));
-      });
-  }, []);
+      const data = await response.json();
+
+      setTriggerFetch(false);
+      setWallets((wallets) => ({ ...wallets, data, loading: false }));
+    } catch (error) {
+      setTriggerFetch(false);
+      setWallets((wallets) => ({ ...wallets, error: true, loading: false }));
+    }
+  }, [triggerFetch]);
 
   React.useEffect(() => {
     fetchWallets();
   }, [fetchWallets]);
 
-  const addWallet = (e: React.FormEvent) => {
+  const addWallet = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!formRef.current) return;
 
     const formData = new FormData(formRef.current);
-    setCreateWallet({ loading: true, error: "" });
+    setCreateWallet({ loading: true, error: false });
 
-    fetch("http://localhost:3090/accounts", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ currency: formData.get("currency") }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.error) {
-          throw new Error(data.error);
-        }
-
-        onWalletCreate();
-        closeModal();
-        fetchWallets();
-      })
-      .catch((error) => {
-        setCreateWallet((info) => ({ ...info, error: error.message }));
-      })
-      .finally(() => {
-        setCreateWallet((info) => ({ ...info, loading: false }));
+    try {
+      const response = await fetch(SERVER_BASE_URL + "/accounts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ currency: formData.get("currency") }),
       });
+
+      const data = await response.json();
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
+      setCreateWallet((info) => ({ ...info, loading: false }));
+      onWalletCreate();
+      closeModal();
+    } catch (error) {
+      setCreateWallet({ loading: false, error: true });
+    }
   };
 
-  if (wallets.loading) {
-    return <Loader width={4} size={50} />;
-  }
-
-  if (wallets.error) {
-    return <NetworkError retryRequest={fetchWallets} />;
-  }
-
   return (
-    <Modal isOpen={isOpen}>
+    <Modal isOpen={isOpen} data-testid="modal">
       <AddNewWalletContent>
-        <div className="header">
-          <h2>Add new wallet</h2>
+        {wallets.loading ||
+          (createWallet.loading && (
+            <div className="loader">
+              <Loader width={4} size={50} />
+            </div>
+          ))}
 
-          <button onClick={closeModal}>
-            <Close className="close" />
-          </button>
-        </div>
-
-        <p className="text">
-          The crypto wallet will be created instantly and be available in your
-          list of wallets.
-        </p>
-
-        <form className="wallets__form" onSubmit={addWallet} ref={formRef}>
-          <label htmlFor="currency">Select wallet</label>
-          <select id="currency" name="currency">
-            <option value="">Select wallet:</option>
-            {wallets.data.map((wallet) => (
-              <option key={wallet.name} value={wallet.currency}>
-                {wallet.name}
-              </option>
-            ))}
-          </select>
-
-          <button
-            className="submit__wallet"
-            type="submit"
-            disabled={createWallet.loading}
-          >
-            Create wallet
-          </button>
-        </form>
-
-        {Boolean(createWallet.error) && (
-          <div className="error">
-            <Warning className="warning" />
-            <span>Network Error</span>
-            <Close
-              className="close"
-              onClick={() =>
-                setCreateWallet((info) => ({ ...info, error: "" }))
-              }
-            />
+        {wallets.error && (
+          <div className="fetch__error">
+            <NetworkError retryRequest={() => setTriggerFetch(true)} />
           </div>
+        )}
+
+        {!wallets.loading && !createWallet.loading && !wallets.error && (
+          <>
+            <div className="header">
+              <h2>Add new wallet</h2>
+
+              <button onClick={closeModal} aria-label="Close button">
+                <Close className="close" />
+              </button>
+            </div>
+
+            <p className="text">
+              The crypto wallet will be created instantly and be available in
+              your list of wallets.
+            </p>
+
+            <form className="wallets__form" onSubmit={addWallet} ref={formRef}>
+              <label htmlFor="currency">Select wallet</label>
+              <select id="currency" name="currency">
+                <option value="">Select wallet:</option>
+                {wallets.data.map((wallet) => (
+                  <option key={wallet.name} value={wallet.currency}>
+                    {wallet.name}
+                  </option>
+                ))}
+              </select>
+
+              <button
+                className="submit__wallet"
+                type="submit"
+                disabled={createWallet.loading}
+              >
+                Create wallet
+              </button>
+            </form>
+
+            {Boolean(createWallet.error) && (
+              <div className="error">
+                <Warning className="warning" />
+                <span>Network Error</span>
+                <Close
+                  aria-label="Reset error"
+                  className="close"
+                  onClick={() =>
+                    setCreateWallet((info) => ({ ...info, error: false }))
+                  }
+                />
+              </div>
+            )}
+          </>
         )}
       </AddNewWalletContent>
     </Modal>
@@ -162,7 +172,17 @@ export default function AddNewWallet({
 }
 
 const AddNewWalletContent = styled.div`
+  position: relative;
   padding: 4rem 1.5rem;
+  height: 100%;
+
+  .loader,
+  .fetch__error {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
 
   .header {
     display: flex;
