@@ -1,3 +1,16 @@
+@font-face {
+  font-family: 'AribauGrotesk';
+  src: local('AribauGrotesk'), url("./font/AribauGrotesk/Aribau-Grotesk-Bold.otf") format('truetype');
+}
+@font-face {
+  font-family: 'AribauGrotesk-light';
+  src: local('AribauGrotesk'), url("./font/AribauGrotesk/Aribau-Grotesk-ExtraLight.otf") format('truetype');
+}
+@font-face {
+  font-family: 'AribauGrotesk-regular';
+  src: local('AribauGrotesk'), url("./font/AribauGrotesk/Aribau-Grotesk-Regular.otf") format('truetype');
+}
+
 body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
@@ -9,3 +22,292 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.container{
+  max-width: 1120px;
+  margin: 0px auto;}
+  .container-modal{
+    max-width: 400px;
+    height: 100%;
+    margin: 0px auto;}
+
+.navbar{
+  padding: 16px;
+  max-width: 1440px;
+  max-height:56px;
+  margin: 0 auto;
+  border-bottom: 1px solid #f2f2f2;}
+
+.box{
+  display: flex;}
+  .userName{
+    font-family:"AribauGrotesk-light";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    margin-left: auto;}
+
+.content{
+  display: flex;
+  margin-top: 60px;
+  padding: 0px;}
+  .first{
+    width: 240px;}
+    .second{
+      max-width:880px ;}
+
+.sidebar{
+  font-family: 'AribauGrotesk-light';
+  padding: 14px;
+  display: block;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 16px;
+  text-decoration: none;
+  color: black;}
+  .active{
+    font-family: 'AribauGrotesk';
+    border: 1px solid #F5F7FA;
+    background-color: #F5F7FA;}
+    
+
+  .wallet-header{  
+    display: flex;
+    border-bottom: 1px solid #f2f2f2;
+    padding-bottom: 16px;}
+  .wallet-content{
+    margin-left:65px;}
+    .wallet{
+      font-family: 'AribauGrotesk';
+      font-style: normal;
+      font-weight: bold;
+      font-size: 32px;}
+      .add-wallet{
+        font-family: 'AribauGrotesk';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        margin-left: auto;}
+        .add-new-wallet{
+          font-family: 'AribauGrotesk';
+          cursor: pointer;
+          border: none;
+          background-color: #FFFFFF;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 16px;
+          color: #000000;
+          }
+
+  .loader{
+    display: flex;
+    justify-content: center;
+    padding-top: 180px;}
+    .loader-modal{
+      display: flex;
+      justify-content: center;
+      padding-top: 300px;}
+      .error-modal{
+      padding-top: 210px;}
+      .error-img{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;}
+        .error-text{
+          font-family: "AribauGrotesk-regular";
+          font-style: normal;
+          font-weight: normal;
+          font-size: 18px;
+          text-align: center;}
+      
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 40px;}
+    .grid-child{
+      position: relative;
+      color: white;
+      max-width: 240px;
+      max-height: 150px;
+      background: #111111;
+      box-shadow: 0px 10px 20px rgba(138, 138, 138, 0.5);
+      border-radius: 10px; }
+
+.wallet-logo{
+   position: absolute;
+   top: 16px;
+   left: 16px;
+   display: inline-flex;
+   align-items: center;}
+   .wallet-name{
+    font-family: "AribauGrotesk-light";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    color: #9AA5B1;
+     margin-left: 8px;}
+     .wallet-price{
+      font-family: "AribauGrotesk";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+
+      color: #FFFFFF;
+      position: absolute;
+      top: 68px;
+      left: 16px;}
+
+.cards{
+  margin-top: 24px;}
+
+  .error-img-main{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;}
+    .main-error-text{
+      text-align: center;}
+      .main-btn{
+        font-family: 'AribauGrotesk';
+        width: 186px;
+        height: 54px;
+        background: #000000;
+        border-radius: 40px;
+        color: #ffff;
+        margin: auto;
+        display: block;
+      }
+
+.card-img-bg{
+  z-index: -1;
+  margin-top: 47px;}
+  .card-btn{
+    position: absolute;
+    top: 102px;
+    left: 192px;}
+
+.content-modal{
+  max-width: 397px;
+  padding-top:74px;
+  display: flex;}
+  .content-modal-btn{
+    font-family: "AribauGrotesk";
+    cursor: pointer;
+    width: 16px;
+    font-size: 20px;
+    margin-left: auto;}
+    .content-modal-title{
+      font-family: "AribauGrotesk";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 24px;}
+      .content-modal-body{
+        font-family:"AribauGrotesk-light";
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        color:#3E4C59;
+        margin-top: 49px; }
+        .modal-form{
+          margin-top: 43px;}
+            .form-label{
+              font-family:"AribauGrotesk-regular" ;
+              font-style: normal;
+              font-weight: 500;
+              font-size: 16px;
+              color:#3E4C59;}
+              .form-select{
+                font-family:"AribauGrotesk-light" ;
+                border: 1px solid #CBD2D9;
+                box-sizing: border-box;
+                border-radius: 5px;
+                height: 64px;
+                width: 100%;
+                display: block;
+                margin-top:14px;
+                padding: 8px;}
+                .form-btn{
+                  font-family:"AribauGrotesk-regular" ;
+                  font-style: normal;
+                  font-weight: 500;
+                  font-size: 18px;
+                  text-align: center;
+                  color: #FFFFFF;
+                  height: 54px;
+                  width: 222px;
+                  border-radius: 40px;
+                  background: #000000;
+                  margin-left: 90px;
+                  margin-top: 33px;}
+
+
+@media only screen and (max-width: 800px) {
+  .grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;}
+
+    .wallet-content{
+      margin-left:55px;}
+      .wallet{
+        font-family: 'AribauGrotesk';
+        font-style: normal;
+        font-weight: bold;
+        font-size: 32px;}
+        .add-wallet{
+          font-family: 'AribauGrotesk';
+          font-style: normal;
+          font-weight: 500;
+          font-size: 16px;
+          margin-left: auto;
+          padding: 10px;}
+}
+
+@media only screen and (max-width: 600px) {
+  .container-modal{
+    max-width: 350px;
+    height: 100%;
+    margin: 0px auto;}
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    }
+    .wallet-content{
+      margin-left:40px;}
+      .wallet{
+        font-family: 'AribauGrotesk';
+        font-style: normal;
+        font-weight: bold;
+        font-size: 19px;}
+        .add-wallet{
+          font-family: 'AribauGrotesk';
+          font-style: normal;
+          font-weight: 500;
+          margin-left: auto;
+          padding: 8px;}
+
+          .wallet-header{  
+            display: flex;
+            border-bottom: 1px solid #f2f2f2;
+            padding-bottom: 4px;}
+
+            .form-btn{
+              font-family:"AribauGrotesk-regular" ;
+              font-style: normal;
+              font-weight: 500;
+              font-size: 18px;
+              text-align: center;
+              color: #FFFFFF;
+              height: 54px;
+              width: 222px;
+              border-radius: 40px;
+              background: #000000;
+              margin-left: 50px;
+              margin-top: 33px;}
+            }
+
+
+
+  
+
