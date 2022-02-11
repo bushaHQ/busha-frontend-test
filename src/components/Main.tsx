@@ -7,7 +7,8 @@ import { Item } from "./types";
 import { flexBox } from "./style";
 import ErrorPage from "./ErrorPage";
 import Sliderbar from "./Sliderbar";
-const Main = () => {
+const Main: React.FC = (props) => {
+  console.log(props);
   const [accounts, setAccounts] = useState<Item[]>([]);
   const [loading, setloading] = useState(true);
   const [error, setError] = useState(false);
@@ -19,19 +20,20 @@ const Main = () => {
     try {
       const response = await fetch(requestUrls.accounts);
       const data = await response.json();
+      // throw "err";
       setAccounts(data);
-      setloading(false);
       setError(false);
-    } catch (error) {
       setloading(false);
+    } catch (error) {
       setError(true);
+      setloading(false);
     }
   };
 
   useEffect(() => {
     getAccounts();
     return () => {
-      setAccounts([]); 
+      setAccounts([]);
     };
   }, []);
 
@@ -41,15 +43,16 @@ const Main = () => {
   };
 
   return (
-    <MainWrapper>
+    <MainWrapper error={error} loading={loading}>
       <div className="main__box">
         <h2 className="main__title">Wallet</h2>
-        <button onClick={handleSlider} className="add__btn">
+        <button
+          onClick={handleSlider}
+          className={`add__btn ${loading || (error && "hide")}`}
+        >
           + Add new wallet
         </button>
       </div>
-
-      {error && <ErrorPage func={getAccounts} />}
 
       {loading ? (
         <div className="loader__icon">
@@ -57,10 +60,17 @@ const Main = () => {
         </div>
       ) : (
         <div className="main__account__box">
-          {accounts.length &&
-            accounts.map((item: Item, index) => {
-              return <Card item={item} key={item?.id} />;
-            })}
+          {accounts.length
+            ? accounts.map((item: Item, index) => {
+                return <Card item={item} key={item?.id} />;
+              })
+            : ""}
+        </div>
+      )}
+
+      {error && (
+        <div style={{ margin: "2rem 0" }}>
+          <ErrorPage func={getAccounts} />
         </div>
       )}
 
@@ -69,7 +79,7 @@ const Main = () => {
   );
 };
 
-const MainWrapper = styled.div`
+const MainWrapper = styled.div<{ error: boolean; loading: boolean }>`
   width: 100%;
   height: 100%;
   margin-left: 1rem;
@@ -104,7 +114,13 @@ const MainWrapper = styled.div`
 
     ::before {
       content: "";
-      background-color: rgba(211, 213, 216, 0.5);
+
+      ${({ error, loading }) =>
+        (loading || !error) &&
+        `
+    background: rgba(211, 213, 216, 0.5);
+  `}
+
       height: 1px;
       width: 100%;
     }
@@ -117,15 +133,20 @@ const MainWrapper = styled.div`
     .main__box {
       padding: 0 1rem;
     }
+
     .main__account__box {
       padding: 0.3rem;
     }
     .main__title {
-      font-size: 1.3rem;
+      font-size: 1rem;
     }
     .add__btn {
       font-size: 0.7rem;
     }
+  }
+
+  .hide {
+    display: none;
   }
 
   @media screen and (max-width: 289px) {
