@@ -56,13 +56,11 @@ export default function App() {
 
   return (
     <StyledHome>
-      {isModalOpen && (
-        <AddNewWallet
-          isOpen={isModalOpen}
-          closeModal={() => setModalOpen(false)}
-          onWalletCreate={fetchAccounts}
-        ></AddNewWallet>
-      )}
+      <AddNewWallet
+        isOpen={isModalOpen}
+        closeModal={() => setModalOpen(false)}
+        onWalletCreate={fetchAccounts}
+      ></AddNewWallet>
       <header className="header">
         <div className="container top-bar">
           <Logo className="logo" />
@@ -85,10 +83,17 @@ export default function App() {
 
         <section>
           <div className="wallets__header">
-            <h1>Wallets</h1>
-            <button className="new__item" onClick={() => setModalOpen(true)}>
-              + Add new wallet
-            </button>
+            {Boolean(!loading && !accountsError) && (
+              <>
+                <h1>Wallets</h1>
+                <button
+                  className="new__item"
+                  onClick={() => setModalOpen(true)}
+                >
+                  + Add new wallet
+                </button>
+              </>
+            )}
           </div>
           {loading ? (
             <div className="loader">
