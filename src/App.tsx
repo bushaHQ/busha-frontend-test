@@ -179,11 +179,23 @@ const StyledHome = styled.div`
 
   .main {
     display: grid;
-    grid-template-columns: 17rem 1fr;
-    gap: 4.5rem;
-    margin-top: 4rem;
+    grid-template-columns: auto;
+    gap: 2rem;
+    margin-top: 3rem;
+
+    @media (min-width: 700px) {
+      grid-template-columns: 17rem 1fr;
+      gap: 4.5rem;
+      margin-top: 4rem;
+    }
 
     .aside {
+      overflow: auto;
+
+      ul {
+        display: flex;
+      }
+
       .nav-link {
         margin-bottom: 1rem;
         color: #3e4c59;
@@ -191,6 +203,7 @@ const StyledHome = styled.div`
         cursor: pointer;
         border-radius: 3px;
         padding: 1rem;
+        flex: 1;
 
         &:first-child {
           color: #000;
@@ -200,6 +213,12 @@ const StyledHome = styled.div`
 
         &:last-child {
           margin-bottom: 0;
+        }
+      }
+
+      @media (min-width: 700px) {
+        ul {
+          flex-direction: column;
         }
       }
     }
