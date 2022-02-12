@@ -51,22 +51,30 @@ export default function App() {
       }
 
       const data = await response.json();
-      setTriggerFetch(false);
-      setAccounts((info) => ({ ...info, data, loading: false }));
+
+      if (triggerFetch) {
+        setTriggerFetch(false);
+        setAccounts((info) => ({ ...info, data, loading: false }));
+      }
     } catch (error) {
-      setTriggerFetch(false);
-      setAccounts((info) => ({ ...info, loading: false, error: true }));
+      if (triggerFetch) {
+        setTriggerFetch(false);
+        setAccounts((info) => ({ ...info, loading: false, error: true }));
+      }
     }
   }, [triggerFetch]);
 
   React.useEffect(() => {
     fetchAccounts();
+
+    return () => {
+      setTriggerFetch(false);
+    };
   }, [fetchAccounts]);
 
   return (
     <StyledHome>
       <AddNewWallet
-        key={String(isModalOpen)}
         isOpen={isModalOpen}
         closeModal={() => setModalOpen(false)}
         onWalletCreate={() => setTriggerFetch(true)}
@@ -93,17 +101,11 @@ export default function App() {
 
         <section>
           <div className="wallets__header">
-            {Boolean(!accounts.loading && !accounts.error) && (
-              <>
-                <h1>Wallets</h1>
-                <button
-                  className="new__item"
-                  onClick={() => setModalOpen(true)}
-                >
-                  + Add new wallet
-                </button>
-              </>
-            )}
+            {Boolean(!accounts.loading && !accounts.error) && <h1>Wallets</h1>}
+
+            <button className="new__item" onClick={() => setModalOpen(true)}>
+              + Add new wallet
+            </button>
           </div>
           {accounts.loading ? (
             <div className="loader">
