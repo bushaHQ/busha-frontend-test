@@ -52,6 +52,7 @@ export const AddWallet: React.FC<AddWalletProps> = ({
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line
   }, [walletError, postWalletError]);
 
   const handleSubmit = async () => {

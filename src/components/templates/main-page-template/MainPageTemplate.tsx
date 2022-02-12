@@ -35,6 +35,7 @@ export const MainPage: React.FC<{}> = () => {
 
   useEffect(() => {
     fetchAccounts();
+    // eslint-disable-next-line
   }, []);
 
   const AccountCardContent = () => {
