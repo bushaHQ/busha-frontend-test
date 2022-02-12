@@ -57,12 +57,17 @@ export const MainPage: React.FC<{}> = () => {
             imgURL,
             name,
             balance,
-          }: Pick<IAccount | IWallet, "imgURL" | "name" | "balance">) => (
+            currency,
+          }: Pick<
+            IAccount | IWallet,
+            "imgURL" | "name" | "balance" | "currency"
+          >) => (
             <AccountCard
               key={name}
               accountIcon={imgURL}
               accountName={name}
               ammount={balance}
+              currency={currency}
             />
           )
         )}

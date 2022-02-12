@@ -12,9 +12,10 @@ import {
 } from "./AccountCard.styles";
 
 export const AccountCard: React.FC<AccountProps> = ({
+  ammount,
+  currency,
   accountIcon,
   accountName,
-  ammount,
 }) => {
   return (
     <Container>
@@ -22,7 +23,18 @@ export const AccountCard: React.FC<AccountProps> = ({
         <img src={accountIcon} alt={accountName} width={34} height={34} />
         <CurrencyText>{accountName}</CurrencyText>
       </CurrencyContainer>
-      <CurrencyAmountText>{ammount}</CurrencyAmountText>
+      {accountName === "Naira" ? (
+        <CurrencyAmountText>{`₦ 
+        ${
+          ammount
+          //   ?.replace(
+          //   /(?=(\d{3})+(?!\d))/g,
+          //   ","
+          // )
+        }`}</CurrencyAmountText>
+      ) : (
+        <CurrencyAmountText>{`${ammount} ${currency}`}</CurrencyAmountText>
+      )}
       <CircleBg>
         <Icon name="right-arrow" />
       </CircleBg>

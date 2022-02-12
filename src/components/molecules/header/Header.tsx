@@ -7,7 +7,7 @@ import { AddWalletText, Container } from "./Header.styles";
 export const Header: React.FC<HeaderProps> = ({ noData = true, setModal }) => {
   return (
     <Container noData={noData}>
-      <Heading>Walllets</Heading>
+      <Heading>{"Wallet"}</Heading>
       {!noData && (
         <AddWalletText onClick={() => setModal(true)}>
           + Add new wallet
