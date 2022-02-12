@@ -33,71 +33,72 @@ export default function AddNewWallet({
   closeModal,
   onWalletCreate,
 }: AddNewWalletProps) {
-  const formRef = React.useRef<HTMLFormElement>(null);
-  const [triggerFetch, setTriggerFetch] = React.useState(true);
+  const [currency, setCurrency] = React.useState("");
   const [createWallet, setCreateWallet] = React.useState({
     loading: false,
     error: false,
   });
   const [wallets, setWallets] = React.useState<WalletState>({
-    loading: false,
+    loading: true,
     data: [],
     error: false,
   });
 
-  const fetchWallets = React.useCallback(async () => {
-    if (!triggerFetch) return;
-
-    setWallets((wallets) => ({ ...wallets, loading: true, error: false }));
-
-    try {
-      const response = await fetch(SERVER_BASE_URL + "/wallets");
-      if (!response.ok) {
-        throw new Error("Error fetching wallets");
-      }
-
-      const data = await response.json();
-
-      setTriggerFetch(false);
-      setWallets((wallets) => ({ ...wallets, data, loading: false }));
-    } catch (error) {
-      setTriggerFetch(false);
-      setWallets((wallets) => ({ ...wallets, error: true, loading: false }));
-    }
-  }, [triggerFetch]);
-
+  // Fetch wallets effect
   React.useEffect(() => {
-    fetchWallets();
-  }, [fetchWallets]);
+    (async () => {
+      if (!wallets.loading) return;
+
+      setWallets((wallets) => ({ ...wallets, loading: true, error: false }));
+
+      try {
+        const response = await fetch(SERVER_BASE_URL + "/wallets");
+        if (!response.ok) {
+          throw new Error("Error fetching wallets");
+        }
+
+        const data = await response.json();
+
+        setWallets((wallets) => ({ ...wallets, data, loading: false }));
+      } catch (error) {
+        setWallets((wallets) => ({ ...wallets, error: true, loading: false }));
+      }
+    })();
+  }, [wallets.loading]);
+
+  // Handles creating an account
+  React.useEffect(() => {
+    (async () => {
+      if (!createWallet.loading) return;
+
+      try {
+        const response = await fetch(SERVER_BASE_URL + "/accounts", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ currency }),
+        });
+
+        const data = await response.json();
+        if (data.error) {
+          throw new Error(data.error);
+        }
+
+        setCreateWallet((info) => ({ ...info, loading: false }));
+        onWalletCreate();
+        closeModal();
+      } catch (error) {
+        setCreateWallet({ loading: false, error: true });
+      }
+    })();
+  }, [closeModal, createWallet.loading, currency, onWalletCreate]);
 
   const addWallet = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!formRef.current) return;
-
-    const formData = new FormData(formRef.current);
+    if (!currency) return;
     setCreateWallet({ loading: true, error: false });
-
-    try {
-      const response = await fetch(SERVER_BASE_URL + "/accounts", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ currency: formData.get("currency") }),
-      });
-
-      const data = await response.json();
-      if (data.error) {
-        throw new Error(data.error);
-      }
-
-      setCreateWallet((info) => ({ ...info, loading: false }));
-      onWalletCreate();
-      closeModal();
-    } catch (error) {
-      setCreateWallet({ loading: false, error: true });
-    }
   };
 
   return (
@@ -112,7 +113,11 @@ export default function AddNewWallet({
 
         {wallets.error && (
           <div className="fetch__error">
-            <NetworkError retryRequest={() => setTriggerFetch(true)} />
+            <NetworkError
+              retryRequest={() =>
+                setWallets((wallets) => ({ ...wallets, loading: true }))
+              }
+            />
           </div>
         )}
 
@@ -131,10 +136,14 @@ export default function AddNewWallet({
               your list of wallets.
             </p>
 
-            <form className="wallets__form" onSubmit={addWallet} ref={formRef}>
+            <form className="wallets__form" onSubmit={addWallet}>
               <label htmlFor="currency">Select wallet</label>
-              <select id="currency" name="currency">
-                <option value="">Select wallet:</option>
+              <select
+                id="currency"
+                onChange={(e) => setCurrency(e.currentTarget.value)}
+                value={currency}
+              >
+                <option value="">Select:</option>
                 {wallets.data.map((wallet) => (
                   <option key={wallet.name} value={wallet.currency}>
                     {wallet.name}
