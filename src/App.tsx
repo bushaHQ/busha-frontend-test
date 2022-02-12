@@ -1,5 +1,7 @@
+import Wallets from "./pages/Wallets";
+
 function App() {
-  return <h1>Busha</h1>;
+  return <Wallets />;
 }
 
 export default App;
