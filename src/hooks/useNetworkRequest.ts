@@ -11,10 +11,15 @@ export const useNetworkRequest = ({
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<IWallet[] | IAccount[]>();
 
+  const baseURL =
+    process.env.NODE_ENV === "development"
+      ? process.env.REACT_APP_API_URL
+      : process.env.REACT_APP_API_URL_PROD;
+
   const fetchData = async function () {
     try {
       setIsLoading(true);
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/${path}`, {
+      const res = await fetch(`${baseURL}${path}`, {
         method,
         headers,
         body: dataObj,
