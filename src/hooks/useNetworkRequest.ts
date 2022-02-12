@@ -14,7 +14,7 @@ export const useNetworkRequest = ({
   const baseURL =
     process.env.NODE_ENV === "development"
       ? process.env.REACT_APP_API_URL
-      : `${process.env.REACT_APP_API_URL_PROD}:${process.env.PORT}/`;
+      : `${process.env.REACT_APP_API_URL_PROD}`;
 
   const fetchData = async function () {
     try {
