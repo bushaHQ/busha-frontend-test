@@ -32,53 +32,44 @@ const SERVER_BASE_URL = process.env.REACT_APP_BASE_URL;
 
 export default function App() {
   const [isModalOpen, setModalOpen] = React.useState(false);
-  const [triggerFetch, setTriggerFetch] = React.useState(true);
   const [accounts, setAccounts] = React.useState<AccountState>({
-    loading: false,
+    loading: true,
     data: [],
     error: false,
   });
 
-  const fetchAccounts = React.useCallback(async () => {
-    if (!triggerFetch) return;
+  React.useEffect(() => {
+    (async () => {
+      if (!accounts.loading) return;
 
-    setAccounts((info) => ({ ...info, loading: true, error: false }));
+      setAccounts((info) => ({ ...info, loading: true, error: false }));
 
-    try {
-      const response = await fetch(SERVER_BASE_URL + "/accounts");
-      if (!response.ok) {
-        throw new Error("Error fetching accounts");
-      }
+      try {
+        const response = await fetch(SERVER_BASE_URL + "/accounts");
+        if (!response.ok) {
+          throw new Error("Error fetching accounts");
+        }
 
-      const data = await response.json();
+        const data = await response.json();
 
-      if (triggerFetch) {
-        setTriggerFetch(false);
         setAccounts((info) => ({ ...info, data, loading: false }));
-      }
-    } catch (error) {
-      if (triggerFetch) {
-        setTriggerFetch(false);
+      } catch (error) {
         setAccounts((info) => ({ ...info, loading: false, error: true }));
       }
-    }
-  }, [triggerFetch]);
-
-  React.useEffect(() => {
-    fetchAccounts();
-
-    return () => {
-      setTriggerFetch(false);
-    };
-  }, [fetchAccounts]);
+    })();
+  }, [accounts.loading]);
 
   return (
     <StyledHome>
       <AddNewWallet
+        key={String(isModalOpen)}
         isOpen={isModalOpen}
         closeModal={() => setModalOpen(false)}
-        onWalletCreate={() => setTriggerFetch(true)}
-      ></AddNewWallet>
+        onWalletCreate={() =>
+          setAccounts((info) => ({ ...info, loading: true }))
+        }
+      />
+
       <header className="header">
         <div className="container top-bar">
           <Logo className="logo" />
@@ -112,7 +103,11 @@ export default function App() {
               <Loader width={4} size={50} />
             </div>
           ) : accounts.error ? (
-            <NetworkError retryRequest={() => setTriggerFetch(true)} />
+            <NetworkError
+              retryRequest={() =>
+                setAccounts((info) => ({ ...info, loading: true }))
+              }
+            />
           ) : (
             <div className="wallets__grid">
               {accounts.data.map((account) => (
@@ -162,6 +157,7 @@ const StyledHome = styled.div`
         display: flex;
         align-items: center;
         font-weight: 500;
+        color: #3e4c59;
 
         .avatar {
           background: rgba(154, 165, 177, 0.3);
@@ -175,7 +171,7 @@ const StyledHome = styled.div`
           align-items: center;
         }
         .name {
-          font-size: 0.75rem;
+          font-size: 0.875rem;
         }
       }
     }
@@ -190,13 +186,15 @@ const StyledHome = styled.div`
     .aside {
       .nav-link {
         margin-bottom: 1rem;
-        font-size: 0.8rem;
-        font-weight: 500;
+        color: #3e4c59;
+        font-weight: 400;
         cursor: pointer;
         border-radius: 3px;
         padding: 1rem;
 
         &:first-child {
+          color: #000;
+          font-weight: 500;
           background: #f5f7fa;
         }
 
