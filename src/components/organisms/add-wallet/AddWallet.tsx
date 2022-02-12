@@ -52,6 +52,9 @@ export const AddWallet: React.FC<AddWalletProps> = ({
 
   useEffect(() => {
     fetchData();
+    return () => {
+      setPostError(false);
+    };
     // eslint-disable-next-line
   }, [walletError, postWalletError]);
 
@@ -59,8 +62,8 @@ export const AddWallet: React.FC<AddWalletProps> = ({
     try {
       const res = await postData();
       if (!res?.error) {
-        setModal(false);
         fetchAccounts();
+        setModal(false);
       } else {
         setPostError(true);
       }

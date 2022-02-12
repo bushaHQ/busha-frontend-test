@@ -35,6 +35,9 @@ export const MainPage: React.FC<{}> = () => {
 
   useEffect(() => {
     fetchAccounts();
+    return () => {
+      setIsOpen(false);
+    };
     // eslint-disable-next-line
   }, []);
 
