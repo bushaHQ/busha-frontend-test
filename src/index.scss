@@ -1,11 +1,56 @@
+@font-face {
+  font-family: "Aribau Grotesk";
+  src: url("./assets/fonts/AribauGrotesk-Bold.woff2") format("woff2"),
+    url("./assets/fonts/AribauGrotesk-Bold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Aribau Grotesk";
+  src: url("./assets/fonts/AribauGrotesk-Regular.woff2") format("woff2"),
+    url("./assets/fonts/AribauGrotesk-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Aribau Grotesk";
+  src: url("./assets/fonts/AribauGrotesk-Medium.woff2") format("woff2"),
+    url("./assets/fonts/AribauGrotesk-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 body {
   margin: 0;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Aribau Grotesk", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+button {
+  cursor: pointer;
+}
+
+ul {
+  padding-left: 0;
+  list-style: none;
+  margin: 0;
+}
+
+.container {
+  max-width: 90rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
