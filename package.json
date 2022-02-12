@@ -32,7 +32,7 @@
     "start:server": "node server/index.js",
     "wait-on:server": "wait-on http://localhost:3090/",
     "start:dev": "concurrently  \"npm run db:reset && npm run start:server\" \"npm run wait-on:server && npm run start:client\"",
-    "start": "concurrently  \"npm run db:reset && npm run start:server\" \"npm run wait-on:server && npm run start:client\""
+    "start": "node server/index.js"
   },
   "eslintConfig": {
     "extends": [
