@@ -12,9 +12,10 @@ export const MainArea = styled.main`
 export const AccountContainer = styled.section<{ noData: boolean }>`
   gap: 40px;
   width: 100%;
-  display: flex;
+  display: grid;
   flex-wrap: wrap;
   justify-content: space-around;
+  grid-template-columns: auto auto auto;
   ${({ noData }) => {
     if (noData) {
       return css`
