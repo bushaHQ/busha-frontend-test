@@ -79,6 +79,11 @@ export default function AddNewWallet({ onWalletCreate }: AddNewWalletProps) {
         }
 
         setCreateWallet((info) => ({ ...info, loading: false }));
+        setWallets((wallets) => ({
+          ...wallets,
+          data: wallets.data.filter((wallet) => wallet.currency !== currency),
+        }));
+        setCurrency("");
         onWalletCreate();
         setModalOpen(false);
       } catch (error) {
