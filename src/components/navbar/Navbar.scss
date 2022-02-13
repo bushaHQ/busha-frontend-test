@@ -1,0 +1,42 @@
+.nav__wrapper {
+  // height: 80px;
+  width: 100%;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  z-index: 12;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+
+  .brand {
+    padding-left: 10rem;
+
+    .brand-img {
+      width: 100%;
+    }
+  }
+
+  .brand__text {
+    padding-right: 10rem;
+    font-family: "Space Grotesk";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 14px;
+    color: #3e4c59;
+
+    .rounded-border {
+      border-radius: 50%;
+      padding: 10px;
+      font-family: "Space Grotesk";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 18px;
+      text-align: center;
+      color: #3e4c59;
+      background: rgba(154, 165, 177, 0.3);
+    }
+  }
+}
