@@ -72,6 +72,5 @@
     "msw": "^0.34.0",
     "nodemon": "^2.0.12",
     "wait-on": "^6.0.0"
-  },
-  "proxy": "http://localhost:3090"
+  }
 }
