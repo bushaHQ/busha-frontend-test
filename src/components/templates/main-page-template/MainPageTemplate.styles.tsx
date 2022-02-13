@@ -14,8 +14,8 @@ export const AccountContainer = styled.section<{ noData: boolean }>`
   width: 100%;
   display: grid;
   flex-wrap: wrap;
-  justify-content: space-around;
-  grid-template-columns: auto auto auto;
+  justify-content: space-evenly;
+  grid-template-columns: repeat(auto-fill, 260px);
   ${({ noData }) => {
     if (noData) {
       return css`
