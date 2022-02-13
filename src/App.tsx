@@ -31,7 +31,6 @@ interface AccountState {
 const SERVER_BASE_URL = process.env.REACT_APP_BASE_URL;
 
 export default function App() {
-  const [isModalOpen, setModalOpen] = React.useState(false);
   const [accounts, setAccounts] = React.useState<AccountState>({
     loading: true,
     data: [],
@@ -61,15 +60,6 @@ export default function App() {
 
   return (
     <StyledHome>
-      <AddNewWallet
-        key={String(isModalOpen)}
-        isOpen={isModalOpen}
-        closeModal={() => setModalOpen(false)}
-        onWalletCreate={() =>
-          setAccounts((info) => ({ ...info, loading: true }))
-        }
-      />
-
       <header className="header">
         <div className="container top-bar">
           <Logo className="logo" />
@@ -94,9 +84,11 @@ export default function App() {
           <div className="wallets__header">
             {Boolean(!accounts.loading && !accounts.error) && <h1>Wallets</h1>}
 
-            <button className="new__item" onClick={() => setModalOpen(true)}>
-              + Add new wallet
-            </button>
+            <AddNewWallet
+              onWalletCreate={() =>
+                setAccounts((info) => ({ ...info, loading: true }))
+              }
+            />
           </div>
           {accounts.loading ? (
             <div className="loader">
@@ -238,15 +230,6 @@ const StyledHome = styled.div`
       h1 {
         font-size: 2rem;
         margin: 0 0 0.7rem 0;
-      }
-
-      .new__item {
-        background: none;
-        border: none;
-        color: #000;
-        font-weight: 500;
-        font-size: 0.875rem;
-        margin: 0;
       }
     }
     .wallets__grid {
