@@ -8,8 +8,6 @@ import { ReactComponent as Warning } from "../../assets/warning.svg";
 import NetworkError from "../shared/NetworkError";
 
 interface AddNewWalletProps {
-  isOpen: boolean;
-  closeModal: () => void;
   onWalletCreate: () => void;
 }
 
@@ -28,12 +26,9 @@ interface WalletState {
 
 const SERVER_BASE_URL = process.env.REACT_APP_BASE_URL;
 
-export default function AddNewWallet({
-  isOpen,
-  closeModal,
-  onWalletCreate,
-}: AddNewWalletProps) {
+export default function AddNewWallet({ onWalletCreate }: AddNewWalletProps) {
   const [currency, setCurrency] = React.useState("");
+  const [isModalOpen, setModalOpen] = React.useState(false);
   const [createWallet, setCreateWallet] = React.useState({
     loading: false,
     error: false,
@@ -87,12 +82,12 @@ export default function AddNewWallet({
 
         setCreateWallet((info) => ({ ...info, loading: false }));
         onWalletCreate();
-        closeModal();
+        setModalOpen(false);
       } catch (error) {
         setCreateWallet({ loading: false, error: true });
       }
     })();
-  }, [closeModal, createWallet.loading, currency, onWalletCreate]);
+  }, [createWallet.loading, currency, onWalletCreate]);
 
   const addWallet = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -102,83 +97,104 @@ export default function AddNewWallet({
   };
 
   return (
-    <Modal isOpen={isOpen} data-testid="modal">
-      <AddNewWalletContent>
-        {wallets.loading ||
-          (createWallet.loading && (
+    <StyledContainer>
+      <button className="new__item" onClick={() => setModalOpen(true)}>
+        + Add new wallet
+      </button>
+
+      <Modal isOpen={isModalOpen} data-testid="modal">
+        <AddNewWalletContent>
+          {wallets.loading ? (
             <div className="loader">
               <Loader width={4} size={50} />
             </div>
-          ))}
-
-        {wallets.error && (
-          <div className="fetch__error">
-            <NetworkError
-              retryRequest={() =>
-                setWallets((wallets) => ({ ...wallets, loading: true }))
-              }
-            />
-          </div>
-        )}
-
-        {!wallets.loading && !createWallet.loading && !wallets.error && (
-          <>
-            <div className="header">
-              <h2>Add new wallet</h2>
-
-              <button onClick={closeModal} aria-label="Close button">
-                <Close className="close" />
-              </button>
+          ) : wallets.error ? (
+            <div className="fetch__error">
+              <NetworkError
+                retryRequest={() =>
+                  setWallets((wallets) => ({ ...wallets, loading: true }))
+                }
+              />
             </div>
+          ) : (
+            <>
+              <div className="header">
+                <h2>Add new wallet</h2>
 
-            <p className="text">
-              The crypto wallet will be created instantly and be available in
-              your list of wallets.
-            </p>
-
-            <form className="wallets__form" onSubmit={addWallet}>
-              <label htmlFor="currency">Select wallet</label>
-              <select
-                id="currency"
-                onChange={(e) => setCurrency(e.currentTarget.value)}
-                value={currency}
-              >
-                <option value="">Select:</option>
-                {wallets.data.map((wallet) => (
-                  <option key={wallet.name} value={wallet.currency}>
-                    {wallet.name}
-                  </option>
-                ))}
-              </select>
-
-              <button
-                className="submit__wallet"
-                type="submit"
-                disabled={createWallet.loading}
-              >
-                Create wallet
-              </button>
-            </form>
-
-            {Boolean(createWallet.error) && (
-              <div className="error">
-                <Warning className="warning" />
-                <span>Network Error</span>
-                <Close
-                  aria-label="Reset error"
-                  className="close"
-                  onClick={() =>
-                    setCreateWallet((info) => ({ ...info, error: false }))
-                  }
-                />
+                <button
+                  onClick={() => setModalOpen(false)}
+                  aria-label="Close button"
+                >
+                  <Close className="close" />
+                </button>
               </div>
-            )}
-          </>
-        )}
-      </AddNewWalletContent>
-    </Modal>
+
+              <p className="text">
+                The crypto wallet will be created instantly and be available in
+                your list of wallets.
+              </p>
+
+              <form className="wallets__form" onSubmit={addWallet}>
+                <label htmlFor="currency">Select wallet</label>
+                <select
+                  id="currency"
+                  onChange={(e) => setCurrency(e.currentTarget.value)}
+                  value={currency}
+                >
+                  <option value="">Select:</option>
+                  {wallets.data.map((wallet) => (
+                    <option key={wallet.name} value={wallet.currency}>
+                      {wallet.name}
+                    </option>
+                  ))}
+                </select>
+
+                <button
+                  className="submit__wallet"
+                  type="submit"
+                  disabled={createWallet.loading}
+                >
+                  <span>Create wallet</span>
+                  {createWallet.loading && (
+                    <span style={{ marginLeft: "3px" }}>
+                      <Loader size={20} />
+                    </span>
+                  )}
+                </button>
+              </form>
+
+              {Boolean(createWallet.error) && (
+                <div className="error">
+                  <Warning className="warning" />
+                  <span>Network Error</span>
+                  <Close
+                    aria-label="Reset error"
+                    className="close"
+                    onClick={() =>
+                      setCreateWallet((info) => ({ ...info, error: false }))
+                    }
+                  />
+                </div>
+              )}
+            </>
+          )}
+        </AddNewWalletContent>
+      </Modal>
+    </StyledContainer>
   );
 }
+
+const StyledContainer = styled.div`
+  .new__item {
+    background: none;
+    border: none;
+    color: #000;
+    font-weight: 500;
+    font-size: 0.875rem;
+    margin: 0;
+    margin-left: auto;
+  }
+`;
 
 const AddNewWalletContent = styled.div`
   position: relative;
@@ -244,8 +260,12 @@ const AddNewWalletContent = styled.div`
       border-radius: 40px;
       color: #fff;
       border-color: #000;
-      padding: 0.6rem 1.7rem;
+      padding: 1rem 1.7rem;
+      margin: auto;
       margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 
