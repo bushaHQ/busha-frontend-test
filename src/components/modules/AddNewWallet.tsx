@@ -24,7 +24,8 @@ interface WalletState {
   error: boolean;
 }
 
-const API_BASE_URL = process.env.REACT_APP_API_URL ?? "";
+const API_BASE_URL =
+  process.env.NODE_ENV === "test" ? "http://localhost:3090" : "";
 
 export default function AddNewWallet({ onWalletCreate }: AddNewWalletProps) {
   const [currency, setCurrency] = React.useState("");
@@ -190,14 +191,15 @@ export default function AddNewWallet({ onWalletCreate }: AddNewWalletProps) {
 }
 
 const StyledContainer = styled.div`
+  margin-left: auto;
+
   .new__item {
     background: none;
     border: none;
     color: #000;
     font-weight: 500;
     font-size: 0.875rem;
-    margin: 0;
-    margin-left: auto;
+    margin-bottom: 0.5rem;
   }
 `;
 

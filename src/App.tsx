@@ -28,7 +28,8 @@ interface AccountState {
   error: boolean;
 }
 
-const API_BASE_URL = process.env.REACT_APP_API_URL ?? "";
+const API_BASE_URL =
+  process.env.NODE_ENV === "test" ? "http://localhost:3090" : "";
 
 export default function App() {
   const [accounts, setAccounts] = React.useState<AccountState>({
@@ -82,7 +83,7 @@ export default function App() {
 
         <section>
           <div className="wallets__header">
-            {Boolean(!accounts.loading && !accounts.error) && <h1>Wallets</h1>}
+            {Boolean(!accounts.loading) && <h1>Wallets</h1>}
 
             <AddNewWallet
               onWalletCreate={() =>
@@ -229,7 +230,7 @@ const StyledHome = styled.div`
 
       h1 {
         font-size: 2rem;
-        margin: 0 0 0.7rem 0;
+        margin: 0 0 0.5rem 0;
       }
     }
     .wallets__grid {
