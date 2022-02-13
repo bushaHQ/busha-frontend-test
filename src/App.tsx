@@ -28,8 +28,6 @@ interface AccountState {
   error: boolean;
 }
 
-const SERVER_BASE_URL = process.env.REACT_APP_BASE_URL;
-
 export default function App() {
   const [accounts, setAccounts] = React.useState<AccountState>({
     loading: true,
@@ -44,7 +42,7 @@ export default function App() {
       setAccounts((info) => ({ ...info, loading: true, error: false }));
 
       try {
-        const response = await fetch(SERVER_BASE_URL + "/accounts");
+        const response = await fetch("/accounts");
         if (!response.ok) {
           throw new Error("Error fetching accounts");
         }
