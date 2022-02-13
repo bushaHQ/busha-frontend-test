@@ -1,1 +1,1 @@
-web: yarn build && yarn start:server
+web: yarn build && db:reset && yarn start:server
