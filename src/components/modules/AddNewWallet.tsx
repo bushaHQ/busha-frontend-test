@@ -24,8 +24,6 @@ interface WalletState {
   error: boolean;
 }
 
-const SERVER_BASE_URL = process.env.REACT_APP_BASE_URL;
-
 export default function AddNewWallet({ onWalletCreate }: AddNewWalletProps) {
   const [currency, setCurrency] = React.useState("");
   const [isModalOpen, setModalOpen] = React.useState(false);
@@ -47,7 +45,7 @@ export default function AddNewWallet({ onWalletCreate }: AddNewWalletProps) {
       setWallets((wallets) => ({ ...wallets, loading: true, error: false }));
 
       try {
-        const response = await fetch(SERVER_BASE_URL + "/wallets");
+        const response = await fetch("/wallets");
         if (!response.ok) {
           throw new Error("Error fetching wallets");
         }
@@ -67,7 +65,7 @@ export default function AddNewWallet({ onWalletCreate }: AddNewWalletProps) {
       if (!createWallet.loading) return;
 
       try {
-        const response = await fetch(SERVER_BASE_URL + "/accounts", {
+        const response = await fetch("/accounts", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
