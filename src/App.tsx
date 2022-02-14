@@ -1,11 +1,16 @@
 import { Suspense, lazy, FC } from "react";
-import Navbar from "./components/navbar";
+import Sidebar from "./components/sidebar";
+
+import Loader from "./components/shared/Loader";
 
 const App: React.FC = () => {
   return(
     <>
-    <div className="wrapper">
-      <Navbar />
+    <div>
+      <Sidebar />
+      <Suspense fallback={<Loader />} >
+
+      </Suspense>
     </div>
     </>
   );
