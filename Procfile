@@ -1,1 +1,1 @@
-web: npm install -g concurrently && npm run start
+web:  npm run start
