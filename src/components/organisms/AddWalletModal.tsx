@@ -7,7 +7,6 @@ import NoDataDisplay from "../molecules/NoDataDisplay";
 import Select from "../atoms/Select";
 import Button from "../atoms/Button";
 import ErrorAlert from "../atoms/ErrorAlert";
-import { serverUrl } from "../../utils";
 import { IAccountType, IWalletType } from "../../types";
 interface Props {
   accounts: IAccountType[];
@@ -79,7 +78,7 @@ const AddWalletModal = ({
     e.preventDefault();
     setIsMutating(true);
     setShowPostError(false);
-    fetch(`${serverUrl}/accounts`, {
+    fetch(`accounts`, {
       method: "POST",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -107,7 +106,7 @@ const AddWalletModal = ({
     setShowPostError(false);
     setIsFetching(true);
 
-    fetch(`${serverUrl}/wallets`)
+    fetch(`/wallets`)
       .then((response) => {
         if (response.ok) {
           return response.json();

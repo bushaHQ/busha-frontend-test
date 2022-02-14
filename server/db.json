@@ -37,6 +37,16 @@
       "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/BTC.svg"
     },
     {
+      "currency": "RMT",
+      "hold": "0",
+      "pending_balance": "0",
+      "balance": "0",
+      "name": "SureRemit",
+      "type": "digital",
+      "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/RMT.svg",
+      "id": "AQG10_k"
+    },
+    {
       "currency": "LTC",
       "hold": "0",
       "pending_balance": "0",
@@ -44,7 +54,7 @@
       "name": "Litecoin",
       "type": "digital",
       "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/LTC.svg",
-      "id": "jJgEQbt"
+      "id": "hMAsS6g"
     }
   ],
   "wallets": [
@@ -53,12 +63,6 @@
       "name": "Stellar",
       "type": "digital",
       "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000381/alice_v3/XLM.svg"
-    },
-    {
-      "currency": "RMT",
-      "name": "SureRemit",
-      "type": "digital",
-      "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/RMT.svg"
     },
     {
       "currency": "USDT",

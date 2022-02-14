@@ -7,7 +7,6 @@ import { H1 } from "../components/atoms/Typography";
 import AddWalletModal from "../components/organisms/AddWalletModal";
 import NoDataDisplay from "../components/molecules/NoDataDisplay";
 import styled from "styled-components";
-import { serverUrl } from "../utils";
 import { IAccountType } from "../types";
 
 const CenterContent = styled.div`
@@ -54,7 +53,7 @@ const Wallets = () => {
     setShowError(false);
     setIsLoading(true);
 
-    fetch(`${serverUrl}/accounts`)
+    fetch(`/accounts`)
       .then((response) => {
         if (response.ok) {
           return response.json();
