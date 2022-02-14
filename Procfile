@@ -1,1 +1,1 @@
-web: node server/index.js
+yarn build && node server/index.js
