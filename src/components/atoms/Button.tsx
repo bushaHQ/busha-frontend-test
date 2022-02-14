@@ -6,6 +6,7 @@ type ButtonProps = {
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export const StyledButton = styled.button<ButtonProps>`
+  font-family: "Aribau Grotesk";
   background: ${(props) =>
     props.variant === "secondary" ? "transparent" : "#000000"};
   padding: ${(props) => (props.variant === "secondary" ? 0 : "18px 54px")};
