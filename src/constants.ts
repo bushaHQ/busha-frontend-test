@@ -56,7 +56,7 @@ const breakpoints = {
   BIG: "100rem",
   TABLET: "64rem",
   NORMAL: "85.375rem",
-  MOBILE: "23.438rem",
+  MOBILE: "450px",
 };
 
 export { colors, fonts, breakpoints };

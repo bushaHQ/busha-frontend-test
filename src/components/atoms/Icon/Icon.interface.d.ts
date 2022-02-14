@@ -1,5 +1,6 @@
 export type IconType =
   | "logo"
+  | "menu"
   | "error"
   | "close"
   | "error-sign"

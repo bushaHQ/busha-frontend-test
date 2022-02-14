@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 
 import {
+  Close,
+  MenuIcon,
   MainArea,
+  MobileMenu,
   BodyContainer,
   MenuContainer,
   AccountContainer,
+  MobileMenuContainer,
 } from "./MainPageTemplate.styles";
 
 import {
@@ -17,12 +21,14 @@ import {
 import Modal from "../../shared/Modal";
 import Loader from "../../shared/Loader";
 import { METHOD } from "../../../typings";
+import { colors } from "../../../constants";
 import { useNetworkRequest } from "../../../hooks";
 import { TopBar, AddWallet } from "../../organisms";
 import { IAccount, IWallet } from "../../../typings";
 
 export const MainPage: React.FC<{}> = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [openMobileMenu, setopenMobileMenu] = useState(false);
   const {
     data: accountData,
     isLoading: accountLoading,
@@ -82,9 +88,21 @@ export const MainPage: React.FC<{}> = () => {
     <>
       <TopBar />
       <BodyContainer>
+        <MenuIcon
+          color={colors.GREEN_COLOR}
+          onClick={() => setopenMobileMenu(true)}
+        />
         <MenuContainer>
           <MenuList />
         </MenuContainer>
+        {openMobileMenu && (
+          <MobileMenuContainer>
+            <MobileMenu>
+              <Close onClick={() => setopenMobileMenu(false)} />
+              <MenuList />
+            </MobileMenu>
+          </MobileMenuContainer>
+        )}
         <MainArea>
           <Header
             setModal={setIsOpen}

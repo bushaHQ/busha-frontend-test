@@ -8,6 +8,7 @@ import {
   DownArrow,
   RightArrow,
 } from "./assets";
+import { MenuIcon } from "./assets/menu";
 
 import { IconProps, IconType } from "./Icon.interface";
 
@@ -38,6 +39,10 @@ export const Icon: React.FC<IconProps & { name: IconType }> = ({
 
     case "error-sign": {
       return <ErrorSign {...props} />;
+    }
+
+    case "menu": {
+      return <MenuIcon {...props} />;
     }
 
     default:
