@@ -20,17 +20,18 @@
       line-height: 16px;
       color: #000000;
       padding: 12px;
-    }
-    a.active {
-        background: #F5F7FA;
-        border-radius: 3px;
-        font-weight: 500; 
-      }
-    
-    a:hover:not(.active) {
-        background: #F5F7FA;
+
+      &.active {
+        background: #f5f7fa;
         border-radius: 3px;
         font-weight: 500;
       }
+
+      &:hover:not(.active) {
+        background: #f5f7fa;
+        border-radius: 3px;
+        font-weight: 500;
+      }
+    }
   }
 }
