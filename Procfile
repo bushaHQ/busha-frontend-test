@@ -1,1 +1,1 @@
-web:  npm run start
+yarn build && yarn db:reset && yarn start:server
