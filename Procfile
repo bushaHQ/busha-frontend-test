@@ -1,1 +1,1 @@
-yarn build && yarn db:reset && yarn start:server
+weeb: yarn build && yarn db:reset && yarn start:server
