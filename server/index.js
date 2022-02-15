@@ -13,6 +13,10 @@ server.use(middlewares);
 
 server.use(jsonServer.bodyParser);
 
+server.get("/", (req, res) => {
+  res.send("Welcome");
+});
+
 server.use("/accounts", (req, res, next) => {
   if (req.method === "POST") {
     if (!req.body.currency) {
