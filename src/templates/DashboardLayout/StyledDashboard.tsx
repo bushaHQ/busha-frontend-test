@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const DashboardWrapperStyle = styled.div`
   background-color: white;
   height: 100vh;
-  overflow: hidden;
+  /* overflow: hidden; */
   display: grid;
   grid-template-rows: 3.5rem 3fr;
 
@@ -13,6 +13,13 @@ export const DashboardWrapperStyle = styled.div`
     column-gap: 4.0625rem;
     overflow: hidden;
     padding: 3.75rem 10rem 0;
+
+    @media (max-width: 700px) {
+      display: flex;
+      flex-direction: column;
+      column-gap: 0;
+      padding: 20px 15px;
+    }
 
     main {
       overflow-y: hidden;
@@ -27,6 +34,11 @@ export const Navbar = styled.nav`
   background-color: white;
   padding: 0 10rem;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+
+  @media (max-width: 700px) {
+    padding: 40px 15px;
+  }
 
   .profile-holder {
     display: flex;
@@ -42,6 +54,18 @@ export const Navbar = styled.nav`
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .user-name {
+    font-size: 14px;
+  }
+`;
+
+export const StyledSideNav = styled.aside`
+  @media (max-width: 700px) {
+    display: flex;
+    padding: 40px 10px 20px;
+    overflow: auto;
   }
 `;
 

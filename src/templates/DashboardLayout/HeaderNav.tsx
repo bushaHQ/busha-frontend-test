@@ -9,7 +9,7 @@ const HeaderNav = () => {
 
       <div className="profile-holder">
         <span className="avatar">O</span>
-        <span>Oluwatobi Akindunjoye</span>
+        <span className="user-name">Oluwatobi Akindunjoye</span>
       </div>
     </Navbar>
   );

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import menuLinks from "./MenuLinks";
-import { MenuItem } from "./StyledDashboard";
+import { MenuItem, StyledSideNav } from "./StyledDashboard";
 
 const SideNav = () => {
   const [currentPath] = useState(window.location.pathname);
   return (
-    <aside>
+    <StyledSideNav>
       {menuLinks.map(({ name, link }, index) => {
         const isActive = currentPath === link;
         return (
@@ -14,7 +14,7 @@ const SideNav = () => {
           </MenuItem>
         );
       })}
-    </aside>
+    </StyledSideNav>
   );
 };
 

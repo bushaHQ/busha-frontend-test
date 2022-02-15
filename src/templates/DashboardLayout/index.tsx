@@ -11,10 +11,10 @@ const index = ({ children }: Props) => {
   return (
     <DashboardWrapperStyle>
       <HeaderNav />
-      <div className="dashboard-content">
+      <section className="dashboard-content">
         <SideNav />
         <main>{children && children}</main>
-      </div>
+      </section>
     </DashboardWrapperStyle>
   );
 };

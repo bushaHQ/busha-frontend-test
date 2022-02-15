@@ -15,7 +15,6 @@ export const StyledButton = styled.button<ButtonProps>`
   color: ${(props) => (props.variant === "secondary" ? "#000000" : "white")};
   cursor: pointer;
   align-items: center;
-  font-size: 18px;
 `;
 
 const Button = (props: ButtonProps) => {

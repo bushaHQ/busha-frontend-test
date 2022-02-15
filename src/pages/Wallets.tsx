@@ -26,6 +26,10 @@ const WalletsStyles = styled.div`
     align-items: center;
     justify-content: space-between;
 
+    @media (max-width: 700px) {
+      padding-top: 2rem;
+    }
+
     .add-btn {
       font-size: 16px;
       font-weight: 500;
@@ -33,13 +37,17 @@ const WalletsStyles = styled.div`
   }
   .accounts {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 40px;
     border-top: 1px solid #d3d5d850;
     margin-top: 16px;
     padding-top: 24px;
     padding-bottom: 5px;
     padding-right: 20px;
+
+    @media (max-width: 700px) {
+      padding-right: 0;
+    }
   }
 `;
 
