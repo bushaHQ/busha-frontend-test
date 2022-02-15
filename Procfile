@@ -1,1 +1,1 @@
-web: npm run db:reset && npm run start:server && npm run wait-on:server && npm run start:client
+web: npm install json-server && npm run db:reset && npm run start:server && npm run wait-on:server && npm run start:client
