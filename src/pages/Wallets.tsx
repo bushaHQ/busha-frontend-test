@@ -8,6 +8,7 @@ import AddWalletModal from "../components/organisms/AddWalletModal";
 import NoDataDisplay from "../components/molecules/NoDataDisplay";
 import styled from "styled-components";
 import { IAccountType } from "../types";
+import { BASE_URL } from "../utils";
 
 const CenterContent = styled.div`
   display: flex;
@@ -61,7 +62,7 @@ const Wallets = () => {
     setShowError(false);
     setIsLoading(true);
 
-    fetch(`/accounts`)
+    fetch(`${BASE_URL}/accounts`)
       .then((response) => {
         if (response.ok) {
           return response.json();

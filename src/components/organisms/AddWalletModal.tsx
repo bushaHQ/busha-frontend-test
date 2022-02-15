@@ -8,6 +8,7 @@ import Select from "../atoms/Select";
 import Button from "../atoms/Button";
 import ErrorAlert from "../atoms/ErrorAlert";
 import { IAccountType, IWalletType } from "../../types";
+import { BASE_URL } from "../../utils";
 interface Props {
   accounts: IAccountType[];
   setAccounts: Function;
@@ -78,7 +79,7 @@ const AddWalletModal = ({
     e.preventDefault();
     setIsMutating(true);
     setShowPostError(false);
-    fetch(`accounts`, {
+    fetch(`${BASE_URL}/accounts`, {
       method: "POST",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -106,7 +107,7 @@ const AddWalletModal = ({
     setShowPostError(false);
     setIsFetching(true);
 
-    fetch(`/wallets`)
+    fetch(`${BASE_URL}/wallets`)
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -162,6 +163,7 @@ const AddWalletModal = ({
                   value: wallet.currency,
                 }))}
               />
+
               <Button type="submit" disabled={isMutating}>
                 {isMutating ? <Loader /> : "Create wallet"}
               </Button>
