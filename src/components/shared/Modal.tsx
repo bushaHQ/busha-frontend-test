@@ -6,8 +6,8 @@ import ModalError from "../ModalError"
 import Loader from './Loader'
 import PostError from "../PostError";
 
-const URL = `${window.location.protocol}//${window.location.hostname}:3090/wallets`;
-const AccountsURL = `${window.location.protocol}//${window.location.hostname}:3090/accounts`;
+const URL = 'http://localhost:3090/wallets';
+const AccountsURL = 'http://localhost:3090/accounts';
 
 export interface ModalProps {
   isOpen: boolean;
