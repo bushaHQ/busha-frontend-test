@@ -1,5 +1,4 @@
 .sidebar {
-  padding-top: 50px;
   padding-left: 10rem;
 
   &__menu {
@@ -9,6 +8,7 @@
     overflow: auto;
     margin: 0;
     padding: 0;
+    padding-top: 50px;
 
     a {
       display: block;
