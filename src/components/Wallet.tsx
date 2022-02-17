@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import Loader from '../components/shared/Loader'
 import Error from './Error';
 import Modal from './shared/Modal'
-const URL = '/accounts';
+const URL = 'http://localhost:3090/accounts';
 
 
 const Wallet = () => {
