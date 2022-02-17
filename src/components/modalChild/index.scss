@@ -1,0 +1,82 @@
+.modal-content-wrapper {
+  padding: 50px 20px;
+  font-family: "AribauGrotesk";
+}
+
+.modal-loader,
+.error-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.modal-body-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-close {
+  cursor: pointer;
+}
+
+.modal-body-text {
+  color: #3e4c59;
+  font-size: 16px;
+  line-height: 26px;
+  padding-right: 10px;
+}
+
+.modal-body-label {
+  color: #3e4c59;
+}
+
+.modal-form-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.modal-form-button button {
+  background: #000000;
+  border-radius: 40px;
+  color: #fff;
+  padding: 10px 25px;
+  border: none;
+  cursor: pointer;
+}
+
+.create-wallet-error {
+  padding: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff4f4;
+  border-radius: 8px;
+  margin-top: 40px;
+}
+
+.error-msg {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  span {
+    color: #d72c0d;
+  }
+}
+
+select {
+  width: 100%;
+  padding: 10px;
+}
+
+select:focus {
+  outline: none;
+}

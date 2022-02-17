@@ -1,0 +1,66 @@
+@font-face {
+  font-family: "AribauGrotesk";
+  src: local("AribauGrotesk"), url("./assets/fonts/Aribau-Grotesk-Regular.otf");
+}
+
+.app-container {
+  max-width: 1100px;
+  margin: auto;
+  padding-top: 40px;
+  display: flex;
+  gap: 30px;
+}
+
+.main-body {
+  flex: 5;
+  font-family: "AribauGrotesk";
+}
+
+.main-body-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.main-body-divider {
+  border: 1px solid rgba(211, 213, 216, 0.5);
+  margin-top: 15px;
+}
+
+.wallet {
+  font-weight: 600;
+}
+
+.add-wallet {
+  cursor: pointer;
+}
+
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.btn-error {
+  background: #000000;
+  border-radius: 40px;
+  color: #fff;
+  padding: 10px 25px;
+  border: none;
+  cursor: pointer;
+}
+
+.card {
+  padding: 30px 0px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+}
