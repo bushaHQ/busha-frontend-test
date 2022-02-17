@@ -111,7 +111,7 @@ export const MainPage: React.FC<{}> = () => {
           <AccountCardContent />
         </MainArea>
       </BodyContainer>
-      <Modal isOpen={isOpen}>
+      <Modal isOpen={isOpen} data-testid="modal">
         <AddWallet setModal={setIsOpen} fetchAccounts={fetchAccounts} />
       </Modal>
     </>

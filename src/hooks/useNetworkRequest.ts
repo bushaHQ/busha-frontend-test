@@ -35,5 +35,6 @@ export const useNetworkRequest = ({
       return { isLoading: false, error: true, data: null, fetchData };
     }
   };
+
   return { isLoading, error, data, fetchData };
 };

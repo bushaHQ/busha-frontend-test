@@ -24,6 +24,7 @@ export const AddWallet: React.FC<AddWalletProps> = ({
 }) => {
   const [value, setValue] = useState("");
   const [postError, setPostError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const {
     data: WalletData,
@@ -56,7 +57,7 @@ export const AddWallet: React.FC<AddWalletProps> = ({
       setPostError(false);
     };
     // eslint-disable-next-line
-  }, [walletError, postWalletError]);
+  }, []);
 
   const handleSubmit = async () => {
     try {
@@ -70,17 +71,29 @@ export const AddWallet: React.FC<AddWalletProps> = ({
     } catch (error) {}
   };
 
+  if (walletLoading || loading) {
+    return (
+      <>
+        <Close
+          onClick={() => setModal(false)}
+          aria-label={"Close button"}
+          aria-labelledby={"Close button"}
+        />
+        <NoDataContainer>
+          <Loader size={50} width={5} />
+        </NoDataContainer>
+      </>
+    );
+  }
+
   if (walletError)
     return (
       <NoDataContainer>
-        <NetworkErrorCard reFetch={fetchData} />
-      </NoDataContainer>
-    );
-
-  if (walletLoading)
-    return (
-      <NoDataContainer>
-        <Loader size={50} width={5} />
+        <NetworkErrorCard
+          reFetch={() => {
+            setLoading(true);
+          }}
+        />
       </NoDataContainer>
     );
 
@@ -108,11 +121,15 @@ export const AddWallet: React.FC<AddWalletProps> = ({
         type="submit"
         onClick={() => handleSubmit()}
       >
-        {postWalletLoading && !postWalletError && !postError
-          ? "Loading..."
-          : "Create wallet"}
+        {postWalletLoading && !postWalletError && !postError ? (
+          <>
+            "Loading..." <Loader />
+          </>
+        ) : (
+          "Create wallet"
+        )}
       </Button>
-      {(postWalletError || postError) && <NetworkErrorSmallCard />}
+      {postError && <NetworkErrorSmallCard />}
     </Container>
   );
 };
