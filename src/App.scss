@@ -1,10 +1,38 @@
-// @import url('https://db.onlinewebfonts.com/c/ddb4daa06f2d44fdbfdeb2ef47cb4a58?family=Aribau+Grotesk');
-@import url('https://fonts.googleapis.com/css2?family=Neucha&family=Space+Grotesk:wght@400;500;700&display=swap');
-
+// DASHBOARD STYLING
 .dashboard__main__content {
-    margin-left: 30%;
-    padding-top: 25px;;
+  margin-left: 30%;
+
+  .wallets__main {
+    padding-top: 20px;
+
+    h1 {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 32px;
+      line-height: 32px;
+      color: #000000;
+    }
+
+    &__row {
+      margin: 0 -5px;
+      ::after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+    }
+
+    &__column {
+      float: left;
+      width: 30%;
+      padding: 0 10px;
+      margin-top: 15px;
+    }
+
+    &__card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      padding: 16px;
+      background-color: #fff1;
+    }
+  }
 }
-
-
-

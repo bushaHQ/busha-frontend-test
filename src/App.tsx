@@ -1,22 +1,35 @@
-import { Suspense, lazy, FC } from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "./components/sidebar";
 
 import "./App.scss"
+import Dashboard from "./pages/Dashboard";
 
-import Loader from "./components/shared/Loader";
-// const
 
 const App: React.FC = () => {
+  const [walletItems, setWalletItems] = useState([]);
+
+  // const getWalletData = () => {
+  //   fetch("http://localhost:3090/wallets", {
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       "Accept": "application/json"
+  //     }
+  //   }).then(function (res) {
+  //     return res.json()
+  //   }).then(function (myJson) {
+  //     console.log(myJson, "ee");
+  //     setWalletItems(myJson)
+  //   })
+  // }
+
+  // useEffect(()=>{
+  //   getWalletData()
+  // },[])
+  
   return (
     <>
       <Sidebar />
-      <Suspense fallback={<Loader />} >
-        <div className="dashboard__main__content">
-          <div className="wallets__main">
-            <h1>Wallets</h1>
-          </div>
-        </div>
-      </Suspense>
+      <Dashboard />
     </>
   );
 }
