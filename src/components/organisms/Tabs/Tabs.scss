@@ -1,0 +1,47 @@
+.tab {
+    display: flex;
+    align-items: center;
+    padding-top: 60px;
+    padding: 60px 160px 0 160px;
+
+    .active {
+        background: #F5F7FA;
+        border-radius: 3px;
+        color: #000000;
+        font-weight: 700;
+    }
+
+    &__menu button {
+        display: block;
+        background-color: inherit;
+        color: #3E4C59;
+        padding: 22px 16px;
+        border: none;
+        outline: none;
+        text-align: left;
+        cursor: pointer;
+        transition: 0.3s;
+        font-size: 14px;
+        width: 240px;
+    }
+
+    &__menu button:hover {
+        background-color: #ddd;
+    }
+
+    &__menu button.active {
+        background-color: #ccc;
+    }
+
+    &__content {
+        padding: 0px 60px;
+        width: 70%;
+        border-left: none;
+        height: 300px;
+
+        h3 {
+            font-size: 32px;
+            font-weight: 700;
+        }
+    }
+}

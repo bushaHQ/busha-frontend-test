@@ -1,0 +1,15 @@
+.dashboard-layout {
+  height: inherit;
+  padding: 0 160px;
+  width: 100%;
+}
+
+.append {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(154, 165, 177, 0.3);
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+}
