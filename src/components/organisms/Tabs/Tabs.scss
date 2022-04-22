@@ -44,4 +44,21 @@
             font-weight: 700;
         }
     }
+
+    &__content-body {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 5px;
+        border-bottom: 1px solid rgba(211, 213, 216, 0.5);
+
+        p {
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 16px;
+            text-align: right;
+            color: #000000;
+        }
+    }
 }

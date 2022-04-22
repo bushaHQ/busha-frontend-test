@@ -5,7 +5,7 @@ import toAmount from '../../../helpers/toAmount'
 import { CurrencyCode } from '../../../helpers/currency';
 import './WalletCard.scss'
 
-export interface WalletItems {
+export type WalletItems = {
     id: string;
     // currency: CurrencyCode;
     currency: string;

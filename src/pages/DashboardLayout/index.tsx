@@ -6,13 +6,20 @@ import Prices from '../Prices/Index'
 import Wallets from '../Wallets/Index'
 import Peer2Peer from '../Peer2Peer/Index'
 import Settings from '../Settings/Index'
+import { useCallback } from 'react';
 
 const DashboardLayout = () => {
+  const onAddNewWallet = useCallback(() => {
+
+  }, [])
+  
   const tabs = [
     {
       key: '1',
       title: 'Wallets',
+      action: '+ Add new wallet',
       component: <Wallets />,
+      handler: onAddNewWallet,
     },
     {
       key: '2',
