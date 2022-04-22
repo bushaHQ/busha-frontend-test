@@ -1,0 +1,37 @@
+.wallet {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    padding-top: 24px;
+
+    &__content {
+        padding: 16px;
+        background-image: url('../../../assets//images/vector-background.png');
+    }
+
+    &__currency {
+        display: flex;
+        align-items: center;
+
+        p {
+            margin-left: 8px;
+            color: #9AA5B1;
+            font-weight: 700;
+            padding: 18px 0;
+        }
+    }
+
+    &__balance {
+        color: #FFFFFF;
+        font-size: 16;
+
+        p {
+            color: #fff;
+        }
+    }
+
+    &__arrow {
+        display: flex;
+        justify-content: end;
+    }
+}
