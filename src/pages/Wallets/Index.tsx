@@ -20,8 +20,8 @@ const Wallets: VoidFunctionComponent<any> = () => {
     const [selectedWalletValue, setSelectedWalletValue] = useState('')
     const [message, setMessage] = useState('Network Error')
     const [buttonLabel, setButtonLabel] = useState('Create Wallet')
-    const { data: wallets, loading: isLoadingWallets, error: walletError, getData: getAccounts } = useAccounts();
-    const { data: walletOptions, loading: isLoadingWalletOptions, error: walletOptionsError } = useWallets();
+    const { data: wallets, loading: isLoadingWallets, getData: getAccounts } = useAccounts();
+    const { data: walletOptions, loading: isLoadingWalletOptions } = useWallets();
 
     const walletItems = useMemo(() => transformWalletOptions(walletOptions as WalletResponse[]), [walletOptions])
     const accountItems = useMemo(() => transformAccounts(wallets as AccountResponse[]), [wallets])
