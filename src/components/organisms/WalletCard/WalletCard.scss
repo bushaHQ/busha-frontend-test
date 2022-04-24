@@ -1,6 +1,10 @@
 .wallet {
-    display: flex;
-    flex-flow: row wrap;
+    // display: flex;
+    // flex-flow: row wrap;
+    // justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 2.188rem;
     justify-content: space-between;
     padding-top: 24px;
 

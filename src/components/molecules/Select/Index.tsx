@@ -10,7 +10,7 @@ interface SelectProps {
     label: string;
     options: SelectItemType[];
     placeholder?: string;
-    onChange: () => void;
+    onChange: (e: any) => void;
 }
 
 const Select: VoidFunctionComponent<SelectProps> = ({

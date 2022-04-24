@@ -9,10 +9,10 @@ interface WalletCardProps {
     items: AccountItems[]
 }
 const WalletCard: VoidFunctionComponent<WalletCardProps> = ({ items }) => {
-
+ 
     return (
          <div className="wallet">
-                {items.map((item) => (
+                {items?.map((item) => (
                      <Card key={item.id} >
                         <div className="wallet__content">
                            <div className="wallet__currency">
@@ -23,7 +23,7 @@ const WalletCard: VoidFunctionComponent<WalletCardProps> = ({ items }) => {
                            </div>
 
                            <div className="wallet__balance">
-                               <p>{item.type === 'fiat' ? toAmount(item.balance) : `${item.balance} ${item.currencyCode}`}</p>
+                               <p>{item.type === 'fiat' ? toAmount(item.balance, item.currencyCode) : `${item.balance} ${item.currencyCode}`}</p>
                            </div>
 
                            <div className="wallet__arrow">

@@ -1,52 +1,77 @@
-import { useCallback, useMemo, useState, VoidFunctionComponent } from "react";
+import { ChangeEvent, useCallback, useMemo, useState, VoidFunctionComponent } from "react";
 import WalletCard from '../../components/organisms/WalletCard/Index'
-import { CurrencyCode } from '../../helpers/currency';
-import { items, walletOptions } from '../../helpers/data';
 import Modal from '../../components/shared/Modal'
 import Loader from '../../components/shared/Loader'
 import CloseIcon from '../../assets/icons/CloseIcon'
 import Header from '../../components/molecules/Header/Index'
 import Button from '../../components/atoms/Button/Index'
-import Select, { SelectItemType } from '../../components/molecules/Select/Index'
-import { useApi } from '../../hooks/useApi'
+import Select from '../../components/molecules/Select/Index'
+import { useAccounts } from '../../hooks/useAccounts'
 import './Wallets.scss'
 import { transformAccounts, transformWalletOptions } from "../../helpers/transformers";
 import Alert from '../../components/molecules/Alert/Index'
 import WarningIcon from '../../assets/icons/WarningIcon'
+import { AccountResponse, WalletResponse } from "../../helpers/types";
+import { useWallets } from "../../hooks/useWallets";
 
 const Wallets: VoidFunctionComponent<any> = () => {
     const [showModal, setShowModal] = useState(false)
-    const [isLoading, setIsLoading] = useState(false)
-    const { data: wallets, loading: isLoadingWallets } = useApi('/accounts');
+    const [selectedWalletValue, setSelectedWalletValue] = useState('')
+    const [message, setMessage] = useState('Network Error')
+    const { data: wallets, loading: isLoadingWallets, getData: getAccounts } = useAccounts();
+    const { data: walletTypes, loading: isLoadingWalletTypes } = useWallets();
 
-    const walletItems = useMemo(() => transformWalletOptions(walletOptions), [])
-    // const accountItems = useMemo(() => transformAccounts(items), [])
+    const walletItems = useMemo(() => transformWalletOptions(walletTypes as WalletResponse[]), [walletTypes])
+    const accountItems = useMemo(() => transformAccounts(wallets as AccountResponse[]), [wallets])
 
     const onAddNewWallet = useCallback(() => {
         setShowModal(true)
     }, [])
 
-    const onCreateWallet = useCallback(() => {
-        try{
-            setIsLoading(true)
+    const onCreateWallet = useCallback(async () => {
+        try {
+            const response = await fetch('http://localhost:3090/accounts',
+            {
+                // Adding method type
+                method: "POST",
+                 
+                // Adding body or contents to send
+                body: JSON.stringify({
+                    currency: selectedWalletValue 
+                }),
+                 
+                // Adding headers to the request
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            })
 
-        } catch {
+            const  data = await response.json()
+            if(data.error){
+                setMessage(data.error)
+            }
 
+            if(data){
+                wallets.push(data)
+                getAccounts()
+                setShowModal(false)
+            }
+        
+        } catch(error) {
+            setMessage(error)
         } finally {
-            setIsLoading(true)
+            // setIsLoading(true)
         }
 
-    }, [])
-
-    const onChange = () => {
-
+    }, [getAccounts, selectedWalletValue, wallets])
+    
+    const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+       setSelectedWalletValue(event.target.value);
     }
 
     const hideModal = useCallback(() => {
         setShowModal(false)
     }, [])
-
-    if (!isLoadingWallets) console.log(wallets);
     
     return (
          <main>
@@ -61,11 +86,17 @@ const Wallets: VoidFunctionComponent<any> = () => {
                 }
            />
 
-                <WalletCard items={items} />
+                {isLoadingWallets &&  (
+                     <div className="modal__loader">
+                        <Loader size={70} />
+                    </div>
+                )}
+
+                {!isLoadingWallets && <WalletCard items={accountItems} />}
 
                 <Modal isOpen={showModal}>
                     <div className="modal">
-                        {!isLoading && (
+                        {!isLoadingWalletTypes && (
                             <>
                                 <Header 
                                     title="Add new wallet" 
@@ -95,18 +126,17 @@ const Wallets: VoidFunctionComponent<any> = () => {
                                     <div className="modal__error">
                                         <div className="modal__error-message">
                                             <WarningIcon />
-                                            <p>Network Error</p>
+                                            <p>{message}</p>
                                         </div>
-            
-                                            <CloseIcon color="#D72C0D" /> 
-                                     
+                                        
+                                        <CloseIcon color="#D72C0D" /> 
                                     </div>
                                 </Alert>
                             </>
                         )}
                     </div>
                     
-                    {isLoading && (
+                    {isLoadingWalletTypes && (
                         <div className="modal__loader">
                             <Loader size={70} />
                         </div>
