@@ -39,15 +39,11 @@ const Wallets: VoidFunctionComponent<any> = () => {
             setButtonLabel('Loading...')
             const response = await fetch('http://localhost:3090/accounts',
             {
-                // Adding method type
                 method: "POST",
-                 
-                // Adding body or contents to send
                 body: JSON.stringify({
                     currency: selectedWalletValue 
                 }),
                  
-                // Adding headers to the request
                 headers: {
                     "Content-type": "application/json; charset=UTF-8"
                 }
