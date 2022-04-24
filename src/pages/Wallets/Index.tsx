@@ -20,6 +20,7 @@ const Wallets: VoidFunctionComponent<any> = () => {
     const [showAlert, setShowAlert] = useState(false)
     const [selectedWalletValue, setSelectedWalletValue] = useState('')
     const [message, setMessage] = useState('Network Error')
+    const [buttonLabel, setButtonLabel] = useState('Create Wallet')
     const { data: wallets, loading: isLoadingWallets, error: walletError, getData: getAccounts } = useAccounts();
     const { data: walletOptions, loading: isLoadingWalletOptions, error: walletOptionsError } = useWallets();
 
@@ -36,6 +37,7 @@ const Wallets: VoidFunctionComponent<any> = () => {
 
     const onCreateWallet = useCallback(async () => {
         try {
+            setButtonLabel('Loading...')
             const response = await fetch('http://localhost:3090/accounts',
             {
                 // Adding method type
@@ -68,7 +70,7 @@ const Wallets: VoidFunctionComponent<any> = () => {
             setMessage(error)
             setShowAlert(true)
         } finally {
-            // setIsLoading(true)
+            setButtonLabel('Create Wallet')
         }
 
     }, [getAccounts, selectedWalletValue, wallets])
@@ -136,7 +138,7 @@ const Wallets: VoidFunctionComponent<any> = () => {
                                         <div className="modal__form-button">
                                              <Button 
                                                 onClick={onCreateWallet} 
-                                                buttonLabel="Create wallet"
+                                                buttonLabel={buttonLabel}
                                             />
                                         </div>
                                 </div>

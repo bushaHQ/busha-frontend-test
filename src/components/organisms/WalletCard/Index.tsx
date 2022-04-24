@@ -17,7 +17,7 @@ const WalletCard: VoidFunctionComponent<WalletCardProps> = ({ items }) => {
                         <div className="wallet__content">
                            <div className="wallet__currency">
                                <div>
-                                    <img src={item.imgURL} alt={item.name} />
+                                    <img src={item.imgURL} alt={item.name} width="34px" height="34px" />
                                </div>
                                <p>{item.name}</p>
                            </div>
