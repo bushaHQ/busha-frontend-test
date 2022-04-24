@@ -1,4 +1,7 @@
-.navbar-header {
+.header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgba(211, 213, 216, 0.5);
 }
