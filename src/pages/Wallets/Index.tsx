@@ -13,7 +13,6 @@ import Alert from '../../components/molecules/Alert/Index'
 import WarningIcon from '../../assets/icons/WarningIcon'
 import { AccountResponse, WalletResponse } from "../../helpers/types";
 import { useWallets } from "../../hooks/useWallets";
-import Error from '../../components/molecules/Error/Index'
 
 const Wallets: VoidFunctionComponent<any> = () => {
     const [showModal, setShowModal] = useState(false)

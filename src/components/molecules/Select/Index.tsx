@@ -19,27 +19,15 @@ const Select: VoidFunctionComponent<SelectProps> = ({
   placeholder,
   onChange,
 }) => {
-  const checkOptions = options.some((value: any) => {
-    return typeof value == "object";
-  });
 
   const [showSelectHeader] = useState(true);
   const ref = useRef<HTMLDivElement>(null);
 
-//   useEffect(() => {
-//     const checkValueSelected = ref.current?.children[1].value;
-//     if (!checkValueSelected.includes("null")) {
-//       setShowSelectHeader(false);
-//     }
-//   }, [ref.current?.children[1].value]);
 
   return (
       <div className="select">
           <label className="select__label">{label}</label>
           <div className="select__options" ref={ref}>
-            {/* <div className="select__icon">
-                <ArrowDownIcon />  
-            </div> */}
      
             <select className="select__form" onChange={onChange}>
                 {showSelectHeader && (
