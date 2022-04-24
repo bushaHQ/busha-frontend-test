@@ -16,11 +16,11 @@ import { useWallets } from "../../hooks/useWallets";
 import Error from '../../components/molecules/Error/Index'
 
 const Wallets: VoidFunctionComponent<any> = () => {
-    const [showModal, setShowModal] = useState(false)
-    const [showAlert, setShowAlert] = useState(false)
-    const [selectedWalletValue, setSelectedWalletValue] = useState('')
-    const [message, setMessage] = useState('Network Error')
-    const [buttonLabel, setButtonLabel] = useState('Create Wallet')
+    const [showModal, setShowModal] = useState<boolean>(false)
+    const [showAlert, setShowAlert] = useState<boolean>(false)
+    const [selectedWalletValue, setSelectedWalletValue] = useState<string>('')
+    const [message, setMessage] = useState<string>('Network Error')
+    const [buttonLabel, setButtonLabel] = useState<string>('Create Wallet')
     const { 
         data: wallets, 
         loading: isLoadingWallets, 
