@@ -1,10 +1,10 @@
-.title__body {
-    display: flex;
-    align-items: center;
-}
-
 .title {
     font-size: 14px;
     color: #3E4C59;
+
+    &__body {
+        display: flex;
+        align-items: center;
+    }
 
 }

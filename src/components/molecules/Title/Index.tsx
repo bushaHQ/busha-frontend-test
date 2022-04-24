@@ -6,7 +6,7 @@ export interface TitleProps {
     append?: ReactNode;
 }
 
-const Title: VoidFunctionComponent<TitleProps> = ({title, append}) => {
+const Title: VoidFunctionComponent<TitleProps> = ({ title, append }) => {
 
     return (
         <div className="title__body">

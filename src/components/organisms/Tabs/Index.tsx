@@ -36,12 +36,7 @@ const Tab: VoidFunctionComponent<TabProps> = ({ tabs }) => {
         
             <div className="tab__content">
             {currentTab !== -1 &&
-                <>
-                <div className="tab__content-body">
-                     <h3>{tabs[currentTab].title}</h3>
-                     <p>{tabs[currentTab].action}</p>
-                </div>
-                   
+                <> 
                     {tabs[currentTab].component}
                 </>
             }
