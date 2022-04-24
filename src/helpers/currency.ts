@@ -1,5 +1,5 @@
 export const currencyCode = {
-    NGN: 'NGN',
+    NGN:  'NGN',
     USDT: 'USD',
     XLM: 'XLM',
     TRX: 'TRX',
