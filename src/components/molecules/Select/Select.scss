@@ -1,19 +1,13 @@
-.select {
+@import "../../../variables";
 
+.select {
     &__label {
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 16px;
-        color: #3E4C59;
+        font-weight: $font-weight;
+        font-size: $font-size;
+        line-height: $line-height;
+        color: $dark-grey;
     }
 
-    // position: relative;
-
-    // &__icon {
-    //     position: absolute;
-    //     right: 30;
-    //     top: 17;
-    // }
     &__options {
         margin-top: 14px;
     }
@@ -22,10 +16,10 @@
         display: block;
         width: 100%;
         padding: 0.375rem 0.75rem;
-        font-size: 1rem;
+        font-size: $font-size;
         line-height: 1.5;
-        color: #495057;
-        background-color: #fff;
+        color: $black;
+        background-color: $white;
         background-clip: padding-box;
         border: 1px solid #ced4da;
         border-radius: 0.25rem;

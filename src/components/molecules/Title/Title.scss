@@ -1,10 +1,11 @@
+@import "../../../variables";
+
 .title {
     font-size: 14px;
-    color: #3E4C59;
+    color: $dark-grey;
 
     &__body {
         display: flex;
         align-items: center;
     }
-
 }

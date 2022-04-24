@@ -1,3 +1,5 @@
+@import "../../../variables";
+
 .tab {
     display: flex;
     align-items: center;
@@ -7,14 +9,14 @@
     .active {
         background: #F5F7FA;
         border-radius: 3px;
-        color: #000000;
+        color: $black;
         font-weight: 700;
     }
 
     &__menu button {
         display: block;
         background-color: inherit;
-        color: #3E4C59;
+        color: $dark-grey;
         padding: 22px 16px;
         border: none;
         outline: none;
@@ -40,7 +42,7 @@
         height: 300px;
 
         h3 {
-            font-size: 32px;
+            font-size: $font-size * 2;
             font-weight: 700;
         }
     }
@@ -55,10 +57,10 @@
         p {
             cursor: pointer;
             font-weight: 500;
-            font-size: 16px;
-            line-height: 16px;
+            font-size: $font-size;
+            line-height: $line-height;
             text-align: right;
-            color: #000000;
+            color: $black;
         }
     }
 }

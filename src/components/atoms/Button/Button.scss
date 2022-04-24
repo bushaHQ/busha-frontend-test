@@ -1,15 +1,17 @@
+@import "../../../variables";
+
 .button {
-    background: #000000;
+    background: $black;
     border-radius: 40px;
-    color: #fff;
+    color: $white;
     min-width: 186px;
     height: 54px;
     text-align: center;
     border: none;
     font-weight: 400;
-    font-size: 18px;
+    font-size: $font-size + 2;
     line-height: 18px;
     text-align: center;
-    cursor: pointer;
+    cursor: $cursor;
     padding: 18px 54px;
 }
