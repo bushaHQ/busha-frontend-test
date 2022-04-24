@@ -9,7 +9,7 @@ export type WalletResponse = {
 
 export type AccountResponse = {
     id: string;
-    currency: string;
+    currency: CurrencyCode;
     hold: string;
     pending_balance: string;
     balance: string;
@@ -22,7 +22,7 @@ export type AccountResponse = {
 
 export type AccountItems = {
     id: string;
-    currencyCode: string;
+    currencyCode: CurrencyCode;
     hold: string;
     pendingBalance: string;
     balance: string;
