@@ -13,19 +13,25 @@ import Alert from '../../components/molecules/Alert/Index'
 import WarningIcon from '../../assets/icons/WarningIcon'
 import { AccountResponse, WalletResponse } from "../../helpers/types";
 import { useWallets } from "../../hooks/useWallets";
+import Error from '../../components/molecules/Error/Index'
 
 const Wallets: VoidFunctionComponent<any> = () => {
     const [showModal, setShowModal] = useState(false)
+    const [showAlert, setShowAlert] = useState(false)
     const [selectedWalletValue, setSelectedWalletValue] = useState('')
     const [message, setMessage] = useState('Network Error')
-    const { data: wallets, loading: isLoadingWallets, getData: getAccounts } = useAccounts();
-    const { data: walletTypes, loading: isLoadingWalletTypes } = useWallets();
+    const { data: wallets, loading: isLoadingWallets, error: walletError, getData: getAccounts } = useAccounts();
+    const { data: walletOptions, loading: isLoadingWalletOptions, error: walletOptionsError } = useWallets();
 
-    const walletItems = useMemo(() => transformWalletOptions(walletTypes as WalletResponse[]), [walletTypes])
+    const walletItems = useMemo(() => transformWalletOptions(walletOptions as WalletResponse[]), [walletOptions])
     const accountItems = useMemo(() => transformAccounts(wallets as AccountResponse[]), [wallets])
 
     const onAddNewWallet = useCallback(() => {
         setShowModal(true)
+    }, [])
+
+    const hideAlert = useCallback(() => {
+        setShowAlert(false)
     }, [])
 
     const onCreateWallet = useCallback(async () => {
@@ -47,11 +53,12 @@ const Wallets: VoidFunctionComponent<any> = () => {
             })
 
             const  data = await response.json()
-            if(data.error){
+            if(data.error) {
                 setMessage(data.error)
+                setShowAlert(true)
             }
 
-            if(data){
+            if(data) {
                 wallets.push(data)
                 getAccounts()
                 setShowModal(false)
@@ -59,6 +66,7 @@ const Wallets: VoidFunctionComponent<any> = () => {
         
         } catch(error) {
             setMessage(error)
+            setShowAlert(true)
         } finally {
             // setIsLoading(true)
         }
@@ -86,17 +94,28 @@ const Wallets: VoidFunctionComponent<any> = () => {
                 }
            />
 
+
                 {isLoadingWallets &&  (
-                     <div className="modal__loader">
+                     <div className="wallet__loader">
                         <Loader size={70} />
                     </div>
                 )}
 
                 {!isLoadingWallets && <WalletCard items={accountItems} />}
 
+                {/* {!!walletError && !isLoadingWallets &&(
+                    <div className="wallet__error">
+                         <Error 
+                            message="Network Error" 
+                            buttonLabel="Try again" 
+                            handleError={getAccounts}
+                        /> 
+                    </div> 
+                )} */}
+
                 <Modal isOpen={showModal}>
                     <div className="modal">
-                        {!isLoadingWalletTypes && (
+                        {!isLoadingWalletOptions && (
                             <>
                                 <Header 
                                     title="Add new wallet" 
@@ -122,21 +141,26 @@ const Wallets: VoidFunctionComponent<any> = () => {
                                         </div>
                                 </div>
 
-                                <Alert>
-                                    <div className="modal__error">
-                                        <div className="modal__error-message">
-                                            <WarningIcon />
-                                            <p>{message}</p>
-                                        </div>
+                                {showAlert && (
+                                    <Alert>
+                                        <div className="modal__error">
+                                            <div className="modal__error-message">
+                                                <WarningIcon />
+                                                <p>{message}</p>
+                                            </div>
+
+                                            <div onClick={hideAlert}>
+                                                <CloseIcon color="#D72C0D" /> 
+                                            </div>
                                         
-                                        <CloseIcon color="#D72C0D" /> 
-                                    </div>
-                                </Alert>
+                                        </div>
+                                    </Alert>
+                                )}
                             </>
                         )}
                     </div>
                     
-                    {isLoadingWalletTypes && (
+                    {isLoadingWalletOptions && (
                         <div className="modal__loader">
                             <Loader size={70} />
                         </div>

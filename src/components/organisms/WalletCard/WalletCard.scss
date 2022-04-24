@@ -1,7 +1,4 @@
 .wallet {
-    // display: flex;
-    // flex-flow: row wrap;
-    // justify-content: space-between;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 2.188rem;
@@ -11,6 +8,8 @@
     &__content {
         padding: 16px;
         background-image: url('../../../assets//images/vector-background.png');
+        background-repeat: no-repeat;
+        background-position: bottom;
     }
 
     &__currency {
@@ -20,7 +19,7 @@
         p {
             margin-left: 8px;
             color: #9AA5B1;
-            font-weight: 700;
+            font-weight: 400;
             padding: 18px 0;
         }
     }
@@ -31,6 +30,7 @@
 
         p {
             color: #fff;
+            font-weight: 500;
         }
     }
 

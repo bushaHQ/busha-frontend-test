@@ -7,6 +7,13 @@
         color: #000000;
         cursor: pointer;
     }
+
+    &__error,
+    &__loader {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 .modal {
