@@ -5,6 +5,7 @@ export type ApiResponse = {
     status: Number;
     statusText: String;
     data: WalletResponse[];
+    getWalletOptions: () => Promise<void>;
     error: any;
     loading: Boolean;
 };
@@ -18,26 +19,26 @@ export const useWallets = (): ApiResponse => {
     const [error, setError] = useState<any>();
     const [loading, setLoading] = useState<boolean>(false);
 
-    useEffect(() => {
-        const getData = async () => {
-            setLoading(true);
-            try {
-                const response = await fetch(`${url}`)
-                const newData = await response.json()
-                setStatus(response.status);
-                setStatusText(response.statusText);
-                setData(newData)
-    
-            } catch(error) {
-                setError(error);
-                
-            } finally {
-                setLoading(false);
-            }
+    const getWalletOptions = async () => {
+        setLoading(true);
+        try {
+            const response = await fetch(`${url}`)
+            const newData = await response.json()
+            setStatus(response.status);
+            setStatusText(response.statusText);
+            setData(newData)
+
+        } catch(error) {
+            setError(error);
+            
+        } finally {
+            setLoading(false);
         }
-        getData()
+    }
 
-    }, [url])
+    useEffect(() => {
+        getWalletOptions()
+    }, [])
 
-    return { status, statusText, data: data as WalletResponse[], error, loading };
+    return { status, statusText, data: data as WalletResponse[], error, loading, getWalletOptions };
 }

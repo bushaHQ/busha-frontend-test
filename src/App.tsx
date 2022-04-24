@@ -1,5 +1,7 @@
+import DashboardLayout from './pages/DashboardLayout/index'
+
 function App() {
-  return <h1>Busha</h1>;
+  return <DashboardLayout />;
 }
 
 export default App;

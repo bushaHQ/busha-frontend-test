@@ -13,6 +13,7 @@ import Alert from '../../components/molecules/Alert/Index'
 import WarningIcon from '../../assets/icons/WarningIcon'
 import { AccountResponse, WalletResponse } from "../../helpers/types";
 import { useWallets } from "../../hooks/useWallets";
+import Error from '../../components/molecules/Error/Index'
 
 const Wallets: VoidFunctionComponent<any> = () => {
     const [showModal, setShowModal] = useState(false)
@@ -20,8 +21,18 @@ const Wallets: VoidFunctionComponent<any> = () => {
     const [selectedWalletValue, setSelectedWalletValue] = useState('')
     const [message, setMessage] = useState('Network Error')
     const [buttonLabel, setButtonLabel] = useState('Create Wallet')
-    const { data: wallets, loading: isLoadingWallets, getData: getAccounts } = useAccounts();
-    const { data: walletOptions, loading: isLoadingWalletOptions } = useWallets();
+    const { 
+        data: wallets, 
+        loading: isLoadingWallets, 
+        getData: getAccounts,
+        error: walletError, 
+    } = useAccounts();
+    const { 
+        data: walletOptions, 
+        loading: isLoadingWalletOptions, 
+        error: walletOptionsError,
+        getWalletOptions,
+    } = useWallets();
 
     const walletItems = useMemo(() => transformWalletOptions(walletOptions as WalletResponse[]), [walletOptions])
     const accountItems = useMemo(() => transformAccounts(wallets as AccountResponse[]), [wallets])
@@ -100,7 +111,7 @@ const Wallets: VoidFunctionComponent<any> = () => {
 
                 {!isLoadingWallets && <WalletCard items={accountItems} />}
 
-                {/* {!!walletError && !isLoadingWallets &&(
+                {!!walletError && !isLoadingWallets &&(
                     <div className="wallet__error">
                          <Error 
                             message="Network Error" 
@@ -108,7 +119,7 @@ const Wallets: VoidFunctionComponent<any> = () => {
                             handleError={getAccounts}
                         /> 
                     </div> 
-                )} */}
+                )}
 
                 <Modal isOpen={showModal}>
                     <div className="modal">
@@ -155,6 +166,16 @@ const Wallets: VoidFunctionComponent<any> = () => {
                                 )}
                             </>
                         )}
+
+                        {!!walletOptionsError && !isLoadingWalletOptions &&(
+                            <div className="wallet__error">
+                                <Error 
+                                    message="Network Error" 
+                                    buttonLabel="Try again" 
+                                    handleError={getWalletOptions}
+                                /> 
+                            </div> 
+                        )}  
                     </div>
                     
                     {isLoadingWalletOptions && (
