@@ -3,9 +3,12 @@
 .title {
     font-size: 14px;
     color: $dark-grey;
+    font-weight: $font-weight;
+    line-height: 14px;
 
     &__body {
         display: flex;
         align-items: center;
+        cursor: $cursor;
     }
 }
