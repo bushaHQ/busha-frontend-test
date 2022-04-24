@@ -7,7 +7,7 @@
     padding: 60px 160px 0 160px;
 
     .active {
-        background: #F5F7FA;
+        background-color: #F5F7FA !important;
         border-radius: 3px;
         color: $black;
         font-weight: 700;
@@ -28,7 +28,7 @@
     }
 
     &__menu button:hover {
-        background-color: #ddd;
+        background-color: #F5F7FA;
     }
 
     &__menu button.active {
