@@ -1,5 +1,6 @@
 import { VoidFunctionComponent } from "react";
 import ExclamationIcon from "../../../assets/icons/ExclamationIcon";
+import Button from '../../atoms/Button/Index'
 import './Error.scss'
 
 interface ErrorProps {
@@ -8,7 +9,7 @@ interface ErrorProps {
     handleError: () => void;
 }
 
-const Error: VoidFunctionComponent<ErrorProps> = ({message, buttonLabel, handleError}) => {
+const Error: VoidFunctionComponent<ErrorProps> = ({ message, buttonLabel, handleError }) => {
     return (
          <div className="error">
              <div className="error__message">
@@ -19,7 +20,10 @@ const Error: VoidFunctionComponent<ErrorProps> = ({message, buttonLabel, handleE
                  
              </div>
              <div className="error__button">
-                 <button onClick={handleError}>{buttonLabel}</button>
+                 <Button 
+                    onClick={handleError} 
+                    buttonLabel={buttonLabel}
+                 />
              </div>
         </div>
     )
