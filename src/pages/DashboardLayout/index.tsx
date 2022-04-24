@@ -1,5 +1,5 @@
 import './DashboardLayout.scss';
-import Header from './Header';
+import Header from '../../components/molecules/NavHeader/Index';
 import Tabs from '../../components/organisms/Tabs/Index'
 import Activity from '../Activity/Index'
 import Prices from '../Prices/Index'
@@ -12,14 +12,12 @@ const DashboardLayout = () => {
   const onAddNewWallet = useCallback(() => {
 
   }, [])
-  
+
   const tabs = [
     {
       key: '1',
       title: 'Wallets',
-      action: '+ Add new wallet',
       component: <Wallets />,
-      handler: onAddNewWallet,
     },
     {
       key: '2',
