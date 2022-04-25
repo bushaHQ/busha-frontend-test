@@ -9,7 +9,6 @@ export type ApiResponse = {
 };
 
 export const useAccounts = (): ApiResponse => {
-    // const baseURL = process.env.REACT_APP_BASEURL;
     const [data, setData] = useState<AccountResponse[]>();
     const [error, setError] = useState<any>();
     const [loading, setLoading] = useState<boolean>(false);
@@ -17,7 +16,7 @@ export const useAccounts = (): ApiResponse => {
     const getData = async () => {
         setLoading(true);
         try {
-            const response = await fetch('http://localhost:3090/accounts')
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/accounts`)
             const newData = await response.json()
             setData(newData)
 
