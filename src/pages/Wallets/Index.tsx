@@ -47,31 +47,40 @@ const Wallets: VoidFunctionComponent<any> = () => {
 
     const onCreateWallet = useCallback(async () => {
         try {
-            setButtonLabel('Loading...')
-            const response = await fetch('http://localhost:3090/accounts',
-            {
-                method: "POST",
-                body: JSON.stringify({
-                    currency: selectedWalletValue 
-                }),
-                 
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8"
+            if(selectedWalletValue !== '') {
+                setButtonLabel('Loading...')
+                const response = await fetch('http://localhost:3090/accounts',
+                {
+                    method: "POST",
+                    body: JSON.stringify({
+                        currency: selectedWalletValue 
+                    }),
+                     
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8"
+                    }
+                })
+    
+                const  data = await response.json()
+           
+                if(data.error) {
+                    setMessage(data.error)
+                    setShowAlert(true)
                 }
-            })
-
-            const  data = await response.json()
-            if(data.error) {
-                setMessage(data.error)
+    
+                if(data) {
+                    wallets.push(data)
+                    setSelectedWalletValue('')
+                    setShowModal(false)
+                    setMessage('')
+                    setShowAlert(false)
+                    getAccounts()
+                }
+            } else {
+                setMessage('Please select a wallet')
                 setShowAlert(true)
             }
-
-            if(data) {
-                wallets.push(data)
-                getAccounts()
-                setShowModal(false)
-            }
-        
+          
         } catch(error) {
             setMessage(error)
             setShowAlert(true)
@@ -86,6 +95,8 @@ const Wallets: VoidFunctionComponent<any> = () => {
     }
 
     const hideModal = useCallback(() => {
+        setMessage('')
+        setShowAlert(false)
         setShowModal(false)
     }, [])
     

@@ -1,6 +1,7 @@
 @import "../../../variables";
 
 .select {
+
     &__label {
         font-weight: $font-weight;
         font-size: $font-size;
@@ -21,9 +22,12 @@
         color: $black;
         background-color: $white;
         background-clip: padding-box;
-        border: 1px solid #ced4da;
+        border: 1px solid #CBD2D9;
         border-radius: 0.25rem;
         transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
         height: 64px;
+        background: url('../../../assets/svg//arrow-down.svg') no-repeat right;
+        -webkit-appearance: none;
+        background-position-x: 345px;
     }
 }
