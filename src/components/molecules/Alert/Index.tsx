@@ -1,10 +1,15 @@
-import { PropsWithChildren, VoidFunctionComponent } from "react";
+import { ReactNode, useEffect, useState, VoidFunctionComponent } from "react";
 import './Alert.scss'
 
-const Alert: VoidFunctionComponent<any> = (props: PropsWithChildren<any>) => {
+interface AlertProps {
+    variant?: string;
+    children: ReactNode;
+}
+
+const Alert: VoidFunctionComponent<AlertProps> = ({variant='error', children}) => {
     return (
-         <div className="alert">
-          {props.children}
+         <div className={`alert alert-${variant}`}>
+          {children}
         </div>
     )
 }

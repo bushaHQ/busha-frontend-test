@@ -1,4 +1,13 @@
-.alert {
+.alert-error {
+    background: #FFF4F4;
+    border: 1px solid #E0B3B2;
+    border-radius: 8px;
+    margin-top: 45px;
+    align-items: center;
+    padding: 15px 20px;
+}
+
+.alert-success {
     background: #FFF4F4;
     border: 1px solid #E0B3B2;
     border-radius: 8px;
