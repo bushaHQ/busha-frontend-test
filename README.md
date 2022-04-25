@@ -1,75 +1,27 @@
-# Busha Frontend test
+<!-- @format -->
 
-## Requirements
+# Busha Frontend test completed
+## Get Started
 
-Create the screens for a Busha MVP application.
+  -clone the repo
 
-| View              | Links                                                                                |
-| ----------------- | ------------------------------------------------------------------------------------ |
-| Account List  | [Issue](issues/account-list.md) • [Tests](src/tests/account-list.test.tsx)   |
-| Add Account    | [Issue](issues/add-wallet.md) • [Tests](src/tests/add-wallet.test.tsx)       |
+  -yarn install
+  
+  -yarn start
 
-## Guidelines
+##### What was done:
 
-- Fulfil the requirements using TypeScript and React.
+* Complete screens (Including Design & Functionality) for Busha MVP application
 
-- Make use of, but don't change, the dependencies in [`package.json`](package.json).
+##### How should it be tested:
+* Browser: http://localhost:3000/
+    * Production: https://busha-frontend-test-five.vercel.app/ 
+* UI against figma
+* yarn test
 
-- Make use of, but don't change, the components in [`src/components/shared`](src/components/shared). See examples in [`src/stories`](src/stories).
-
-- Don't change the tests in [`src/tests`](src/tests).
-
-## Submission
-
-When the tests pass, and the UI resembles the figma design, submit a PR and include a live url 🚀 to your solution .
-
-## Feedback
-
-Something we can improve? Email bolaji@busha.co or create an issue.
-
-## Available Scripts
-### Setup
-
-```sh
-yarn install
-```
-
-Requires [Node](https://nodejs.org) and [NPM](https://www.npmjs.com/).
-
-### Develop
-
-```sh
-yarn start
-```
-
-[JSON Server](https://github.com/typicode/json-server) will start on port 3090 and [Create React App](https://github.com/facebook/create-react-app) will start on port 3000.
-
-### Reset Database
-```sh
-yarn run db:reset
-```
-You might want to reset the database if the request to `GET /wallets`  returns an empty list 🙂.
-
-### Storybook
-
-```sh
-yarn run storybook
-```
-
-[Storybook](https://storybook.js.org) will start on port 6006.
-
-### Test
-
-```sh
-yarn test
-```
-
-Tests are written with [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/).
-
-## Learn More
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and Typescript.
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+##### Please note:
+* It'd be preferable to run this locally.
+* I'd have love to make some changes to some files to enable the DB server run on production, but I'm not allowed to do that according to the task description
+* I have configured ENVIRONMENT VARIABLES on vercel.
+* I couldn't make use of the fonts used on the figma design because its not free online.
+* Failed a couple of tests cases 🙂, but I'm still figuring it out.
