@@ -41,7 +41,7 @@ const Wallets: VoidFunctionComponent<any> = () => {
         setShowModal(true)
     }, [])
 
-    const hideAlert = useCallback(() => {
+    const onDismissAlert = useCallback(() => {
         setShowAlert(false)
     }, [])
 
@@ -168,7 +168,7 @@ const Wallets: VoidFunctionComponent<any> = () => {
                                                 <p>{message}</p>
                                             </div>
 
-                                            <div onClick={hideAlert}>
+                                            <div className="modal__error-icon" onClick={onDismissAlert}>
                                                 <CloseIcon color="#D72C0D" /> 
                                             </div>
                                         

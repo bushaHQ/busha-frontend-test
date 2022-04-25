@@ -1,5 +1,6 @@
 import BushaLogo from '../../../assets/logos/BushaLogo';
 import Title from '../../../components/molecules/Title/Index'
+import Avatar from '../Avatar/Index'
 import './NavHeader.scss';
 
 const Header = () => (
@@ -11,9 +12,7 @@ const Header = () => (
       <Title 
         title="Oluwatobi Akindunjoye"
         append={
-          <div className="append">
-            <p>O</p>
-          </div>
+          <Avatar name="Oluwatobi Akindunjoye" />
         }
       />
     </nav>
