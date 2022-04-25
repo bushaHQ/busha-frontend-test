@@ -21,6 +21,7 @@
 
 ##### Please note:
 * It'd be preferable to run this locally.
+* I'd have love to make some changes to some files to enable the DB server run on production, but I'm not allowed to do that according to the task description
 * I have configured ENVIRONMENT VARIABLES on vercel.
 * I couldn't make use of the fonts used on the figma design because its not free online.
 * Failed a couple of tests cases 🙂, but I'm still figuring it out.
