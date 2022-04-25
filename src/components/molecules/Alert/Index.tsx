@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState, VoidFunctionComponent } from "react";
+import { ReactNode, VoidFunctionComponent } from "react";
 import './Alert.scss'
 
 interface AlertProps {

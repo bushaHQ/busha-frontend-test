@@ -82,7 +82,7 @@ const Wallets: VoidFunctionComponent<any> = () => {
             }
           
         } catch(error) {
-            setMessage(error)
+            setMessage(error as string)
             setShowAlert(true)
         } finally {
             setButtonLabel('Create Wallet')
