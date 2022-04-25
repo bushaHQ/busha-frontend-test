@@ -1,5 +1,20 @@
+/**
+ * /* eslint-disable no-empty-pattern
+ *
+ * @format
+ */
+
+/** @format */
+
+import Main from "containers/main";
+import AppLayout from "layout/AppLayout";
+
 function App() {
-  return <h1>Busha</h1>;
+  return (
+    <AppLayout>
+      <Main />
+    </AppLayout>
+  );
 }
 
 export default App;
