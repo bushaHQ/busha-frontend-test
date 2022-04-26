@@ -134,7 +134,7 @@ const Wallets: VoidFunctionComponent<any> = () => {
 
                 <Modal isOpen={showModal}>
                     <div className="modal">
-                        {!isLoadingWalletOptions && (
+                        {!isLoadingWalletOptions && walletItems?.length && (
                             <>
                                 <Header 
                                     title="Add new wallet" 

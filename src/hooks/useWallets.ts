@@ -9,7 +9,6 @@ export type ApiResponse = {
 };
 
 export const useWallets = (): ApiResponse => {
-    // const baseURL = process.env.REACT_APP_BASEURL;
     const [data, setData] = useState<WalletResponse[]>();
     const [error, setError] = useState<any>();
     const [loading, setLoading] = useState<boolean>(false);
