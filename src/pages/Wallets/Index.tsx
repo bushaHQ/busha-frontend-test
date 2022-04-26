@@ -120,7 +120,7 @@ const Wallets: VoidFunctionComponent<any> = () => {
                     </div>
                 )}
 
-                {!isLoadingWallets && <WalletCard items={accountItems} />}
+                {!isLoadingWallets && accountItems?.length && <WalletCard items={accountItems} />}
 
                 {!!walletError && !isLoadingWallets &&(
                     <div className="wallet__error">
