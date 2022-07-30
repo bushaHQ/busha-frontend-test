@@ -1,0 +1,29 @@
+.menu_container {
+    height: 100%;
+    padding-left: 160px;
+    min-width: 400px;
+
+    .container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        row-gap: 5px;
+
+        .menu_option {
+            padding: 14px 17px;
+            color: var(--grey_60);
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 14px;
+            cursor: pointer;
+
+            &:hover,
+            &.active_options {
+                background-color: var(--grey_10);
+                color: var(--black_100);
+
+            }
+        }
+    }
+}

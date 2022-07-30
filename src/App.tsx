@@ -1,5 +1,8 @@
+import Layout from "./Layout";
+import './styles/global.scss'
+
 function App() {
-  return <h1>Busha</h1>;
+  return <Layout />;
 }
 
 export default App;

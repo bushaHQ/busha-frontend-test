@@ -1,0 +1,228 @@
+.wallets_container {
+    padding: 0 20px;
+    width: 100%;
+    position: relative;
+    max-width: 900px;
+
+    .wallet_header {
+        display: flex;
+        justify-content: space-between;
+
+        h1 {
+            margin-top: 0;
+        }
+
+        p {
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 16px;
+            color: var(--black_100);
+            cursor: pointer;
+        }
+    }
+
+    .cardContainer {
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 40px;
+        row-gap: 40px;
+
+        .card {
+            background-color: var(--black_50);
+            padding: 16px;
+            width: 240px;
+            display: flex;
+            flex-direction: column;
+            row-gap: 18px;
+            box-shadow: 0px 10px 20px rgba(138, 138, 138, 0.5);
+            border-radius: 10px;
+
+            .imageContent {
+                display: flex;
+                align-items: center;
+                column-gap: 8px;
+
+                div {
+                    font-weight: 400;
+                    font-size: 14px;
+                    line-height: 14px;
+                    color: var(--grey_50);
+                }
+
+                img {
+                    max-width: 34px;
+                }
+            }
+
+            .balance {
+                font-family: 'Inter';
+                font-style: normal;
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 16px;
+                color: var(--white_100);
+            }
+
+            .arrow {
+                padding: 6px;
+                border-radius: 50%;
+                background-color: var(--black_10);
+                width: fit-content;
+                cursor: pointer;
+                align-self: flex-end;
+
+                img {
+                    position: relative;
+                    top: 1px;
+                }
+            }
+        }
+    }
+}
+
+.loader {
+    position: absolute;
+    top: 30%;
+    right: 50%;
+    transform: translate(50%, -50%);
+}
+
+.modalContent {
+    padding: 70px 20px 0 24px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 40px;
+
+    .modal_header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h2 {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 24px;
+            line-height: 32px;
+            color: var(--black_100);
+            margin: 0;
+        }
+
+        img {
+            cursor: pointer;
+        }
+    }
+
+    .modal_text {
+        max-width: 360px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 26px;
+        color: var(--grey_60);
+    }
+
+    .modal_input_content {
+        .input_title {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            color: var(--grey_60);
+            line-height: 16px;
+            margin-bottom: 14px;
+        }
+
+        .modal_input {
+            border: 1px solid var(--grey_30);
+            border-radius: 5px;
+            width: 100%;
+            max-width: 350px;
+            height: 65px;
+
+            position: relative;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 16px;
+            color: var(--black_100);
+
+            .input_text {
+                padding: 0 24px;
+                cursor: pointer;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+
+                &::after {
+                    content: '';
+                    width: 15px;
+                    height: 10px;
+                    background-image: url('../../../assets/selectArrow.svg');
+                    position: absolute;
+                    right: 25px;
+                    top: 45%;
+                    background-repeat: no-repeat;
+                }
+
+                &.active_select {
+                    &::after {
+                        transform: rotate(180deg);
+                    }
+                }
+            }
+
+            .selectOptions {
+                position: absolute;
+                top: 70px;
+                width: 100%;
+                -webkit-box-shadow: 1px 2px 16px 8px #D1D1D1;
+                box-shadow: 1px 2px 16px 8px #D1D1D1;
+                background-color: var(--white_100);
+                border-radius: 8px;
+
+                div {
+                    padding: 10px 24px;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: #caf0f0;
+                        ;
+                    }
+                }
+            }
+
+        }
+
+        .input_button {
+            margin: 25px auto 0;
+            padding: 18px 54px;
+            color: var(--white_100);
+            border-radius: 40px;
+            background-color: var(--black_100);
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 18px;
+            width: fit-content;
+            cursor: pointer;
+        }
+    }
+
+    .create_error {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #FFF4F4;
+        border: 1px solid #E0B3B2;
+        border-radius: 8px;
+        padding: 13px 20px;
+
+        .error {
+            display: flex;
+            column-gap: 14px;
+        }
+
+        .close {
+            cursor: pointer;
+        }
+    }
+}

@@ -1,0 +1,17 @@
+@import './fonts.scss';
+
+html:root {
+    --black_100: #000000;
+    --black_50: #111111;
+    --black_10: #303030;
+    --grey_60: #3E4C59;
+    --grey_50: #9AA5B1;
+    --grey_30: #CBD2D9;
+    --grey_10: #F5F7FA;
+    --white_100: #ffffff;
+}
+
+body {
+    font-family: 'Aribau Grotesk';
+}
+
