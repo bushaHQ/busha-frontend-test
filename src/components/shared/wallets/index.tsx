@@ -104,6 +104,7 @@ export default function Wallets() {
                     <p onClick={() => openAddWalletModal()}>+ Add new wallet</p>
                 }
             </div>
+            <hr/>
             <div>
                 {accountLoad ?
                     <div className={styles.loader}>

@@ -3,21 +3,34 @@
     width: 100%;
     position: relative;
     max-width: 900px;
+    margin-bottom: 0px;
+    margin-left: 25px;
+
+    h1 {
+        margin-top: 0px;
+        margin-bottom: 16px;
+    }
+
+    hr {
+        border: 1px solid rgba(211, 213, 216, 0.5);
+        margin-top: 0px;
+        margin-bottom: 20px;
+    }
 
     .wallet_header {
         display: flex;
         justify-content: space-between;
 
-        h1 {
-            margin-top: 0;
-        }
+        font-family: 'Montserrat', sans-serif;
 
         p {
-            font-weight: 600;
+            font-style: normal;
+            font-weight: bold;
             font-size: 16px;
             line-height: 16px;
             color: var(--black_100);
             cursor: pointer;
+            margin-bottom: 0px;
         }
     }
 
@@ -26,16 +39,21 @@
         flex-wrap: wrap;
         column-gap: 40px;
         row-gap: 40px;
+        margin-left: 10px;
 
         .card {
             background-color: var(--black_50);
             padding: 16px;
-            width: 240px;
+            width: 208px;
             display: flex;
             flex-direction: column;
             row-gap: 18px;
             box-shadow: 0px 10px 20px rgba(138, 138, 138, 0.5);
             border-radius: 10px;
+
+            background-image: url("../../../assets/card-background-vector3.svg"), url("../../../assets/card-background-vector4.svg");
+            background-repeat: no-repeat;
+            background-position: bottom left;
 
             .imageContent {
                 display: flex;
@@ -55,7 +73,7 @@
             }
 
             .balance {
-                font-family: 'Inter';
+                font-family: 'Montserrat';
                 font-style: normal;
                 font-weight: 500;
                 font-size: 16px;
@@ -67,12 +85,13 @@
                 padding: 6px;
                 border-radius: 50%;
                 background-color: var(--black_10);
-                width: fit-content;
+                width: 20px;
+                height: 20px;
                 cursor: pointer;
                 align-self: flex-end;
 
                 img {
-                    position: relative;
+                    position: center;
                     top: 1px;
                 }
             }

@@ -1,7 +1,7 @@
 .menu_container {
     height: 100%;
     padding-left: 160px;
-    min-width: 400px;
+    min-width: 240px;
 
     .container {
         width: 100%;
@@ -16,13 +16,14 @@
             font-weight: 500;
             font-size: 14px;
             line-height: 14px;
+            height: 16px;
             cursor: pointer;
 
             &:hover,
             &.active_options {
                 background-color: var(--grey_10);
                 color: var(--black_100);
-
+                font-weight: bold;
             }
         }
     }
