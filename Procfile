@@ -1,1 +1,1 @@
-web: export SERVER_PORT=$PORT && npm run start:server
+web: export SERVER_PORT=$PORT && yarn && npm run start:server
