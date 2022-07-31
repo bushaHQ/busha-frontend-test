@@ -88,7 +88,7 @@ export default function Wallets() {
                             {createError &&
                                 <div className={styles.create_error}>
                                     <div className={styles.error}>
-                                        <img src="assets/icons/create_error.svg" alt=""/>
+                                        <img src="assets/icons/create_error.svg" alt="" />
                                         <div>Network Error</div>
                                     </div>
                                     <img src="assets/icons/redClose.svg" alt="" className={styles.close} onClick={() => setCreateError(false)} />
@@ -116,14 +116,14 @@ export default function Wallets() {
                                 return (
                                     <div key={i} className={styles.card}>
                                         <div className={styles.imageContent}>
-                                            <img src={e.imgURL} alt=''/>
+                                            <img src={e.imgURL} alt='' />
                                             <div>{e.name}</div>
                                         </div>
                                         <div className={styles.balance}>
                                             {e.balance} {e.currency}
                                         </div>
                                         <div className={styles.arrow}>
-                                            <img src="assets/icons/rightArrow.svg" alt=""/>
+                                            <img src="assets/icons/rightArrow.svg" alt="" />
                                         </div>
                                     </div>
                                 )
