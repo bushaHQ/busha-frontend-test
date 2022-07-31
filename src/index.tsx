@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
+    <link rel="shortcut icon" href="./favicon.ico" />
     <App />
   </React.StrictMode>,
   document.getElementById('root')

@@ -22,7 +22,7 @@ test("renders sidebar links", () => {
   });
 });
 
-test.skip("smoke test within shit", () => {
+test("smoke test within shit", () => {
   render(
     <div data-testid="logo">
       <img src="logo.svg" alt="logo" /> <h2>Logo</h2>
