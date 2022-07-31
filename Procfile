@@ -1,0 +1,1 @@
+web: export SERVER_PORT=$PORT && npm run start:server
