@@ -1,9 +1,9 @@
-import{ useEffect, PropsWithChildren } from "react";
+import { useEffect, PropsWithChildren } from "react";
 import Modal from "../shared/Modal";
 import styled from "styled-components";
 import Loader from "../shared/Loader";
 import { useState } from "react";
-import { addAccount, IWallet, fetchWallets} from '../../api/api'
+import { addAccount, IWallet, fetchWallets } from '../../api/api'
 import { Dropdown, DropdownItem } from '../form/Dropdown'
 import { ErrorRetry } from "../form/ErrorRetry";
 import { ErrorWallets } from "../form/ErrorWallets"
@@ -19,11 +19,11 @@ export function AddWallets(props: PropsWithChildren<ModalProps>) {
     const [optionsLoading, setOptionsLoading] = useState(true);
     const [errorAccounts, setErrorAccounts] = useState(false);
     const [errorWallets, setErrorWallets] = useState(false);
-    
+
     const [options, setOptions] = useState([] as DropdownItem[]);
     const [selectedOption, setSelectedOption] = useState("");
 
-    useEffect (() => {
+    useEffect(() => {
         if (props.isOpen) {
             getWallets()
         }
@@ -46,8 +46,8 @@ export function AddWallets(props: PropsWithChildren<ModalProps>) {
         props.setIsOpen(true)
         try {
             const wallets = await fetchWallets()
-            setOptions(wallets.map<DropdownItem>((wal: IWallet):DropdownItem=>(
-                {id: wal.currency, val: wal.name})))
+            setOptions(wallets.map<DropdownItem>((wal: IWallet): DropdownItem => (
+                { id: wal.currency, val: wal.name })))
             setOptionsLoading(false)
         } catch {
             setErrorWallets(true);
@@ -64,11 +64,11 @@ export function AddWallets(props: PropsWithChildren<ModalProps>) {
     return (
         <Modal isOpen={props.isOpen}>
             {optionsLoading &&
-            <LoaderContainer>
-                <Loader aria-label="Loading..." width={8} size={75.37} />
-            </LoaderContainer>
+                <LoaderContainer>
+                    <Loader aria-label="Loading..." width={8} size={75.37} />
+                </LoaderContainer>
             }
-            <ErrorRetry show={errorWallets} retry={getWallets}/>
+            <ErrorRetry show={errorWallets} retry={getWallets} />
             <div style={{ padding: '0px 17px 0px 25px' }}>
                 <AddWalletContainer>
                     Add new wallet
@@ -81,9 +81,12 @@ export function AddWallets(props: PropsWithChildren<ModalProps>) {
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <CreateWalletDiv onClick={addNewWAllet} id="add-wallet">
                     <>Create wallet</>
-                    {loading && <button style={{ width: 0, opacity: 0, position: "absolute" }} id="button-1"> <label htmlFor="button-1" >Loading...</label> </button>}
+                    {loading &&
+                        <button style={{ width: 0, opacity: 0, position: "absolute" }} id="button-1">
+                            <label htmlFor="button-1" >Loading...</label>
+                        </button>}
                 </CreateWalletDiv>
-                <ErrorWallets show={errorAccounts}/>
+                <ErrorWallets show={errorAccounts} />
             </div>
         </Modal>
     )

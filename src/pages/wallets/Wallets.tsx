@@ -37,24 +37,25 @@ export function Wallets() {
     return (
         <Container>
             <TitleContainer>
-            <WalletsTitle>Wal‎lets</WalletsTitle>
-            {!loading && !errorAccounts &&
-            <>
-            <AddNewWAlletButton onClick={() => setAddWalletModal(true)}><img src="./assets/icons/Plus.svg" alt="plus icon" /> Add new wallet</AddNewWAlletButton>
-            <AddWallets isOpen={addWalletModal} setIsOpen={setAddWalletModal} addPost={addPost}/>
-            </>
-            }
+                <WalletsTitle>Wal‎lets</WalletsTitle>
+                {!loading && !errorAccounts &&
+                    <>
+                        <AddNewWAlletButton onClick={() => setAddWalletModal(true)}>
+                            <img src="./assets/icons/Plus.svg" alt="plus icon" /> Add new wallet</AddNewWAlletButton>
+                        <AddWallets isOpen={addWalletModal} setIsOpen={setAddWalletModal} addPost={addPost} />
+                    </>
+                }
             </TitleContainer>
             {loading &&
-            <LoaderContainer>
-                <Loader aria-label="Loading..." width={8} size={75.37} />
-            </LoaderContainer>
+                <LoaderContainer>
+                    <Loader aria-label="Loading..." width={8} size={75.37} />
+                </LoaderContainer>
             }
-            <ErrorRetry show={errorAccounts} retry={getAccounts}/>
+            <ErrorRetry show={errorAccounts} retry={getAccounts} />
             {!loading && !errorAccounts &&
-            <CardsContainer>{posts.map((accounts: IAccount) =>
-                <WalletCard key={accounts.id} accounts={accounts} />
-            )}</CardsContainer>
+                <CardsContainer>{posts.map((accounts: IAccount) =>
+                    <WalletCard key={accounts.id} accounts={accounts} />
+                )}</CardsContainer>
             }
         </Container>
     )

@@ -21,11 +21,14 @@ export function TopBar(props: React.PropsWithChildren<ModalProps>) {
     return (
         <Container>
             <Toggle onClick={toggleIsLoading}>
-                {sideBar === false ? <img src="../assets/icons/SideBarIcon.svg" alt="SideBar Icon" /> : <img src="../assets/icons/Close.svg" alt="Close Icon" />}
+                {sideBar === false ?
+                    <img src="../assets/icons/SideBarIcon.svg" alt="SideBar Icon" /> :
+                    <img src="../assets/icons/Close.svg" alt="Close Icon" />}
             </Toggle>
             <Logo src="../assets/BushaLogo.svg" alt="Busha Logo" />
             <NameContainer>
-                <img style={{ borderRadius: '50%', margin: '5px' }} src="../assets/demo.png" alt="User" width="36px" height="36px" />
+                <img style={{ borderRadius: '50%', margin: '5px' }}
+                    src="../assets/demo.png" alt="User" width="36px" height="36px" />
                 <UserName>Oluwatobi Akindunjoye</UserName>
             </NameContainer>
         </Container >

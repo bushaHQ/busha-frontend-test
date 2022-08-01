@@ -39,37 +39,41 @@ export function Dropdown(props: PropsWithChildren<ModalProps>) {
 
     useEffect(() => {
         if (!selectedOption.val) {
-            setSelectedOption({ id: "", val: "No options available"})
+            setSelectedOption({ id: "", val: "No options available" })
             setOptionsList([])
         }
         props.optionSelected(selectedOption.id)
     }, [selectedOption])
 
     return (
-    <div style={{ padding: '0px 24px 0px 25px' }}>
-        <AddNewWalletDiscription>The crypto wallet will be created instantly and be available in your list of wallets.</AddNewWalletDiscription>
-        <SelectWalletLabel>Select wallet</SelectWalletLabel>
-        <DropDownContainer>
-            <DropDownHeader onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
-                {selectedOption.val}
-                {!isDropdownOpen &&
-                    <img src="./assets/icons/DropDownIcon.svg" alt="Drop Down Icon"></img>
-                }
-                {isDropdownOpen &&
-                    <img style={{ transform: 'rotate(180deg)' }} src="./assets/icons/DropDownIcon.svg" alt="Drop Down Icon"></img>
-                }
-            </DropDownHeader>
-            {isDropdownOpen && (
-                <DropDownList>
-                    {optionsList}
-                </DropDownList>
-            )}
-        </DropDownContainer>
-        <select onChange={(e) => setSelectedOption({ id: e.target.value, val: e.target.id })} style={{ width: 0 }}>
-            {props.options.map((option: DropdownItem) => <option key={option.val} id={option.val} value={option.id}>{option.val}</option>)}
-        </select>
-    </div>
-    )         
+        <div style={{ padding: '0px 24px 0px 25px' }}>
+            <AddNewWalletDiscription>The crypto wallet will be created instantly and be available
+                in your list of wallets.</AddNewWalletDiscription>
+            <SelectWalletLabel>Select wallet</SelectWalletLabel>
+            <DropDownContainer>
+                <DropDownHeader onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+                    {selectedOption.val}
+                    {!isDropdownOpen &&
+                        <img src="./assets/icons/DropDownIcon.svg" alt="Drop Down Icon"></img>
+                    }
+                    {isDropdownOpen &&
+                        <img style={{ transform: 'rotate(180deg)' }}
+                            src="./assets/icons/DropDownIcon.svg" alt="Drop Down Icon"></img>
+                    }
+                </DropDownHeader>
+                {isDropdownOpen && (
+                    <DropDownList>
+                        {optionsList}
+                    </DropDownList>
+                )}
+            </DropDownContainer>
+            <select onChange={(e) => setSelectedOption({ id: e.target.value, val: e.target.id })}
+                style={{ width: 0 }}>
+                {props.options.map((option: DropdownItem) =>
+                    <option key={option.val} id={option.val} value={option.id}>{option.val}</option>)}
+            </select>
+        </div>
+    )
 }
 
 const DropDownContainer = styled.div`

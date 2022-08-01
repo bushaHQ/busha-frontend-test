@@ -5,6 +5,8 @@ export interface ModalProps {
     sideBar: boolean;
 }
 
+const links = ["Wallets", "Prices", "Peer2Peer", "Activity", "Settings"]
+
 export function SideBar(props: React.PropsWithChildren<ModalProps>) {
     const [sideBar, setSideBar] = useState(props.sideBar)
 
@@ -16,11 +18,8 @@ export function SideBar(props: React.PropsWithChildren<ModalProps>) {
         <>
             {sideBar &&
                 <Container id="side-bar">
-                    <Selected>Wallets</Selected>
-                    <Link>Prices</Link>
-                    <Link>Peer2Peer</Link>
-                    <Link>Activity</Link>
-                    <Link>Settings</Link>
+                    <Selected>{links[0]}</Selected>
+                    {links.slice(1).map((l) => <Link>{l}</Link>)}
                 </Container>}
         </>
     )
