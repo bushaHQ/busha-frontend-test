@@ -3,39 +3,60 @@ import Loader from "../Loader";
 import { getAccounts, getWallets, setWallet } from "../../../utils/getData";
 import Modal from "../Modal";
 import NetworkError from "../networkError";
+import CloseIcon from '../../../assets/closeIcon.svg'
 
 import styles from "./styles.module.scss";
 
 export default function Wallets() {
-
-    const [accountData, setAccountData] = useState([]);
     const [walletData, setWalletData] = useState([]);
-    const [walletLoad, setWalletLoad] = useState(false);
-    const [accountLoad, setAccountLoad] = useState(false);
     const [openModal, setOpenModal] = useState(false);
     const [openSelect, setOpenSelect] = useState(false);
     const [selectedWallet, setSelectedWallet] = useState<any>([])
     const [createError, setCreateError] = useState(false);
+    const [account, setAccount] = useState<any>({
+        loading: true,
+        error: false,
+        accountData: []
+    });
+    const [wallets, setWallets] = useState({
+        loading: true,
+        error: false
+    });
+    const [createWalletSubmitting, setCreateWalletSubmitting] = useState(false);
 
     useEffect(() => {
         (async () => {
+
             await getAccountData();
         })()
-    }, [openModal])
+    }, [])
+
+    useEffect(() => {
+        return () => {
+            setAccount(undefined)
+        }
+    }, []);
 
     const getAccountData = async () => {
-        setAccountLoad(true);
-        const data = await getAccounts();
-        setAccountData(data)
-        setAccountLoad(false);
+        setAccount((prev: any) => ({
+            ...prev,
+            loading: true
+        }))
+        const data = await getAccounts(setAccount);
+        setAccount((prev: any) => ({
+            ...prev,
+            accountData: data,
+            loading: false
+        }))
+
     }
 
     const getWalletData = async () => {
-        setWalletLoad(true);
-        const data = await getWallets();
+        const data = await getWallets(setWallets);
         setWalletData(data)
-        setSelectedWallet(data[0])
-        setWalletLoad(false);
+        if (data) {
+            setSelectedWallet(data[0])
+        }
     }
 
     const openAddWalletModal = async () => {
@@ -49,41 +70,47 @@ export default function Wallets() {
     }
 
     const AddNewWallet = async () => {
-        setWallet(selectedWallet, setCreateError, setOpenModal)
+        const data = await setWallet(selectedWallet, setCreateError, setCreateWalletSubmitting, setAccount)
+        account.accountData.push(data);
+        
+        setAccount({
+            ...account,
+        });
+        setOpenModal(false)
     }
-
 
     return (
         <div className={styles.wallets_container}>
             <Modal isOpen={openModal}>
-                {walletLoad ?
-                    <div className={styles.loader}>
-                        <Loader />
-                    </div>
+                {wallets.loading ?
+                    <>
+                        <img src={CloseIcon} alt="" className={styles.close_button} onClick={() => setOpenModal(false)} aria-label="Close button" />
+                        <div className={styles.loader}>
+                            <Loader />
+                        </div>
+                    </>
                     :
-                    walletData.length ?
+                    !wallets.error ?
                         <div className={styles.modalContent}>
                             <div className={styles.modal_header}>
                                 <h2>Add new wallet</h2>
-                                <img src="assets/icons/close.svg" alt="" onClick={() => setOpenModal(false)} />
+                                <img src={CloseIcon} alt="" onClick={() => setOpenModal(false)} aria-label="Close button" />
                             </div>
                             <div className={styles.modal_text}>The crypto wallet will be created instantly and be available in your list of wallets.</div>
                             <div className={styles.modal_input_content}>
                                 <div className={styles.input_title}>Select wallet</div>
                                 <div className={styles.modal_input}>
-                                    <div className={`${styles.input_text} ${openSelect && styles.active_select}`} onClick={() => setOpenSelect(!openSelect)}>{selectedWallet?.name}</div>
-                                    {
-                                        openSelect &&
-                                        <div className={styles.selectOptions}>
-                                            {walletData?.map((e: any, i) => {
+                                    <select className={`${styles.input_text} ${openSelect && styles.active_select}`} onClick={() => setOpenSelect(!openSelect)} role={"combobox"} >{selectedWallet?.name}
+                                        {
+                                            walletData?.map((e: any, i) => {
                                                 return (
-                                                    <div key={i} className={styles.option} onClick={() => changeSelectOption(e)}>{e.name}</div>
+                                                    <option key={i} value={e.currency} className={styles.option} onClick={() => changeSelectOption(e)}>{e.name}</option>
                                                 )
-                                            })}
-                                        </div>
-                                    }
+                                            })
+                                        }
+                                    </select>
                                 </div>
-                                <div className={styles.input_button} onClick={() => AddNewWallet()}>Create wallet</div>
+                                <button className={styles.input_button} onClick={() => AddNewWallet()}>{createWalletSubmitting ? <Loader size={20} /> : 'Create wallet'}</button>
                             </div>
                             {createError &&
                                 <div className={styles.create_error}>
@@ -95,25 +122,29 @@ export default function Wallets() {
                                 </div>}
                         </div>
                         :
-                        <NetworkError onClick={() => getWalletData()} />
+                        <>
+                            <img src={CloseIcon} alt="" className={styles.close_button} onClick={() => setOpenModal(false)} aria-label="Close button" />
+                            <NetworkError onClick={() => getWalletData()} />
+                        </>
                 }
             </Modal>
             <div className={styles.wallet_header}>
-                <h1>Wallets</h1>
-                {accountData.length &&
+                <h1>Wallet</h1>
+                {
+                    !account.error &&
                     <p onClick={() => openAddWalletModal()}>+ Add new wallet</p>
                 }
             </div>
-            <hr/>
+            <hr />
             <div>
-                {accountLoad ?
+                {account.loading ? (
                     <div className={styles.loader}>
                         <Loader />
                     </div>
-                    :
-                    accountData.length ?
+                ) :
+                    account.error ? (<NetworkError onClick={getAccountData} />) : (
                         <div className={styles.cardContainer}>
-                            {accountData?.map((e: any, i) => {
+                            {account.accountData?.map((e: any, i: number) => {
                                 return (
                                     <div key={i} className={styles.card}>
                                         <div className={styles.imageContent}>
@@ -130,8 +161,7 @@ export default function Wallets() {
                                 )
                             })}
                         </div>
-                        :
-                        <NetworkError onClick={() => getAccountData()} />
+                    )
                 }
             </div>
         </div>
