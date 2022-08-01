@@ -1,18 +1,20 @@
 import { TopBar } from './layout/TopBar';
 import { SideBar } from './layout/SideBar';
 import { Wallets } from './wallets/Wallets';
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 
+function sideBarW(): boolean {
+    if (window.innerWidth <= 750)
+        return false
+    return true
+}
 export function WalletsPage() {
 
-    const [sideBar, setSideBar] = useState(true)
+    const [sideBar, setSideBar] = useState(sideBarW())
 
     useLayoutEffect(() => {
         function updateSize() {
-            if (window.innerWidth <= 750)
-                setSideBar(false)
-            else
-                setSideBar(true)
+            setSideBar(sideBarW())
         }
         window.addEventListener('resize', updateSize);
         return () => window.removeEventListener('resize', updateSize);

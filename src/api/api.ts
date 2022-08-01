@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { API_URL, TEST_MODE, TEST_URL } from './env';
 
 export interface IAccount {
     id: string;
@@ -22,18 +23,21 @@ export interface IWallet {
 
 /* get list of all wallets */
 export async function fetchWallets() : Promise<IWallet[]> {
-    const resp = await axios.get("http://localhost:3090/wallets")
+    const BASE_URL = TEST_MODE ? TEST_URL : API_URL;
+    const resp = await axios.get(`${BASE_URL}/wallets`)
     return resp.data
 }
 
 /* get list of all accounts */
 export async function fetchAccounts() : Promise<IAccount[]> {
-    const resp = await axios.get("http://localhost:3090/accounts")
+    const BASE_URL = TEST_MODE ? TEST_URL : API_URL;
+    const resp = await axios.get(`${BASE_URL}/accounts`)
     return resp.data
 }
 
 /* add a wallet to accounts */
 export async function addAccount(currency: string) : Promise<IAccount> {
-    const resp = await axios.post("http://localhost:3090/accounts", { "currency": currency })
+    const BASE_URL = TEST_MODE ? TEST_URL : API_URL;
+    const resp = await axios.post(`${BASE_URL}/accounts`, { "currency": currency })
     return resp.data
 }
