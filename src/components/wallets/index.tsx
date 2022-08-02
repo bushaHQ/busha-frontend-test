@@ -137,8 +137,8 @@ export default function Wallets() {
                             <div className={styles.modal_text}>The crypto wallet will be created instantly and be available in your list of wallets.</div>
                             <div className={styles.modal_input_content}>
                                 <div className={styles.input_title}>Select wallet</div>
-                                <div className={styles.modal_input}>
-                                    <select className={`${styles.input_text} ${openSelect && styles.active_select}`} onChange={(event) => changeSelectOption(event)} onClick={() => setOpenSelect(!openSelect)} role={"combobox"} >{selectedWallet?.name}
+                                <div className={`${styles.modal_input} ${openSelect && styles.active_select}`}>
+                                    <select className={styles.input_text} onChange={(event) => changeSelectOption(event)} onClick={() => setOpenSelect(!openSelect)} role={"combobox"} >{selectedWallet?.name}
                                         {
                                             walletData?.map((e: any, i) => {
                                                 return (
