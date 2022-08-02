@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Menu_types } from "../../../utils/menutypes"
+import { Menu_types } from "../../utils/menutypes"
 import Menu from "../menu"
 import Wallets from "../wallets";
 

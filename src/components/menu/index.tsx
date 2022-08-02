@@ -1,4 +1,4 @@
-import { Menu_types } from "../../../utils/menutypes";
+import { Menu_types } from "../../utils/menutypes";
 
 import styles from "./styles.module.scss";
 

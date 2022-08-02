@@ -1,5 +1,5 @@
-import Header from "./components/shared/header";
-import Main  from "./components/shared/main";
+import Header from "./components/header";
+import Main  from "./components/main";
 
 export default function Layout () {
     return(
