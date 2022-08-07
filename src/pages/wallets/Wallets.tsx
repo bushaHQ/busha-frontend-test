@@ -17,6 +17,12 @@ export function Wallets() {
             getAccounts()
     }, [posts.length])
 
+    useEffect(() => {
+        return () => {
+            setPosts([] as IAccount[])
+        }
+    }, [])
+
     async function getAccounts() {
         setErrorAccounts(false)
         setLoading(true)

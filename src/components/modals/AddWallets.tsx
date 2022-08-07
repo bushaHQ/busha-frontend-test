@@ -27,6 +27,10 @@ export function AddWallets(props: PropsWithChildren<ModalProps>) {
         if (props.isOpen) {
             getWallets()
         }
+
+        return () => {
+            setOptions([] as DropdownItem[])
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.isOpen])
 
