@@ -44,7 +44,7 @@ const ModalContainer = styled.div`
 `;
 
 const ModalContent = styled.div`
-  width: 440px;
+  width: 397px;
   height: 100%;
   max-width: 100%;
   position: absolute;
@@ -53,13 +53,14 @@ const ModalContent = styled.div`
   bottom: 0%;
   background: #ffffff;
   overflow-y: auto;
+  padding: 0px 17px 0 24px;
   @media (max-width: 750px) {
-    width: 50%;
+    width: calc(50% - 41px);
   }
   @media (max-width: 500px) {
-    width: 60%;
+    width: calc(60% - 41px);
   }
   @media (max-width: 400px) {
-    width: 70%;
+    width: calc(70% - 41px);
   }
 `;

@@ -1,26 +1,23 @@
-import { useState, PropsWithChildren } from "react";
-import { useEffect } from "react";
+import { PropsWithChildren } from "react";
 import styled from "styled-components";
-import { IWallet } from "../../api/api"
 
 export interface ModalProps {
     show: boolean
     retry: () => void
 }
 
-
 export function ErrorRetry(props: PropsWithChildren<ModalProps>) {
     return (
         <>
-        {props.show &&
-        <Container>
-            <Subcontainer>
-                <img src="./assets/icons/ErrorIcon.svg" alt="errorAccounts Icon" />
-                Network error
-                <RetryButton onClick={props.retry}>Try again</RetryButton>
-            </Subcontainer>
-        </Container>
-        }
+            {props.show &&
+                <Container>
+                    <Subcontainer>
+                        <img src="./assets/icons/ErrorIcon.svg" alt="errorAccounts Icon" />
+                        Network error
+                        <RetryButton onClick={props.retry}>Try again</RetryButton>
+                    </Subcontainer>
+                </Container>
+            }
         </>
     )
 }
@@ -52,5 +49,4 @@ const RetryButton = styled.button`
     border-radius: 40px;
     font-size: 18px;
     font-weight: 500;
-    text-dcoration: none;
 `

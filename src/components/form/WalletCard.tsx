@@ -36,14 +36,17 @@ const WalletCardContainer = styled.div`
     flex-direction: column;
     justify-content: space-between;
     position: relative;
-    cursor: pointer;
+    transition: 0.1s all;
+    &:hover {
+        transform: translate(0px, -2px)
+    }
 `
 
 const AccountName = styled.div`
     margin: 8px;
     width: 50px;
-    fontSize: 14px;
-    fontWeight: 400;
+    font-size: 14px;
+    font-weight: 400;
     color: #9AA5B1;
 `
 
@@ -67,4 +70,9 @@ const RightArrowButton = styled.button`
     border-radius: 50%;
     background: rgba(48, 48, 48, 1);
     border: none;
+    transition: 0.1s all;
+    cursor: pointer;
+    &:hover {
+        padding-right: 0px;
+    }
 `

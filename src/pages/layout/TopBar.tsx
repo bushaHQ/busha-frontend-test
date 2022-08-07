@@ -25,9 +25,9 @@ export function TopBar(props: React.PropsWithChildren<ModalProps>) {
                     <img src="../assets/icons/SideBarIcon.svg" alt="SideBar Icon" /> :
                     <img src="../assets/icons/Close.svg" alt="Close Icon" />}
             </Toggle>
-            <Logo src="../assets/BushaLogo.svg" alt="Busha Logo" />
+            <Logo href="/"><img src="../assets/BushaLogo.svg" alt="Busha Logo" /></Logo>
             <NameContainer>
-                <img style={{ borderRadius: '50%', margin: '5px' }}
+                <img style={{ borderRadius: '50%' }}
                     src="../assets/demo.png" alt="User" width="36px" height="36px" />
                 <UserName>Oluwatobi Akindunjoye</UserName>
             </NameContainer>
@@ -48,7 +48,8 @@ const Container = styled.div`
 `
 
 const UserName = styled.span`
-    @media (max-width: 450px) {
+    cursor: default;
+    @media (max-width: 750px) {
         display: none;
     }
 `
@@ -56,13 +57,14 @@ const UserName = styled.span`
 const NameContainer = styled.div`
     display: flex;
     align-items: center;
+    gap: 5px;
     font-size: 14px;
     font-weight: 500;
     color: rgba(62, 76, 89, 1);
     margin-right: 11.1111%;
 `
 
-const Logo = styled.img`
+const Logo = styled.a`
     margin-left: 11.1111%;
     @media (max-width: 750px) {
         margin-left: 0;
@@ -75,8 +77,8 @@ const Toggle = styled.button`
     padding: 0;
     background: white; 
     border: none;
-    margin: 15.5px;
-    @media (min-width: 750px) {
+    margin-left: 11.1111%;
+    @media (min-width: 751px) {
         display: none;
     }
 `

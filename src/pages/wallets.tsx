@@ -1,7 +1,7 @@
 import { TopBar } from './layout/TopBar';
 import { SideBar } from './layout/SideBar';
 import { Wallets } from './wallets/Wallets';
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 
 function sideBarW(): boolean {
     if (window.innerWidth <= 750)

@@ -27,6 +27,7 @@ export function AddWallets(props: PropsWithChildren<ModalProps>) {
         if (props.isOpen) {
             getWallets()
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.isOpen])
 
     async function addNewWAllet() {
@@ -69,22 +70,22 @@ export function AddWallets(props: PropsWithChildren<ModalProps>) {
                 </LoaderContainer>
             }
             <ErrorRetry show={errorWallets} retry={getWallets} />
-            <div style={{ padding: '0px 17px 0px 25px' }}>
-                <AddWalletContainer>
-                    Add new wallet
-                    <AddWalletClose aria-label="Close button" onClick={closeAddWallets}>
-                        <AddCloseIcon src="./assets/icons/Close.svg" alt="" />
-                    </AddWalletClose>
-                </AddWalletContainer>
-            </div>
+            <AddWalletContainer>Add new wallet
+                <AddWalletClose aria-label="Close button" onClick={closeAddWallets}>
+                    <AddCloseIcon src="./assets/icons/Close.svg" alt="" />
+                </AddWalletClose>
+            </AddWalletContainer>
+            <AddNewWalletDiscription>
+                The crypto wallet will be created instantly and be available in your list of wallets.
+            </AddNewWalletDiscription>
             <Dropdown options={options} optionSelected={(option) => setSelectedOption(option)}></Dropdown>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <CreateWalletDiv onClick={addNewWAllet} id="add-wallet">
-                    <>Create wallet</>
+                <CreateWalletDiv onClick={addNewWAllet} id="add-wallet">Create wallet
                     {loading &&
                         <button style={{ width: 0, opacity: 0, position: "absolute" }} id="button-1">
                             <label htmlFor="button-1" >Loading...</label>
-                        </button>}
+                        </button>
+                    }
                 </CreateWalletDiv>
                 <ErrorWallets show={errorAccounts} />
             </div>
@@ -107,6 +108,7 @@ const AddWalletContainer = styled.div`
     height: 105px;
     font-size: 24px;
     font-weight: 500;
+    cursor: default;
     @media (max-width: 750px) {
         font-size: 20px;
         height: 90px;
@@ -116,6 +118,7 @@ const AddWalletContainer = styled.div`
 const AddWalletClose = styled.div`
     border: none;
     padding: 0;
+    cursor: pointer;
     background: white; 
     margin-bottom: 10px;
     @media (max-width: 750px) {
@@ -132,6 +135,19 @@ const AddCloseIcon = styled.img`
     }
 `
 
+const AddNewWalletDiscription = styled.div`
+    margin-top: 50px;
+    color: rgba(62, 76, 89, 1);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 26px;
+    padding-right: 7px;
+    @media (max-width: 750px) {
+        font-size: 14px;
+        margin-top: 30px;
+    }
+`
+
 const CreateWalletDiv = styled.div`
     background: black;
     color: white;
@@ -140,10 +156,8 @@ const CreateWalletDiv = styled.div`
     margin: 82px 0px 16px 0px;
     border-radius: 40px;
     font-size: 18px;
-    font-weight: 600
-    @media (max-width: 750px) {
-        padding: 2px 20%;
-    }
+    font-weight: 600;
+    cursor: pointer;
     @media (max-width: 500px) {
         padding: 16.5px 15%;
     }
@@ -151,4 +165,3 @@ const CreateWalletDiv = styled.div`
         padding: 16.5px 10%;
     }
 `
-

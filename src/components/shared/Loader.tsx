@@ -16,7 +16,7 @@ export interface LoaderProps {
 
 const LoaderDiv = styled.div.attrs({
   "aria-label": "Loading...",
-})<LoaderProps>`
+}) <LoaderProps>`
   animation: ${spinKeyframes} 500ms infinite linear;
   color: gray;
   width: 40px;

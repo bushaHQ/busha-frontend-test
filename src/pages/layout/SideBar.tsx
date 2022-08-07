@@ -19,8 +19,9 @@ export function SideBar(props: React.PropsWithChildren<ModalProps>) {
             {sideBar &&
                 <Container id="side-bar">
                     <Selected>{links[0]}</Selected>
-                    {links.slice(1).map((l) => <Link>{l}</Link>)}
-                </Container>}
+                    {links.slice(1).map((l) => <Link key={l}>{l}</Link>)}
+                </Container>
+            }
         </>
     )
 }
@@ -32,40 +33,43 @@ const Container = styled.div`
     display: flex;
     float: left;
     flex-direction: column;
-    align-items: flex-end;
     padding-top: 116px;
     position: fixed;
     background: white;
     z-index: 1;
     @media (max-width: 750px) {
-        width: 50%;
+        width: calc(50% - 11.1111%);
         box-shadow: 50vw 0px 0px 50vw rgba(0, 0, 0, 0.4);
     }
     @media (max-width: 500px) {
-        width: 60%;
+        width: calc(60% - 11.1111%);
     }
     @media (max-width: 400px) {
-        width: 70%;
+        width: calc(70% - 11.1111%);
     }
 `
 
 const Link = styled.a`
-    width: 206px;
+    width: calc(100% - 34px);
     height: 44px;
     padding: 0px 17px;
     margin-bottom: 4px;
     border-radius: 3px;
     display: flex;
     align-items: center;
-    cursor: pointer;
     font-weight: 400;
     font-size: 16px;
     text-decoration: none;
     color: #3E4C59;
+    cursor: pointer;
+    &:hover {
+        background-color: rgba(245, 247, 250, 0.5);
+        color: #000000;
+    }
 `
 
 const Selected = styled.a`
-    width: 206px;
+    width: calc(100% - 34px);
     height: 44px;
     padding: 0px 17px;
     margin-bottom: 4px;
@@ -73,9 +77,9 @@ const Selected = styled.a`
     display: flex;
     align-items: center;
     background-color: rgba(245, 247, 250, 1);
-    cursor: pointer;
     font-weight: 500;
     font-size: 16px;
     text-decoration: none;
     color: #000000;
+    cursor: pointer;
 `

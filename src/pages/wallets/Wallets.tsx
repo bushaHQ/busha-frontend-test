@@ -13,9 +13,8 @@ export function Wallets() {
     const [addWalletModal, setAddWalletModal] = useState(false)
 
     useEffect(() => {
-        if (posts.length === 0) {
+        if (posts.length === 0)
             getAccounts()
-        }
     }, [posts.length])
 
     async function getAccounts() {
@@ -41,21 +40,20 @@ export function Wallets() {
                 {!loading && !errorAccounts &&
                     <>
                         <AddNewWAlletButton onClick={() => setAddWalletModal(true)}>
-                            <img src="./assets/icons/Plus.svg" alt="plus icon" /> Add new wallet</AddNewWAlletButton>
+                            <img src="./assets/icons/Plus.svg" alt="plus icon" /> Add new wallet
+                        </AddNewWAlletButton>
                         <AddWallets isOpen={addWalletModal} setIsOpen={setAddWalletModal} addPost={addPost} />
                     </>
                 }
             </TitleContainer>
             {loading &&
-                <LoaderContainer>
-                    <Loader aria-label="Loading..." width={8} size={75.37} />
-                </LoaderContainer>
+                <LoaderContainer><Loader aria-label="Loading..." width={8} size={75.37} /></LoaderContainer>
             }
             <ErrorRetry show={errorAccounts} retry={getAccounts} />
             {!loading && !errorAccounts &&
-                <CardsContainer>{posts.map((accounts: IAccount) =>
-                    <WalletCard key={accounts.id} accounts={accounts} />
-                )}</CardsContainer>
+                <CardsContainer>
+                    {posts.map((accounts: IAccount) => <WalletCard key={accounts.id} accounts={accounts} />)}
+                </CardsContainer>
             }
         </Container>
     )
@@ -70,6 +68,7 @@ const TitleContainer = styled.div`
 const WalletsTitle = styled.div`
     font-size: 32px;
     font-weight: 700;
+    cursor: default;
     @media (max-width: 350px) {
         font-size: 27px;
     }
@@ -93,13 +92,12 @@ const LoaderContainer = styled.div`
     justify-content: center;
 `
 
-const Container = styled.div`    
-    // height: 100vh;
+const Container = styled.div`
     display: flex;
     flex-direction: column;
-    padding: 110px 11.1111% 60px calc(240px + 65px + 11.1111%);
+    padding: 110px 11.1111% 0px calc(240px + 65px + 11.1111%);
     @media (max-width: 750px) {
-        padding: 110px 11.1111% 60px 11.1111%;
+        padding: 110px 11.1111% 0px 11.1111%;
     }
 `
 
@@ -108,7 +106,7 @@ const CardsContainer = styled.div`
     grid-template-columns: auto auto auto;
     grid-gap: 2.8vw;
     row-gap: 2.8vw;
-    padding: 24px 4px 5vh 10px;
+    padding: 24px 4px 24px 10px;
     border-top: 1px solid rgba(211, 213, 216, 0.5);
     @media (max-width: 1250px) {
         grid-template-columns: auto auto;

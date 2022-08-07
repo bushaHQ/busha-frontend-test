@@ -23,21 +23,29 @@
       "deposit": true,
       "payout": true,
       "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/ETH.svg"
-    }
-  ],
-  "wallets": [
+    },
     {
       "currency": "XLM",
+      "hold": "0",
+      "pending_balance": "0",
+      "balance": "0",
       "name": "Stellar",
       "type": "digital",
-      "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000381/alice_v3/XLM.svg"
+      "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000381/alice_v3/XLM.svg",
+      "id": "GZQzNXw"
     },
     {
       "currency": "LTC",
+      "hold": "0",
+      "pending_balance": "0",
+      "balance": "0",
       "name": "Litecoin",
       "type": "digital",
-      "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/LTC.svg"
-    },
+      "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/LTC.svg",
+      "id": "gihL167"
+    }
+  ],
+  "wallets": [
     {
       "currency": "RMT",
       "name": "SureRemit",

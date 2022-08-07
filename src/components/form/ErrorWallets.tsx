@@ -15,18 +15,18 @@ export function ErrorWallets(props: PropsWithChildren<ModalProps>) {
 
     return (
         <>
-        {(props.show && show) &&
-       <Container>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '14.04px' }}>
-                <Icon src="./assets/icons/AddWalletErrorIcon.svg"></Icon>
-                Network error
-            </div>
-            <button onClick={() => setShow(false)} 
-                style={{ border: 'none', padding: 'none', background: 'rgba(255, 244, 244, 1)' }}>
-                <img src="./assets/icons/ErrorClose.svg" alt="errorAccounts close icon" />
-            </button>
-        </Container>
-        }
+            {(props.show && show) &&
+                <Container>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '14.04px' }}>
+                        <Icon src="./assets/icons/AddWalletErrorIcon.svg"></Icon>
+                        Network error
+                    </div>
+                    <button onClick={() => setShow(false)}
+                        style={{ border: 'none', padding: 'none', background: 'rgba(255, 244, 244, 1)' }}>
+                        <img src="./assets/icons/ErrorClose.svg" alt="errorAccounts close icon" />
+                    </button>
+                </Container>
+            }
         </>
     )
 }
