@@ -42,10 +42,6 @@ interface IProps {
   account: AccountType
 }
 
-// font-family: 'Inter';
-// font-style: normal;
-// font-weight: 500;
-
 const WalletCard = ({ account }: IProps) => {
   return (
     <CardContainer flexDirection="column">

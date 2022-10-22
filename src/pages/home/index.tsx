@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import DashboardLayout from '../../layout/Dashboard'
 import styled from 'styled-components'
 import { FlexWrapper } from '../../components/ui/Wrapper'
@@ -6,6 +7,7 @@ import { Text } from '../../components/ui/Text'
 import { colors, weights, sizes } from '../../styles/common'
 import { AccountType } from '../../types/accounts'
 import WalletCard from '../../components/WalletCard'
+import AddAccountModal from '../../containers/Modals/AddAccountModal'
 
 const ContentContainer = styled(FlexWrapper)`
   width: 100%;
@@ -26,7 +28,7 @@ const CtaButton = styled.button`
   color: ${colors.black};
 
   &:hover {
-    opacity:0.7;
+    opacity: 0.7;
   }
 `
 const _Accounts: AccountType[] = [
@@ -98,6 +100,8 @@ const _Accounts: AccountType[] = [
 ]
 
 const DashboardHome = () => {
+  const [addModalOpen, setAddModal] = useState<boolean>(true)
+
   return (
     <DashboardLayout>
       <ContentContainer flexDirection="column">
@@ -114,7 +118,10 @@ const DashboardHome = () => {
           >
             Wallets
           </Text>
-          <CtaButton>+ Add new wallet</CtaButton>
+
+          <CtaButton onClick={(): void => setAddModal(true)}>
+            + Add new wallet
+          </CtaButton>
         </FlexWrapper>
         <WalletsContainer backgroundColor="black" className="w-100">
           {_Accounts.map((_acc) => {
@@ -122,6 +129,7 @@ const DashboardHome = () => {
           })}
         </WalletsContainer>
       </ContentContainer>
+      <AddAccountModal isOpen={addModalOpen} setAddModal={setAddModal} />
     </DashboardLayout>
   )
 }
