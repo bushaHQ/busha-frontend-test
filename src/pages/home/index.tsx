@@ -112,7 +112,7 @@ const DashboardHome = () => {
     }
 
     init()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
@@ -129,15 +129,13 @@ const DashboardHome = () => {
             fontSize={sizes['3xlg']}
             lineHeight="3.2rem"
           >
-            Wallets{process.env.REACT_APP_BASE_URL}
+            Wallets
           </Text>
 
           <CtaButton onClick={(): void => setAddModal(true)}>
             Add new wallet
           </CtaButton>
         </FlexWrapper>
-
-        <p>test {JSON.stringify(accountContext.test)}</p>
 
         <WalletsContainer backgroundColor="black" className="w-100">
           {_Accounts.map((_acc) => {
