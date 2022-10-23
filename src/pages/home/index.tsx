@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import DashboardLayout from '../../layout/Dashboard'
 import styled from 'styled-components'
 import { FlexWrapper } from '../../components/ui/Wrapper'
@@ -8,6 +8,9 @@ import { colors, weights, sizes } from '../../styles/common'
 import { AccountType } from '../../types/accounts'
 import WalletCard from '../../components/WalletCard'
 import AddAccountModal from '../../containers/Modals/AddAccountModal'
+
+import AccountContext from '../../context/account/accountContext'
+import { IAccount } from '../../context/account/types'
 
 const ContentContainer = styled(FlexWrapper)`
   width: 100%;
@@ -100,7 +103,17 @@ const _Accounts: AccountType[] = [
 ]
 
 const DashboardHome = () => {
-  const [addModalOpen, setAddModal] = useState<boolean>(true)
+  const [addModalOpen, setAddModal] = useState<boolean>(false)
+  const accountContext = useContext(AccountContext) as IAccount
+
+  useEffect(() => {
+    async function init() {
+      accountContext.fetchAccounts?.()
+    }
+
+    init()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <DashboardLayout>
@@ -116,13 +129,16 @@ const DashboardHome = () => {
             fontSize={sizes['3xlg']}
             lineHeight="3.2rem"
           >
-            Wallets
+            Wallets{process.env.REACT_APP_BASE_URL}
           </Text>
 
           <CtaButton onClick={(): void => setAddModal(true)}>
-            + Add new wallet
+            Add new wallet
           </CtaButton>
         </FlexWrapper>
+
+        <p>test {JSON.stringify(accountContext.test)}</p>
+
         <WalletsContainer backgroundColor="black" className="w-100">
           {_Accounts.map((_acc) => {
             return <WalletCard account={_acc} key={_acc.id} />

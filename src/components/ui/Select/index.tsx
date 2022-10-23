@@ -37,7 +37,7 @@ const SelectContainer = styled(FlexWrapper)`
 `
 
 interface IProps {
-  options: string[]
+  options?: string[]
 }
 
 const SelectInput = ({ options }: IProps) => {
@@ -54,13 +54,14 @@ const SelectInput = ({ options }: IProps) => {
       </Text>
       <SelectContainer>
         <Select>
-          <option value="" hidden>
-            Type
-          </option>
-          {options.length > 0 &&
+          <option value="">Type</option>
+          {/* {options.length > 0 &&
             options.map((_option) => {
               return <option value={_option}>{_option}</option>
-            })}
+            })} */}
+          <option value="btc">BTC</option>
+          <option value="btc">BTC</option>
+          <option value="btc">BTC</option>
         </Select>
         <figure>
           <CaretDown />

@@ -6,6 +6,7 @@ import { FlexWrapper } from '../../components/ui/Wrapper'
 import { ReactComponent as CloseIcon } from '../../assets/svgs/close.svg'
 import Button from '../../components/ui/Button'
 import Dropdown from '../../components/ui/Select/Dropdown'
+import { Select } from '../../components/ui/Select'
 
 interface IProps {
   isOpen: boolean
@@ -47,6 +48,8 @@ const AddAccountModal = ({ isOpen, setAddModal }: IProps) => {
     console.log('value', value)
   }
 
+  // const options = ['btc', 'eth']
+
   return (
     <Modal isOpen={isOpen}>
       <ContentContainer flexDirection="column" className="h-100 w-100">
@@ -63,7 +66,10 @@ const AddAccountModal = ({ isOpen, setAddModal }: IProps) => {
           >
             Add new wallet
           </Text>
-          <CtaButton onClick={() => setAddModal(false)}>
+          <CtaButton
+            aria-label="Close Button"
+            onClick={() => setAddModal(false)}
+          >
             <CloseIcon />
           </CtaButton>
         </FlexWrapper>
@@ -78,6 +84,7 @@ const AddAccountModal = ({ isOpen, setAddModal }: IProps) => {
           The crypto wallet will be created instantly and be available in your
           list of wallets.
         </Text>
+        <Select />
         <FlexWrapper className="w-100 mt-4" flexDirection="column">
           {list.length > 0 && (
             <FlexWrapper className="w-100 mt-4" flexDirection="column">
