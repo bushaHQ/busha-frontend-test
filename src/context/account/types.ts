@@ -1,4 +1,4 @@
-interface AccountData {
+export interface AccountData {
   id: string
   currency: string
   hold: string
@@ -13,8 +13,12 @@ interface AccountData {
 
 export interface IAccount {
   accounts: AccountData[]
-  test: string
-  accountError: string
+  fetchAccountsLoading: boolean
+  fetchAccountsError: string
+  fetchAccountsErrorFlag: boolean
   setError?: () => void
   fetchAccounts?: () => void
 }
+
+export const LOADING_ACCOUNTS = 'LOADING_ACCOUNTS'
+export const SET_ACCOUNTS = 'SET_ACCOUNTS'

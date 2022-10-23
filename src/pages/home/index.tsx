@@ -9,13 +9,20 @@ import { AccountType } from '../../types/accounts'
 import WalletCard from '../../components/WalletCard'
 import AddAccountModal from '../../containers/Modals/AddAccountModal'
 
+import Loader from '../../components/shared/Loader'
 import AccountContext from '../../context/account/accountContext'
 import { IAccount } from '../../context/account/types'
 
+import { ReactComponent as ErrorIcon } from '../../assets/svgs/Error.svg'
+
+import Button from '../../components/ui/Button'
+
 const ContentContainer = styled(FlexWrapper)`
-  width: 100%;
   padding: 6rem 16rem;
 `
+
+const StatusContainer = styled(FlexWrapper)``
+
 const WalletsContainer = styled(Wrapper)`
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 24rem));
@@ -34,77 +41,16 @@ const CtaButton = styled.button`
     opacity: 0.7;
   }
 `
-const _Accounts: AccountType[] = [
-  {
-    id: '977dacbb-95b4-4432-9dc9-b66f707b7043',
-    currency: 'NGN',
-    hold: '530000000',
-    pending_balance: '0',
-    balance: '2499998700',
-    name: 'Naira',
-    type: 'fiat',
-    deposit: true,
-    payout: true,
-    imgURL:
-      'https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/NGN.svg',
-  },
-  {
-    id: 'd92abd3e-933b-4f23-a3e8-fe641e9f1bec',
-    currency: 'ETH',
-    hold: '0.508056',
-    pending_balance: '0',
-    balance: '0.1',
-    name: 'Ethereum',
-    type: 'digital',
-    deposit: true,
-    payout: true,
-    imgURL:
-      'https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/ETH.svg',
-  },
-  {
-    id: '5ad2ee10-5ca6-4576-96fe-1ef642057681',
-    currency: 'BTC',
-    hold: '0',
-    pending_balance: '0.00001',
-    balance: '142.999009',
-    name: 'Bitcoin',
-    type: 'digital',
-    deposit: true,
-    payout: true,
-    imgURL:
-      'https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/BTC.svg',
-  },
-  {
-    id: 'd92abd3e-933b-4f23-a3e8-fe641e9f1bec',
-    currency: 'ETH',
-    hold: '0.508056',
-    pending_balance: '0',
-    balance: '0.1',
-    name: 'Ethereum',
-    type: 'digital',
-    deposit: true,
-    payout: true,
-    imgURL:
-      'https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/ETH.svg',
-  },
-  {
-    id: '5ad2ee10-5ca6-4576-96fe-1ef642057681',
-    currency: 'BTC',
-    hold: '0',
-    pending_balance: '0.00001',
-    balance: '142.999009',
-    name: 'Bitcoin',
-    type: 'digital',
-    deposit: true,
-    payout: true,
-    imgURL:
-      'https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/BTC.svg',
-  },
-]
 
 const DashboardHome = () => {
   const [addModalOpen, setAddModal] = useState<boolean>(false)
   const accountContext = useContext(AccountContext) as IAccount
+
+  const {
+    accounts,
+    fetchAccountsLoading,
+    fetchAccountsErrorFlag,
+  } = accountContext
 
   useEffect(() => {
     async function init() {
@@ -117,7 +63,7 @@ const DashboardHome = () => {
 
   return (
     <DashboardLayout>
-      <ContentContainer flexDirection="column">
+      <ContentContainer flexDirection="column" className="w-100">
         <FlexWrapper
           justifyContent="space-between"
           className="border-b-1 pb-4 w-100 mb-4"
@@ -137,12 +83,89 @@ const DashboardHome = () => {
           </CtaButton>
         </FlexWrapper>
 
-        <WalletsContainer backgroundColor="black" className="w-100">
-          {_Accounts.map((_acc) => {
-            return <WalletCard account={_acc} key={_acc.id} />
-          })}
-        </WalletsContainer>
+        {fetchAccountsLoading ? (
+          <StatusContainer
+            flexDirection="column"
+            className="w-100 h-100"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <FlexWrapper
+              flexDirection="column"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Loader />
+              <Text
+                color={colors.grey60}
+                fontWeight={weights.normal}
+                lineHeight="2.6rem"
+                fontSize={sizes.lg}
+                className="mb-6 mt-4"
+              >
+                Loading...
+              </Text>
+            </FlexWrapper>
+          </StatusContainer>
+        ) : fetchAccountsErrorFlag ? (
+          <StatusContainer
+            flexDirection="column"
+            className="w-100 h-100"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <FlexWrapper
+              flexDirection="column"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <ErrorIcon />
+              <Text
+                color={colors.grey60}
+                fontWeight={weights.normal}
+                lineHeight="2.6rem"
+                fontSize={sizes.lg}
+                className="mb-6 mt-4"
+              >
+                {' '}
+                Network Error
+              </Text>
+
+              <Button text="Try again" type="button" />
+            </FlexWrapper>
+          </StatusContainer>
+        ) : accounts.length > 0 ? (
+          <WalletsContainer backgroundColor="black" className="w-100">
+            {accounts.map((_acc) => {
+              return <WalletCard account={_acc} key={_acc.id} />
+            })}
+          </WalletsContainer>
+        ) : (
+          <StatusContainer
+            flexDirection="column"
+            className="w-100 h-100"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <FlexWrapper
+              flexDirection="column"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Text
+                color={colors.grey60}
+                fontWeight={weights.normal}
+                lineHeight="2.6rem"
+                fontSize={sizes.lg}
+                className="mb-6 mt-4"
+              >
+                No accounts
+              </Text>
+            </FlexWrapper>
+          </StatusContainer>
+        )}
       </ContentContainer>
+
       <AddAccountModal isOpen={addModalOpen} setAddModal={setAddModal} />
     </DashboardLayout>
   )

@@ -7,6 +7,8 @@ import { Text } from '../../components/ui/Text'
 import { AccountType } from '../../types/accounts'
 import { ReactComponent as CaretRight } from '../../assets/svgs/CaretRight.svg'
 
+import { AccountData } from '../../context/account/types'
+
 const CardContainer = styled(FlexWrapper)`
   background: #111111;
   box-shadow: 0px 10px 20px rgba(138, 138, 138, 0.5);
@@ -39,7 +41,7 @@ const CardButton = styled.button`
 `
 
 interface IProps {
-  account: AccountType
+  account: AccountData
 }
 
 const WalletCard = ({ account }: IProps) => {

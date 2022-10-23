@@ -1,22 +1,33 @@
 import { useReducer } from 'react'
 import AccountReducer from './AccountReducer'
 import AccountContext from './accountContext'
-import { IAccount } from './types'
+import { IAccount, SET_ACCOUNTS, LOADING_ACCOUNTS } from './types'
 
 const AcccountState = (props: any) => {
   const initialState: IAccount = {
     accounts: [],
-    test: 'Mona Lisa',
-    accountError: '',
+    fetchAccountsLoading: false,
+    fetchAccountsError: '',
+    fetchAccountsErrorFlag: false,
   }
 
   const [state, dispatch] = useReducer(AccountReducer, initialState)
 
   const fetchAccounts = () => {
-    console.log('calling api')
+    dispatch({
+      type: LOADING_ACCOUNTS,
+      payload: true,
+    })
     fetch(`${process.env.REACT_APP_BASE_URL}/accounts`)
-      .then((res) => console.log('res.json()', res))
-      .then((err) => console.log('erroror ', err))
+      .then((response) => response.json())
+      .then((json) => {
+        console.log('res', json)
+        dispatch({
+          type: SET_ACCOUNTS,
+          payload: json,
+        })
+      })
+      .catch((err) => console.log('erroror ', err))
   }
 
   const setError = async () => {
@@ -33,8 +44,9 @@ const AcccountState = (props: any) => {
     <AccountContext.Provider
       value={{
         accounts: state.accounts,
-        test: state.test,
-        accountError: state.accountError,
+        fetchAccountsLoading: state.fetchAccountsLoading,
+        fetchAccountsError: state.fetchAccountsError,
+        fetchAccountsErrorFlag: state.fetchAccountsErrorFlag,
         setError,
         fetchAccounts,
       }}
