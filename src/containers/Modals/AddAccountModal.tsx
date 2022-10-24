@@ -152,7 +152,6 @@ const AddAccountModal = ({ isOpen, setAddModal }: IProps) => {
             fontSize={sizes.lg}
             className="mb-6"
           >
-            {' '}
             The crypto wallet will be created instantly and be available in your
             list of wallets.
           </Text>
