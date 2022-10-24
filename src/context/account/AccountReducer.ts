@@ -27,6 +27,7 @@ const AccountReducer = (
         fetchAccountsLoading: false,
         fetchAccountsError: '',
         fetchAccountsErrorFlag: false,
+        createAccountSuccess: false,
       }
     case SET_ACCOUNT_ERROR:
       return {
