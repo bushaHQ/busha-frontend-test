@@ -17,16 +17,21 @@ const LinksContainer = styled.ul`
 
 const LinkItem = styled.li`
   margin-bottom: 16px;
+  width: 24rem;
+  display:flex;
+`
+
+const Link = styled.a`
   font-size: 1rem;
   font-weight: 400;
   font-size: 16px;
   line-height: 16px;
   color: #3e4c59;
   cursor: pointer;
-  width: 24rem;
   background: transparent;
   padding: 1.4rem 1.7rem;
   transition: all 0.2s;
+  width: 100%;
 
   &.active,
   &:hover {
@@ -52,7 +57,7 @@ const SideBar = () => {
         {sidebarLinks.map((_link, _i) => {
           return (
             <LinkItem key={_link} className={_i === 0 ? 'active' : ''}>
-              {_link}
+              <Link className={_i === 0 ? 'active' : ''}>{_link}</Link>
             </LinkItem>
           )
         })}

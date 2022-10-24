@@ -55,6 +55,16 @@
       "type": "digital",
       "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/LTC.svg",
       "id": "WFzxiJt"
+    },
+    {
+      "currency": "USDT",
+      "hold": "0",
+      "pending_balance": "0",
+      "balance": "0",
+      "name": "Tether",
+      "type": "digital",
+      "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000381/alice_v3/USDT.svg",
+      "id": "WYXDM3_"
     }
   ],
   "wallets": [
@@ -63,12 +73,6 @@
       "name": "SureRemit",
       "type": "digital",
       "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/RMT.svg"
-    },
-    {
-      "currency": "USDT",
-      "name": "Tether",
-      "type": "digital",
-      "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000381/alice_v3/USDT.svg"
     },
     {
       "currency": "XRP",
