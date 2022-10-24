@@ -74,7 +74,11 @@ const WalletCard = ({ account }: IProps) => {
         fontWeight={weights.medium}
         className="mb-6"
       >
-        ₦&nbsp;{account?.balance?.toLocaleString()}
+        ₦&nbsp;
+        {/* {account?.balance?.toLocaleString()} */}
+        {new Intl.NumberFormat('en-US', {
+          maximumSignificantDigits: 10,
+        }).format(Number(account.balance))}
       </Text>
       <FlexWrapper justifyContent="space-between" className="w-100">
         <CardButton>
