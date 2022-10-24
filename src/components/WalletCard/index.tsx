@@ -74,8 +74,7 @@ const WalletCard = ({ account }: IProps) => {
         fontWeight={weights.medium}
         className="mb-6"
       >
-        ₦&nbsp;
-        {/* {account?.balance?.toLocaleString()} */}
+        {account.name.toLowerCase() === 'naira' ? '₦' : ''}
         {new Intl.NumberFormat('en-US', {
           maximumSignificantDigits: 10,
         }).format(Number(account.balance))}
