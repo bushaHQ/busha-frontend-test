@@ -6,10 +6,10 @@ import { Text } from '../../components/ui/Text'
 import { FlexWrapper } from '../../components/ui/Wrapper'
 import { ReactComponent as CloseIcon } from '../../assets/svgs/close.svg'
 import Button from '../../components/ui/Button'
-// import { Select } from '../../components/ui/Select'
 import { IAccount } from '../../context/account/types'
 import AccountContext from '../../context/account/accountContext'
 import ErrorContainer from '../Error'
+import SelectInput from '../../components/ui/Select'
 
 import Loader from '../../components/shared/Loader'
 import { ReactComponent as ErrorIcon } from '../../assets/svgs/Error.svg'
@@ -26,37 +26,6 @@ const ContentContainer = styled(FlexWrapper)`
 
 const CtaButton = styled.button`
   background-color: transparent;
-`
-const SelectContainer = styled(FlexWrapper)`
-  position: relative;
-  width: 100%;
-
-  figure {
-    position: absolute;
-    right: 5%;
-    top: 40%;
-    transform: translateY(50%);
-  }
-`
-
-export const Select = styled.select`
-  width: 100%;
-  background: white;
-  color: gray;
-  font-size: 14px;
-  border: none;
-  border: 1px solid #cbd2d9;
-  border-radius: 5px;
-  min-height: 6.4rem;
-  padding: 2.4rem;
-  appearance: none;
-
-  option {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 16px;
-    color: #000000;
-  }
 `
 
 interface SelectState {
@@ -188,20 +157,16 @@ const AddAccountModal = ({ isOpen, setAddModal }: IProps) => {
             list of wallets.
           </Text>
 
-          <SelectContainer>
-            <Select onChange={handleChange} name="currency">
-              <option value="">Type</option>
-              {wallets.length > 0 &&
-                wallets.map((_wallet) => {
-                  return (
-                    <option value={_wallet.currency}>{_wallet.currency}</option>
-                  )
-                })}
-            </Select>
-            <figure>
-              <CaretDown />
-            </figure>
-          </SelectContainer>
+          <SelectInput handleChange={handleChange} name="currency">
+            <option value="">Type</option>
+            {wallets.length > 0 &&
+              wallets.map((_wallet) => {
+                return (
+                  <option value={_wallet.currency}>{_wallet.currency}</option>
+                )
+              })}
+          </SelectInput>
+
           <FlexWrapper
             alignItems="center"
             justifyContent="center"

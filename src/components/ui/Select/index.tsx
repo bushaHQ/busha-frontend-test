@@ -4,6 +4,18 @@ import { Text } from '../Text'
 import { colors, sizes } from '../../../styles/common'
 import { ReactComponent as CaretDown } from '../../../assets/svgs/CaretDown.svg'
 
+const SelectContainer = styled(FlexWrapper)`
+  position: relative;
+  width: 100%;
+
+  figure {
+    position: absolute;
+    right: 5%;
+    top: 40%;
+    transform: translateY(50%);
+  }
+`
+
 export const Select = styled.select`
   width: 100%;
   background: white;
@@ -24,19 +36,7 @@ export const Select = styled.select`
   }
 `
 
-const SelectContainer = styled(FlexWrapper)`
-  position: relative;
-  width: 100%;
-
-  figure {
-    position: absolute;
-    right: 5%;
-    top: 40%;
-    transform: translateY(50%);
-  }
-`
-
-const SelectInput = ({ children }: any) => {
+const SelectInput = ({ children, handleChange, name }: any) => {
   return (
     <FlexWrapper className="w-100" flexDirection="column">
       <Text
@@ -49,7 +49,9 @@ const SelectInput = ({ children }: any) => {
         Select Wallet
       </Text>
       <SelectContainer>
-        <Select>{children}</Select>
+        <Select name={name} onChange={handleChange}>
+          {children}
+        </Select>
         <figure>
           <CaretDown />
         </figure>
