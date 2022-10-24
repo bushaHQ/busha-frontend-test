@@ -8,6 +8,7 @@ import { ReactComponent as WarningIcon } from '../../assets/svgs/Warning.svg'
 interface IProps {
   className?: string
   label: string
+  closeError: () => void
 }
 
 const ErrorBox = styled(FlexWrapper)`
@@ -21,7 +22,7 @@ const ErrorBox = styled(FlexWrapper)`
 
 const CtaButtton = styled.button``
 
-const ErrorContainer = ({ className, label }: IProps) => {
+const ErrorContainer = ({ className, label, closeError }: IProps) => {
   return (
     <ErrorBox
       className={className ? className : ''}
@@ -40,7 +41,7 @@ const ErrorContainer = ({ className, label }: IProps) => {
           {label}
         </Text>
       </FlexWrapper>
-      <CtaButtton>
+      <CtaButtton onClick={closeError}>
         <CloseIcon />
       </CtaButtton>
     </ErrorBox>

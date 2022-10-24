@@ -12,6 +12,7 @@ import {
   CREATE_ACCOUNT,
   CREATE_ACCOUNT_ERROR,
   LOADING_WALLETS,
+  CLEAR_ACCOUNT_ERROR,
 } from './types'
 
 const AcccountState = (props: any) => {
@@ -112,6 +113,13 @@ const AcccountState = (props: any) => {
       })
   }
 
+  const clearAccountError = async () => {
+    dispatch({
+      type: CLEAR_ACCOUNT_ERROR,
+      payload: '',
+    })
+  }
+
   return (
     <AccountContext.Provider
       value={{
@@ -131,6 +139,7 @@ const AcccountState = (props: any) => {
         fetchAccounts,
         fetchWallets,
         createAccount,
+        clearAccountError,
       }}
     >
       {props.children}

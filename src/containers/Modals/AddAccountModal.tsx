@@ -81,6 +81,10 @@ const AddAccountModal = ({ isOpen, setAddModal }: IProps) => {
     }
   }
 
+  const handleError = () => {
+    accountContext.clearAccountError?.()
+  }
+
   return (
     <Modal isOpen={isOpen}>
       {fetchWalletsLoading ? (
@@ -181,7 +185,11 @@ const AddAccountModal = ({ isOpen, setAddModal }: IProps) => {
             />
           </FlexWrapper>
           {createAccountErrorFlag ? (
-            <ErrorContainer className="mt-4" label={createAccountError} />
+            <ErrorContainer
+              className="mt-4"
+              label={createAccountError}
+              closeError={handleError}
+            />
           ) : null}
         </ContentContainer>
       ) : (

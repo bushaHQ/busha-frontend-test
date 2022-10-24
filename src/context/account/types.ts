@@ -27,6 +27,7 @@ export interface IAccount {
   createAccountError: string
   createAccountErrorFlag: boolean
   createAccount?: (currency: string) => void
+  clearAccountError?: () => void
 }
 
 export const LOADING_ACCOUNTS = 'LOADING_ACCOUNTS'
@@ -40,3 +41,4 @@ export const SET_WALLET_ERROR = 'SET_WALLET_ERROR'
 export const CREATING_ACCOUNT = 'CREATING_ACCOUNT'
 export const CREATE_ACCOUNT = 'CREATE_ACCOUNT'
 export const CREATE_ACCOUNT_ERROR = 'CREATE_ACCOUNT_ERROR'
+export const CLEAR_ACCOUNT_ERROR = 'CLEAR_ACCOUNT_ERROR'

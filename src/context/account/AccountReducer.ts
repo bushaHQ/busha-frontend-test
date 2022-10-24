@@ -7,6 +7,7 @@ import {
   SET_ACCOUNT_ERROR,
   SET_WALLETS,
   SET_WALLET_ERROR,
+  CLEAR_ACCOUNT_ERROR,
 } from './types'
 import { LOADING_ACCOUNTS, SET_ACCOUNTS } from './types'
 
@@ -76,6 +77,12 @@ const AccountReducer = (
         createAccountSuccess: false,
         createAccountError: action.payload,
         createAccountErrorFlag: true,
+      }
+    case CLEAR_ACCOUNT_ERROR:
+      return {
+        ...state,
+        createAccountError: '',
+        createAccountErrorFlag: false,
       }
     default:
       return state
