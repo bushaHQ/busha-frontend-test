@@ -94,7 +94,7 @@ const AcccountState = (props: any) => {
         if (json.hasOwnProperty('error')) {
           dispatch({
             type: CREATE_ACCOUNT_ERROR,
-            payload: 'Network Error',
+            payload: 'Network Error here',
           })
         } else {
           dispatch({
