@@ -10,13 +10,17 @@ import { ReactComponent as CaretRight } from '../../assets/svgs/CaretRight.svg'
 import { AccountData } from '../../context/account/types'
 
 const CardContainer = styled(FlexWrapper)`
-  background: #111111;
   box-shadow: 0px 10px 20px rgba(138, 138, 138, 0.5);
   border-radius: 10px;
   width: 100%;
   min-height: 15rem;
   padding: 1.6rem;
   cursor: pointer;
+  background-color: #111111;
+  background-image: url('../../assets/svgs/WalletBase.svg'),
+    url('../../assets/svgs/WalletCover.svg');
+  background-repeat: no-repeat;
+  background-position: bottom left;
 
   &:hover {
     opacity: 0.9;
