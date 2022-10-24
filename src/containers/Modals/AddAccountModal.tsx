@@ -10,10 +10,8 @@ import { IAccount } from '../../context/account/types'
 import AccountContext from '../../context/account/accountContext'
 import ErrorContainer from '../Error'
 import SelectInput from '../../components/ui/Select'
-
 import Loader from '../../components/shared/Loader'
 import { ReactComponent as ErrorIcon } from '../../assets/svgs/Error.svg'
-import { ReactComponent as CaretDown } from '../../assets/svgs/CaretDown.svg'
 
 interface IProps {
   isOpen: boolean
@@ -24,7 +22,9 @@ const ContentContainer = styled(FlexWrapper)`
   padding: 7.4rem 2.4rem;
 `
 
-const CtaButton = styled.button`
+const CtaButton = styled.button.attrs({
+  'aria-label': 'Close button',
+})`
   background-color: transparent;
 `
 
@@ -52,6 +52,10 @@ const AddAccountModal = ({ isOpen, setAddModal }: IProps) => {
   useEffect(() => {
     async function init() {
       accountContext.fetchWallets?.()
+      setWalletCurrency({
+        touched: false,
+        value: '',
+      })
     }
     init()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -137,11 +141,7 @@ const AddAccountModal = ({ isOpen, setAddModal }: IProps) => {
             >
               Add new wallet
             </Text>
-            <CtaButton
-              aria-label="Close Button"
-              aria-labelledby="Close Button"
-              onClick={() => setAddModal(false)}
-            >
+            <CtaButton onClick={() => setAddModal(false)}>
               <CloseIcon />
             </CtaButton>
           </FlexWrapper>
@@ -178,6 +178,7 @@ const AddAccountModal = ({ isOpen, setAddModal }: IProps) => {
               loading={createAccountLoading}
               loadingText="Loading..."
               onClick={handleSubmit}
+              disabled={walletCurrency.value.length < 1}
             />
           </FlexWrapper>
           {createAccountErrorFlag ? (

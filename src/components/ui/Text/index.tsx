@@ -8,6 +8,7 @@ interface Props {
   fontWeight?: string | number
   lineHeight?: string
 }
+
 export const PageText: React.FC<Props> = ({ className, children }) => {
   return <span className={className}>{children}</span>
 }

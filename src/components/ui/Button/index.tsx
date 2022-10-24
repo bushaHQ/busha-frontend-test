@@ -6,7 +6,6 @@ interface IProps {
   color?: string
   backgroundColor?: string
 
-  variant?: string
   disabled?: boolean
   loading?: boolean
   loadingText?: string
@@ -24,21 +23,30 @@ export const ButtonContainer = styled.button`
   font-size: 1.6rem;
   line-height: 1.6rem;
   color: ${(props) => (props.color ? props.color : colors.white)};
-  opacity: ${(props) => (props.disabled ? '0.5' : '1')};
+  opacity: ${(props) => (props.disabled ? '0.7' : '1')};
   height: 54px;
   border-radius: 40px;
   min-width: 22.2rem;
   text-align: center;
   background-color: ${colors.black};
+  pointer-events: ${(props) => (props.disabled ? 'none' : '')};
+  cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
 
   &:hover {
-    opacity: 0.7;
+    opacity: 0.9;
   }
 `
 
-const Button = ({ text, color, loading, loadingText, onClick }: IProps) => {
+const Button = ({
+  text,
+  color,
+  loading,
+  loadingText,
+  onClick,
+  ...props
+}: IProps) => {
   return (
-    <ButtonContainer color={color} onClick={onClick && onClick}>
+    <ButtonContainer color={color} onClick={onClick && onClick} {...props}>
       {loading ? loadingText : text}
     </ButtonContainer>
   )

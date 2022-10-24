@@ -2,7 +2,11 @@ import styled from 'styled-components'
 import TopNav from '../../containers/TopNav'
 import SideBar from '../../containers/SideBar'
 
-const DashboardLayout = ({ children }: any) => {
+interface IProps {
+  children: React.ReactNode
+}
+
+const DashboardLayout = ({ children }: IProps) => {
   return (
     <Dashboard>
       <TopNav />
