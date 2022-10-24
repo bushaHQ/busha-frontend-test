@@ -5,17 +5,14 @@ import { FlexWrapper } from '../../components/ui/Wrapper'
 import { Wrapper } from '../../components/ui/Wrapper'
 import { Text } from '../../components/ui/Text'
 import { colors, weights, sizes } from '../../styles/common'
-import { AccountType } from '../../types/accounts'
 import WalletCard from '../../components/WalletCard'
-import AddAccountModal from '../../containers/Modals/AddAccountModal'
-
 import Loader from '../../components/shared/Loader'
 import AccountContext from '../../context/account/accountContext'
 import { IAccount } from '../../context/account/types'
-
 import { ReactComponent as ErrorIcon } from '../../assets/svgs/Error.svg'
-
 import Button from '../../components/ui/Button'
+
+import AddAccountModal from '../../containers/Modals/AddAccountModal'
 
 const ContentContainer = styled(FlexWrapper)`
   padding: 6rem 16rem;
@@ -131,7 +128,11 @@ const DashboardHome = () => {
                 Network Error
               </Text>
 
-              <Button text="Try again" type="button" />
+              <Button
+                onClick={() => accountContext.fetchAccounts?.()}
+                text="Try again"
+                type="button"
+              />
             </FlexWrapper>
           </StatusContainer>
         ) : accounts.length > 0 ? (

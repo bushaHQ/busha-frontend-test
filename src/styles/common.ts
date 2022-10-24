@@ -2,7 +2,8 @@ export const colors = {
   white: '#FFFFFF',
   black: '#000000',
   grey60: '#3E4C59',
-  grey50: '#9AA5B1'
+  grey50: '#9AA5B1',
+  error: '#D72C0D',
 }
 
 export const sizes = {

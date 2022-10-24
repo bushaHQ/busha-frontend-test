@@ -13,10 +13,9 @@ interface IProps {
   className?: string
   borderRadius?: string
   icon?: React.ReactNode
-  title?: string
+
   onClick?: () => void
   type?: 'button' | 'submit' | 'reset'
-  size?: 'large' | 'medium' | 'small'
 }
 
 export const ButtonContainer = styled.button`
@@ -25,6 +24,7 @@ export const ButtonContainer = styled.button`
   font-size: 1.6rem;
   line-height: 1.6rem;
   color: ${(props) => (props.color ? props.color : colors.white)};
+  opacity: ${(props) => (props.disabled ? '0.5' : '1')};
   height: 54px;
   border-radius: 40px;
   min-width: 22.2rem;
@@ -36,9 +36,9 @@ export const ButtonContainer = styled.button`
   }
 `
 
-const Button = ({ text, color, loading, loadingText }: IProps) => {
+const Button = ({ text, color, loading, loadingText, onClick }: IProps) => {
   return (
-    <ButtonContainer color={color}>
+    <ButtonContainer color={color} onClick={onClick && onClick}>
       {loading ? loadingText : text}
     </ButtonContainer>
   )

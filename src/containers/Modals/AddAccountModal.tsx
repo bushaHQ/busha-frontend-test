@@ -1,3 +1,4 @@
+import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { colors, weights, sizes } from '../../styles/common'
 import Modal from '../../components/shared/Modal'
@@ -5,8 +6,14 @@ import { Text } from '../../components/ui/Text'
 import { FlexWrapper } from '../../components/ui/Wrapper'
 import { ReactComponent as CloseIcon } from '../../assets/svgs/close.svg'
 import Button from '../../components/ui/Button'
-import Dropdown from '../../components/ui/Select/Dropdown'
-import { Select } from '../../components/ui/Select'
+// import { Select } from '../../components/ui/Select'
+import { IAccount } from '../../context/account/types'
+import AccountContext from '../../context/account/accountContext'
+import ErrorContainer from '../Error'
+
+import Loader from '../../components/shared/Loader'
+import { ReactComponent as ErrorIcon } from '../../assets/svgs/Error.svg'
+import { ReactComponent as CaretDown } from '../../assets/svgs/CaretDown.svg'
 
 interface IProps {
   isOpen: boolean
@@ -20,83 +27,181 @@ const ContentContainer = styled(FlexWrapper)`
 const CtaButton = styled.button`
   background-color: transparent;
 `
+const SelectContainer = styled(FlexWrapper)`
+  position: relative;
+  width: 100%;
+
+  figure {
+    position: absolute;
+    right: 5%;
+    top: 40%;
+    transform: translateY(50%);
+  }
+`
+
+export const Select = styled.select`
+  width: 100%;
+  background: white;
+  color: gray;
+  font-size: 14px;
+  border: none;
+  border: 1px solid #cbd2d9;
+  border-radius: 5px;
+  min-height: 6.4rem;
+  padding: 2.4rem;
+  appearance: none;
+
+  option {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 16px;
+    color: #000000;
+  }
+`
+
+interface SelectState {
+  touched: boolean
+  value: string
+}
 
 const AddAccountModal = ({ isOpen, setAddModal }: IProps) => {
-  const list = [
-    {
-      value: 'XLM',
-      name: 'Stellar',
-    },
-    {
-      value: 'LTC',
-      name: 'Litecoin',
-    },
-    {
-      value: 'XRP',
-      name: 'Ripple',
-    },
-    {
-      value: 'DOGE',
-      name: 'Dogecoin',
-    },
-    {
-      value: 'TRX',
-      name: 'TRON',
-    },
-  ]
-  const handleChange = (value: any) => {
-    console.log('value', value)
+  const accountContext = useContext(AccountContext) as IAccount
+  const {
+    wallets,
+    fetchWalletsLoading,
+    fetchWalletsErrorFlag,
+    createAccountLoading,
+    createAccountSuccess,
+    createAccountErrorFlag,
+    createAccountError,
+  } = accountContext
+  const [walletCurrency, setWalletCurrency] = useState<SelectState>({
+    touched: false,
+    value: '',
+  })
+
+  useEffect(() => {
+    async function init() {
+      accountContext.fetchWallets?.()
+    }
+    init()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen])
+
+  useEffect(() => {
+    if (createAccountSuccess) {
+      setAddModal(false)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [createAccountSuccess])
+
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setWalletCurrency({
+      touched: true,
+      value: e.target.value,
+    })
   }
 
-  // const options = ['btc', 'eth']
+  const handleSubmit = () => {
+    if (walletCurrency.value.length > 0) {
+      accountContext.createAccount?.(walletCurrency.value)
+    }
+  }
 
   return (
     <Modal isOpen={isOpen}>
-      <ContentContainer flexDirection="column" className="h-100 w-100">
+      {fetchWalletsLoading ? (
         <FlexWrapper
-          className="w-100 mb-6"
-          justifyContent="space-between"
+          flexDirection="column"
+          justifyContent="center"
           alignItems="center"
+          className="w-100 h-100"
         >
+          <Loader />
           <Text
-            color={colors.black}
-            fontWeight={weights.bold}
-            lineHeight={sizes['3xlg']}
-            fontSize={sizes.xxlg}
+            color={colors.grey60}
+            fontWeight={weights.normal}
+            lineHeight="2.6rem"
+            fontSize={sizes.lg}
+            className="mb-6 mt-4"
           >
-            Add new wallet
+            Loading...
           </Text>
-          <CtaButton
-            aria-label="Close Button"
-            onClick={() => setAddModal(false)}
-          >
-            <CloseIcon />
-          </CtaButton>
         </FlexWrapper>
-        <Text
-          color={colors.grey60}
-          fontWeight={weights.normal}
-          lineHeight="2.6rem"
-          fontSize={sizes.lg}
-          className="mb-6"
+      ) : fetchWalletsErrorFlag ? (
+        <FlexWrapper
+          flexDirection="column"
+          justifyContent="center"
+          alignItems="center"
+          className="w-100 h-100"
         >
-          {' '}
-          The crypto wallet will be created instantly and be available in your
-          list of wallets.
-        </Text>
-        <Select />
-        <FlexWrapper className="w-100 mt-4" flexDirection="column">
-          {list.length > 0 && (
-            <FlexWrapper className="w-100 mt-4" flexDirection="column">
-              <Dropdown
-                options={list}
-                onChange={handleChange}
-                selectedColor="#CBD2D9"
-                hoverColor="#eaecee"
-                placeholder="Select an Option"
-              />
-            </FlexWrapper>
-          )}
+          <ErrorIcon />
+          <Text
+            color={colors.grey60}
+            fontWeight={weights.normal}
+            lineHeight="2.6rem"
+            fontSize={sizes.lg}
+            className="mb-6 mt-4"
+          >
+            {' '}
+            Network Error
+          </Text>
+
+          <Button
+            onClick={() => accountContext.fetchWallets?.()}
+            text="Try again"
+            type="button"
+          />
+        </FlexWrapper>
+      ) : wallets.length > 0 ? (
+        <ContentContainer flexDirection="column" className="h-100 w-100">
+          <FlexWrapper
+            className="w-100 mb-6"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Text
+              color={colors.black}
+              fontWeight={weights.bold}
+              lineHeight={sizes['3xlg']}
+              fontSize={sizes.xxlg}
+            >
+              Add new wallet
+            </Text>
+            <CtaButton
+              aria-label="Close Button"
+              aria-labelledby="Close Button"
+              onClick={() => setAddModal(false)}
+            >
+              <CloseIcon />
+            </CtaButton>
+          </FlexWrapper>
+          <Text
+            color={colors.grey60}
+            fontWeight={weights.normal}
+            lineHeight="2.6rem"
+            fontSize={sizes.lg}
+            className="mb-6"
+          >
+            {' '}
+            The crypto wallet will be created instantly and be available in your
+            list of wallets.
+          </Text>
+
+          <SelectContainer>
+            <Select onChange={handleChange} name="currency">
+              <option value="">Type</option>
+              {wallets.length > 0 &&
+                wallets.map((_wallet) => {
+                  return (
+                    <option value={_wallet.currency}>{_wallet.currency}</option>
+                  )
+                })}
+            </Select>
+            <figure>
+              <CaretDown />
+            </figure>
+          </SelectContainer>
           <FlexWrapper
             alignItems="center"
             justifyContent="center"
@@ -105,12 +210,32 @@ const AddAccountModal = ({ isOpen, setAddModal }: IProps) => {
             <Button
               text="Create wallet"
               type="button"
-              loading={false}
-              loadingText="Creating Account......"
+              loading={createAccountLoading}
+              loadingText="Loading..."
+              onClick={handleSubmit}
             />
           </FlexWrapper>
+          {createAccountErrorFlag ? (
+            <ErrorContainer className="mt-4" label={createAccountError} />
+          ) : null}
+        </ContentContainer>
+      ) : (
+        <FlexWrapper
+          flexDirection="column"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Text
+            color={colors.grey60}
+            fontWeight={weights.normal}
+            lineHeight="2.6rem"
+            fontSize={sizes.lg}
+            className="mb-6 mt-4"
+          >
+            No Wallets
+          </Text>
         </FlexWrapper>
-      </ContentContainer>
+      )}
     </Modal>
   )
 }

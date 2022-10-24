@@ -15,4 +15,3 @@
   [GET "/accounts" error](https://www.figma.com/file/YP9FywhIqW8vZfHzXomQWs/Busha-Home?node-id=2%3A278)
 
 - Makes request to `GET "/accounts"` when "Try again" button is clicked.
-

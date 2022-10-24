@@ -10,11 +10,11 @@ export const Select = styled.select`
   color: gray;
   font-size: 14px;
   border: none;
-  appearance: none;
   border: 1px solid #cbd2d9;
   border-radius: 5px;
-  height: 6.4rem;
+  min-height: 6.4rem;
   padding: 2.4rem;
+  appearance: none;
 
   option {
     font-weight: 400;
@@ -36,11 +36,7 @@ const SelectContainer = styled(FlexWrapper)`
   }
 `
 
-interface IProps {
-  options?: string[]
-}
-
-const SelectInput = ({ options }: IProps) => {
+const SelectInput = ({ children }: any) => {
   return (
     <FlexWrapper className="w-100" flexDirection="column">
       <Text
@@ -53,16 +49,7 @@ const SelectInput = ({ options }: IProps) => {
         Select Wallet
       </Text>
       <SelectContainer>
-        <Select>
-          <option value="">Type</option>
-          {/* {options.length > 0 &&
-            options.map((_option) => {
-              return <option value={_option}>{_option}</option>
-            })} */}
-          <option value="btc">BTC</option>
-          <option value="btc">BTC</option>
-          <option value="btc">BTC</option>
-        </Select>
+        <Select>{children}</Select>
         <figure>
           <CaretDown />
         </figure>

@@ -25,6 +25,10 @@ const CardContainer = styled(FlexWrapper)`
 
 const CardFigure = styled.figure`
   margin-right: 0.8rem;
+  height: 3.4rem;
+  width: 3.4rem;
+  border-radius: 30px;
+  overflow: hidden;
 `
 
 const CardButton = styled.button`
@@ -49,7 +53,11 @@ const WalletCard = ({ account }: IProps) => {
     <CardContainer flexDirection="column">
       <FlexWrapper alignItems="center" className="mb-6">
         <CardFigure>
-          <img src={account?.imgURL} alt={account?.currency} />
+          <img
+            src={account?.imgURL}
+            alt={account?.currency}
+            className="w-100 h-100"
+          />
         </CardFigure>
         <Text color={colors.grey50} lineHeight={sizes.sm} fontSize={sizes.sm}>
           {account?.name}

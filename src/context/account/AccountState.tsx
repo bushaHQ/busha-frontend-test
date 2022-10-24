@@ -1,7 +1,18 @@
 import { useReducer } from 'react'
 import AccountReducer from './AccountReducer'
 import AccountContext from './accountContext'
-import { IAccount, SET_ACCOUNTS, LOADING_ACCOUNTS } from './types'
+import {
+  IAccount,
+  SET_ACCOUNTS,
+  LOADING_ACCOUNTS,
+  SET_ACCOUNT_ERROR,
+  SET_WALLETS,
+  SET_WALLET_ERROR,
+  CREATING_ACCOUNT,
+  CREATE_ACCOUNT,
+  CREATE_ACCOUNT_ERROR,
+  LOADING_WALLETS,
+} from './types'
 
 const AcccountState = (props: any) => {
   const initialState: IAccount = {
@@ -9,11 +20,19 @@ const AcccountState = (props: any) => {
     fetchAccountsLoading: false,
     fetchAccountsError: '',
     fetchAccountsErrorFlag: false,
+    wallets: [],
+    fetchWalletsLoading: false,
+    fetchWalletsError: '',
+    fetchWalletsErrorFlag: false,
+    createAccountLoading: false,
+    createAccountSuccess: false,
+    createAccountError: '',
+    createAccountErrorFlag: false,
   }
 
   const [state, dispatch] = useReducer(AccountReducer, initialState)
 
-  const fetchAccounts = () => {
+  const fetchAccounts = async () => {
     dispatch({
       type: LOADING_ACCOUNTS,
       payload: true,
@@ -21,23 +40,76 @@ const AcccountState = (props: any) => {
     fetch(`${process.env.REACT_APP_BASE_URL}/accounts`)
       .then((response) => response.json())
       .then((json) => {
-        console.log('res', json)
         dispatch({
           type: SET_ACCOUNTS,
           payload: json,
         })
       })
-      .catch((err) => console.log('erroror ', err))
+      .catch((err) =>
+        dispatch({
+          type: SET_ACCOUNT_ERROR,
+          payload: true,
+        }),
+      )
   }
 
-  const setError = async () => {
-    try {
-      // const res = await Axios.get('http://localhost:5000/api/auth')
-      dispatch({
-        type: 'CLEAR_ERRORS',
-        payload: 'Netwrok Errror',
+  const fetchWallets = async () => {
+    dispatch({
+      type: LOADING_WALLETS,
+      payload: true,
+    })
+    fetch(`${process.env.REACT_APP_BASE_URL}/wallets`)
+      .then((response) => response.json())
+      .then((json) => {
+        dispatch({
+          type: SET_WALLETS,
+          payload: json,
+        })
       })
-    } catch (err) {}
+      .catch((err) =>
+        dispatch({
+          type: SET_WALLET_ERROR,
+          payload: true,
+        }),
+      )
+  }
+
+  const createAccount = async (currency: string) => {
+    dispatch({
+      type: CREATING_ACCOUNT,
+      payload: true,
+    })
+    fetch(`${process.env.REACT_APP_BASE_URL}/accounts`, {
+      method: 'POST',
+      body: JSON.stringify({
+        currency,
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        if (json.hasOwnProperty('error')) {
+          dispatch({
+            type: CREATE_ACCOUNT_ERROR,
+            payload: 'Network Error',
+          })
+        } else {
+          dispatch({
+            type: CREATE_ACCOUNT,
+            payload: true,
+          })
+          console.log('res', json)
+          fetchAccounts()
+        }
+      })
+      .catch((err) => {
+        dispatch({
+          type: CREATE_ACCOUNT_ERROR,
+          payload: 'Network Error',
+        })
+      })
   }
 
   return (
@@ -47,8 +119,18 @@ const AcccountState = (props: any) => {
         fetchAccountsLoading: state.fetchAccountsLoading,
         fetchAccountsError: state.fetchAccountsError,
         fetchAccountsErrorFlag: state.fetchAccountsErrorFlag,
-        setError,
+        wallets: state.wallets,
+        fetchWalletsLoading: state.fetchWalletsLoading,
+        fetchWalletsError: state.fetchWalletsError,
+        fetchWalletsErrorFlag: state.fetchWalletsErrorFlag,
+        createAccountLoading: state.createAccountLoading,
+        createAccountSuccess: state.createAccountSuccess,
+        createAccountError: state.createAccountError,
+        createAccountErrorFlag: state.createAccountErrorFlag,
+
         fetchAccounts,
+        fetchWallets,
+        createAccount,
       }}
     >
       {props.children}
