@@ -1,11 +1,122 @@
+:root {
+  /* colors */
+  /* primary */
+
+  /* neutral */
+  --clr-light: 0, 0%, 100%;
+
+  /* font-sizes */
+  --fs-900: 6.25rem;
+  --fs-800: 3.5rem;
+  --fs-700: 2.5rem;
+  --fs-600: 2rem;
+  --fs-500: 1.75rem;
+  --fs-400: 1.125rem;
+  --fs-300: 1rem;
+  --fs-200: 0.875rem;
+  --fs-100: 0.75rem;
+
+  /* font weight */
+  --fw-500: 500;
+  --fw-600: 600;
+  --fw-700: 700;
+
+  /* font-families */
+  --ff-sans-normal: "Public Sans", sans-serif;
+}
+
+/* ------------------- */
+/* Reset               */
+/* ------------------- */
+/* Box sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
+  line-height: 1.5;
   margin: 0;
-  font-family: 'Montserrat', sans-serif;
+  min-height: 100vh;
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  text-rendering: optimizeSpeed;
+  background-color: #ffffff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Reset margins */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+figure,
+picture {
+  margin: 0;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* forms defaults */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* specifics */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* ------------------- */
+/* Utility classes     */
+/* ------------------- */
+/* general */
+.grid {
+  display: grid;
+  gap: var(--gap, 1rem);
+}
+.flex {
+  display: flex;
+  gap: var(--gap, 1rem);
+}
+.block {
+  display: block;
+}
+.container {
+  max-width: 90rem;
+  padding-inline: var(--pad-inline, 1em);
+  margin-inline: auto;
+}
+.hide {
+  display: hidden;
+}
+.pointer {
+  cursor: pointer;
+}
+.flow > *:where(:not(:first-child)) {
+  margin-top: var(--flow-space, 1rem);
+}
+
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }

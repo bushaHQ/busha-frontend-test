@@ -1,5 +1,8 @@
+import "./App.scss";
+import { NavBar } from "./globals/NavBar";
+
 function App() {
-  return <h1>Busha</h1>;
+  return <NavBar />;
 }
 
 export default App;
