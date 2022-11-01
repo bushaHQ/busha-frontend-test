@@ -101,6 +101,9 @@ a {
 .block {
   display: block;
 }
+.fh-screen {
+  height: 100vh;
+}
 .container {
   max-width: 90rem;
   padding-inline: var(--pad-inline, 1em);

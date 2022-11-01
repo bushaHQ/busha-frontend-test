@@ -1,3 +1,6 @@
+// .App {
+//   height: 100vh;
+// }
 .header {
   --background: hsl(var(--clr-light));
   position: sticky;
@@ -25,4 +28,12 @@
     height: 36px;
     place-items: center;
   }
+}
+
+.sidebar {
+  // padding-block: 3em;
+}
+
+.dashboard {
+  padding-block: 3em;
 }
