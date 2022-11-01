@@ -98,11 +98,17 @@ a {
   display: flex;
   gap: var(--gap, 1rem);
 }
+.flex-col {
+  flex-direction: column;
+}
 .block {
   display: block;
 }
 .fh-screen {
   height: 100vh;
+}
+.w-full {
+  width: 100%;
 }
 .container {
   max-width: 90rem;
@@ -117,6 +123,10 @@ a {
 }
 .flow > *:where(:not(:first-child)) {
   margin-top: var(--flow-space, 1rem);
+}
+/* colors */
+.text-light {
+  color: #ffffff;
 }
 
 code {

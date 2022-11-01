@@ -1,7 +1,8 @@
 import logo from "../assets/logo.png";
+import "./Navbar.scss";
 
-interface AppProps {}
-export const NavBar: React.FC<AppProps> = (props) => {
+interface NavbarProps {}
+const Navbar: React.FC<NavbarProps> = (props) => {
   return (
     <header className="flex header">
       <div className="flex container nav">
@@ -21,3 +22,5 @@ export const NavBar: React.FC<AppProps> = (props) => {
     </header>
   );
 };
+
+export default Navbar;

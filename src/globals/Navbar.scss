@@ -1,0 +1,28 @@
+.header {
+  --background: hsl(var(--clr-light));
+  position: sticky;
+  inset: 0;
+  z-index: 9;
+  height: 56px;
+  background-color: var(--background);
+  transition: background 250ms ease-in;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+
+  .nav {
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .user {
+    align-items: center;
+  }
+
+  .avatar {
+    background: rgba(154, 165, 177, 0.3);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    place-items: center;
+  }
+}
