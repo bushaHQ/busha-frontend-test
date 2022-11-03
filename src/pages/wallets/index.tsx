@@ -48,7 +48,7 @@ export default function Wallets() {
       {apiState === "success" && (
         <WalletGrid>
           {walletAccounts.map((item: AccountsDetail) => (
-            <WalletCard key={item.id} cardData={item} />
+            <WalletCard key={item.currency} cardData={item} />
           ))}
         </WalletGrid>
       )}
