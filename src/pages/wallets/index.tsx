@@ -26,7 +26,7 @@ export default function Wallets() {
 
   return (
     <WalletPage>
-      <div className="title-bar">
+      <PageHeader>
         <h2 className="title">W‎allets</h2>
         {apiState === "success" && (
           <button
@@ -37,7 +37,7 @@ export default function Wallets() {
             <p>+ Add new wallet</p>
           </button>
         )}
-      </div>
+      </PageHeader>
       {/* Loading UI */}
       {apiState === "loading" && (
         <LoaderContainer>
@@ -72,35 +72,35 @@ export default function Wallets() {
   );
 }
 
+const PageHeader = styled.div`
+  width: 100%;
+  border-bottom: 1px solid #d3d5d880;
+  padding-bottom: 24px;
+  width: 100%;
+  color: #1f2933;
+  display: flex;
+  justify-content: space-between;
+
+  .title {
+    font-weight: bold;
+    font-size: 2rem;
+  }
+
+  .wallet-action {
+    color: #000;
+    border: none;
+    background: none;
+    outline: none;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+`;
+
 const WalletPage = styled.div`
   width: 100%;
   height: fit-content;
-
-  .title-bar {
-    width: 100%;
-    border-bottom: 1px solid #d3d5d880;
-    padding-bottom: 24px;
-    width: 100%;
-    color: #1f2933;
-    display: flex;
-    justify-content: space-between;
-
-    .title {
-      font-weight: bold;
-      font-size: 2rem;
-    }
-
-    .wallet-action {
-      color: #000;
-      border: none;
-      background: none;
-      outline: none;
-      font-family: inherit;
-      font-size: 16px;
-      font-weight: 500;
-      cursor: pointer;
-    }
-  }
 `;
 
 const LoaderContainer = styled.div`
