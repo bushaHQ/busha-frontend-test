@@ -109,11 +109,14 @@ const MainCard = ({ title = "" }) => {
     <Main>
       <MainHeader>
         <MainText>{title}</MainText>
-        <AddWalletText onClick={addNewWalletHandler}>
-          + Add new wallet
-        </AddWalletText>
+
+        {accountStatus === "resolved" && (
+          <AddWalletText onClick={addNewWalletHandler}>
+            + Add new wallet
+          </AddWalletText>
+        )}
       </MainHeader>
-      <MainBody>
+      <MainBody display={accountStatus === "resolved" ? "grid" : "flex"}>
         {accountStatus === "resolved" ? (
           accountData.map((account) => {
             return <WalletCardComponent key={account.id} {...account} />;
@@ -123,7 +126,9 @@ const MainCard = ({ title = "" }) => {
             <Loader width={4} />
           </LoadingStateContainer>
         ) : (
-          <LoadingStateComponent refreshHandler={() => getAccount(dispatch)} />
+          <NetworkHandlerComponent
+            refreshHandler={() => getAccount(dispatch)}
+          />
         )}
       </MainBody>
       <Modal isOpen={isOpen}>
@@ -199,7 +204,7 @@ const MainCard = ({ title = "" }) => {
             <Loader width={4} />
           </LoadingStateContainer>
         ) : walletStatus === "rejected" ? (
-          <LoadingStateComponent refreshHandler={() => getWallet(dispatch)} />
+          <NetworkHandlerComponent refreshHandler={() => getWallet(dispatch)} />
         ) : (
           ""
         )}
@@ -208,7 +213,7 @@ const MainCard = ({ title = "" }) => {
   );
 };
 
-const LoadingStateComponent = ({
+const NetworkHandlerComponent = ({
   refreshHandler,
 }: {
   refreshHandler: () => void;

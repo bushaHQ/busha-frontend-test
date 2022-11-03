@@ -127,10 +127,13 @@ export const WalletCircularBg = styled.div`
   width: 32px;
 `;
 
-export const MainBody = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 270px);
-  gap: 20px;
+export const MainBody = styled.div<{ display: "grid" | "flex" }>`
+  display: ${({ display }) => display};
+  ${({ display }) =>
+    display === "flex" && "justify-content:center;align-items:center;"}
+  ${({ display }) =>
+    display === "grid" &&
+    "grid-template-columns: repeat(auto-fill, 270px);gap: 20px;"}
   width: 100%;
 `;
 
