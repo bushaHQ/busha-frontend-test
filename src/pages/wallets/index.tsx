@@ -6,6 +6,7 @@ import useAccounts from "../../hooks/useAccounts";
 import { AccountsDetail } from "../../types";
 import Loader from "../../components/shared/Loader";
 import ErrorState from "../../components/shared/ErrorState";
+import { generateKey } from "../../utils";
 
 export default function Wallets() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -48,7 +49,7 @@ export default function Wallets() {
       {apiState === "success" && (
         <WalletGrid>
           {walletAccounts.map((item: AccountsDetail) => (
-            <WalletCard key={item.id} cardData={item} />
+            <WalletCard key={generateKey()} cardData={item} />
           ))}
         </WalletGrid>
       )}
