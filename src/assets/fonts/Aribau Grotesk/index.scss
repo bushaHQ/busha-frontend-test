@@ -1,28 +1,29 @@
-// Font Definition
+// @import url(//db.onlinewebfonts.com/c/ddb4daa06f2d44fdbfdeb2ef47cb4a58?family=Aribau+Grotesk);
 @font-face {
   font-family: "Aribau Grotesk";
-  src: url("../src/assets/fonts/Aribau\ Grotesk/Aribau\ Grotesk\ Regular.otf");
+  src: url("./fonts/Aribau\ Grotesk\ Regular.otf");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Aribau Grotesk";
-  src: url("../src/assets/fonts/Aribau\ Grotesk/Aribau\ Grotesk\ Medium.otf");
+  src: url("./fonts/Aribau\ Grotesk\ Medium.otf");
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Aribau Grotesk";
-  src: url("../src/assets/fonts/Aribau\ Grotesk/Aribau\ Grotesk\ Bold.otf");
+  src: url("./fonts/Aribau\ Grotesk\ Bold.otf");
   font-weight: 700;
   font-style: normal;
 }
 
 body {
   margin: 0;
-  font-family: "Aribau Grotesk", "Montserrat", sans-serif;
+  // font-family: "Montserrat";
+  font-family: "Aribau Grotesk", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -30,13 +31,4 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  ::-webkit-scrollbar {
-    display: none;
-  }
 }

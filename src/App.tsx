@@ -1,5 +1,12 @@
+import "../src/index.scss";
+import DashboardLayout from "./components/layout/DashboardLayout";
+
 function App() {
-  return <h1>Busha</h1>;
+  return (
+    <>
+      <DashboardLayout />
+    </>
+  );
 }
 
 export default App;
