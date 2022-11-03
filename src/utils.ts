@@ -45,15 +45,3 @@ export const addWallet = async (payload: any) => {
     throw new Error(`Unable to create wallet`);
   }
 };
-
-export const generateKey = () => {
-  const characters =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+";
-
-  let result = " ";
-  const charactersLength = characters.length;
-  for (let i = 0; i < 16; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
-};

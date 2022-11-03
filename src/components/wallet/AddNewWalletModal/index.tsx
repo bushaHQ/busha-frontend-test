@@ -7,7 +7,7 @@ import Loader from "../../shared/Loader";
 import ErrorState from "../../shared/ErrorState";
 
 import { ApiState, WalletModalProps } from "../../../types";
-import { addWallet, generateKey } from "../../../utils";
+import { addWallet } from "../../../utils";
 import useWallets from "../../../hooks/useWallets";
 
 export default function AddNewWalletModal(
@@ -77,7 +77,7 @@ export default function AddNewWalletModal(
               <select id="new-wallet" name="wallet" ref={selectRef}>
                 {walletsData.map((data) => (
                   <option
-                    key={generateKey()}
+                    key={data.currency}
                     role="button"
                     value={data.currency}
                   >
