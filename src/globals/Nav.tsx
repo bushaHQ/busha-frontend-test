@@ -1,6 +1,6 @@
 import logo from "../assets/logo.png";
-import "./Navbar.scss";
-
+import "./Nav.scss";
+//
 interface NavbarProps {}
 const Navbar: React.FC<NavbarProps> = (props) => {
   return (
