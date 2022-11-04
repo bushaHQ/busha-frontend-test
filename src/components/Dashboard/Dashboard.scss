@@ -97,16 +97,12 @@
       }
     }
   }
-  .balance {
-    --gap: 0.5rem;
-    align-items: center;
-    h3 {
-      font-size: 16px;
-      // font-weight: 500;
-    }
-  }
+
   h3 {
-    justify-self: flex-start;
+    font-size: 16px;
+    span {
+      margin-left: 4px;
+    }
   }
   .next {
     display: flex;

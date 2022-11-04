@@ -4,6 +4,7 @@ import "./Dashboard.scss";
 import arrow from "../../assets/arrow.svg";
 import { BASE_URL } from "../../utils/constants";
 import { AccountsType } from "../../utils/types";
+import { formatMoney } from "../../helpers";
 
 interface DashboardProps {
   accounts: AccountsType[];
@@ -78,7 +79,10 @@ const Dashboard: React.FC<DashboardProps> = ({
                   <p>{account.name}</p>
                 </div>
                 <h3>
-                  {account.balance} <span>{account.currency}</span>
+                  {account.type === "fiat"
+                    ? "₦" + account.balance
+                    : account.balance}
+                  <span>{account.type === "fiat" ? "" : account.currency}</span>
                 </h3>
                 <div className="next pointer">
                   <div className="grid">
