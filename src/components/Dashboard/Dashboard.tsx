@@ -1,34 +1,20 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import Loader from "./components/shared/Loader";
+import Loader from "../shared/Loader";
 import "./Dashboard.scss";
-import arrow from "./assets/arrow.svg";
+import arrow from "../../assets/arrow.svg";
+import { BASE_URL } from "../../utils/constants";
+import { AccountsType } from "../../utils/types";
 
 interface DashboardProps {
   accounts: AccountsType[];
   isOpen: boolean;
-  isRefresh: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   setAccounts: Dispatch<SetStateAction<AccountsType[]>>;
 }
-export type AccountsType = {
-  id: string;
-  currency: string;
-  hold: string;
-  pending_balance: number;
-  balance: string;
-  name: string;
-  type: string;
-  deposit: boolean;
-  payout: boolean;
-  imgURL: string;
-};
-
-export const BASE_URL = "http://localhost:3090";
 
 const Dashboard: React.FC<DashboardProps> = ({
   accounts,
   isOpen,
-  isRefresh,
   setIsOpen,
   setAccounts,
 }) => {
@@ -42,19 +28,18 @@ const Dashboard: React.FC<DashboardProps> = ({
         const response = await fetch(`${BASE_URL}/accounts`);
         const data = await response.json();
         setAccounts(data);
-        setIsLoading(false);
-        setIsOpen(false);
-        // throw new Error("error");
       } catch (error) {
         setIsError(true);
+      } finally {
         setIsLoading(false);
       }
     };
     getAccounts();
     return () => {
       setAccounts([]);
+      setIsLoading(false);
     };
-  }, [isError]);
+  }, [isError, setAccounts]);
   if (isLoading)
     return (
       <main className="flex loading">
@@ -85,17 +70,20 @@ const Dashboard: React.FC<DashboardProps> = ({
         ) : (
           <div className="flex cardList w-full text-light">
             {accounts?.map((account, i) => (
-              <section key={i} className="card">
-                <div className="flex">
+              <section key={i} className="flex flex-col card">
+                <div className="flex plus-symbol">
                   <div className="symbol">
                     <img src={account.imgURL} alt={account.name} />
                   </div>
                   <p>{account.name}</p>
                 </div>
-                <h3>{account.balance}</h3>
-                <p>{account.currency}</p>
-                <div className="next w-full">
-                  <img src={arrow} alt="arrow right" />
+                <h3>
+                  {account.balance} <span>{account.currency}</span>
+                </h3>
+                <div className="next pointer">
+                  <div className="grid">
+                    <img src={arrow} alt="arrow right" />
+                  </div>
                 </div>
               </section>
             ))}

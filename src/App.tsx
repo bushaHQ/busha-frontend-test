@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { AddWalletModal } from "./AddWalletModal";
+import { AddWalletModal } from "./components/AddWallet/AddWalletModal";
 import "./App.scss";
 import Modal from "./components/shared/Modal";
-import Dashboard, { AccountsType } from "./Dashboard";
+import Dashboard from "./components/Dashboard/Dashboard";
 import Navbar from "./globals/Navbar";
 import Sidebar from "./globals/Sidebar";
+import { AccountsType } from "./utils/types";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isRefresh, setIsRefresh] = useState(false);
   const [accounts, setAccounts] = useState<AccountsType[]>([]);
 
   return (
@@ -16,13 +16,9 @@ function App() {
       <Navbar />
       <div className="flex container dashboard">
         <Sidebar />
-        <Dashboard
-          {...{ accounts, isOpen, setIsOpen, isRefresh, setAccounts }}
-        />
-        {/* <AddWalletModal {...{ isOpen, setIsOpen, setIsRefresh }} /> */}
-
+        <Dashboard {...{ accounts, isOpen, setIsOpen, setAccounts }} />
         <Modal isOpen={isOpen}>
-          <AddWalletModal {...{ setIsOpen, setIsRefresh, setAccounts }} />
+          <AddWalletModal {...{ setIsOpen, setAccounts }} />
         </Modal>
       </div>
     </div>

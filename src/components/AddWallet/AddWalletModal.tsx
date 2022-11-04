@@ -1,31 +1,19 @@
-import {
-  ChangeEvent,
-  Dispatch,
-  FormEvent,
-  SetStateAction,
-  useEffect,
-  useState,
-} from "react";
-import Loader from "./components/shared/Loader";
-import close from "./assets/close.svg";
-import Modal from "./components/shared/Modal";
-import { AccountsType, BASE_URL } from "./Dashboard";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import Loader from "../shared/Loader";
+import close from "../../assets/close.svg";
+import closeDanger from "../../assets/close-red.svg";
+import danger from "../../assets/danger.png";
+import "./AddWalletModal.scss";
+import { BASE_URL } from "../../utils/constants";
+import { AccountsType, WalletType } from "../../utils/types";
 
 interface AddWalletModalProps {
-  isOpen?: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-  setIsRefresh: Dispatch<SetStateAction<boolean>>;
   setAccounts: Dispatch<SetStateAction<AccountsType[]>>;
 }
-type WalletType = {
-  currency: string;
-  name: string;
-  type: string;
-  imgURL: string;
-};
+
 export const AddWalletModal: React.FC<AddWalletModalProps> = ({
   setIsOpen,
-  setIsRefresh,
   setAccounts,
 }) => {
   const [wallets, setWallets] = useState<WalletType[]>([]);
@@ -72,11 +60,6 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
     }
   };
 
-  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    console.log(e.target.selectedIndex);
-    setCurrency(e.target.value);
-  };
-
   if (isLoading)
     return (
       <div>
@@ -88,27 +71,24 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
       </div>
     );
   return (
-    <div className="flow">
-      <div>{currency}</div>
+    <div className="grid add-container flow">
       {isError ? (
         <div className="flex flex-col errorContainer">
           <div className="grid error">
             <div className="line"></div>
             <div className="point"></div>
           </div>
-          <p> Network Error</p>
+          <p>Network Error</p>
           <button className="try pointer" onClick={() => setIsError(false)}>
             Try again
           </button>
         </div>
       ) : (
-        <div>
+        <div className="create-container flow">
           <div className="flex top">
             <h2>Add New Wallet</h2>
             <div className="pointer" onClick={() => setIsOpen(false)}>
-              <button aria-label="Close button">Close button</button>
-              {/* <img src={close} alt={close} /> */}
-              {/* <button>Close button</button> */}
+              <img src={close} aria-label="Close button" />
             </div>
           </div>
           <p>
@@ -116,11 +96,11 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
             list of wallets.
           </p>
           <p>Select wallet</p>
-          <div>
+          <div className="add-form flow">
             <select
               name=""
               id=""
-              onChange={(e) => handleChange(e)}
+              onChange={(e) => setCurrency(e.target.value)}
               role="combobox"
               value={currency}
             >
@@ -131,20 +111,28 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
                 </option>
               ))}
             </select>
+
+            <button
+              className="try pointer"
+              type="submit"
+              onClick={() => handleSubmit()}
+            >
+              {isCreating ? <Loader /> : "Create wallet"}
+            </button>
           </div>
-          {/* <div> */}
-          <button
-            className="try pointer"
-            type="submit"
-            onClick={() => handleSubmit()}
-          >
-            {isCreating ? <Loader /> : "Create wallet"}
-          </button>
 
           {isNetwork && (
-            <div>
-              <div>Network Error</div>
-              <img src={close} alt="" onClick={() => setIsNetwork(false)} />
+            <div className="flex err-badge">
+              <div className="flex danger">
+                <img src={danger} alt="danger" />
+                <div>Network Error</div>
+              </div>
+
+              <img
+                src={closeDanger}
+                alt=""
+                onClick={() => setIsNetwork(false)}
+              />
             </div>
           )}
         </div>

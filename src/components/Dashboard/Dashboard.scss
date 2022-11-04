@@ -1,5 +1,5 @@
 .main {
-  padding-inline: 6em;
+  padding-inline: 2em;
   align-items: center;
   justify-content: center;
 
@@ -10,6 +10,7 @@
 
 .topBar {
   justify-content: space-between;
+  border-bottom: 1px solid rgba(211, 213, 216, 0.5);
 }
 
 .top {
@@ -18,6 +19,7 @@
 }
 
 .errorContainer {
+  --gap: 2rem;
   align-items: center;
   .error {
     --gap: 0;
@@ -37,6 +39,9 @@
       height: 5px;
       width: 5px;
       background-color: #e12d39;
+    }
+    p {
+      color: #3e4c59;
     }
   }
 }
@@ -59,34 +64,59 @@
   height: 100vh;
 }
 .cardList {
-  --gap: 0.5rem;
+  --gap: 2rem;
   flex-wrap: wrap;
-  justify-content: space-between;
   align-items: center;
   height: 100%;
   .card {
+    --gap: 1rem;
     width: 240px;
     min-height: 150px;
     border-radius: 10px;
-    background: #111111;
+    background-color: #111111;
     padding: 1em 0.7em;
     box-shadow: 0px 10px 20px rgba(138, 138, 138, 0.5);
-    // align-items: flex-end;
+    background-image: url(../../assets/plane.png);
+    background-repeat: no-repeat;
+    background-position: bottom right;
   }
-  .symbol {
-    object-fit: cover;
-    width: 48px;
-    height: 48px;
-    img {
-      max-width: 100%;
-      max-height: 100%;
+  .plus-symbol {
+    --gap: 0.5rem;
+    align-items: center;
+    p {
+      color: #9aa5b1;
+      font-size: 14px;
     }
+    .symbol {
+      object-fit: cover;
+      width: 34px;
+      height: 34px;
+      img {
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+  }
+  .balance {
+    --gap: 0.5rem;
+    align-items: center;
     h3 {
-      justify-self: flex-start;
+      font-size: 16px;
+      // font-weight: 500;
     }
-    .next {
-      display: flex;
-      justify-items: flex-end;
+  }
+  h3 {
+    justify-self: flex-start;
+  }
+  .next {
+    display: flex;
+    justify-content: flex-end;
+    div {
+      background: #303030;
+      border-radius: 30px;
+      height: 32px;
+      width: 32px;
+      place-items: center;
     }
   }
 }

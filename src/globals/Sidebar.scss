@@ -1,0 +1,13 @@
+aside {
+  li {
+    border-radius: 3px;
+    width: 240px;
+    padding: 0.5em 1em;
+    &:first-child {
+      background: #f5f7fa;
+    }
+    &:hover {
+      background: #f5f7fa;
+    }
+  }
+}

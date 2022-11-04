@@ -1,0 +1,41 @@
+.add-container {
+  height: 100%;
+  place-items: center;
+
+  .create-container {
+    --flow-space: 2rem;
+    height: inherit;
+    padding: 4em 1.5em;
+    .top {
+      h2 {
+        font-size: 24px;
+        font-weight: 500;
+      }
+    }
+    p {
+      font-size: 18px;
+      color: #3e4c59;
+    }
+
+    .add-form {
+      text-align: center;
+      select {
+        width: 100%;
+        padding: 1em;
+      }
+    }
+    .err-badge {
+      align-items: center;
+      justify-content: space-between;
+      border-radius: 8px;
+      padding: 0.5em 0.7em;
+      background: #fff4f4;
+      border: none;
+      color: #d72c0d;
+      .danger {
+        --gap: 0.5rem;
+        align-items: center;
+      }
+    }
+  }
+}
