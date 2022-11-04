@@ -8,6 +8,15 @@
   }
 }
 
+.topBar {
+  justify-content: space-between;
+}
+
+.top {
+  justify-content: space-between;
+  align-items: center;
+}
+
 .errorContainer {
   align-items: center;
   .error {
@@ -51,8 +60,10 @@
 }
 .cardList {
   --gap: 0.5rem;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  height: 100%;
   .card {
     width: 240px;
     min-height: 150px;

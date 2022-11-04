@@ -1,10 +1,16 @@
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Loader from "./components/shared/Loader";
 import "./Dashboard.scss";
 import arrow from "./assets/arrow.svg";
 
-interface DashboardProps {}
-type AccountsType = {
+interface DashboardProps {
+  accounts: AccountsType[];
+  isOpen: boolean;
+  isRefresh: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  setAccounts: Dispatch<SetStateAction<AccountsType[]>>;
+}
+export type AccountsType = {
   id: string;
   currency: string;
   hold: string;
@@ -17,27 +23,37 @@ type AccountsType = {
   imgURL: string;
 };
 
-const Dashboard: React.FC<DashboardProps> = (props) => {
+export const BASE_URL = "http://localhost:3090";
+
+const Dashboard: React.FC<DashboardProps> = ({
+  accounts,
+  isOpen,
+  isRefresh,
+  setIsOpen,
+  setAccounts,
+}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [accounts, setAccounts] = useState<AccountsType[]>([]);
+
   useEffect(() => {
     const getAccounts = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch("http://localhost:3090/accounts");
+        const response = await fetch(`${BASE_URL}/accounts`);
         const data = await response.json();
-        console.log(data);
         setAccounts(data);
         setIsLoading(false);
+        setIsOpen(false);
         // throw new Error("error");
       } catch (error) {
-        console.log(error);
         setIsError(true);
         setIsLoading(false);
       }
     };
     getAccounts();
+    return () => {
+      setAccounts([]);
+    };
   }, [isError]);
   if (isLoading)
     return (
@@ -49,7 +65,12 @@ const Dashboard: React.FC<DashboardProps> = (props) => {
   return (
     <main className="w-full">
       <section className="flex flex-col main container">
-        <h1>Wallets</h1>
+        <div className="w-full flex topBar">
+          <h1>Wallets</h1>
+          <p className="pointer" onClick={() => setIsOpen(!isOpen)}>
+            + Add new wallet
+          </p>
+        </div>
         {isError ? (
           <div className="flex flex-col errorContainer">
             <div className="grid error">
@@ -64,7 +85,7 @@ const Dashboard: React.FC<DashboardProps> = (props) => {
         ) : (
           <div className="flex cardList w-full text-light">
             {accounts?.map((account, i) => (
-              <section key={account.id} className="card">
+              <section key={i} className="card">
                 <div className="flex">
                   <div className="symbol">
                     <img src={account.imgURL} alt={account.name} />
@@ -72,6 +93,7 @@ const Dashboard: React.FC<DashboardProps> = (props) => {
                   <p>{account.name}</p>
                 </div>
                 <h3>{account.balance}</h3>
+                <p>{account.currency}</p>
                 <div className="next w-full">
                   <img src={arrow} alt="arrow right" />
                 </div>
