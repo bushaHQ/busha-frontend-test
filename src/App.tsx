@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { Loader, Modal, Header, SideBar, InnerWrapper, Error, BalanceCard, AddWalletModal } from "./components";
 import { AppState, WalletData } from "./components/types";
 

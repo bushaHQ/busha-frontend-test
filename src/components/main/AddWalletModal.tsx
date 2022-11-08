@@ -20,7 +20,7 @@ const AddWalletModal = ({ onHide, setAccList }: AddWalletProps): JSX.Element => 
         selectedName: "",
     })
 
-    const { isLoading, isError, selectedName, isSubmitting, isSubmitError, errMssge, data, selected } = state
+    const { isLoading, isError, isSubmitting, isSubmitError, errMssge, data, selected } = state
 
     //Handler functions
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
