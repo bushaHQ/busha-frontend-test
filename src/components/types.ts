@@ -4,7 +4,6 @@ export type AppState = {
     isLoading?: boolean;
     isError?: boolean;
     isSuccess?: boolean;
-    data: any[];
     reload?: boolean;
     errMssge?: any;
 }
@@ -35,7 +34,7 @@ export type CardProps = {
 
 export type AddWalletProps = {
     onHide: () => void;
-    reloadAccount: () => void;
+    reloadAccount?: () => void;
     setAccList: (value: any) => any;
 }
 

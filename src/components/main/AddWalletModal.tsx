@@ -5,7 +5,7 @@ import { Loader, Error } from "../index";
 import { AddWalletProps, AddWalletState } from "../types";
 
 
-const AddWalletModal = ({ onHide, reloadAccount, setAccList }: AddWalletProps): JSX.Element => {
+const AddWalletModal = ({ onHide, setAccList }: AddWalletProps): JSX.Element => {
 
     //Local state
     const [state, setState] = useState<AddWalletState>({
@@ -23,7 +23,6 @@ const AddWalletModal = ({ onHide, reloadAccount, setAccList }: AddWalletProps): 
     const { isLoading, isError, selectedName, isSubmitting, isSubmitError, errMssge, data, selected } = state
 
     //Handler functions
-
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         let sName = data.find(one => one.currency === e.target.value).name;
         setState({
@@ -40,6 +39,7 @@ const AddWalletModal = ({ onHide, reloadAccount, setAccList }: AddWalletProps): 
         })
     }
 
+    //API functions
     const fetchWallets = useCallback(async () => {
         setState((preState) => ({
             ...preState,
@@ -74,17 +74,6 @@ const AddWalletModal = ({ onHide, reloadAccount, setAccList }: AddWalletProps): 
             })
     }, [])
 
-    const fetchAccountList = async () => {
-        const result = await fetch("http://localhost:3090/accounts");
-        await result.json()
-            .then((result) => {
-                console.log(`Fetched new list. Naturally ${selected} (${selectedName}) should appear in list.`);
-                setAccList(result);
-            })
-            .then(() => reloadAccount())
-        onHide()
-    }
-
     const addWallet = async () => {
         let body = JSON.stringify({ currency: selected })
 
@@ -101,14 +90,14 @@ const AddWalletModal = ({ onHide, reloadAccount, setAccList }: AddWalletProps): 
             },
             body,
         })
-            .then((result) => {
+            .then(async (result) => {
                 if (result.ok) {
+                    let updateData = await result.json();
                     setState({
                         ...state,
                         isSubmitting: false,
                     })
-                    console.log(`Added ${selected} (${selectedName}) succsefully.`);
-                    fetchAccountList();
+                    setAccList((prevList: any[]) => [...prevList, updateData]);
                     return true;
                 } else {
                     setState({
@@ -118,6 +107,9 @@ const AddWalletModal = ({ onHide, reloadAccount, setAccList }: AddWalletProps): 
                         subErrMssge: result?.statusText || ""
                     })
                 }
+            })
+            .then((status) => {
+                if (status) onHide();
             })
             .catch((error) => {
                 setState({

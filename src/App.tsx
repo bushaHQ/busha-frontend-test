@@ -6,17 +6,18 @@ function App() {
 
   //Local state
   const [isOpen, setIsOpen] = useState(false);
+  const [accountList, setAccountList] = useState<any[]>([]);
+
   const [state, setState] = useState<AppState>({
     isLoading: false,
     isError: false,
-    data: [],
     reload: false,
     errMssge: ""
   })
 
-  const { isLoading, isError, data, reload } = state
+  const { isLoading, isError, reload } = state
 
-//Handler functions
+  //Handler functions
   const reloadFunc = () => {
     setState((preState) => ({
       ...preState,
@@ -25,45 +26,36 @@ function App() {
     }))
   };
 
-  const fetchAccountList = useCallback(async () => {
-    setState((preState) => ({
-      ...preState,
-      isLoading: true
-    }))
-
-    const result = await fetch("http://localhost:3090/accounts");
-    await result.json()
-      .then((accounts) => {
-        setState((preState) => ({
-          ...preState,
-          isLoading: false,
-          data: accounts
-        }))
-        return accounts;
-      })
-      .catch((error) => {
-        setState((preState) => ({
-          ...preState,
-          isLoading: false,
-          isError: true,
-          errMssge: error
-        }))
-      })
-  }, [])
-
-  const setList = (data: any) => {
-    setState((preState) => ({
-      ...preState,
-      data: data
-    }))
-  }
-
-  const closeModal = useCallback(() => {
-    setIsOpen(false);
-  }, []);
+  const closeModal = () => setIsOpen(false);
 
   //Hooks
   useEffect(() => {
+
+    const fetchAccountList = async () => {
+      setState((preState) => ({
+        ...preState,
+        isLoading: true
+      }))
+
+      const result = await fetch("http://localhost:3090/accounts");
+      await result.json()
+        .then((accounts) => {
+          setState((preState) => ({
+            ...preState,
+            isLoading: false
+          }))
+          setAccountList(accounts)
+          return accounts;
+        })
+        .catch((error) => {
+          setState((preState) => ({
+            ...preState,
+            isLoading: false,
+            isError: true,
+            errMssge: error
+          }))
+        })
+    }
 
     fetchAccountList();
     return () => {
@@ -71,18 +63,15 @@ function App() {
         ...preState,
         isLoading: false,
         isError: false,
-        data: [],
         reload: false,
         errMssge: ""
       }))
-    };
-  }, [reload, fetchAccountList]);
+      setAccountList([]);
+    }
+  }, [reload]);
 
   return (
     <div>
-      <Modal isOpen={isOpen}>
-        <AddWalletModal onHide={closeModal} reloadAccount={() => null} setAccList={setList} />
-      </Modal>
       <Header />
       <InnerWrapper>
         <SideBar />
@@ -95,21 +84,21 @@ function App() {
             </div>
           </div>
 
-          {isLoading || data?.length < 1 || isError ? null :
-            (
-              <div className="balance-item">
-                {data?.map((item: WalletData): JSX.Element => {
-                  return <BalanceCard
-                    key={item.id}
-                    imageUrl={item.imgURL}
-                    name={item.name}
-                    balance={item.balance}
-                    currency={item.currency}
-                  />
-                })}
-              </div>
-            )
-          }
+          <div className="balance-item">
+            {isLoading || accountList?.length < 1 || isError ? null :
+              accountList?.map((item: WalletData, id: number): JSX.Element => {
+                return (
+                  <div key={`${item.id}${id}`}>
+                    <BalanceCard
+                      imageUrl={item.imgURL}
+                      name={item.name}
+                      balance={item.balance}
+                      currency={item.currency}
+                    />
+                  </div>
+                )
+              })}
+          </div>
 
           {!isLoading ? null :
             <div className="loader easer">
@@ -121,6 +110,9 @@ function App() {
           }
         </div>
       </InnerWrapper >
+      <Modal isOpen={isOpen}>
+        <AddWalletModal onHide={closeModal} setAccList={setAccountList} />
+      </Modal>
     </div >
   )
 }
