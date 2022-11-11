@@ -1,5 +1,15 @@
+import React from 'react'
+
+import Header from '../src/components/shared/Header'
+import MainSection from './MainSection';
+
 function App() {
-  return <h1>Busha</h1>;
+  return (
+    <>
+      <Header/>
+      <MainSection/>
+    </>
+  )
 }
 
 export default App;
