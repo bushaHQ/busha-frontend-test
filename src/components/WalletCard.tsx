@@ -1,19 +1,26 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import {ReactComponent as WalletTypeIcon} from '../assets/svgs/NGN.svg'
+// import {ReactComponent as WalletTypeIcon} from '../assets/svgs/NGN.svg'
 import {ReactComponent as ArrowIcon} from '../assets/svgs/Icon.svg'
+import { walletInfo } from '../types'
 
-const WalletCard = () => {
+interface iProps {
+    account: walletInfo,
+}
+
+const WalletCard: React.FC<iProps> = ({account})=> {
   return (
     <CardContainer>
         <CardType>
-            <WalletTypeIcon/>
-            <p>Naira</p>
+            <img src={account.imgURL} alt={account.name}/>
+            <p>{account.name}</p>
         </CardType>
         <CardAmount>
             <p>
-            ₦ 105,160,076.51
+            {account.name==='Naira' ? '₦' : null}
+            {account.balance.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")} 
+            {account.name !== 'Naira' ? account.currency : null }
             </p>
         </CardAmount>
         <MoreInfo>
@@ -38,6 +45,10 @@ const CardType=styled.div`
         font-size: 14px;
         color: #9AA5B1;
     }
+    &>img {
+        width:38px;
+        height: 38px;
+    }
 `
 const CardAmount=styled.div`
     &>p {
@@ -48,13 +59,13 @@ const CardAmount=styled.div`
 `
 const MoreInfo=styled.div`
     text-align: right;
-    
     &>svg {
         border: 1px solid #303030;
         padding: 7px 10px 7px 10px;
         border-radius: 30px;
         background-color: #303030;
         color:#fff;
+        cursor: pointer;
     }
 `
 
