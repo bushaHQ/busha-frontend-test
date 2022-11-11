@@ -67,7 +67,7 @@ const CreateWallet:React.FC<Iprops> = ({setShowModal,accountReload}) => {
         }
       }
 
-    const onSelectChange=(e:React.ChangeEvent<HTMLInputElement>)=> {
+    const onSelectChange=(e:any)=> {
         setSelectedWallet(e.target.value)
         console.log(selectedWallet);
         
