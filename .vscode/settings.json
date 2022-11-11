@@ -1,0 +1,21 @@
+{
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+      },
+      "eslint.alwaysShowStatus": true,
+      "eslint.format.enable": true,
+      "eslint.run": "onSave",
+      "eslint.validate": [
+        "javascript"
+      ],
+      "eslint.workingDirectories": [
+        {
+          "mode": "auto"
+        }
+      ],
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "[javascript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        }
+}
+   
