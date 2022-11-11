@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Header from '../src/components/shared/Header'
-import MainSection from './MainSection';
+import MainSection from './utils/MainSection';
 
 function App() {
   return (
