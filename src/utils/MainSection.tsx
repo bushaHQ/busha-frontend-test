@@ -17,15 +17,6 @@ const MainSection = () => {
 
   useEffect(()=> {
     setIsLoading(true)
-    // const fetchData= async()=> {
-    //   const response=await WalletApi.get('/accounts')
-    //   setAccounts(response.data)
-    //   setIsLoading(false)
-    //   console.log(response.data);
-    // }
-    // fetchData().catch(()=> {
-    //   setIsLoading(null)
-    // })
     fetch('http://localhost:3090/accounts')
         .then((res)=>res.json())
         .then(result=>{

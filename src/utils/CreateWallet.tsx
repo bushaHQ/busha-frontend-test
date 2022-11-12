@@ -24,13 +24,6 @@ const CreateWallet:React.FC<Iprops> = ({setShowModal,accountReload}) => {
 
     useEffect(()=> {
         setIsLoading(true)
-        // const fetchData=async()=>{
-        //     const response= await WalletApi.get('/wallets')
-        //     console.log(response.data);
-        //     setIsLoading(false)
-        //     setWallets(response.data)
-        // }
-        // fetchData().catch(()=>setIsLoading(null))
         fetch('http://localhost:3090/wallets')
         .then((res)=>res.json())
         .then(result=>{
