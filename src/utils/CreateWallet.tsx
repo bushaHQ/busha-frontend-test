@@ -5,7 +5,6 @@ import {ReactComponent as CloseIcon} from '../assets/svgs/close.svg'
 import {ReactComponent as FlagIcon} from '../assets/svgs/flag.svg'
 import SelectInput from '../components/shared/SelectInput'
 import Button from '../components/shared/Button'
-import WalletApi from '../api/Wallets-api-config'
 import { walletList } from '../types'
 import Loader from '../components/shared/Loader'
 import Error from '../components/shared/Error'
@@ -25,13 +24,14 @@ const CreateWallet:React.FC<Iprops> = ({setShowModal,accountReload}) => {
 
     useEffect(()=> {
         setIsLoading(true)
-        const fetchData=async()=>{
-            const response= await WalletApi.get('/wallets')
-            console.log(response.data);
-            setIsLoading(false)
-            setWallets(response.data)
+        fetch('http://localhost:3090/wallets')
+        .then((res)=>res.json())
+        .then(result=>{
+          setIsLoading(false)
+          setWallets(result)
         }
-        fetchData().catch(()=>setIsLoading(null))
+        )
+        .catch(()=>setIsLoading(null))
     },[reload])
 
     const componentRender=()=> {
@@ -75,11 +75,26 @@ const CreateWallet:React.FC<Iprops> = ({setShowModal,accountReload}) => {
     const onSubmitWallet=()=> {
       // console.log('hey');
       
-      WalletApi.post('/accounts',{
-        currency: selectedWallet
-      }).then(()=> overallReload()).catch(()=>setShowErrMessage(true)
-      )
-        
+      // WalletApi.post('/accounts',{
+      //   currency: selectedWallet
+      // }).then(()=> overallReload()).catch(()=>setShowErrMessage(true)
+      // )
+      fetch("http://localhost:3090/accounts", {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          currency: selectedWallet
+        })
+    }).then((res)=>{
+      if(res.ok) {
+        overallReload()
+      }else {
+        setShowErrMessage(true)
+      }
+    }).catch(()=>setShowErrMessage(true))
     }
 
     const overallReload=()=> {
