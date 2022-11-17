@@ -98,6 +98,11 @@ code {
   cursor: pointer;
 }
 
+.modal-heading button {
+  background-color: transparent;
+  border: 0px;
+}
+
 .heading {
   padding-bottom: 16px;
   border-bottom: 1px solid rgba(211, 213, 216, 0.5);
@@ -324,14 +329,19 @@ code {
   line-height: 23px;
   color: #3e4c59;
 }
-
-.add-account-error {
+.add-account-error-background {
   margin-top: 45px;
   display: flex;
   background: #fff4f4;
   border: 1px solid #e0b3b2;
   border-radius: 8px;
   padding: 13px 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+.add-account-error {
+  display: flex;
+
   justify-content: left;
   align-items: center;
 }

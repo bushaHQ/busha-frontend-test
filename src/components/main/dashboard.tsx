@@ -67,7 +67,7 @@ function Dashboard() {
       })
       .then((data) => {
         setAccount_loading(false);
-        setAdd_account_error(false);
+
         setAccounts(data);
       });
   };
@@ -81,12 +81,15 @@ function Dashboard() {
         currency: selected_currency,
       }),
     }).then((response) => {
-      if (response.status >= 200 && response.status <= 299) {
+      if (response.status === 422) {
+        refetch_account();
+        setAccount_loading(false);
+        setAdd_account_error(true);
+      } else {
+        setAccount_loading(false);
+        setAdd_account_error(false);
         setOpen(!open);
         refetch_account();
-        return response.json();
-      } else {
-        setAdd_account_error(true);
       }
     });
   };
@@ -141,8 +144,13 @@ function Dashboard() {
               <div className="modal">
                 <div className="modal-heading">
                   <h1>Add new wallet</h1>
-
-                  <img onClick={() => setOpen(!open)} src={"./close.svg"} />
+                  <button
+                    type="button"
+                    onClick={() => setOpen(!open)}
+                    aria-label="Close button"
+                  >
+                    <img src={"./close.svg"} />
+                  </button>
                 </div>
                 <p>
                   The crypto wallet will be created instantly and be available
@@ -158,17 +166,36 @@ function Dashboard() {
                       }}
                     >
                       {currency.map((curr) => (
-                        <option key={curr.currency}>{curr.currency}</option>
+                        <option key={curr.currency} value={curr.currency}>
+                          {curr.name}
+                        </option>
                       ))}
                     </select>
                   </div>
                   <div className="modal-select-button">
-                    <button onClick={() => add_account()}>Create wallet</button>
+                    <button onClick={() => add_account()}>
+                      Create wallet
+                      {account_loading && (
+                        <button
+                          style={{ width: 0, opacity: 0 }}
+                          id="submit-button"
+                        >
+                          <label htmlFor="submit-button">Loading...</label>
+                        </button>
+                      )}
+                    </button>
                   </div>
                   {add_account_error && (
-                    <div className="add-account-error">
-                      <img src="error.svg" />
-                      <p>Network Error</p>
+                    <div className="add-account-error-background">
+                      <div className="add-account-error">
+                        <div>
+                          <img src="error.svg" />
+                        </div>
+                        <div>
+                          <p>Network Error</p>
+                        </div>
+                      </div>
+                      <img src={"redclose.svg"} />
                     </div>
                   )}
                 </div>
