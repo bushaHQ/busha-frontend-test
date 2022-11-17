@@ -53,9 +53,11 @@ function Dashboard() {
         setWallet_error(true);
       })
       .then((data) => {
-        setWallet_loading(false);
+        if (data) {
+          setWallet_loading(false);
 
-        setCurrency(data);
+          setCurrency(data);
+        }
       });
   };
 
