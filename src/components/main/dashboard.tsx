@@ -24,15 +24,19 @@ function Dashboard() {
     setOpen(!open);
     fetch("http://localhost:3090/wallets")
       .then((response) => {
-        if (response.status >= 200 && response.status <= 299) {
+        if (response.ok) {
           return response.json();
-        } else {
-          setWallet_error(true);
         }
+
+        setWallet_error(true);
       })
       .then((data) => {
-        setWallet_loading(false);
-        setCurrency(data);
+        if (data) {
+          setWallet_loading(false);
+
+          setCurrency(data);
+        }
+        return null;
       });
   };
 
@@ -41,29 +45,33 @@ function Dashboard() {
     setWallet_loading(true);
     fetch("http://localhost:3090/wallets")
       .then((response) => {
-        if (response.status >= 200 && response.status <= 299) {
+        if (response.ok) {
+          setWallet_error(false);
+
           return response.json();
-        } else {
-          setWallet_error(true);
         }
+        setWallet_error(true);
       })
       .then((data) => {
         setWallet_loading(false);
+
         setCurrency(data);
       });
   };
 
   const refetch_account = () => {
-    setAccount_error(false);
     setAccount_loading(true);
 
+    console.log(accounts);
     fetch("http://localhost:3090/accounts")
-      .then((response) => {
-        if (response.status >= 200 && response.status <= 299) {
+      .then(async (response) => {
+        if (response.ok) {
+          setAccount_error(false);
+
           return response.json();
-        } else {
-          setAccount_error(true);
         }
+
+        setAccount_error(true);
       })
       .then((data) => {
         setAccount_loading(false);
@@ -93,21 +101,26 @@ function Dashboard() {
       }
     });
   };
+
   useEffect(() => {
     let isMounted = true;
     setAccount_loading(true);
     fetch("http://localhost:3090/accounts")
       .then((response) => {
-        if (response.status >= 200 && response.status <= 299) {
+        if (response.ok) {
           return response.json();
-        } else {
-          setAccount_error(true);
         }
+
+        setAccount_error(true);
       })
+
       .then((data) => {
         if (isMounted) {
           setAccount_loading(false);
-          setAccounts(data);
+          if (data) {
+            setAccounts(data);
+          }
+          return null;
         }
       });
     return () => {
