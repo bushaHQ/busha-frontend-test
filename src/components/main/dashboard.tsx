@@ -30,6 +30,7 @@ function Dashboard() {
 
         setWallet_error(true);
       })
+
       .then((data) => {
         if (data) {
           setWallet_loading(false);
@@ -37,6 +38,10 @@ function Dashboard() {
           setCurrency(data);
         }
         return null;
+      })
+      .catch((error) => {
+        setWallet_error(true);
+        console.error("Error:", error);
       });
   };
 
@@ -52,19 +57,23 @@ function Dashboard() {
         }
         setWallet_error(true);
       })
+
       .then((data) => {
         if (data) {
           setWallet_loading(false);
 
           setCurrency(data);
         }
+      })
+      .catch((error) => {
+        setWallet_error(true);
+        console.error("Error:", error);
       });
   };
 
   const refetch_account = () => {
     setAccount_loading(true);
 
-    console.log(accounts);
     fetch("http://localhost:3090/accounts")
       .then(async (response) => {
         if (response.ok) {
@@ -75,10 +84,15 @@ function Dashboard() {
 
         setAccount_error(true);
       })
+
       .then((data) => {
         setAccount_loading(false);
 
         setAccounts(data);
+      })
+      .catch((error) => {
+        setAccount_error(true);
+        console.error("Error:", error);
       });
   };
 
@@ -90,18 +104,23 @@ function Dashboard() {
       body: JSON.stringify({
         currency: selected_currency,
       }),
-    }).then((response) => {
-      if (response.status === 422) {
-        refetch_account();
-        setAccount_loading(false);
-        setAdd_account_error(true);
-      } else {
-        setAccount_loading(false);
-        setAdd_account_error(false);
-        setOpen(!open);
-        refetch_account();
-      }
-    });
+    })
+      .then((response) => {
+        if (response.status === 422) {
+          refetch_account();
+          setAccount_loading(false);
+          setAdd_account_error(true);
+        } else {
+          setAccount_loading(false);
+          setAdd_account_error(false);
+          setOpen(!open);
+          refetch_account();
+        }
+      })
+      .catch((error) => {
+        setAccount_error(true);
+        console.error("Error:", error);
+      });
   };
 
   useEffect(() => {
@@ -115,6 +134,10 @@ function Dashboard() {
 
         setAccount_error(true);
       })
+      .catch((error) => {
+        setAccount_error(true);
+        console.error("Error:", error);
+      })
 
       .then((data) => {
         if (isMounted) {
@@ -124,6 +147,9 @@ function Dashboard() {
           }
           return null;
         }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
       });
     return () => {
       isMounted = false;
