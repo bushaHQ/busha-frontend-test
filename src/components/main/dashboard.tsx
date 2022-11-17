@@ -17,6 +17,7 @@ function Dashboard() {
   const [open, setOpen] = useState<boolean>(false);
   const [account_error, setAccount_error] = useState<boolean>(false);
   const [wallet_error, setWallet_error] = useState<boolean>(false);
+  const [add_account_error, setAdd_account_error] = useState<boolean>(false);
 
   const get_currencies = () => {
     setWallet_loading(true);
@@ -55,6 +56,7 @@ function Dashboard() {
   const refetch_account = () => {
     setAccount_error(false);
     setAccount_loading(true);
+
     fetch("http://localhost:3090/accounts")
       .then((response) => {
         if (response.status >= 200 && response.status <= 299) {
@@ -65,6 +67,7 @@ function Dashboard() {
       })
       .then((data) => {
         setAccount_loading(false);
+        setAdd_account_error(false);
         setAccounts(data);
       });
   };
@@ -77,18 +80,15 @@ function Dashboard() {
       body: JSON.stringify({
         currency: selected_currency,
       }),
-    })
-      .then((response) => {
-        if (response.status >= 200 && response.status <= 299) {
-          setOpen(!open);
-          return response.json();
-        } else {
-          setWallet_error(true);
-        }
-      })
-      .then((data) => {
+    }).then((response) => {
+      if (response.status >= 200 && response.status <= 299) {
+        setOpen(!open);
         refetch_account();
-      });
+        return response.json();
+      } else {
+        setAdd_account_error(true);
+      }
+    });
   };
   useEffect(() => {
     let isMounted = true;
@@ -117,7 +117,7 @@ function Dashboard() {
         {wallet_error ? (
           <div className="wallet-error">
             <div className="loader">
-              <img src={"./verificationlinkexpired.svg"} />
+              <img alt="close button" src={"./verificationlinkexpired.svg"} />
             </div>
             <div>
               <p> Network Error</p>
@@ -165,6 +165,12 @@ function Dashboard() {
                   <div className="modal-select-button">
                     <button onClick={() => add_account()}>Create wallet</button>
                   </div>
+                  {add_account_error && (
+                    <div className="add-account-error">
+                      <img src="error.svg" />
+                      <p>Network Error</p>
+                    </div>
+                  )}
                 </div>
               </div>
             )}

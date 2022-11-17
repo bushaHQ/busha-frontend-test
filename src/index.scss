@@ -324,3 +324,25 @@ code {
   line-height: 23px;
   color: #3e4c59;
 }
+
+.add-account-error {
+  margin-top: 45px;
+  display: flex;
+  background: #fff4f4;
+  border: 1px solid #e0b3b2;
+  border-radius: 8px;
+  padding: 13px 20px;
+  justify-content: left;
+  align-items: center;
+}
+
+.add-account-error p {
+  margin: 0px;
+  font-style: normal;
+  font-weight: 500;
+  margin-left: 14.4px;
+  font-size: 16px;
+  line-height: 24px;
+
+  color: #d72c0d;
+}
