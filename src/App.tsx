@@ -1,5 +1,3 @@
-function App() {
-  return <h1>Busha</h1>;
-}
+import Dashboard from "./components/main/dashboard";
 
-export default App;
+export default Dashboard;
