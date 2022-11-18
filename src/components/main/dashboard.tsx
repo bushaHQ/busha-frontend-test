@@ -5,8 +5,7 @@ import MaxWidth from "./MaxWidth";
 import NavBar from "./NavBar";
 import Modal from "../shared/Modal";
 import AccountListCard from "./AccountCard";
-import { response } from "msw";
-import { factory } from "typescript";
+
 function Dashboard() {
   const [accounts, setAccounts] = useState<any[]>([]);
   const [currency, setCurrency] = useState<any[]>([]);
@@ -19,6 +18,7 @@ function Dashboard() {
   const [wallet_error, setWallet_error] = useState<boolean>(false);
   const [add_account_error, setAdd_account_error] = useState<boolean>(false);
 
+  // get wallets
   const get_currencies = () => {
     setWallet_loading(true);
     setOpen(!open);
@@ -45,6 +45,7 @@ function Dashboard() {
       });
   };
 
+  // refetch wallets
   const refetch_currencies = () => {
     setWallet_error(false);
     setWallet_loading(true);
@@ -71,6 +72,7 @@ function Dashboard() {
       });
   };
 
+  // refetch accounts
   const refetch_account = () => {
     setAccount_loading(true);
 
@@ -96,6 +98,7 @@ function Dashboard() {
       });
   };
 
+  // add account
   const add_account = () => {
     setAccount_loading(true);
     fetch("http://localhost:3090/accounts", {
@@ -124,6 +127,7 @@ function Dashboard() {
   };
 
   useEffect(() => {
+    // fetch accounts
     let isMounted = true;
     setAccount_loading(true);
     fetch("http://localhost:3090/accounts")
