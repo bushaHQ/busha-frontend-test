@@ -23,6 +23,7 @@ export default function AccountList() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [showCreateWalletModal, setShowCreateWalletModal] = useState(false);
+  const [isCreateWalletError, setIsCreateWalletError] = useState(false);
 
   const handleTryAgainClick = (e:React.MouseEvent<HTMLButtonElement>) => {
     window.location.reload();
@@ -69,7 +70,9 @@ export default function AccountList() {
         <div className='add-new-wallet-modal'>
           <div className='header-group'>
             <p className='new-wallet-header'>Add new wallet</p>
-            <button><i className='fa-solid fa-xmark'></i></button>
+            <button onClick={() => setShowCreateWalletModal(false)}>
+              <i className='fa-solid fa-xmark'></i>
+            </button>
           </div>
           <p className='new-wallet-desc'>The crypto wallet will be created 
             instantly and be available in your list of wallets.
@@ -87,6 +90,18 @@ export default function AccountList() {
           <button className='create-wallet-button'>
               <a href='#'>Create wallet</a>
           </button>
+          { isCreateWalletError ? 
+            <div className='error-notice'>
+              <div className='left'>
+                <i className="fa-sharp fa-solid fa-diamond-exclamation"></i>
+                <p>Network Error</p>
+              </div>
+              <div className='right'>
+                <button onClick={()=> setIsCreateWalletError(false)}><i className='fa-solid fa-xmark'></i></button>
+              </div>
+            </div>:
+            null
+          }
         </div>
       </Modal>
       <div className='main-body'>
@@ -103,7 +118,10 @@ export default function AccountList() {
           <div>
             <div className='wallet-header-section'>
               <h2 className='wallet-subtitle'>Wallets</h2>
-              <p className='add-wallet'><a href='#'> + Add new wallet</a></p>
+              <button className='add-wallet' 
+                onClick={() => setShowCreateWalletModal(true)}>
+                    <a href='#'> + Add new wallet</a>
+              </button>
             </div>
           </div>
           <AccountListContainer>
