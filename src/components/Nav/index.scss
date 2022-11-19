@@ -1,0 +1,57 @@
+.nav{
+    position: absolute;
+    width: 100%;
+    padding: 10px;
+    top: 0;
+    left: 0;
+
+    background: #FFFFFF;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+    .nav-content {
+        display: flex;
+        justify-content: space-between;
+        }
+        .busha-logo{
+            display: flex;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 24px;
+            font-style:normal;
+            font-weight: 900;
+            align-items: center;
+            margin-left: 7%;
+        }
+        .busha-user{
+            display: flex;
+            align-items: center;
+            align-content: center;
+            color: #3E4C59;
+            margin-right: 85px;
+            .user-name-abrev{
+                background: rgba(154, 165, 177, 0.3);
+                display: flex;
+                justify-content: center;
+                font-family: 'Aribau Grotesk';
+                font-style: normal;
+                font-weight: 600;
+                font-size: 18px;
+                line-height: 18px;
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+                margin-right: 4px;
+                // vertical-align: 0;
+                align-items: center;
+                text-align: center;
+            }
+            .user-name{
+                font-family: 'Aribau Grotesk';
+                font-style: normal;
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 14px;
+                align-items: center;
+                text-align: right;
+                color: #3E4C59;
+        }
+    }
+}

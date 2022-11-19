@@ -1,0 +1,57 @@
+
+.arrow-right-frame {
+    position: absolute;
+    right: 3%;
+    bottom: -10%;
+    width: 25px;
+    height: 25px;
+    background: #303030;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .arrow-right {
+        background: #212B36;
+        .fa-chevron-right {
+            width: 10px;
+            height: 10px;
+            vertical-align: 0;
+            color: white;
+        }
+    }
+}
+
+.flex-row {
+    display: flex;
+    align-items: center;
+    .currencyIcon{
+        width: 34px;
+        height: 34px;
+    }
+    .currencyTitle{
+        font-family: 'Aribau Grotesk';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 14px;
+        color: #9AA5B1;
+        margin-left: 8px;
+    }
+    .accountBalance{
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 16px;
+        color: #ffffff;
+        .accountCurrency{
+            margin-left: 4px;
+        }
+    }
+}
+.flex-coloumn {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}

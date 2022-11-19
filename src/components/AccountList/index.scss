@@ -1,0 +1,82 @@
+.main-body{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 10px;
+    margin-top: 10%;
+    .left-section{
+        flex:2;
+        display: flex;
+        justify-content: flex-end;
+        ul{
+            margin-top: 55px;
+            list-style-type: none;
+            text-align: left;
+            width: 70%;
+           
+            border-radius: 3px;
+            li{
+                height: 16px;
+                font-family: 'Aribau Grotesk';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 16px;
+                color: #000000;
+                padding: 10px;
+            }
+            li.selected{
+                background: #F5F7FA;
+                font-weight: 700;
+            }
+        }
+    }
+    .right-section{
+        flex:5;
+        padding-left: 40px;
+        padding-right: 75px;
+        .wallet-header-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            border-bottom: 2px solid rgba(211, 213, 216, 0.5);
+            padding: 0;
+            margin-bottom: 10px;
+
+            h2{
+                margin-block-start: 0em;
+                margin-block-end: 0em;
+            }
+            .wallet-subtitle{
+                font-family: 'Aribau Grotesk';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 32px;
+                line-height: 32px;
+                color: #000000;
+            }
+            .add-wallet{
+                font-family: 'Aribau Grotesk';
+                font-style: normal;
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 16px;
+                text-align: right;
+                color: #000000;
+                a {
+                    text-decoration: none;
+                    color: #000000;
+                }
+            }
+        }
+    }
+}
+.loader{
+    position:absolute;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    left: 45%;
+}
+
+
