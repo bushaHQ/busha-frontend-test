@@ -1,6 +1,5 @@
 import React,{ useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { createNoSubstitutionTemplateLiteral } from 'typescript';
 
 import { Account } from '../../interfaces';
 import { AccountItem } from '../AccountItem';
@@ -24,6 +23,10 @@ export default function AccountList() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
+  const handleTryAgainClick = (e:React.MouseEvent<HTMLButtonElement>) => {
+    window.location.reload();
+  }
+
   useEffect(() => {
     setIsLoading(true);
     const fetchData = async() =>{
@@ -32,6 +35,7 @@ export default function AccountList() {
       if (!data.ok){
         setIsError(true);
         setIsLoading(false);
+        setList([]);
         return
       }
       const json = await data.json();
@@ -55,8 +59,8 @@ export default function AccountList() {
             <i className="fa-solid fa-exclamation"></i>
           </p>
           <p className='error-text'>Network Error</p>
-          <button className='try-again'>
-            <a href='#'>  Try again </a>
+          <button className='try-again' onClick={(e) => handleTryAgainClick(e)}>
+            <a href='#'>  Try again </a>                                             
           </button>
         </div>
       </Modal>
