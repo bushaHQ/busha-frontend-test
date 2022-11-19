@@ -78,5 +78,40 @@
     height: 100%;
     left: 45%;
 }
+.network-error{
+    display: flex;
+    flex-direction: column;
+    column-gap: 20px;
+    align-items: center;
+    justify-items: center;
+    margin-top: 55%;
+    .circular{
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #f5bcbc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .fa-exclamation{
+            color: red;
+            font-size: 70px;
+        }
+    }
+    .try-again {
+        text-align: center;
+        width: 186px;
+        height: 54px;
+        background: #000000;
+        border-radius: 40px;
+        color: white;
+        a{
+            text-decoration: none;
+            color: white;
+        }
+    }
+}
 
 

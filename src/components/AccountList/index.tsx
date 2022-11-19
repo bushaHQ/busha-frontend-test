@@ -1,5 +1,6 @@
 import React,{ useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { createNoSubstitutionTemplateLiteral } from 'typescript';
 
 import { Account } from '../../interfaces';
 import { AccountItem } from '../AccountItem';
@@ -21,11 +22,18 @@ const AccountListContainer = styled.div`
 export default function AccountList() {
   const [list, setList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
     const fetchData = async() =>{
       const data = await fetch("http://localhost:3090/accounts");
+
+      if (!data.ok){
+        setIsError(true);
+        setIsLoading(false);
+        return
+      }
       const json = await data.json();
       setList(json)
       setIsLoading(false);
@@ -41,7 +49,17 @@ export default function AccountList() {
           <Loader size={70} />
         </div>
       </Modal>
-       
+      <Modal isOpen={isError} >
+        <div className='network-error'>
+          <p className='circular'>
+            <i className="fa-solid fa-exclamation"></i>
+          </p>
+          <p className='error-text'>Network Error</p>
+          <button className='try-again'>
+            <a href='#'>  Try again </a>
+          </button>
+        </div>
+      </Modal>
       <div className='main-body'>
         <div className='left-section'>
             <ul>
