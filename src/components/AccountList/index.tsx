@@ -35,7 +35,13 @@ export default function AccountList() {
     return () => {}
   },  []);
   return (
-    <> 
+    <>
+      <Modal isOpen={isLoading}>
+        <div className='loader'>
+          <Loader size={70} />
+        </div>
+      </Modal>
+       
       <div className='main-body'>
         <div className='left-section'>
             <ul>
