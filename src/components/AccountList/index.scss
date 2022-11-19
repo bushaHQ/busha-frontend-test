@@ -110,8 +110,95 @@
         a{
             text-decoration: none;
             color: white;
+            font-family: 'Aribau Grotesk';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 18px;
+            text-align: center;
         }
     }
 }
-
+.add-new-wallet-modal{
+    display: flex;
+    flex-direction: column;
+    column-gap: 20px;
+    align-items: flex-start;
+    margin-top: 5%;
+    padding: 20px;
+    .header-group{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        align-items: center;
+        .new-wallet-header{
+            font-family: 'Aribau Grotesk';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 32px;
+            color: #000000;
+        }
+        button{
+            width: 16px;
+            height: 16px;
+            text-align: center;
+            background-color: Transparent;
+            background-repeat:no-repeat;
+            border: none;
+        }
+        .fa-xmark{
+            font-size: 16px;
+            color: #000000;
+            margin-top: -2px;
+            margin-left: -5px;
+        }
+    }
+    
+    .new-wallet-desc{
+        font-family: 'Aribau Grotesk';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 26px;
+        color: #3E4C59;
+    }
+    .select-new-wallet{
+        display: flex;
+        flex-direction: column;
+        gap: 10px; 
+        width: 100%;
+        .select-subtitle{
+            font-family: 'Aribau Grotesk';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 16px;
+            color: #3E4C59;
+        }
+        .select{
+            border: 1px solid #CBD2D9;
+            border-radius: 5px;
+            padding: 15px;
+        }
+    }
+    .create-wallet-button{
+        width: 222px;
+        height: 54px;
+        background: #000000;
+        border-radius: 40px;
+        align-self: center;
+        margin-top: 27px;
+        a {
+            text-decoration: none;
+            color: white;
+            font-family: 'Aribau Grotesk';
+            font-style: normal;
+            font-weight: 5  00;
+            font-size: 18px;
+            line-height: 18px;
+            text-align: center;
+        }
+    }
+}
 

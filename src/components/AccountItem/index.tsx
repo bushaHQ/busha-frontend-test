@@ -7,6 +7,7 @@ import './index.scss';
 
 type Props = {
     d: Account;
+    key: number;
 };
 
 const ItemContainer = styled.div`

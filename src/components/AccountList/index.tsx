@@ -22,6 +22,7 @@ export default function AccountList() {
   const [list, setList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [showCreateWalletModal, setShowCreateWalletModal] = useState(false);
 
   const handleTryAgainClick = (e:React.MouseEvent<HTMLButtonElement>) => {
     window.location.reload();
@@ -64,6 +65,30 @@ export default function AccountList() {
           </button>
         </div>
       </Modal>
+      <Modal isOpen={showCreateWalletModal}>
+        <div className='add-new-wallet-modal'>
+          <div className='header-group'>
+            <p className='new-wallet-header'>Add new wallet</p>
+            <button><i className='fa-solid fa-xmark'></i></button>
+          </div>
+          <p className='new-wallet-desc'>The crypto wallet will be created 
+            instantly and be available in your list of wallets.
+          </p>
+          <div className='select-new-wallet'>
+            <p className='select-subtitle'>Select wallet</p>
+            <select className='select'>
+              <option>Ethereum</option>
+              <option>Bitcoin</option>
+              <option>Litecoin</option>
+              <option>Dodgecoin</option>
+              <option>Kachicoin</option>
+            </select>
+          </div>
+          <button className='create-wallet-button'>
+              <a href='#'>Create wallet</a>
+          </button>
+        </div>
+      </Modal>
       <div className='main-body'>
         <div className='left-section'>
             <ul>
@@ -82,14 +107,12 @@ export default function AccountList() {
             </div>
           </div>
           <AccountListContainer>
-              { list.map((d:Account)=>{
-                return <AccountItem d={d}/>
+              { list.map((d:Account, index)=>{
+                return <AccountItem d={d} key={index}/>
               })}
           </AccountListContainer>
         </div>
       </div>
-      
-      
     </>
   )
   
