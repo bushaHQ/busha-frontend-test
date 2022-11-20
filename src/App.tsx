@@ -4,6 +4,7 @@ import Loader from "./components/shared/Loader";
 import Sidebar from "./components/sidebar/sidebar";
 import { IAccount, IWallet } from "./interfaces";
 import Modal from "./components/shared/Modal";
+import Header from "./components/header/header";
 
 
 const App = () => {
@@ -21,14 +22,13 @@ const App = () => {
 
 
   const [selectedWallet, setSelectedWallet] = React.useState('')
-  const [creatingWallet, setCreatingWallet] = React.useState(false)
-  const [creatingWalletErrorMessage, setCreatingWalletErrorMessage] = React.useState(null)
+  const [creatingWallet, setCreatingWallet] = React.useState(false);
+  const [creatingWalletErrorMessage, setCreatingWalletErrorMessage] = React.useState('')
 
-  const getAccounts = () => {
+  const getAccounts = async () => {
     setFethingAccounts(true);
     setErrorOccured(false);
-    setTimeout(() => {
-      fetch('http://localhost:3090/accounts')
+      await fetch('http://localhost:3090/accounts')
         .then((response) => {
           if (!response.ok) {
             throw Error(response.statusText)
@@ -44,7 +44,6 @@ const App = () => {
           setErrorOccured(true)
           setFethingAccounts(false)
         })
-    }, 500);
   }
 
   const getWallets = () => {
@@ -87,14 +86,20 @@ const App = () => {
           }
           response.json()
         })
-        .then((data) => {
+        .then(async (data) => {
+          await getAccounts();
+          closeModal()
           setCreatingWallet(false);
-          closeModal();
-          getAccounts()
+
         })
         .catch((error) => {
           setCreatingWallet(false);
-          setCreatingWalletErrorMessage(JSON.parse(error.message).error);
+          try {
+            setCreatingWalletErrorMessage(JSON.parse(error.message).error);
+          } catch (e) {
+            setCreatingWalletErrorMessage('Network error');
+          }
+
         });
 
     }, 500);
@@ -103,7 +108,7 @@ const App = () => {
   const closeModal = () => {
     setIsModalOpened(false);
     setSelectedWallet('');
-    setCreatingWalletErrorMessage(null)
+    setCreatingWalletErrorMessage('')
   }
 
   const openModal = () => {
@@ -113,11 +118,16 @@ const App = () => {
 
   useEffect(() => {
     getAccounts();
-  }, [])
+    return () => {
+      setAccounts([]);
+      setWallets([]);
+    };
+  }, [null])
 
 
   return (
-    <div className="page-content">
+
+    <><Header /><div className="page-content">
 
       <Sidebar />
 
@@ -130,15 +140,12 @@ const App = () => {
           </div>
         </div>
 
-        {
-          fetchingAccounts &&
+        {fetchingAccounts &&
           <div className="loader">
             <Loader />
-          </div>
-        }
+          </div>}
 
-        {
-          errorOccured &&
+        {errorOccured &&
           <div className="error-occured">
             <img alt="error" src="/assets/images/error.svg" />
             <div className="headline-note"> Network Error</div>
@@ -148,21 +155,18 @@ const App = () => {
           </div>
         }
 
-        {
-          !fetchingAccounts && accounts.length > 0 &&
-          accounts.map((element: IAccount) => <BalanceCard currency={element.currency} image={element.imgURL} balance={element.balance} key={element.id} />)
+        {!fetchingAccounts && accounts.length > 0 &&
+          accounts.map((element: IAccount) => <BalanceCard name={element.name} image={element.imgURL} balance={element.balance} key={element.id} />)
         }
 
 
         <Modal isOpen={isModalOpened}>
-          {
-            fetchingWallets &&
+          {fetchingWallets &&
             <div className="loader">
               <Loader />
             </div>
           }
-          {
-            fetchingWalletsFailed &&
+          {fetchingWalletsFailed &&
             <div className="error-occured">
               <img alt="error" src="/assets/images/error.svg" />
               <div className="headline-note"> Network Error</div>
@@ -172,46 +176,55 @@ const App = () => {
             </div>
           }
 
-          {
-            !fetchingWallets && wallets.length > 0 &&
-            <div className="modal">
-              <div className="modal-header">
-                <div className="title">Add new wallet</div>
-                <div className="close">
-                  <button onClick={() => closeModal()}><img alt="close" src="/assets/images/close.svg" /></button>
-                </div>
+          <div className="modal">
+            <div className="modal-header">
+              <div className="title">Add new wallet</div>
+              <div className="close">
+                <button aria-label="Close button" onClick={() => closeModal()}>
+                  <img alt="close" src="/assets/images/close.svg" />
+                </button>
               </div>
-              <div className="headline-note">
-                The crypto wallet will be created instantly and be available in your list of wallets.
-              </div>
-
-              <form>
-                <label>Select wallet</label>
-                <select onChange={(e) => setSelectedWallet(e.target.value)} value={selectedWallet} className="form-control" >
-                  <option value=''>Select an option</option>
-                  {
-                    wallets.map((element: IWallet) => <option key={element.currency} value={element.currency}>{element.name}</option>)
-                  }
-                </select>
-                <div className="submit-btn">
-                  <button className="ui-btn" type="button" disabled={selectedWallet == '' || creatingWallet} onClick={() => createWallet()}>Create wallet</button>
-                </div>
-
-                {
-                  !creatingWallet && creatingWalletErrorMessage &&
-                  <div className="form-error-message">
-                    <div className="message"><img alt="error" src="/assets/images/error_red.svg" /> {creatingWalletErrorMessage}</div>
-                    <div>
-                      <button className="close-error" onClick={() => setCreatingWalletErrorMessage(null)}><img alt="error" src="/assets/images/close_red.svg" /></button>
-                    </div>
-                  </div>
-                }
-              </form>
             </div>
-          }
+
+            {!fetchingWallets &&
+
+              <div>
+                <div className="headline-note">
+                  The crypto wallet will be created instantly and be available in your list of wallets.
+                </div>
+                <form>
+                  <label>Select wallet</label>
+                  <select
+                    onChange={(e) => setSelectedWallet(e.target.value)} value={selectedWallet} className="form-control">
+                    <option value=''>Select an option</option>
+                    {wallets.map((element: IWallet) => <option key={element.currency} value={element.currency}>{element.name}</option>)}
+                  </select>
+                  <div className="submit-btn">
+                    <button className="ui-btn" type="button" disabled={selectedWallet === '' || creatingWallet} onClick={() => createWallet()}>
+                      Create wallet
+                      {
+                        selectedWallet === '' || creatingWallet &&
+                        <span aria-label="Loading...">...</span>
+                      }
+                    </button>
+                  </div>
+
+                  {!creatingWallet && creatingWalletErrorMessage &&
+                    <div className="form-error-message">
+                      <div className="message"><img alt="error" src="/assets/images/error_red.svg" /> {creatingWalletErrorMessage}</div>
+                      <div>
+                        <button className="close-error" onClick={() => setCreatingWalletErrorMessage('')}><img alt="error" src="/assets/images/close_red.svg" /></button>
+                      </div>
+                    </div>
+                  }
+                </form>
+              </div>
+            }
+
+          </div>
         </Modal>
       </div>
-    </div>
+    </div></>
   )
 }
 
