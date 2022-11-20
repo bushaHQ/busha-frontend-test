@@ -23,7 +23,6 @@ export const handlers = [
       })
     );
   }),
-
   rest.get(`${BASE_URL}/wallets`, (req, res, ctx) => {
     return res(ctx.json(wallets));
   }),
