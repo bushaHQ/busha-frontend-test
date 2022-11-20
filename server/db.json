@@ -35,15 +35,21 @@
       "deposit": true,
       "payout": true,
       "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/BTC.svg"
+    },
+    {
+      "id": "df9f6a86-31b6-c2b1-825c-02c03a577386",
+      "currency": "XLM",
+      "hold": "0",
+      "pending_balance": "0",
+      "balance": "0",
+      "name": "Stellar",
+      "type": "digital",
+      "deposit": false,
+      "payout": false,
+      "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000381/alice_v3/XLM.svg"
     }
   ],
   "wallets": [
-    {
-      "currency": "XLM",
-      "name": "Stellar",
-      "type": "digital",
-      "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000381/alice_v3/XLM.svg"
-    },
     {
       "currency": "LTC",
       "name": "Litecoin",

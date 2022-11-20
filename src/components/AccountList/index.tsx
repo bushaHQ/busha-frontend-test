@@ -2,7 +2,7 @@ import React,{ useEffect, useState } from 'react';
 import styled from 'styled-components';
 import uuid from 'react-uuid';
 
-import { Account } from '../../interfaces';
+import { Account, Wallet } from '../../interfaces';
 import { AccountItem } from '../AccountItem';
 import Loader from '../shared/Loader';
 import Modal from '../shared/Modal';
@@ -18,82 +18,92 @@ const AccountListContainer = styled.div`
   margin-left: 15px;
   margin-top: 20px
 `;
-const coins:string[]= [
-  'Ethereum',
-  'Bitcoin',
-  'Litecoin',
-  'Dodgecoin',
-  'Kachicoin'
-];
 
 export default function AccountList() {
-  const [list, setList] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [showCreateWalletModal, setShowCreateWalletModal] = useState(false);
-  const [isCreateWalletError, setIsCreateWalletError] = useState(false);
-  const [isCreateWalletSuccess, setIsCreateWalletSuccess] = useState(false);
-  const [currencyType, setCurrencyType] = useState(coins[0]);
+  const [accountList, setAccountList] = useState<Account[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
+  const [showCreateWalletModal, setShowCreateWalletModal] = useState<boolean>(false);
+  const [isCreateWalletError, setIsCreateWalletError] = useState<boolean>(false);
+  const [isCreateWalletSuccess, setIsCreateWalletSuccess] = useState<boolean>(false);
+  const [currencyType, setCurrencyType] = useState<string>('');
+  const [walletList, setWalletList] = useState<Array<Wallet>>([]);
 
   const handleTryAgainClick = (e:React.MouseEvent<HTMLButtonElement>) => {
     window.location.reload();
   }
+  const showCreateWalletModalHandler = (e:React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    
+    setIsCreateWalletError(false);
+    setIsCreateWalletSuccess(false);
+    setShowCreateWalletModal(true);
+  }
   const handleCreateWalletClick =  async(e:React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    const wallet:Account = {
-      id: uuid(),
-      currency: 'cur',
-      hold: 0,
-      pending_balance: 0,
-      balance: 0,
-      name: currencyType,
-      type: 'fiat',
-      deposit: false,
-      payout: false,
-      imgURL: 'https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/BTC.svg'
-    };
+    try {
+      const filterResult = walletList.filter(wallet => wallet.currency === currencyType);
+      const walletDesc:Wallet = filterResult[0];
+  
+      const account:Account = {
+        id: uuid(),
+        currency: walletDesc.currency,
+        hold: 0,
+        pending_balance: 0,
+        balance: 0,
+        name: walletDesc.currency,
+        type: walletDesc.type,
+        deposit: false,
+        payout: false,
+        imgURL: walletDesc.imgURL
+      };
+        
+      const options = {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(account),
+      };
+  
+      const res = await fetch('http://localhost:3090/accounts', options);
+
+      setIsCreateWalletError(false);
+      setIsCreateWalletSuccess(true);
       
-    const options = {
-      method: 'POST',
-      headers: {
-      'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(wallet),
-    };
-
-    const res = await fetch('http://localhost:3090/accounts', options)
-    if (!res.ok){
-        setIsCreateWalletError(true);
-        return
+      setTimeout(()=>{
+        setShowCreateWalletModal(false);
+        window.location.reload();
+      }, 500)
+    } catch (error) {
+      setIsCreateWalletError(true);
     }
-
-    setIsCreateWalletSuccess(true);
-    
-
-    setTimeout(()=>{
-      setShowCreateWalletModal(false);
-      window.location.reload();
-    }, 500)
   }
 
   useEffect(() => {
     setIsLoading(true);
     const fetchData = async() =>{
-      const data = await fetch("http://localhost:3090/accounts");
+      try {
+        const res = await Promise.all([
+          fetch("http://localhost:3090/accounts"),
+          fetch("http://localhost:3090/wallets")
+        ]);
 
-      if (!data.ok){
+        setAccountList(await res[0].json());
+
+        const wallets: [Wallet] = await res[1].json();
+        setCurrencyType(wallets[0].currency);
+        setWalletList(wallets);
+      } catch (error) {
         setIsError(true);
         setIsLoading(false);
-        setList([]);
-        return
+        setAccountList([]);
+        setWalletList([]);
       }
-      const json = await data.json();
-      setList(json)
       setIsLoading(false);
     }
-
-    fetchData().catch(console.error);
+    fetchData();
     return () => {}
   },  []);
   return (
@@ -127,9 +137,9 @@ export default function AccountList() {
           </p>
           <div className='select-new-wallet'>
             <p className='select-subtitle'>Select wallet</p>
-            <select className='select' onChange={(e) => setCurrencyType(e.target.value)}>
-              {coins.map((coin)=>{
-                <option value={coin}>{coin}</option>
+            <select className='select' value={currencyType} onChange={(e) => setCurrencyType(e.target.value)}>
+              {walletList.map((wallet:Wallet)=>{
+                return <option key={wallet.currency} value={wallet.currency}>{wallet.name}</option>
               })}
             </select>
           </div>
@@ -144,6 +154,18 @@ export default function AccountList() {
               </div>
               <div className='right'>
                 <button onClick={()=> setIsCreateWalletError(false)}><i className='fa-solid fa-xmark'></i></button>
+              </div>
+            </div>:
+            null
+          }
+          { isCreateWalletSuccess ? 
+            <div className='success-notice'>
+              <div className='left'>
+                <i className="fa-sharp fa-solid fa-diamond-exclamation"></i>
+                <p>New Wallet Added</p>
+              </div>
+              <div className='right'>
+                <button onClick={()=> setIsCreateWalletSuccess(false)}><i className='fa-solid fa-xmark'></i></button>
               </div>
             </div>:
             null
@@ -165,13 +187,13 @@ export default function AccountList() {
             <div className='wallet-header-section'>
               <h2 className='wallet-subtitle'>Wallets</h2>
               <button className='add-wallet' 
-                onClick={() => setShowCreateWalletModal(true)}>
+                onClick={(e) => showCreateWalletModalHandler(e)}>
                     <a href='#'> + Add new wallet</a>
               </button>
             </div>
           </div>
           <AccountListContainer>
-              { list.map((d:Account, index)=>{
+              { accountList.map((d:Account, index)=>{
                 return <AccountItem d={d} key={index}/>
               })}
           </AccountListContainer>

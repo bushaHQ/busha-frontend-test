@@ -10,3 +10,10 @@ export interface Account {
     payout: boolean;
     imgURL: string;
 }
+
+export interface Wallet {
+    currency: string;
+    name: string;
+    type: string;
+    imgURL: string;
+}

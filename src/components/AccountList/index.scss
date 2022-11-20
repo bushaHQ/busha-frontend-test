@@ -241,5 +241,42 @@
             }
         }
     }
+    .success-notice{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        align-items: center;
+        background: rgb(204, 234, 204);
+        border: 1px solid rgb(8, 59, 8);
+        border-radius: 8px;
+        .right{
+            margin-right: 15px;
+            button{
+                width: 20px;
+                height: 20px;
+                margin-left: -4px;
+                margin-top: -3px;
+                border: none;
+                background: transparent;
+                background-repeat: no-repeat;
+            }
+            .fa-xmark{
+                color: rgb(8, 118, 8);
+                font-size: 20px;
+            }
+        }
+        .left{
+            display: flex;
+            align-items: center;
+            margin-left: 10px;
+            .fa-diamond-exclamation{
+                color: rgb(8, 118, 8);
+                font-size: 8px;
+            }
+            p {
+                margin-left: 15px;
+            }
+        }
+    }
 }
 
