@@ -1,5 +1,6 @@
 import React,{ useEffect, useState } from 'react';
 import styled from 'styled-components';
+import uuid from 'react-uuid';
 
 import { Account } from '../../interfaces';
 import { AccountItem } from '../AccountItem';
@@ -17,6 +18,13 @@ const AccountListContainer = styled.div`
   margin-left: 15px;
   margin-top: 20px
 `;
+const coins:string[]= [
+  'Ethereum',
+  'Bitcoin',
+  'Litecoin',
+  'Dodgecoin',
+  'Kachicoin'
+];
 
 export default function AccountList() {
   const [list, setList] = useState([]);
@@ -24,9 +32,49 @@ export default function AccountList() {
   const [isError, setIsError] = useState(false);
   const [showCreateWalletModal, setShowCreateWalletModal] = useState(false);
   const [isCreateWalletError, setIsCreateWalletError] = useState(false);
+  const [isCreateWalletSuccess, setIsCreateWalletSuccess] = useState(false);
+  const [currencyType, setCurrencyType] = useState(coins[0]);
 
   const handleTryAgainClick = (e:React.MouseEvent<HTMLButtonElement>) => {
     window.location.reload();
+  }
+  const handleCreateWalletClick =  async(e:React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    const wallet:Account = {
+      id: uuid(),
+      currency: 'cur',
+      hold: 0,
+      pending_balance: 0,
+      balance: 0,
+      name: currencyType,
+      type: 'fiat',
+      deposit: false,
+      payout: false,
+      imgURL: 'https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/BTC.svg'
+    };
+      
+    const options = {
+      method: 'POST',
+      headers: {
+      'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(wallet),
+    };
+
+    const res = await fetch('http://localhost:3090/accounts', options)
+    if (!res.ok){
+        setIsCreateWalletError(true);
+        return
+    }
+
+    setIsCreateWalletSuccess(true);
+    
+
+    setTimeout(()=>{
+      setShowCreateWalletModal(false);
+      window.location.reload();
+    }, 500)
   }
 
   useEffect(() => {
@@ -79,15 +127,13 @@ export default function AccountList() {
           </p>
           <div className='select-new-wallet'>
             <p className='select-subtitle'>Select wallet</p>
-            <select className='select'>
-              <option>Ethereum</option>
-              <option>Bitcoin</option>
-              <option>Litecoin</option>
-              <option>Dodgecoin</option>
-              <option>Kachicoin</option>
+            <select className='select' onChange={(e) => setCurrencyType(e.target.value)}>
+              {coins.map((coin)=>{
+                <option value={coin}>{coin}</option>
+              })}
             </select>
           </div>
-          <button className='create-wallet-button'>
+          <button className='create-wallet-button' onClick={(e) => handleCreateWalletClick(e)}>
               <a href='#'>Create wallet</a>
           </button>
           { isCreateWalletError ? 
