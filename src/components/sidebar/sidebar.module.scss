@@ -1,0 +1,39 @@
+.sidebar {
+    width: 240px;
+    display: none;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+ul li {
+    list-style-type: none;
+
+    a {
+        padding: 14px 17px;
+        font-weight: 400;
+        display: block;
+        text-decoration: none;
+        outline: none;
+        color: #3E4C59 !important;
+
+    }
+
+
+}
+
+.activePage {
+    background: #F5F7FA;
+    color: #000000;
+    font-weight: 500;
+    border-radius: 3px;
+}
+
+/* Medium screen */
+@media (min-width: 768px) {
+    .sidebar {
+        display: block;
+    }
+}

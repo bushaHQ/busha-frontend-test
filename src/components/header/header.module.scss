@@ -1,0 +1,45 @@
+.header {
+    padding: 20px 25px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+    display: flex;
+}
+
+.user {
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-end;
+    align-items: center;
+    color: #3E4C59;
+    font-weight: 500;
+
+}
+
+.imagePlaceholder {
+    background: rgba(154, 165, 177, 0.3);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    position: relative;
+}
+
+.fullname {
+    display: none;
+    font-size: 18px;
+}
+
+.imagePlaceholderEmpty {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Medium screen */
+@media (min-width: 768px) {
+    .fullname{
+        display: flex;
+        margin-left: 10px;
+        font-size: 14px;
+    }
+}
