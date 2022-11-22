@@ -44,11 +44,14 @@ const Layout: FC<{catchError: string}> = ({ catchError }) => {
     }, [])
 
     useEffect(() => {
-      if (catchError) {
-        setError(catchError)
-      }
+      if (catchError) setError(catchError)
     }, [catchError])
-    
+
+    useEffect(() => {    
+      return () => {
+        setData([])
+      }
+    }, [])
 
   return (
     <>

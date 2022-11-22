@@ -21,10 +21,10 @@ const AddWallet: FC<AddWalletProps> = ({ handleClose, fetchAccounts, catchError 
     const [disable, setDisable] = useState(false)
     const [postError, setPostError] = useState('')
     
-    const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
+    const handleSelect = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
         e.preventDefault()
-        setCurrency(e.target.value)
-    }
+        setCurrency(e.currentTarget.value)
+    },[])
 
     const handleError = () => {
         setError('')
@@ -35,7 +35,8 @@ const AddWallet: FC<AddWalletProps> = ({ handleClose, fetchAccounts, catchError 
         const getWallets = async () => {
             try {
                 const wallets = await (await fetch(`${URL}/wallets`)).json()
-                if (wallets?.error) return setError('Network error')
+                
+                if (!wallets?.error) return setData(wallets)
                 return setData(wallets)
             } catch(error: any) {                
                 setError('Network error')
@@ -44,20 +45,24 @@ const AddWallet: FC<AddWalletProps> = ({ handleClose, fetchAccounts, catchError 
         getWallets()
     }, [])
 
-    useEffect(() => {           
+    useEffect(() => {                   
         fetchWallets()
 
         return () => {
             handleClose()
+            setData([])
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
-        if (catchError) {
-          setError(catchError)
-        }
+        if (catchError) setError(catchError)
       }, [catchError])
+
+      useEffect(() => {
+        if (data.length) setCurrency(data[0].currency)
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, [data])
 
     const handleSubmit = async () => {
         try {
@@ -65,7 +70,8 @@ const AddWallet: FC<AddWalletProps> = ({ handleClose, fetchAccounts, catchError 
             setDisable(state => !state)
             const newWallet = {currency}
             CONFIG.body = JSON.stringify(newWallet)
-
+            console.log(newWallet);
+            
             const res = await (await fetch(`${URL}/accounts`, CONFIG)).json()
 
             if (res?.error) {
@@ -92,8 +98,8 @@ const AddWallet: FC<AddWalletProps> = ({ handleClose, fetchAccounts, catchError 
         <SoftTitle mt={4.9} size={36}>The crypto wallet will be created instantly and be available in your list of wallets.</SoftTitle>
         <Label>
             Select a wallet
-            <Select onChange={handleSelect}>
-                {data.length && data?.map(wallet => <Option value={wallet.currency} key={wallet.name}>{wallet.name}</Option>)}
+            <Select value={data[0].currency} onChange={handleSelect}>
+                {data.length && data?.map((wallet) => <Option value={wallet.currency} key={wallet.name}>{wallet.name}</Option>)}
             </Select>
         </Label>
         <LoaderWrapper>
