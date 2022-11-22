@@ -59,15 +59,21 @@
       "deposit": false,
       "payout": false,
       "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/LTC.svg"
+    },
+    {
+      "id": "294c24e8-dde1-f480-1820-2f3be0458f34",
+      "currency": "RMT",
+      "hold": "0",
+      "pending_balance": "0",
+      "balance": "0",
+      "name": "SureRemit",
+      "type": "digital",
+      "deposit": false,
+      "payout": false,
+      "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/RMT.svg"
     }
   ],
   "wallets": [
-    {
-      "currency": "RMT",
-      "name": "SureRemit",
-      "type": "digital",
-      "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/RMT.svg"
-    },
     {
       "currency": "USDT",
       "name": "Tether",

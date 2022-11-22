@@ -32,11 +32,7 @@ export default function AccountList() {
   const [walletList, setWalletList] = useState<Array<Wallet>>([]);
 
   const handleTryAgainClick = async(e:React.MouseEvent<HTMLButtonElement>) => {
-    setIsLoading(true);
-    setShowCreateWalletModal(false)
-    setIsError(false);
-    
-    setIsReload(true);
+    setIsReload(!isreload);
   }
   const showCreateWalletModalHandler = (e:React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -86,7 +82,7 @@ export default function AccountList() {
 
       setShowCreateWalletModal(false);
 
-      setIsReload(true);
+      setIsReload(!isreload);
     
     } catch (error) {
       setIsLoadingInButton(false)
@@ -96,8 +92,8 @@ export default function AccountList() {
 
   useEffect(() => {
     let isMounted = true;
+    setIsLoading(true);
     const fetchData = async() =>{
-      setIsLoading(true);
       try {
         const res = await Promise.all([
           fetch("http://localhost:3090/accounts"),
@@ -113,6 +109,7 @@ export default function AccountList() {
           const wallets: [Wallet] = await res[1].json();
           setCurrencyType(wallets.length > 0 ? wallets[0].currency: '');
           setWalletList(wallets);
+          setIsError(false);
         }
       
       } catch (error) {
@@ -134,6 +131,7 @@ export default function AccountList() {
       isMounted = false;
     }
   },  [isreload]);
+  
   return (
     <>
       
