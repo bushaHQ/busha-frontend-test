@@ -33,8 +33,7 @@
     "start:server": "node server/index.js",
     "wait-on:server": "wait-on process.env.REACT_APP_API_URL",
     "start:dev": "concurrently  \"npm run db:reset && npm run start:server\" \"npm run wait-on:server && npm run start:client\"",
-    "start": "npm run start:server",
-    "heroku-postbuild": "npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+    "start": "npm run start:server"
   },
   "eslintConfig": {
     "extends": [
