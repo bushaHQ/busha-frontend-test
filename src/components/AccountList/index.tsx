@@ -22,26 +22,35 @@ const AccountListContainer = styled.div`
 export default function AccountList() {
   const [accountList, setAccountList] = useState<Account[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoadingInButton, setIsLoadingInButton] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
   const [showCreateWalletModal, setShowCreateWalletModal] = useState<boolean>(false);
   const [isCreateWalletError, setIsCreateWalletError] = useState<boolean>(false);
   const [isCreateWalletSuccess, setIsCreateWalletSuccess] = useState<boolean>(false);
+  const [isreload, setIsReload] = useState<boolean>(false);
   const [currencyType, setCurrencyType] = useState<string>('');
   const [walletList, setWalletList] = useState<Array<Wallet>>([]);
 
-  const handleTryAgainClick = (e:React.MouseEvent<HTMLButtonElement>) => {
-    window.location.reload();
+  const handleTryAgainClick = async(e:React.MouseEvent<HTMLButtonElement>) => {
+    setIsLoading(true);
+    setShowCreateWalletModal(false)
+    setIsError(false);
+    
+    setIsReload(true);
   }
   const showCreateWalletModalHandler = (e:React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     
     setIsCreateWalletError(false);
     setIsCreateWalletSuccess(false);
+    setIsError(false);
+    setIsLoading(false);
+
     setShowCreateWalletModal(true);
   }
   const handleCreateWalletClick =  async(e:React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-
+    setIsLoadingInButton(true);
     try {
       const filterResult = walletList.filter(wallet => wallet.currency === currencyType);
       const walletDesc:Wallet = filterResult[0];
@@ -69,50 +78,65 @@ export default function AccountList() {
   
       const res = await fetch('http://localhost:3090/accounts', options);
 
+      if (!res.ok) throw new Error('an error occurred');
+
+      setIsLoadingInButton(false)
       setIsCreateWalletError(false);
       setIsCreateWalletSuccess(true);
-      
-      setTimeout(()=>{
-        setShowCreateWalletModal(false);
-        window.location.reload();
-      }, 500)
+
+      setShowCreateWalletModal(false);
+
+      setIsReload(true);
+    
     } catch (error) {
+      setIsLoadingInButton(false)
       setIsCreateWalletError(true);
     }
   }
 
   useEffect(() => {
-    setIsLoading(true);
+    let isMounted = true;
     const fetchData = async() =>{
+      setIsLoading(true);
       try {
         const res = await Promise.all([
           fetch("http://localhost:3090/accounts"),
           fetch("http://localhost:3090/wallets")
         ]);
-
-        setAccountList(await res[0].json());
-
-        const wallets: [Wallet] = await res[1].json();
-        setCurrencyType(wallets[0].currency);
-        setWalletList(wallets);
+  
+        if (!res[0].ok) throw new Error('error occured while fetching accounts');
+        if (!res[1].ok) throw new Error('error occured while fetching wallets');
+  
+        if(isMounted){
+          setAccountList(await res[0].json());
+  
+          const wallets: [Wallet] = await res[1].json();
+          setCurrencyType(wallets.length > 0 ? wallets[0].currency: '');
+          setWalletList(wallets);
+        }
+      
       } catch (error) {
-        setIsError(true);
-        setIsLoading(false);
-        setAccountList([]);
-        setWalletList([]);
+        if(isMounted){
+          setIsError(true);
+          setShowCreateWalletModal(false);
+          setAccountList([]);
+          setWalletList([]);
+        }
       }
-      setIsLoading(false);
+  
+      if (isMounted){
+        setIsLoading(false);
+        setIsLoadingInButton(false)
+      }
     }
     fetchData();
-    return () => {}
-  },  []);
+    return () => {
+      isMounted = false;
+    }
+  },  [isreload]);
   return (
     <>
-      <Modal isOpen={isLoading}>
-        <div className='loader'>
-          <Loader size={70} />
-        </div>
-      </Modal>
+      
       <Modal isOpen={isError} >
         <div className='network-error'>
           <p className='circular'>
@@ -120,7 +144,7 @@ export default function AccountList() {
           </p>
           <p className='error-text'>Network Error</p>
           <button className='try-again' onClick={(e) => handleTryAgainClick(e)}>
-            <a href='#'>  Try again </a>                                             
+             Try again                                             
           </button>
         </div>
       </Modal>
@@ -128,7 +152,7 @@ export default function AccountList() {
         <div className='add-new-wallet-modal'>
           <div className='header-group'>
             <p className='new-wallet-header'>Add new wallet</p>
-            <button onClick={() => setShowCreateWalletModal(false)}>
+            <button onClick={() => setShowCreateWalletModal(false)} aria-label='Close button'>
               <i className='fa-solid fa-xmark'></i>
             </button>
           </div>
@@ -137,20 +161,24 @@ export default function AccountList() {
           </p>
           <div className='select-new-wallet'>
             <p className='select-subtitle'>Select wallet</p>
-            <select className='select' value={currencyType} onChange={(e) => setCurrencyType(e.target.value)}>
+            <select role='combobox' className='select' value={currencyType} onChange={(e) => setCurrencyType(e.target.value)}>
               {walletList.map((wallet:Wallet)=>{
-                return <option key={wallet.currency} value={wallet.currency}>{wallet.name}</option>
+                return <option key={wallet.currency} value={wallet.currency}>{wallet.currency}</option>
               })}
             </select>
           </div>
           <button className='create-wallet-button' onClick={(e) => handleCreateWalletClick(e)}>
-              <a href='#'>Create wallet</a>
+              Create wallet
+              {isLoadingInButton ? 
+                      <Loader size={10} />
+                    :
+                    null}
           </button>
           { isCreateWalletError ? 
             <div className='error-notice'>
               <div className='left'>
                 <i className="fa-sharp fa-solid fa-diamond-exclamation"></i>
-                <p>Network Error</p>
+                <p>Network error</p>
               </div>
               <div className='right'>
                 <button onClick={()=> setIsCreateWalletError(false)}><i className='fa-solid fa-xmark'></i></button>
@@ -172,6 +200,11 @@ export default function AccountList() {
           }
         </div>
       </Modal>
+      <Modal isOpen={isLoading}>
+        <div className='loader'>
+          <Loader size={70} />
+        </div>
+      </Modal>
       <div className='main-body'>
         <div className='left-section'>
             <ul>
@@ -188,7 +221,7 @@ export default function AccountList() {
               <h2 className='wallet-subtitle'>Wallets</h2>
               <button className='add-wallet' 
                 onClick={(e) => showCreateWalletModalHandler(e)}>
-                    <a href='#'> + Add new wallet</a>
+                     + Add new wallet
               </button>
             </div>
           </div>

@@ -37,7 +37,7 @@ export const AccountItem: React.FC<Props>= ({d}) => {
             <div className="flex-row">
                 <div className="accountBalance">
                     <div className="flex-row">
-                        <p>{d.hold} </p>
+                        <p>{d.balance} </p>
                         <p className="accountCurrency">{d.currency}</p>    
                     </div>
                 </div>

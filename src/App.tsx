@@ -12,8 +12,7 @@ function App() {
                 <div id="rootmainpage">
                     <Nav/>
                     <Routes>
-                        <Route path="/" element={<h1>Welcome to Busha</h1>} />
-                        <Route path="/accounts" element={<AccountList/>} />
+                        <Route path="/" element={<AccountList/>} />
                     </Routes>
                 </div>
             </div>
