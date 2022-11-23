@@ -37,8 +37,8 @@ export const AccountItem: React.FC<Props>= ({d}) => {
             <div className="flex-row">
                 <div className="accountBalance">
                     <div className="flex-row">
-                        <p>{d.balance} </p>
-                        <p className="accountCurrency">{d.currency}</p>    
+                        <p>{d.currency == "NGN" ? "₦" : ""} {d.balance}{" "} </p>
+                        <p className="accountCurrency">{d.currency == "NGN" ? "" : d.currency}</p>    
                     </div>
                 </div>
             </div>
