@@ -11,6 +11,10 @@
     align-items: center;
     justify-content: center;
 
+    :hover{
+        cursor: pointer;
+    }
+
     .arrow-right {
         background: #212B36;
         .fa-chevron-right {
