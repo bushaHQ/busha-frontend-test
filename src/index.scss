@@ -16,6 +16,10 @@ button:hover{
   cursor:pointer;
 }
 
+select:hover{
+  cursor: pointer;
+}
+
 @font-face {
   font-family: 'Aribau Grotesk';
   src: local('Aribau Grotesk') url('./fonts/Aribau\ Grotesk\ Black.otf') format('opentype');
