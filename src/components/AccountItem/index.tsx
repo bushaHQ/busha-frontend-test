@@ -11,9 +11,10 @@ type Props = {
 };
 
 const ItemContainer = styled.div`
-  min-width: 235px;
-  min-height: 150px;
-  flex-grow:1
+  height: 150px;
+  max-width: 220px;
+  min-width: 200px;
+  flex: 1 0 180px;
   color: white;
   background: black;
   border-width: 1px;
@@ -37,8 +38,8 @@ export const AccountItem: React.FC<Props>= ({d}) => {
             <div className="flex-row">
                 <div className="accountBalance">
                     <div className="flex-row">
-                        <p>{d.currency == "NGN" ? "₦" : ""} {d.balance}{" "} </p>
-                        <p className="accountCurrency">{d.currency == "NGN" ? "" : d.currency}</p>    
+                        <p>{d.currency === "NGN" ? "₦" : ""} {d.balance}{" "} </p>
+                        <p className="accountCurrency">{d.currency === "NGN" ? "" : d.currency}</p>    
                     </div>
                 </div>
             </div>

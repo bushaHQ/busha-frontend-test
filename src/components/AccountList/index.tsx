@@ -11,12 +11,12 @@ import './index.scss';
 
 const AccountListContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   position: relative;
   flex-wrap: wrap;
-  gap: 10px 20px;
+  gap: 20px 20px;
   margin-left: 15px;
-  margin-top: 20px
+  margin-top: 20px;
 `;
 
 export default function AccountList() {
