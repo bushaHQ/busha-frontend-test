@@ -8,8 +8,7 @@ export default function Nav() {
         <nav className='nav'>
             <div className='nav-content'>
                 <div className='busha-logo'>
-                    <img src='/busha_logo.png' alt='Busha Logo'/>
-                    <div>busha</div>
+                    <img src='/BushaLogo.svg' alt='Busha Logo'/>
                 </div>
                 <div className='busha-user'>
                     <div className='user-name-abrev'>o</div>

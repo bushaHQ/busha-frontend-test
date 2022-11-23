@@ -43,7 +43,7 @@ export const AccountItem: React.FC<Props>= ({d}) => {
                     </div>
                 </div>
             </div>
-            <div className="flex-row">
+            <div className="fclex-row">
                 <div className="arrow-right-frame">
                     <div className="arrow-right">
                         <i className="fa-solid fa-chevron-right"></i>
