@@ -15,3 +15,8 @@ code {
 button:hover{
   cursor:pointer;
 }
+
+@font-face {
+  font-family: 'Aribau Grotesk';
+  src: local('Aribau Grotesk') url('./fonts/Aribau\ Grotesk\ Black.otf') format('opentype');
+}
