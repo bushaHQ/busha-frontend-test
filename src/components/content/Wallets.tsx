@@ -8,9 +8,6 @@ import WalletCardComponent from "./WalletCard";
 import Close from '../../assets/img/close.png';
 import ErrorMessageComponent from "../misc/ErrorMessage";
 
-export interface PostData {
-    requestOptions: any;
-  }
 
 const WalletsContent = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,8 +24,9 @@ const WalletsContent = () => {
     const [isAddError, setIsAddError] = useState(false);
     const [addErrorMessage, setAddErrorMessage] = useState('');
 
+    const SERVER_URL = "http://localhost:3090";
+
     useEffect(() => {
-        console.log(process);
         fetchWallets();
     }, []);
 
@@ -40,7 +38,7 @@ const WalletsContent = () => {
 
     const fetchWallets = async () => {
         setIsLoading(true);
-        fetch('http://localhost:3090/accounts', {
+        fetch(SERVER_URL+'/accounts', {
             method: 'GET'
         })
         .then(response => response.json())
@@ -58,7 +56,7 @@ const WalletsContent = () => {
 
     const fetchOtherWallets = () => {
         setIsModalLoading(true);
-        fetch('http://localhost:3090/wallets', {
+        fetch(SERVER_URL+'/wallets', {
             method: 'GET'
         })
         .then(response => response.json())
@@ -82,7 +80,7 @@ const WalletsContent = () => {
         } else {
             setIsAddLoading(true);
             const data = {"currency": addCurrency};
-            fetch('http://localhost:3090/accounts', {
+            fetch(SERVER_URL+'/accounts', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

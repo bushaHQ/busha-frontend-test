@@ -55,15 +55,19 @@
       "type": "digital",
       "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/RMT.svg",
       "id": "FQwY0Vw"
+    },
+    {
+      "currency": "LTC",
+      "hold": "0",
+      "pending_balance": "0",
+      "balance": "0",
+      "name": "Litecoin",
+      "type": "digital",
+      "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/LTC.svg",
+      "id": "OLfAEQP"
     }
   ],
   "wallets": [
-    {
-      "currency": "LTC",
-      "name": "Litecoin",
-      "type": "digital",
-      "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/LTC.svg"
-    },
     {
       "currency": "USDT",
       "name": "Tether",
