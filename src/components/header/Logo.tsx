@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import Icon from '../../assets/logo.png';
+import Icon from '../../assets/img/logo.png';
 
 const LogoComponent = () => {
     return (
         <LogoContainer>
             <ImageWrapper>
-                <img src={Icon} alt="Logo" height="28px" />
+                <img src={Icon} alt="Busha" height="28px" />
             </ImageWrapper>
         </LogoContainer>
     );

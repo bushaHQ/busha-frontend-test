@@ -26,12 +26,13 @@ const UsernameContainer = styled.div`
 
 const UsernameAvatar = styled.div`
     height: 36px;
-    width: 36px;
+    width: 36px !important;
     border-radius: 36px;
     background: rgba(154, 165, 177, 0.3);
     text-align: center;
     margin-top: 10px; 
     cursor: pointer;
+    box-sizing: border-box;
 `;
 
 const AvatarLetter = styled.p`
