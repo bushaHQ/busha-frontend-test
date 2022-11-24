@@ -1,5 +1,7 @@
+import WalletsPage from "./components/pages/Wallets";
+
 function App() {
-  return <h1>Busha</h1>;
+  return <WalletsPage />;
 }
 
 export default App;
