@@ -10,7 +10,7 @@ const WalletCardComponent = (props: any) => {
                 <CurrencyImage><img src={imgURL} alt={currency} height="34px" /></CurrencyImage>
                 <CurrencyTittle>{name}</CurrencyTittle>
             </CardCurrencyRow>
-            <CardAmountRow>{currency} {balance}</CardAmountRow>
+            <CardAmountRow>{balance} {currency}</CardAmountRow>
             <CardButtonRow>
                 <CardButton><img src={Chevron} alt=">" /></CardButton>
             </CardButtonRow>
