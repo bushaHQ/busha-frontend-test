@@ -24,7 +24,8 @@ const WalletsContent = () => {
     const [isAddError, setIsAddError] = useState(false);
     const [addErrorMessage, setAddErrorMessage] = useState('');
 
-    const SERVER_URL = "http://localhost:3090";
+    //const SERVER_URL = "http://localhost:3090";
+    const SERVER_URL = "https://busha-frontent-test-server-auwal.onrender.com";
 
     useEffect(() => {
         fetchWallets();
