@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, FormEvent, SetStateAction, useEffect, useState } from "react";
 import { walletsRes } from "../types";
 import Loader from "./shared/Loader";
 import TryAgain from "./TryAgainPrompt";
@@ -14,7 +14,8 @@ export default function CreateWalletForm(props: {
   const [isError, setIsError] = useState(false);
   const [status, setStatus] = useState('')
 
-  async function handleCreateWallet() {
+  async function handleCreateWallet(e:FormEvent) {
+    e.preventDefault()
     try {
       setStatus('posting')
       await fetch("http://localhost:3090/accounts", {
