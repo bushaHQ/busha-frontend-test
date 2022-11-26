@@ -15,6 +15,7 @@ export default function WalletsGrid(props:{wasWalletAdded: boolean}) {
       setWallets(data);
       setStatus("done")
     } catch (error) {
+      console.log(error)
       setStatus("failed")
     }
   }
