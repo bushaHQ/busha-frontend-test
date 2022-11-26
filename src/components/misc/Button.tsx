@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import Loader from "../shared/Loader";
 
 const ButtonComponent = (props: any) => {
     const { text, onClick, loading } = props;
     return (
-        <ButtonWrapper onClick={onClick} disabled={loading}>{loading ? "Loading...": <>{text}</>}</ButtonWrapper>
+        <ButtonWrapper onClick={onClick} disabled={loading}>{loading ? <Loader />: <>{text}</>}</ButtonWrapper>
     );
 }
 

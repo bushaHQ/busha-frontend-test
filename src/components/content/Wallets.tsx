@@ -84,13 +84,14 @@ const WalletsContent = () => {
         
     }
 
-    const createNewWallet = async () => {
+    const createNewWallet = async (e: any) => {
+        e.preventDefault();
+        setIsAddLoading(true);
         if(addCurrency === ""){
             setIsAddError(true);
             setIsAddLoading(false);
             setAddErrorMessage("Select currency");
         } else {
-            setIsAddLoading(true);
             const data = {"currency": addCurrency};
             await fetch(SERVER_URL+'/accounts', {
                 method: 'POST',
@@ -173,30 +174,37 @@ const WalletsContent = () => {
             }
             <Modal isOpen={isModalOpen}>
                 <ModalWrapper>
+                    <ModalHeaderRow>
+                        <ModalHeaderLeftRow>Add new wallet</ModalHeaderLeftRow>
+                        <ModalHeaderRightRow>
+                            <CloseButton aria-label="Close button" onClick={() => closeAddModal()}><img src={Close} alt="X" /></CloseButton>
+                        </ModalHeaderRightRow>
+                    </ModalHeaderRow>
+                    {/* <CenterModalWrapper className={!isModalLoading ? "hide" : "show"}>
+                        <br /><br /><br />
+                        <LoadingWrapper>
+                            <Loader size={83.37} />
+                        </LoadingWrapper>
+                    </CenterModalWrapper> */}
                     {
-                        isModalLoading ?
+                        (isModalLoading || isAddLoading) &&
                         <CenterModalWrapper>
                             <br /><br /><br />
                             <LoadingWrapper>
                                 <Loader size={83.37} />
                             </LoadingWrapper>
                         </CenterModalWrapper>
-                        :
-                        <>
-                            {
-                            isModalError ?
-                            <CenterModalWrapper>
-                                <ErrorComponent />
-                                <ButtonComponent text="Try again" onClick={() => fetchOtherWallets()} />
-                            </CenterModalWrapper>
-                            :
-                            <ModalFormWrapper>
-                                <ModalHeaderRow>
-                                    <ModalHeaderLeftRow>Add new wallet</ModalHeaderLeftRow>
-                                    <ModalHeaderRightRow>
-                                        <CloseButton aria-label="Close button" onClick={() => closeAddModal()}><img src={Close} alt="X" /></CloseButton>
-                                    </ModalHeaderRightRow>
-                                </ModalHeaderRow>
+                    }
+                    { isModalError &&
+                        <CenterModalWrapper>
+                            <ErrorComponent />
+                            <ButtonComponent text="Try again" onClick={() => fetchOtherWallets()} />
+                        </CenterModalWrapper>
+                    }
+                    {
+                        !isModalLoading && !isModalError && 
+                        <ModalFormWrapper>
+                            <form onSubmit={createNewWallet}>
                                 <Description>The crypto wallet will be created instantly and be available in your list of wallets.</Description>
                                 <InputLabel><label>Select wallet</label></InputLabel>
                                 <select onChange={(e) => setAddCurrency(e.target.value)}>
@@ -210,14 +218,13 @@ const WalletsContent = () => {
                                 <br />
                                 <br />
                                 <ButtonWrapper>
-                                    <ButtonComponent text="Create wallet" aria-label="Loading..." onClick={() => createNewWallet()} loading={isAddLoading} />
+                                    <ButtonComponent type="submit" text="Create wallet" loading={isAddLoading} />
                                 </ButtonWrapper>
-                                <br />
-                                <br />
-                                {isAddError && <ErrorMessageComponent text={addErrorMessage} onClick={() => setIsAddError(false)} />}
-                            </ModalFormWrapper>
-                            }
-                        </>
+                            </form>
+                            <br />
+                            <br />
+                            {isAddError && <ErrorMessageComponent text={addErrorMessage} onClick={() => setIsAddError(false)} />}
+                        </ModalFormWrapper>
                     }
                     
                 </ModalWrapper>
@@ -334,6 +341,8 @@ const ModalHeaderRow = styled.div`
     height: auto;
     display: flex;
     flex-direction: row;
+    padding: 50px 25px;
+    box-sizing: border-box;
 `;
 const ModalHeaderLeftRow = styled.div`
     width: 80%;
@@ -367,7 +376,7 @@ const Description = styled.div`
     font-size: 18px;
     line-height: 26px;
     color: #3E4C59;
-    padding-top: 50px;
+    padding-top: 0px;
 `;
 const InputLabel = styled.div`
     font-family: 'Aribau Grotesk';
@@ -402,7 +411,7 @@ const CenterModalWrapper = styled.div`
     border: 0px solid red;
 `;
 const ModalFormWrapper = styled.div`
-    padding: 50px 25px;
+    padding: 0px 25px;
     box-sizing: border-box;
     border: 0px solid red;
 `;

@@ -44,27 +44,7 @@
       "name": "Stellar",
       "type": "digital",
       "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000381/alice_v3/XLM.svg",
-      "id": "9JLBkaK"
-    },
-    {
-      "currency": "XRP",
-      "hold": "0",
-      "pending_balance": "0",
-      "balance": "0",
-      "name": "Ripple",
-      "type": "digital",
-      "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1606747749/alice_v3/XRP.svg",
-      "id": "IrxjGXz"
-    },
-    {
-      "currency": "RMT",
-      "hold": "0",
-      "pending_balance": "0",
-      "balance": "0",
-      "name": "SureRemit",
-      "type": "digital",
-      "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/RMT.svg",
-      "id": "T0Ny5PJ"
+      "id": "PeuV10q"
     }
   ],
   "wallets": [
@@ -75,10 +55,22 @@
       "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/LTC.svg"
     },
     {
+      "currency": "RMT",
+      "name": "SureRemit",
+      "type": "digital",
+      "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/RMT.svg"
+    },
+    {
       "currency": "USDT",
       "name": "Tether",
       "type": "digital",
       "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000381/alice_v3/USDT.svg"
+    },
+    {
+      "currency": "XRP",
+      "name": "Ripple",
+      "type": "digital",
+      "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1606747749/alice_v3/XRP.svg"
     },
     {
       "currency": "DOGE",
