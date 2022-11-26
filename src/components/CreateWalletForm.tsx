@@ -12,11 +12,11 @@ export default function CreateWalletForm(props: {
 }) {
   const [options, setOptions] = useState<walletsRes[] | undefined>();
   const [isError, setIsError] = useState(false);
-  const [didOptionsFail, setDidOptionsFail] = useState(false);
   const [status, setStatus] = useState('')
 
   async function handleCreateWallet() {
     try {
+      setStatus('posting')
       await fetch("http://localhost:3090/accounts", {
         method: "POST",
         headers: {
@@ -38,7 +38,6 @@ export default function CreateWalletForm(props: {
       const res = await fetch("http://localhost:3090/wallets");
       const data = await res.json();
       setOptions(data);
-      setDidOptionsFail(false);
       setStatus('done')
     } catch (error) {
       setStatus('failed')
@@ -100,7 +99,7 @@ export default function CreateWalletForm(props: {
             onChange={(e) => props.setSelected(e.target.value)}
           >
             {options?.map((val) => {
-              return <option value={val.currency}>{val.name}</option>;
+              return <option key={val.name} value={val.currency}>{val.name}</option>;
             })}
           </select>
         </div>
@@ -110,7 +109,7 @@ export default function CreateWalletForm(props: {
           disabled={props.selected === undefined}
           type="submit"
         >
-          Create wallet
+          {status === 'posting' ? 'Loading...' : "Create wallet"}
         </button>
 
         {isError ?? <WalletFormError setIsError={setIsError}/>}
