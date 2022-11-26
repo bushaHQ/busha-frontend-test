@@ -10,7 +10,7 @@ export default function WalletsGrid(props:{wasWalletAdded: boolean}) {
   async function getWallets() {
     try {
       setStatus("fetching")
-      const res = await fetch("http://localhost:3090/accounts");
+      const res = await fetch(process.env.REACT_APP_SERVER + '/accounts');
       const data = await res.json();
       setWallets(data);
       setStatus("done")

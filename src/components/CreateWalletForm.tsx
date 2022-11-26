@@ -1,3 +1,4 @@
+import { env } from "process";
 import { Dispatch, FormEvent, SetStateAction, useEffect, useState } from "react";
 import { walletsRes } from "../types";
 import Loader from "./shared/Loader";
@@ -18,7 +19,7 @@ export default function CreateWalletForm(props: {
     e.preventDefault()
     try {
       setStatus('posting')
-      await fetch("http://localhost:3090/accounts", {
+      await fetch(process.env.REACT_APP_SERVER+'/accounts', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -36,7 +37,7 @@ export default function CreateWalletForm(props: {
   async function getOptions() {
     try {
       setStatus('fetching')
-      const res = await fetch("http://localhost:3090/wallets");
+      const res = await fetch(process.env.REACT_APP_SERVER+'/wallets');
       const data = await res.json();
       setOptions(data);
       setStatus('done')
