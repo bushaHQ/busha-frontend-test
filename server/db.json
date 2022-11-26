@@ -37,14 +37,24 @@
       "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/BTC.svg"
     },
     {
-      "currency": "LTC",
+      "currency": "XLM",
       "hold": "0",
       "pending_balance": "0",
       "balance": "0",
-      "name": "Litecoin",
+      "name": "Stellar",
       "type": "digital",
-      "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/LTC.svg",
-      "id": "ATiMOzC"
+      "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000381/alice_v3/XLM.svg",
+      "id": "9JLBkaK"
+    },
+    {
+      "currency": "XRP",
+      "hold": "0",
+      "pending_balance": "0",
+      "balance": "0",
+      "name": "Ripple",
+      "type": "digital",
+      "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1606747749/alice_v3/XRP.svg",
+      "id": "IrxjGXz"
     },
     {
       "currency": "RMT",
@@ -54,35 +64,21 @@
       "name": "SureRemit",
       "type": "digital",
       "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/RMT.svg",
-      "id": "62WRPlI"
-    },
-    {
-      "currency": "XLM",
-      "hold": "0",
-      "pending_balance": "0",
-      "balance": "0",
-      "name": "Stellar",
-      "type": "digital",
-      "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000381/alice_v3/XLM.svg",
-      "id": "uHHukr_"
-    },
-    {
-      "currency": "USDT",
-      "hold": "0",
-      "pending_balance": "0",
-      "balance": "0",
-      "name": "Tether",
-      "type": "digital",
-      "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000381/alice_v3/USDT.svg",
-      "id": "CeiaJp3"
+      "id": "T0Ny5PJ"
     }
   ],
   "wallets": [
     {
-      "currency": "XRP",
-      "name": "Ripple",
+      "currency": "LTC",
+      "name": "Litecoin",
       "type": "digital",
-      "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1606747749/alice_v3/XRP.svg"
+      "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/LTC.svg"
+    },
+    {
+      "currency": "USDT",
+      "name": "Tether",
+      "type": "digital",
+      "imgURL": "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000381/alice_v3/USDT.svg"
     },
     {
       "currency": "DOGE",
