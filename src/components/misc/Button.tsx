@@ -4,7 +4,7 @@ import Loader from "../shared/Loader";
 const ButtonComponent = (props: any) => {
     const { text, onClick, loading } = props;
     return (
-        <ButtonWrapper onClick={onClick} disabled={loading}>{loading ? <Loader />: <>{text}</>}</ButtonWrapper>
+        <ButtonWrapper onClick={onClick} disabled={loading}>{loading ? <LoaderWrapper><Loader /></LoaderWrapper>: <>{text}</>}</ButtonWrapper>
     );
 }
 
@@ -25,4 +25,10 @@ const ButtonWrapper = styled.button`
     text-align: center;
     color: #FFFFFF;
     margin: 0 auto;
+`;
+
+const LoaderWrapper = styled.button`
+    margin: 0 auto;
+    background-color: transparent;
+    border: 0;
 `;

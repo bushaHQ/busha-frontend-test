@@ -187,7 +187,7 @@ const WalletsContent = () => {
                         </LoadingWrapper>
                     </CenterModalWrapper> */}
                     {
-                        (isModalLoading || isAddLoading) &&
+                        isModalLoading &&
                         <CenterModalWrapper>
                             <br /><br /><br />
                             <LoadingWrapper>
