@@ -1,5 +1,17 @@
+import NavBar from "./components/NavBar";
+import SideBar from "./components/SideBar";
+import Wallets from "./components/Wallets";
+
 function App() {
-  return <h1>Busha</h1>;
+  return (
+    <>
+      <NavBar />
+      <div className="app-container">
+        <SideBar/>
+        <Wallets/>
+      </div>
+    </>
+  );
 }
 
 export default App;
