@@ -22,10 +22,24 @@ const WalletsContent = () => {
     const [isAddLoading, setIsAddLoading] = useState(false);
     const [isAddError, setIsAddError] = useState(false);
     const [addErrorMessage, setAddErrorMessage] = useState('');
+    const [defaultSelected, setDefaultSelected] = useState('');
 
     const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
     useEffect(() => {
+        fetch(SERVER_URL+'/wallets', {
+            method: 'GET'
+        })
+        .then(response => response.json())
+        .then(json => {
+            //console.log(json);
+            setDefaultSelected(json[0].currency);
+            setAddCurrency(json[0].currency);
+            setOtherWallets(json);
+        }).catch(error => {
+            //console.log(error);
+        });
+
         setIsLoading(true);
         fetch(SERVER_URL+'/accounts', {
             method: 'GET'
@@ -41,6 +55,7 @@ const WalletsContent = () => {
             setIsLoading(false);
             setIsError(true);
         });
+
         return () => {
             setWallets([]);
             setOtherWallets([]);
@@ -73,6 +88,8 @@ const WalletsContent = () => {
         .then(response => response.json())
         .then(json => {
             //console.log(json);
+            setDefaultSelected(json[0].currency);
+            setAddCurrency(json[0].currency);
             setOtherWallets(json);
             setIsModalLoading(false);
             setIsModalError(false);
@@ -101,13 +118,13 @@ const WalletsContent = () => {
                 body: JSON.stringify(data)
             })
             .then(response => response.json())
-            .then(json => {
+            .then(async (json) => {
                 //console.log(json);
+                await fetchWallets();
+                setIsLoading(false);
                 setIsAddLoading(false);
-                setIsAddError(false);
-                fetchWallets();
-                setIsModalOpen(false);
-                setAddCurrency("");
+                closeAddModal();
+                
             }).catch(error => {
                 //console.log(error);
                 setAddErrorMessage("Network Error");
@@ -137,40 +154,38 @@ const WalletsContent = () => {
                     { !isLoading && <AddWalletModalButton onClick={() => openAddModal()}>+ Add new wallet</AddWalletModalButton>}
                 </HeadingRowRight>
             </HeadingRow>
+            { isLoading &&
+                <CenterWrapper>
+                    <LoadingWrapper>
+                        <Loader size={83.37} />
+                    </LoadingWrapper>
+                </CenterWrapper>
+            }
             {
-                isLoading ?
-                    <CenterWrapper>
-                        <LoadingWrapper>
-                            <Loader size={83.37} />
-                        </LoadingWrapper>
-                    </CenterWrapper>
-                :
-                    <>
+                !isLoading && isError && 
+                <CenterWrapper>
+                    <ErrorComponent />
+                    <ButtonComponent text="Try again" onClick={() => fetchWallets()} />
+                </CenterWrapper>
+            }
+            {
+                !isLoading && !isError && 
+                <>
+                    <HorizontalLine />
+                    <WalletsWrapper className="wallet-wrapper">
                         {
-                            isError ?
-                            <CenterWrapper>
-                                <ErrorComponent />
-                                <ButtonComponent text="Try again" onClick={() => fetchWallets()} />
-                            </CenterWrapper>
-                            :
-                            <>
-                                <HorizontalLine />
-                                <WalletsWrapper className="wallet-wrapper">
-                                    {
-                                        wallets.map((item) => (
-                                            <WalletCardComponent 
-                                                key={item['id']} 
-                                                balance={item['balance']}
-                                                currency={item['currency']}
-                                                imgURL={item['imgURL']}
-                                                name={item['name']}
-                                            />
-                                        ))
-                                    }
-                                </WalletsWrapper>
-                            </>
+                            wallets.map((item) => (
+                                <WalletCardComponent 
+                                    key={item['id']} 
+                                    balance={item['balance']}
+                                    currency={item['currency']}
+                                    imgURL={item['imgURL']}
+                                    name={item['name']}
+                                />
+                            ))
                         }
-                    </>
+                    </WalletsWrapper>
+                </>
             }
             <Modal isOpen={isModalOpen}>
                 <ModalWrapper>
@@ -180,12 +195,6 @@ const WalletsContent = () => {
                             <CloseButton aria-label="Close button" onClick={() => closeAddModal()}><img src={Close} alt="X" /></CloseButton>
                         </ModalHeaderRightRow>
                     </ModalHeaderRow>
-                    {/* <CenterModalWrapper className={!isModalLoading ? "hide" : "show"}>
-                        <br /><br /><br />
-                        <LoadingWrapper>
-                            <Loader size={83.37} />
-                        </LoadingWrapper>
-                    </CenterModalWrapper> */}
                     {
                         isModalLoading &&
                         <CenterModalWrapper>
@@ -195,7 +204,7 @@ const WalletsContent = () => {
                             </LoadingWrapper>
                         </CenterModalWrapper>
                     }
-                    { isModalError &&
+                    { !isModalLoading && isModalError &&
                         <CenterModalWrapper>
                             <ErrorComponent />
                             <ButtonComponent text="Try again" onClick={() => fetchOtherWallets()} />
@@ -207,8 +216,7 @@ const WalletsContent = () => {
                             <form onSubmit={createNewWallet}>
                                 <Description>The crypto wallet will be created instantly and be available in your list of wallets.</Description>
                                 <InputLabel><label>Select wallet</label></InputLabel>
-                                <select onChange={(e) => setAddCurrency(e.target.value)}>
-                                    <option value="">Select currency</option>
+                                <select defaultValue={defaultSelected} onChange={(e) => setAddCurrency(e.target.value)}>
                                     {
                                         otherWallets.map((item, index) => (
                                             <option key={index} value={item['currency']}>{item['name']}</option>
@@ -226,7 +234,6 @@ const WalletsContent = () => {
                             {isAddError && <ErrorMessageComponent text={addErrorMessage} onClick={() => setIsAddError(false)} />}
                         </ModalFormWrapper>
                     }
-                    
                 </ModalWrapper>
             </Modal>
         </ContentContainer>
