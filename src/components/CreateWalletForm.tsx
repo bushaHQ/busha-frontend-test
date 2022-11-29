@@ -1,4 +1,3 @@
-import { env } from "process";
 import { Dispatch, FormEvent, SetStateAction, useEffect, useState } from "react";
 import { walletsRes } from "../types";
 import Loader from "./shared/Loader";
