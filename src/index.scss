@@ -1,11 +1,31 @@
-body {
-  margin: 0;
-  font-family: 'Montserrat', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+$width: 768px;
+
+@mixin mobile {
+  @media (max-width: #{$width}) {
+    @content;
+  }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@font-face {
+  font-family: "Light";
+  src: local("Aribau\ Grotesk\ Light\ Italic"),
+    url("./fonts/Aribau\ Grotesk\ Light\ Italic.otf");
+}
+
+@font-face {
+  font-family: "Regular";
+  src: local("Aribau\ Grotesk\ Regular"),
+    url("./fonts/Aribau\ Grotesk\ Regular.otf");
+}
+
+@font-face {
+  font-family: "Medium";
+  src: local("Aribau\ Grotesk\ Medium"),
+    url("./fonts/Aribau\ Grotesk\ Medium.otf");
+}
+
+@font-face {
+  font-family: "Bold";
+  src: local("Aribau\ Grotesk\ Bold"),
+    url("./fonts/Aribau\ Grotesk\ Bold.otf");
 }
