@@ -26,7 +26,7 @@
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "db:reset": "node scripts/db-reset.js",
-    "start:client": "npx http-server ./build",
+    "start:client": "react-scripts start",
     "start:server": "node server/index.js",
     "wait-on:server": "wait-on http://localhost:3090/",
     "start": "concurrently  \"npm run db:reset && npm run start:server\" \"npm run wait-on:server && npm run start:client\""
