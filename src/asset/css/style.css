@@ -1,0 +1,67 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+}
+
+@media screen and (min-width: 1440px) {
+  .app {
+    width: 1440px;
+    margin: auto;
+  }
+}
+
+body {
+  font-family: "Aribau Grotesk";
+}
+
+@font-face {
+  font-family: "Aribau Grotesk";
+  src: url("../fonts/AribauGroteskTRIAL-Th.otf") format("otf");
+  font-style: normal;
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Aribau Grotesk";
+  src: url("../fonts/AribauGroteskTRIAL-Lt.otf") format("otf");
+  font-style: normal;
+  font-weight: 500;
+}
+@font-face {
+  font-family: "Aribau Grotesk";
+  src: url("../fonts/AribauGroteskTRIAL-Md.otf") format("otf");
+  font-style: italic;
+  font-weight: 700;
+}
+
+.custom-select {
+  width: 100%;
+  padding: 24px 0 24px 24px;
+  border-radius: 5px;
+  border: 1px solid #cbd2d9;
+  appearance: none;
+  outline: none;
+}
+
+.custom-select::after {
+  content: "\25BC";
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.custom-select > option {
+  color: #000;
+  font-size: 16px;
+  line-height: 16px;
+}
