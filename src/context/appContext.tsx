@@ -116,7 +116,7 @@ export function AppContextProvider({ children }: AppContextProviderProps) {
   // request to fetch wallets again when there is a network error
   const tryWalletAgain = async (): Promise<void> => {
     try {
-      setIsLoadingWallet(true);
+      setIsLoading(true);
       const response = await fetch(`${URL}/wallets`);
 
       if (!response.ok) {
@@ -126,7 +126,7 @@ export function AppContextProvider({ children }: AppContextProviderProps) {
       const walletData = await response.json();
       setOptions(walletData);
 
-      setIsLoadingWallet(false);
+      setIsLoading(false);
       setWalletNetworkError(false);
     } catch (error: any) {
       setIsLoading(false);
