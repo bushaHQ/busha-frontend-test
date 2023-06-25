@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { Accountwallet } from "../type/AccountWalletType";
 
 import rightarrow from "../asset/image/rightarrow.svg";
+import bg1 from "../asset/image/bg1.svg";
+import bg2 from "../asset/image/bg2.svg";
 
 interface CardProps {
   account: Accountwallet;
@@ -37,6 +39,10 @@ const CardWrapper = styled.div`
   padding: 16px;
   border-radius: 10px;
   background: #111;
+  background-image: url(${bg1}), url(${bg2});
+  background-position: left bottom, center bottom;
+  background-repeat: no-repeat, no-repeat;
+  background-size: 50% 85%, contain;
   box-shadow: 0px 10px 20px 0px rgba(138, 138, 138, 0.5);
   cursor: pointer;
 `;
