@@ -34,7 +34,7 @@ export const Select = ({ handleClose }: SelectProps) => {
     setSelectedOption(event.target.value);
   };
 
-  const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
     const selectedOptionData = options.find(
