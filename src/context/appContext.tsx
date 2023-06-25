@@ -60,7 +60,6 @@ export function AppContextProvider({ children }: AppContextProviderProps) {
       const accountData = await response.json();
       setAccounts(accountData);
       setIsLoading(false);
-      console.log(accountData, "accounts");
     } catch (error: any) {
       setIsLoading(false);
       setAccountNetworkError(true);

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import styled from "styled-components";
 import { Header } from "./Header";
 import { Sidebar } from "./Sidebar";
@@ -12,9 +12,9 @@ export const Layout = () => {
     setIsOpen(true);
   };
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setIsOpen(false);
-  };
+  }, []);
 
   return (
     <>

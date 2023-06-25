@@ -28,7 +28,7 @@ export const Select = ({ handleClose }: SelectProps) => {
     if (isSuccess) {
       handleClose();
     }
-  }, [isSuccess]);
+  }, [isSuccess, handleClose]);
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
