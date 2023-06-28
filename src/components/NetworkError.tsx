@@ -10,10 +10,10 @@ interface NetworkErrorProps {
 }
 
 export const NetworkError = ({ onTry, marginTop }: NetworkErrorProps) => {
-  const { isLoading } = useAppContext() as AppContextProps;
+  const { isLoading, isLoadingWallet } = useAppContext() as AppContextProps;
   return (
     <>
-      {isLoading ? (
+      {isLoading || isLoadingWallet ? (
         <LoaderContainerStyle>
           <Loader width={8} size={84} />
         </LoaderContainerStyle>

@@ -1,20 +1,10 @@
-import { createContext, useCallback, useState, useRef } from "react";
+import { createContext, useCallback, useReducer, useRef } from "react";
 import { Accountwallet, Option } from "../type/AccountWalletType";
 import { CONFIG, URL } from "../api";
 
-interface AppContextProviderProps {
-  children: React.ReactNode;
-}
-
-export interface AppContextProps {
+interface State {
   accounts: Accountwallet[];
   options: Option[];
-  fetchAccounts: () => void;
-  tryAccountAgain: () => void;
-  tryWalletAgain: () => void;
-  fetchWallets: () => void;
-  cancelFetchAccounts: () => void;
-  addAccount: (name: string, currency: string, balance: number) => void;
   isLoading: boolean;
   isLoadingWallet: boolean;
   addingWallet: boolean;
@@ -24,60 +14,112 @@ export interface AppContextProps {
   postNetworkError: boolean;
 }
 
+interface Action {
+  type: string;
+  payload?: any;
+}
+
+const initialState: State = {
+  accounts: [],
+  options: [],
+  isLoading: false,
+  isLoadingWallet: false,
+  addingWallet: false,
+  isSuccess: false,
+  accountNetworkError: false,
+  walletNetworkError: false,
+  postNetworkError: false,
+};
+
+const reducer = (state: State, action: Action): State => {
+  switch (action.type) {
+    case "FETCH_ACCOUNTS_START":
+      return { ...state, isLoading: true };
+    case "FETCH_ACCOUNTS_SUCCESS":
+      return { ...state, accounts: action.payload, isLoading: false };
+    case "FETCH_ACCOUNTS_ERROR":
+      return { ...state, isLoading: false, accountNetworkError: true };
+    case "FETCH_WALLETS_START":
+      return { ...state, isLoadingWallet: true };
+    case "FETCH_WALLETS_SUCCESS":
+      return { ...state, options: action.payload, isLoadingWallet: false };
+    case "FETCH_WALLETS_ERROR":
+      return { ...state, isLoadingWallet: false, walletNetworkError: true };
+    case "ADD_ACCOUNT_START":
+      return { ...state, addingWallet: true };
+    case "ADD_ACCOUNT_SUCCESS":
+      return {
+        ...state,
+        accounts: [...state.accounts, action.payload],
+        addingWallet: false,
+        isSuccess: true,
+      };
+    case "ACCOUNT_NETWORK_ERROR":
+      return { ...state, accountNetworkError: action.payload };
+    case "WALLET_NETWORK_ERROR":
+      return { ...state, walletNetworkError: action.payload };
+    case "ADD_ACCOUNT_ERROR":
+      return { ...state, addingWallet: false, postNetworkError: true };
+    case "SET_SUCCESS":
+      return { ...state, isSuccess: action.payload };
+    default:
+      return state;
+  }
+};
+
+interface AppContextProviderProps {
+  children: React.ReactNode;
+}
+
+export interface AppContextProps extends State {
+  fetchAccounts: () => void;
+  tryAccountAgain: () => void;
+  tryWalletAgain: () => void;
+  fetchWallets: () => void;
+  cancelFetchAccounts: () => void;
+  addAccount: (name: string, currency: string, balance: number) => void;
+}
+
 export const AppContext = createContext<AppContextProps | null>(null);
 
 export function AppContextProvider({ children }: AppContextProviderProps) {
-  const [accounts, setAccounts] = useState<Accountwallet[]>([]);
-  const [options, setOptions] = useState<Option[]>([]);
-
-  const [isLoading, setIsLoading] = useState(false);
-  const [isLoadingWallet, setIsLoadingWallet] = useState(false);
-  const [addingWallet, setAddingWallet] = useState(false);
-  const [isSuccess, setSuccess] = useState(false);
-
-  const [accountNetworkError, setAccountNetworkError] = useState(false);
-  const [walletNetworkError, setWalletNetworkError] = useState(false);
-  const [postNetworkError, setPostNetworkError] = useState(false);
+  const [state, dispatch] = useReducer(reducer, initialState);
   const abortControllerInstanceRef = useRef<AbortController | null>(null);
 
   // fetch accounts
   const fetchAccounts = useCallback(async (): Promise<void> => {
     try {
-      // Create the signal that should be used to cancel the request
       const abortController = new AbortController();
       const { signal } = abortController;
 
       abortControllerInstanceRef.current = abortController;
 
-      setIsLoading(true);
-      const response = await fetch(`${URL}/accounts`, {
-        signal,
-      });
+      dispatch({ type: "FETCH_ACCOUNTS_START" });
+      const response = await fetch(`${URL}/accounts`, { signal });
 
       if (!response.ok) {
         throw Error("Could not fetch account wallets");
       }
+
       const accountData = await response.json();
-      setAccounts(accountData);
-      setIsLoading(false);
+      dispatch({ type: "FETCH_ACCOUNTS_SUCCESS", payload: accountData });
     } catch (error: any) {
-      setIsLoading(false);
-      setAccountNetworkError(true);
+      dispatch({ type: "FETCH_ACCOUNTS_ERROR" });
     }
   }, []);
 
   const cancelFetchAccounts = useCallback(() => {
     if (!abortControllerInstanceRef.current) {
-      throw new Error("Please call fetch Accounts before using this function");
+      throw new Error("Please call fetchAccounts before using this function");
     }
 
     abortControllerInstanceRef.current.abort();
   }, []);
 
   // request to fetch accounts again when there is a network error
-  const tryAccountAgain = async (): Promise<void> => {
+  const tryAccountAgain = useCallback(async (): Promise<void> => {
     try {
-      setIsLoading(true);
+      dispatch({ type: "FETCH_ACCOUNTS_START" });
       const response = await fetch(`${URL}/accounts`);
 
       if (!response.ok) {
@@ -85,37 +127,36 @@ export function AppContextProvider({ children }: AppContextProviderProps) {
       }
 
       const accountData = await response.json();
-      setAccounts(accountData);
-      setIsLoading(false);
-      setAccountNetworkError(false);
+      dispatch({ type: "FETCH_ACCOUNTS_SUCCESS", payload: accountData });
+      //dispatch({ type: "SET_SUCCESS", payload: false });
+      dispatch({ type: "ACCOUNT_NETWORK_ERROR", payload: false });
     } catch (error: any) {
-      setIsLoading(false);
-      setAccountNetworkError(true);
+      dispatch({ type: "FETCH_ACCOUNTS_ERROR" });
     }
-  };
+  }, []);
 
   // request to fetch wallet when add new form is clicked
   const fetchWallets = useCallback(async (): Promise<void> => {
     try {
-      setIsLoadingWallet(true);
+      dispatch({ type: "FETCH_WALLETS_START" });
       const response = await fetch(`${URL}/wallets`);
+
       if (!response.ok) {
         throw Error("Could not fetch wallets");
       }
+
       const walletData = await response.json();
-      setOptions(walletData);
-      setIsLoadingWallet(false);
+      dispatch({ type: "FETCH_WALLETS_SUCCESS", payload: walletData });
     } catch (error: any) {
       console.log("error fetching options", error);
-      setIsLoadingWallet(false);
-      setWalletNetworkError(true);
+      dispatch({ type: "FETCH_WALLETS_ERROR" });
     }
   }, []);
 
   // request to fetch wallets again when there is a network error
-  const tryWalletAgain = async (): Promise<void> => {
+  const tryWalletAgain = useCallback(async (): Promise<void> => {
     try {
-      setIsLoading(true);
+      dispatch({ type: "FETCH_WALLETS_START" });
       const response = await fetch(`${URL}/wallets`);
 
       if (!response.ok) {
@@ -123,60 +164,44 @@ export function AppContextProvider({ children }: AppContextProviderProps) {
       }
 
       const walletData = await response.json();
-      setOptions(walletData);
-
-      setIsLoading(false);
-      setWalletNetworkError(false);
+      dispatch({ type: "FETCH_WALLETS_SUCCESS", payload: walletData });
+      dispatch({ type: "WALLET_NETWORK_ERROR", payload: false });
     } catch (error: any) {
-      setIsLoading(false);
-      setWalletNetworkError(true);
+      dispatch({ type: "FETCH_WALLETS_ERROR" });
     }
-  };
+  }, []);
 
-  // For adding new account
-  const addAccount = async (
-    name: string,
-    currency: string,
-    balance: number
-  ): Promise<void> => {
-    try {
-      setAddingWallet(true);
-      CONFIG.body = JSON.stringify({ name, currency, balance });
-      const response = await fetch(`${URL}/accounts`, CONFIG);
+  // For adding a new account
+  const addAccount = useCallback(
+    async (name: string, currency: string, balance: number): Promise<void> => {
+      try {
+        dispatch({ type: "ADD_ACCOUNT_START" });
+        CONFIG.body = JSON.stringify({ name, currency, balance });
+        const response = await fetch(`${URL}/accounts`, CONFIG);
 
-      if (response.ok) {
-        setSuccess(true);
-        const newAccount = await response.json();
-        const updatedAccounts = [...accounts, newAccount];
-        setAddingWallet(false);
-        setAccounts(updatedAccounts);
-        setSuccess(false);
-      } else {
-        throw new Error("There was an error adding the account");
+        if (response.ok) {
+          const newAccount = await response.json();
+          dispatch({ type: "ADD_ACCOUNT_SUCCESS", payload: newAccount });
+          dispatch({ type: "SET_SUCCESS", payload: false });
+        } else {
+          throw new Error("There was an error adding the account");
+        }
+      } catch (error: any) {
+        console.log(error);
+        dispatch({ type: "ADD_ACCOUNT_ERROR" });
       }
-    } catch (error: any) {
-      console.log(error);
-      setAddingWallet(false);
-      setPostNetworkError(true);
-    }
-  };
+    },
+    []
+  );
 
   const valueToShare = {
-    accounts,
+    ...state,
     fetchAccounts,
     tryAccountAgain,
     fetchWallets,
     tryWalletAgain,
     addAccount,
-    isLoading,
-    isLoadingWallet,
-    addingWallet,
-    isSuccess,
-    accountNetworkError,
-    walletNetworkError,
-    postNetworkError,
     cancelFetchAccounts,
-    options,
   };
 
   return (
