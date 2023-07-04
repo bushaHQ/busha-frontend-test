@@ -72,7 +72,7 @@ interface AppContextProviderProps {
 }
 
 export interface AppContextProps extends State {
-  fetchAccounts: (network?: false) => void;
+  fetchAccounts: (network?: boolean) => void;
   fetchWallets: (network?: boolean) => void;
   cancelFetchAccounts: () => void;
   addAccount: (name: string, currency: string, balance: number) => void;
