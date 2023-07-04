@@ -19,18 +19,23 @@ export const NewWallet = ({ handleClose }: NewWalletProps) => {
     isLoadingWallet,
     walletNetworkError,
     postNetworkError,
-    tryWalletAgain,
     fetchWallets,
   } = useAppContext() as AppContextProps;
+
+  const network = false;
 
   useEffect(() => {
     fetchWallets();
   }, [fetchWallets]);
 
+  const handleTryAgain = () => {
+    fetchWallets(network);
+  };
+
   return (
     <div>
       {walletNetworkError ? (
-        <NetworkError marginTop={200} onTry={tryWalletAgain} />
+        <NetworkError marginTop={200} onTry={handleTryAgain} />
       ) : (
         <WalletContainer>
           <Header>

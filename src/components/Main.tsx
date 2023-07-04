@@ -14,11 +14,12 @@ export const Main = ({ handleOpen }: MainProps) => {
   const {
     fetchAccounts,
     cancelFetchAccounts,
-    tryAccountAgain,
     accounts,
     isLoading,
     accountNetworkError,
   } = useAppContext() as AppContextProps;
+
+  const network = false;
 
   useEffect(() => {
     fetchAccounts();
@@ -26,6 +27,10 @@ export const Main = ({ handleOpen }: MainProps) => {
       cancelFetchAccounts();
     };
   }, [fetchAccounts, cancelFetchAccounts]);
+
+  const handleTryAccountAgain = () => {
+    fetchAccounts(network);
+  };
 
   return (
     <MainContainer>
@@ -45,7 +50,7 @@ export const Main = ({ handleOpen }: MainProps) => {
       </Header>
       {accountNetworkError ? (
         <NetworkErrorContainer>
-          <NetworkError marginTop={126} onTry={tryAccountAgain} />
+          <NetworkError marginTop={126} onTry={handleTryAccountAgain} />
         </NetworkErrorContainer>
       ) : (
         <div>

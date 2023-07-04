@@ -72,10 +72,8 @@ interface AppContextProviderProps {
 }
 
 export interface AppContextProps extends State {
-  fetchAccounts: () => void;
-  tryAccountAgain: () => void;
-  tryWalletAgain: () => void;
-  fetchWallets: () => void;
+  fetchAccounts: (network?: false) => void;
+  fetchWallets: (network?: boolean) => void;
   cancelFetchAccounts: () => void;
   addAccount: (name: string, currency: string, balance: number) => void;
 }
@@ -87,26 +85,30 @@ export function AppContextProvider({ children }: AppContextProviderProps) {
   const abortControllerInstanceRef = useRef<AbortController | null>(null);
 
   // fetch accounts
-  const fetchAccounts = useCallback(async (): Promise<void> => {
-    try {
-      const abortController = new AbortController();
-      const { signal } = abortController;
+  const fetchAccounts = useCallback(
+    async (network?: boolean): Promise<void> => {
+      try {
+        const abortController = new AbortController();
+        const { signal } = abortController;
 
-      abortControllerInstanceRef.current = abortController;
+        abortControllerInstanceRef.current = abortController;
 
-      dispatch({ type: "FETCH_ACCOUNTS_START" });
-      const response = await fetch(`${URL}/accounts`, { signal });
+        dispatch({ type: "FETCH_ACCOUNTS_START" });
+        const response = await fetch(`${URL}/accounts`, { signal });
 
-      if (!response.ok) {
-        throw Error("Could not fetch account wallets");
+        if (!response.ok) {
+          throw Error("Could not fetch account wallets");
+        }
+
+        const accountData = await response.json();
+        dispatch({ type: "FETCH_ACCOUNTS_SUCCESS", payload: accountData });
+        dispatch({ type: "ACCOUNT_NETWORK_ERROR", payload: network });
+      } catch (error: any) {
+        dispatch({ type: "FETCH_ACCOUNTS_ERROR" });
       }
-
-      const accountData = await response.json();
-      dispatch({ type: "FETCH_ACCOUNTS_SUCCESS", payload: accountData });
-    } catch (error: any) {
-      dispatch({ type: "FETCH_ACCOUNTS_ERROR" });
-    }
-  }, []);
+    },
+    []
+  );
 
   const cancelFetchAccounts = useCallback(() => {
     if (!abortControllerInstanceRef.current) {
@@ -116,27 +118,8 @@ export function AppContextProvider({ children }: AppContextProviderProps) {
     abortControllerInstanceRef.current.abort();
   }, []);
 
-  // request to fetch accounts again when there is a network error
-  const tryAccountAgain = useCallback(async (): Promise<void> => {
-    try {
-      dispatch({ type: "FETCH_ACCOUNTS_START" });
-      const response = await fetch(`${URL}/accounts`);
-
-      if (!response.ok) {
-        throw new Error("Could not fetch account wallets");
-      }
-
-      const accountData = await response.json();
-      dispatch({ type: "FETCH_ACCOUNTS_SUCCESS", payload: accountData });
-      //dispatch({ type: "SET_SUCCESS", payload: false });
-      dispatch({ type: "ACCOUNT_NETWORK_ERROR", payload: false });
-    } catch (error: any) {
-      dispatch({ type: "FETCH_ACCOUNTS_ERROR" });
-    }
-  }, []);
-
   // request to fetch wallet when add new form is clicked
-  const fetchWallets = useCallback(async (): Promise<void> => {
+  const fetchWallets = useCallback(async (network?: boolean): Promise<void> => {
     try {
       dispatch({ type: "FETCH_WALLETS_START" });
       const response = await fetch(`${URL}/wallets`);
@@ -147,26 +130,9 @@ export function AppContextProvider({ children }: AppContextProviderProps) {
 
       const walletData = await response.json();
       dispatch({ type: "FETCH_WALLETS_SUCCESS", payload: walletData });
+      dispatch({ type: "WALLET_NETWORK_ERROR", payload: network });
     } catch (error: any) {
       console.log("error fetching options", error);
-      dispatch({ type: "FETCH_WALLETS_ERROR" });
-    }
-  }, []);
-
-  // request to fetch wallets again when there is a network error
-  const tryWalletAgain = useCallback(async (): Promise<void> => {
-    try {
-      dispatch({ type: "FETCH_WALLETS_START" });
-      const response = await fetch(`${URL}/wallets`);
-
-      if (!response.ok) {
-        throw new Error("Could not fetch account wallets");
-      }
-
-      const walletData = await response.json();
-      dispatch({ type: "FETCH_WALLETS_SUCCESS", payload: walletData });
-      dispatch({ type: "WALLET_NETWORK_ERROR", payload: false });
-    } catch (error: any) {
       dispatch({ type: "FETCH_WALLETS_ERROR" });
     }
   }, []);
@@ -197,9 +163,7 @@ export function AppContextProvider({ children }: AppContextProviderProps) {
   const valueToShare = {
     ...state,
     fetchAccounts,
-    tryAccountAgain,
     fetchWallets,
-    tryWalletAgain,
     addAccount,
     cancelFetchAccounts,
   };
