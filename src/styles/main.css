@@ -1,0 +1,219 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Tahoma, sans-serif;
+}
+
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+    padding: 0 2rem;
+    border-bottom: 2px solid white;
+    background-color: rgb(254, 254, 254);
+    box-shadow: 0 4px 8px 0 rgba(210, 200, 200, 0.2);
+}
+header img{
+    width: 80px;
+    margin-left: 110px;
+}
+@media screen and (max-width: 1024px){
+    div .move {
+        padding-right: 8px;
+    }
+    
+}
+
+.but{
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: none;
+    background-color: rgb(215, 218, 220);
+    font-size: 15px;
+   
+}
+.tobi{
+    font-size: 12px;
+    display: inline;
+    padding-left: 5px;
+    color: rgb(122, 117, 117);
+}
+.move{
+    padding-right: 100px;
+}
+.container{
+    margin-top: 40px;
+    margin-left: 150px;
+    display: flex;
+    column-gap: 20px;
+}
+ul{
+    list-style: none;
+}
+ul a{
+    text-decoration: none;
+    color: rgb(87, 82, 82);
+}
+.top{
+    margin-top: -5px;
+    margin-left: 60px;
+    color: rgb(95, 93, 93);
+}
+.wall{
+    color: rgb(128, 123, 123);
+    background-color: rgb(229, 229, 229);
+    width: 150px;
+    height: 30px;
+    padding-left: 10px;
+    padding-top: 5px;
+}
+.wall:hover{
+    background: rgb(143, 140, 140);
+}
+.wish{
+    padding-left: 10px;
+    margin-top: 20px;
+}
+.wish:hover{
+    background-color: rgb(148, 144, 144);
+    width: 150px;
+    height: 30px;
+    padding-top: 5px;
+    transition: all .5s;
+    
+}
+div .line{
+   border-bottom: 1px solid rgb(218, 215, 215);
+   width: 920px;
+   position: absolute;
+   margin-top: 30px;
+   margin-left: 235px;
+}
+.new{
+    font-size: 13px;
+    font-weight: 400;
+    margin-top: 0;
+    margin-left: 710px;
+}
+.be{
+    text-decoration: none;
+    top: 0;
+    color: black;
+}
+.card{
+   display: inline;
+    background-color: black;
+    height: 700px;
+    width: 1000px;
+}
+.card1{
+    height: 200px;
+    width: 300px;
+    background-image: linear-gradient(to right, black, rgb(108, 23, 23));
+    margin-left: 385px;
+    margin-top: -120px;
+    border-radius: 20px;
+    color: rgb(254, 251, 251);
+    box-shadow: 5px 10px 10px 5px rgba(154, 132, 132, 0.2);
+}
+
+.rub img{
+    width: 12px;
+    margin-left: 3px;
+}
+
+.circle{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    background-color: rgb(43, 170, 31);
+    font-size: 15px;
+    margin-left: 20px;
+    padding-top: 6px;
+    padding-left: 6px;
+}
+.circle2{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    background-color: rgb(220, 132, 17);
+    font-size: 15px;
+    margin-left: 20px;
+    padding-top: 6px;
+    padding-left: 6px;
+}
+.circle3{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    background-color: rgb(106, 77, 223);
+    font-size: 15px;
+    margin-left: 20px;
+    padding-top: 6px;
+    padding-left: 6px;
+}
+.circle4{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    background-color: rgb(54, 118, 223);
+    font-size: 15px;
+    margin-left: 20px;
+    padding-top: 6px;
+    padding-left: 6px;
+}
+.rub{
+    padding-top: 20px;
+}
+.nai{
+   margin-left:60px ;
+   margin-top: -24px;
+   font-size: 12px;
+   color: rgb(177, 163, 163);
+}
+.money{
+    margin-top: 40px;
+    margin-left: 20px;
+}
+.forward{
+    height: 28px;
+   margin-left: 250px;
+   margin-top: 50px;
+}
+.card2{
+    height: 200px;
+    width: 300px;
+    background-image: linear-gradient(to right, black, rgb(108, 23, 23));
+    margin-left: 695px;
+    margin-top: -197px;
+    border-radius: 20px;
+    color: rgb(254, 251, 251);
+    box-shadow: 5px 10px 10px 5px rgba(154, 132, 132, 0.2);
+}
+.card3{
+    height: 200px;
+    width: 300px;
+    background-image: linear-gradient(to right, black, rgb(108, 23, 23));
+    margin-left: 1005px;
+    margin-top: -199px;
+    border-radius: 20px;
+    color: rgb(254, 251, 251);
+    box-shadow: 5px 10px 10px 5px rgba(154, 132, 132, 0.2);
+}
+.card4{
+    height: 200px;
+    width: 300px;
+    background-image: linear-gradient(to right, black, rgb(108, 23, 23));
+    margin-left: 385px;
+    margin-top: 10px;
+    border-radius: 20px;
+    color: rgb(254, 251, 251);
+    box-shadow: 5px 10px 10px 5px rgba(154, 132, 132, 0.2);
+}
