@@ -1,0 +1,193 @@
+/* Header */
+.header{
+  position: relative;
+  box-shadow: 0px 0.5px 5px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  display: flex;
+  flex-direction: inline;
+  justify-content: space-between;
+  padding: 10px, 10%;
+}
+
+.busha-logo{
+  width: 100%;
+  margin-left: 100%;
+  height: 100%;
+}
+
+.profile{
+  display: flex;
+  flex-direction: inline;
+  width: 20%;
+}
+
+.profile span {
+  position: relative;
+  text-align: center;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 10px;
+}
+
+.profile .initial{
+  border-radius: 50%;
+  background-color: #9AA5B1;
+  display: flex;
+  align-items: center; 
+  height: 15%; 
+  padding: 10px;
+}
+
+/* Navbar */
+
+.navLinks{
+  list-style-type: none; 
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  padding-inline-start: 0;
+}
+
+.navLinks li{
+  width: 100%;
+  padding: 10px;
+  height: 40px;
+}
+
+/*Main/Wallets*/
+
+main{
+  position: relative;
+  width: 100%;
+  margin: auto;
+  padding-left: 5%;
+}
+
+main .title{
+  display: flex;
+  margin: auto; 
+  align-items: center;
+  justify-content: space-between;
+}
+
+main .title button{
+  position: relative;
+  padding: 5px; 
+  border: none; 
+  background-color: white;
+}
+
+main .title button a{
+  height:100%;
+  width:100%; 
+  padding: 15px; 
+  border-radius: 10px;
+}
+
+.Wallets-section{
+  display: flex; 
+  flex-wrap: wrap; 
+  flex-direction: inline; 
+  margin: auto;
+}
+
+.card{
+background-color:#292929;
+box-shadow: rgba(138, 138, 138, 0.50);
+border-radius: 10px; 
+margin: 20px; 
+width: 200px; 
+padding: 10px;
+}
+
+.currency{
+  color: #9aa5b1;
+  display: flex; 
+  align-items: center;
+  margin: 10px 0px;
+}
+
+.currency img{
+  margin-right: 10px;
+}
+
+.card .figures{
+  color: white; 
+  margin: 10px 0px;
+}
+
+.card-right-arrow{
+  position: relative; 
+  display: flex;
+  flex-direction: row-reverse;
+  margin: 10px 0px;
+}
+
+.card-right-arrow button{
+  background-color: #303030;
+  border: none; 
+  border-radius: 50%;
+  color: white; 
+  width:30px; 
+  padding: 5px;
+}
+
+/* Modal/Navbar */
+
+section{
+position: fixed;
+background-color: white;
+padding: 20px; 
+z-index: 1;
+height: 100vh; 
+width: 30%;
+top: 0px; 
+right: 0px; 
+box-shadow: 1px 1px 2px 1px gray;
+}
+
+select{
+ width: 420px;
+ height: 48px;
+ padding: 6px 16px 6px 16px;
+ font-size: 15px; 
+ cursor: pointer;
+
+}
+
+.create-wallet-btn{
+  display: block; 
+  width: 200px; 
+  height: 48px; 
+  margin: 20px auto;  
+  background-color: #0F0A0A; 
+  color: white; 
+  border-radius: 25px; 
+  border: none; 
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.create-wallet-btn:hover{
+  background-color: #12A633; 
+  color: #0F0A0A;  
+}
+
+
+.navLinks li:hover, .add-wallet:hover {
+  background-color: #f5f7fa;
+}
+.closeModal-btn {
+  background-color: transparent;
+  padding: 10px;
+  font-size: large;
+  cursor: pointer;
+  border: none;
+}
+
+.closeModal-btn:hover {
+  color: red;
+}
+.hide {
+  display: none;
+}
