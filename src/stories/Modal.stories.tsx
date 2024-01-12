@@ -1,8 +1,11 @@
+// Import necessary dependencies
 import * as React from "react";
 import { Story, Meta } from "@storybook/react";
 
-import Modal, { ModalProps } from "../components/shared/Modal";
+// Import your Modal component and ModalProps
+import Modal from "../components/shared/Modal";
 
+// Set up the Storybook metadata
 export default {
   component: Modal,
   title: "Components/Modal",
@@ -15,14 +18,17 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<ModalProps> = (args) => {
+// Define the Template for the Modal component
+const Template: Story = (args) => {
   const [isOpen, setIsOpen] = React.useState(false);
+
   return (
     <>
       <button type="button" onClick={() => setIsOpen(true)}>
         Open Modal
       </button>
-      <Modal isOpen={isOpen}>
+      {/* Ensure that handleCloseModal is provided */}
+      <Modal isOpen={isOpen} handleCloseModal={() => setIsOpen(false)}>
         <h1>Modal content here</h1>
         <button type="button" onClick={() => setIsOpen(false)}>
           Close Modal
@@ -32,4 +38,5 @@ const Template: Story<ModalProps> = (args) => {
   );
 };
 
+// Bind the Template to your Primary story
 export const Primary = Template.bind({});

@@ -1,0 +1,56 @@
+// Card.scss
+.card {
+  width: 240px;
+  height: 150px;
+  flex-shrink: 0;
+  color: white;
+  position: relative;
+  margin: 0.4rem;
+  border-radius: 10px;
+  background: #111;
+  box-shadow: 0px 10px 20px 0px rgba(138, 138, 138, 0.5);
+
+  .card-content {
+    padding: 1rem;
+    position: relative;
+    z-index: 30;
+
+    .card-info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem; // space-x-2 equivalent
+      margin-bottom: 0.75rem; // mb-3 equivalent
+
+      img {
+        width: 34px;
+        height: 34px;
+      }
+
+      p {
+        font-size: 14px;
+        color: #9aa5b1;
+        font-weight: 400;
+      }
+    }
+
+    .balance {
+      font-weight: bold;
+      font-size: 1.25rem; // text-1xl equivalent
+    }
+  }
+
+  .background-images {
+    position: absolute;
+    top: 0;
+    //   z-index: -1;
+
+    img {
+      position: absolute;
+      top: 13px; // top-[10px] equivalent
+
+      &:nth-child(2) {
+        top: 48px; // top-[48px] equivalent
+      }
+    }
+  }
+}

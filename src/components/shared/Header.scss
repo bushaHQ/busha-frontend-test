@@ -1,0 +1,37 @@
+.header {
+  height: 56px;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 160px;
+  align-items: center;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+
+  .user-info {
+    display: flex;
+    gap: 2px; // space-x-2 equivalent
+    justify-content: center;
+    align-items: center;
+
+    .avatar {
+      background-color: #c8cfd6;
+      border-radius: 50%;
+      font-weight: bold;
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-content: center;
+      margin: 0 6px;
+
+      p {
+        color: #3e4c59;
+        font-size: 18px;
+        font-weight: 700;
+      }
+    }
+
+    p {
+      color: #3e4c59;
+    }
+  }
+}
