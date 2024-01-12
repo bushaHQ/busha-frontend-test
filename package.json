@@ -1,5 +1,10 @@
 {
   "name": "busha-fe-test",
+  
+    "engines": {
+      "node": "16.20.2"
+    },
+  
   "version": "0.1.0",
   "private": true,
   "dependencies": {

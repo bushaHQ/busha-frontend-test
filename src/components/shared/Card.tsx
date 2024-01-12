@@ -4,7 +4,7 @@ import "./Card.scss"; // Adjust the import path as necessary
 interface Data {
   name: string;
   balance: string;
-  imgURL: string;
+  imgURL: string; 
   currency: string;
 }
 
