@@ -1,11 +1,97 @@
+* {
+  box-sizing: border-boxs;
+}
+html {
+  height: 100vh;
+}
 body {
   margin: 0;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100vh;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+// App.scss
+.main {
+  padding-left: 160px;
+  padding-right: 160px;
+  .flex {
+    display: flex;
+    justify-content: space-between;
+  }
+  .wallets-sidebar {
+    width: 240px;
+    margin-right: 20px;
+
+    ul {
+      padding: 0;
+      li {
+        font-weight: bold;
+        background-color: #f5f7fa;
+        color: black;
+        padding-left: 0.75rem; /* px-3 */
+        padding-right: 0.75rem; /* px-3 */
+        align-items: center; /* items-center */
+        display: flex; /* flex */
+        font-weight: 500; /* font-[500] */
+        color: #3e4c59; /* text-[#3E4C59] */
+        height: 44px;
+
+        &:not(:first-child) {
+          font-weight: normal;
+          background-color: transparent;
+        }
+      }
+    }
+  }
+
+  .wallets-content {
+    flex: 1;
+    height: 81vh;
+
+    .wallets-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 32px;
+      font-weight: bold;
+      h3 {
+        margin: 13px 0;
+      }
+
+      button {
+        font-weight: bold;
+        border: none;
+
+        background-color: transparent;
+        cursor: pointer;
+      }
+    }
+
+    hr {
+      color: lightgray;
+      // border: 1px solid e4c59;
+    }
+
+    .wallets-body {
+      display: flex;
+      justify-content: center;
+      height: 100%;
+      width: 100%;
+      align-items: start;
+
+      .wallets-grid {
+        display: flex;
+        height: fit-content;
+        margin-top: 5px;
+        flex-wrap: wrap;
+        width: 100%;
+      }
+    }
+  }
 }

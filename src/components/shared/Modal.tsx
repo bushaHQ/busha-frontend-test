@@ -1,12 +1,44 @@
 import ReactDOM from "react-dom";
 import * as React from "react";
+import "./Modal.scss";
 import styled from "styled-components";
+import Loader from "./Loader";
+import { useState, useEffect } from "react";
+import NetworkError from "./NetworkError";
+import ModalData from "./ModalData";
 
-export interface ModalProps {
+interface ModalProps {
   isOpen: boolean;
+  handleCloseModal: () => void;
 }
-export default function Modal(props: React.PropsWithChildren<ModalProps>) {
-  const { isOpen } = props;
+
+interface IData {
+  currency: string;
+  name: string;
+  type: string;
+  imgURL: string;
+}
+
+const Modal: React.FC<ModalProps> = ({ isOpen, handleCloseModal }) => {
+  const [data, setData] = useState<IData[]>([]);
+  const [loader, setLoader] = useState(true);
+  const [success, setSuccess] = useState(false);
+
+  useEffect(() => {
+   handleClick()
+  }, []);
+
+  const handleClick = async () => {
+    const dbs = await fetch("http://localhost:3090/wallets");
+    if (dbs.status === 200) {
+      const res = await dbs.json();
+      setData(res);
+      setSuccess(true);
+    } else {
+      setSuccess(false);
+    }
+    setLoader(false);
+  };
 
   const el = React.useRef(document.createElement("div"));
   const modalRoot = document.getElementById("modal-root");
@@ -24,12 +56,22 @@ export default function Modal(props: React.PropsWithChildren<ModalProps>) {
 
   const modal = (
     <ModalContainer data-testid="modal">
-      <ModalContent>{props.children}</ModalContent>
+      <ModalContent>
+        <div className="container">
+          {loader ? (
+            <Loader />
+          ) : !success ? (
+            <NetworkError handleClick={handleClick} />
+          ) : (
+            <ModalData handleClose={handleCloseModal} data={data} />
+          )}
+        </div>
+      </ModalContent>
     </ModalContainer>
   );
 
   return ReactDOM.createPortal(modal, el.current);
-}
+};
 
 const ModalContainer = styled.div`
   position: fixed;
@@ -54,3 +96,5 @@ const ModalContent = styled.div`
   background: #ffffff;
   overflow-y: auto;
 `;
+
+export default Modal;
