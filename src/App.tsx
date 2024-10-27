@@ -1,13 +1,13 @@
+import Navbar from "./components/Navbar";
 import Button from "./components/shared/Button";
 import "./styles/main.scss";
 
 function App() {
   return (
-    <h1>
+    <div>
+      <Navbar />
       <Button title={"Try again"} />
-      <div className="">Card</div>
-      Busha
-    </h1>
+    </div>
   );
 }
 
