@@ -1,6 +1,94 @@
 .wallet-page {
+  // width: 100%;
+
+  .page-top-controller {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 32px;
+  }
+
+  .new-wallet-action {
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .wallets-grid {
+    padding: 0 4px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: safe;
+    gap: 43px;
+    flex-wrap: wrap;
+  }
+
   .wallet-card {
-    background-color: #000;
+    width: 240px;
+    max-width: 240px;
+    height: 150px;
+    max-height: 150px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    background-color: $black;
+    background-image: url("../../assets/top-card-design.svg"),
+      url("../../assets/card-design.svg"); /* Add your image path here */
+    background-size: cover; /* Ensures the image covers the entire element */
+    background-position: center left -50px, center bottom -30px; /* Positions the image 10px above the bottom */
+    background-repeat: no-repeat;
     box-shadow: 0px 10px 20px 0px #8a8a8a80;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .token-icon {
+      width: 34px;
+      height: 34px;
+    }
+
+    .chevron {
+      width: 32px;
+      height: 32px;
+      align-self: flex-end;
+    }
+
+    h5 {
+      font-size: 16px;
+      font-weight: 600;
+      color: $white;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      p {
+        color: #9aa5b1;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .wallet-page .wallets-grid {
+    gap: 33px;
+  }
+}
+
+@media screen and (max-width: 970px) {
+  .wallet-page .wallets-grid {
+    gap: 20px;
+    justify-content: space-between;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .wallet-page .wallets-grid {
+    .wallet-card {
+      width: 220px;
+    }
   }
 }
