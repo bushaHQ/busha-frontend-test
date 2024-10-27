@@ -1,0 +1,15 @@
+@import "../variables";
+
+.button {
+  color: $white;
+  background-color: $black;
+  border: none;
+  font-size: 18px;
+  line-height: 18px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 52px 0 52px;
+  border-radius: 40px;
+}
