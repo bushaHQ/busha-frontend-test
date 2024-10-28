@@ -12,6 +12,7 @@ const Sidebar = ({ selectedPath, setSelectedPath }: SidebarProps) => {
       {sidebar.map((item: SidebarItem, index: number) => (
         <div
           key={index}
+          aria-label="Sidebar Wallets"
           onClick={() => setSelectedPath(item.title)}
           className={`sidebar-item ${
             selectedPath === item.title && "active-item"

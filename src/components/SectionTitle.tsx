@@ -5,7 +5,11 @@ interface SectionTitleProps {
 }
 
 const SectionTitle = ({ title }: SectionTitleProps) => {
-  return <div className="section-title">{title}</div>;
+  return (
+    <div className="section-title" aria-label="Section Wallets">
+      {title}
+    </div>
+  );
 };
 
 export default SectionTitle;

@@ -12,4 +12,16 @@
   justify-content: center;
   padding: 0 52px 0 52px;
   border-radius: 40px;
+  width: fit-content;
+}
+
+.error-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  img {
+    width: 100px;
+  }
 }

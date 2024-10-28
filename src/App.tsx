@@ -4,17 +4,16 @@ import Sidebar from "./components/Sidebar";
 import "./styles/main.scss";
 import { sidebar } from "./service/sidebar.service";
 import WalletPage from "./pages/WalletPage/WalletPage";
+import { SidebarComponent } from "./types";
 
-type SidebarComponent = () => JSX.Element;
-
-const Wallets: SidebarComponent = () => <WalletPage />;
+const Wallet: SidebarComponent = () => <WalletPage />;
 const Prices: SidebarComponent = () => <div>Prices Component</div>;
 const Peer2Peer: SidebarComponent = () => <div>Peer2Peer Component</div>;
 const Activity: SidebarComponent = () => <div>Activity Component</div>;
 const Settings: SidebarComponent = () => <div>Settings Component</div>;
 
 const componentMap: Record<string, SidebarComponent> = {
-  Wallets,
+  Wallet,
   Prices,
   Peer2Peer,
   Activity,

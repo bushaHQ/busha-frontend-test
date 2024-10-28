@@ -6,7 +6,7 @@ type Sidebar = Array<SidebarItem>;
 
 export const sidebar: Sidebar = [
   {
-    title: "Wallets",
+    title: "Wallet",
   },
   {
     title: "Prices",
