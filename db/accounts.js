@@ -25,19 +25,19 @@ const accounts = [
     imgURL:
       "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/ETH.svg",
   },
-  // {
-  //   id: "5ad2ee10-5ca6-4576-96fe-1ef642057681",
-  //   currency: "BTC",
-  //   hold: "0",
-  //   pending_balance: "0.00001",
-  //   balance: "142.999009",
-  //   name: "Bitcoin",
-  //   type: "digital",
-  //   deposit: true,
-  //   payout: true,
-  //   imgURL:
-  //     "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/BTC.svg",
-  // },
+  {
+    id: "5ad2ee10-5ca6-4576-96fe-1ef642057681",
+    currency: "BTC",
+    hold: "0",
+    pending_balance: "0.00001",
+    balance: "142.999009",
+    name: "Bitcoin",
+    type: "digital",
+    deposit: true,
+    payout: true,
+    imgURL:
+      "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/BTC.svg",
+  },
 ];
 
 module.exports = accounts;

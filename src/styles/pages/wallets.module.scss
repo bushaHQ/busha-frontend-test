@@ -7,7 +7,6 @@
   .wallet-content {
     min-height: 400px;
     display: flex;
-    align-items: center;
     justify-content: center;
   }
 
@@ -16,6 +15,11 @@
     align-items: center;
     justify-content: space-between;
     height: 32px;
+  }
+
+  .balance {
+    display: flex;
+    gap: 4px;
   }
 
   .new-wallet-action {

@@ -39,7 +39,7 @@ const WalletPage = () => {
     <div className="wallet-page">
       <div className="page-top-controller">
         <SectionTitle title={"Wallets"} />
-        {userAccounts && (
+        {userAccounts.length > 0 && (
           <div onClick={toggleOpenNewWallet} className="new-wallet-action">
             + Add new wallet
           </div>
@@ -67,13 +67,13 @@ const WalletPage = () => {
                       <span>{account.name}</span>
                     </div>
 
-                    <>
+                    <div className="balance">
                       <h5>
                         {account.type === "fiat" && "₦"} {account.balance}{" "}
                       </h5>
 
                       <h5>{account.type === "digital" && account.currency}</h5>
-                    </>
+                    </div>
                     <img src={Chevron} alt="chevron" className="chevron" />
                   </div>
                 ))
