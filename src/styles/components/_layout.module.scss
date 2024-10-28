@@ -1,0 +1,49 @@
+@import "../variables";
+
+.layout {
+  width: 100%;
+
+  .layout-children {
+    margin: 0 auto;
+    margin-top: 60px;
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+    justify-content: space-between;
+    padding: 0 40px;
+
+    .content {
+      min-height: 500px;
+      width: 100%;
+      overflow: hidden;
+      max-width: 100%;
+    }
+  }
+
+  .section-title {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 32px;
+  }
+}
+
+.divider {
+  margin: 16px 0px;
+  border: 1px solid $grey;
+}
+
+@media screen and (min-width: 1280px) {
+  .layout .layout-children {
+    max-width: 1115px;
+
+    .content {
+      max-width: 815px;
+    }
+  }
+}
+
+@media screen and (max-width: 970px) {
+  .layout .layout-children .content {
+    max-width: 100%;
+  }
+}

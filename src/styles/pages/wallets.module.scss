@@ -1,0 +1,196 @@
+@import "../variables";
+
+.wallet-page {
+  // width: 100%;
+  height: 100%;
+
+  .wallet-content {
+    min-height: 400px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .page-top-controller {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 32px;
+  }
+
+  .balance {
+    display: flex;
+    gap: 4px;
+  }
+
+  .new-wallet-action {
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .wallet-grid {
+    padding: 0 4px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: safe;
+    gap: 43px;
+    flex-wrap: wrap;
+  }
+
+  .wallet-card {
+    width: 240px;
+    max-width: 240px;
+    height: 150px;
+    max-height: 150px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    background-color: $black;
+    background-image: url("../../assets/top-card-design.svg"),
+      url("../../assets/card-design.svg"); /* Add your image path here */
+    background-size: cover; /* Ensures the image covers the entire element */
+    background-position: center left -50px, center bottom -30px; /* Positions the image 10px above the bottom */
+    background-repeat: no-repeat;
+    box-shadow: 0px 10px 20px 0px #8a8a8a80;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .token-icon {
+      width: 34px;
+      height: 34px;
+    }
+
+    .chevron {
+      width: 32px;
+      height: 32px;
+      align-self: flex-end;
+    }
+
+    h5 {
+      font-size: 16px;
+      font-weight: 600;
+      color: $white;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      span {
+        color: #9aa5b1;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+.add-new-wallet {
+  padding: 0px 16px 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  min-height: 90vh;
+  justify-content: center;
+  align-items: center;
+
+  .form-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h4 {
+      font-size: 24px;
+      line-height: 32px;
+      font-weight: 500;
+    }
+
+    img {
+      cursor: pointer;
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  p {
+    font-size: 18px;
+    color: $grey-60;
+  }
+
+  label {
+    font-size: 16px;
+    font-weight: 500;
+    color: $grey-60;
+  }
+
+  .form-container {
+    height: 90vh;
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .form-error {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #e0b3b2;
+    background: #fff4f4;
+    padding: 13px 20px;
+    height: 50px;
+    border-radius: 8px;
+    box-sizing: border-box;
+
+    .group-1 {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    span {
+      font-size: 16px;
+      font-weight: 500;
+      color: #d72c0d;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    label {
+      font-size: 16px;
+      font-weight: 500;
+      color: $black;
+    }
+
+    button {
+      align-self: center;
+    }
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .wallet-page .wallet-grid {
+    gap: 33px;
+  }
+}
+
+@media screen and (max-width: 970px) {
+  .wallet-page .wallet-grid {
+    gap: 20px;
+    justify-content: space-between;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .wallet-page .wallet-grid {
+    .wallet-card {
+      width: 220px;
+    }
+  }
+}
