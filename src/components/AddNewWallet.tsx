@@ -8,9 +8,8 @@ import React, {
 } from "react";
 import Modal from "./shared/Modal";
 import { Close, ErrorIcon2, RedCloseIcon } from "../assets";
-import Dropdown from "./Dropdown";
 import Button from "./shared/Button";
-import { Account, AccountArray, Wallet } from "../types";
+import { AccountArray, Wallet } from "../types";
 import { fetchData } from "../utils";
 import Loader from "./shared/Loader";
 import Error from "./Error";
