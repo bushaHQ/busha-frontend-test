@@ -6,7 +6,7 @@ interface FetchOptions {
   method: "GET" | "POST";
   url: string;
   body?: any;
-  successfulAction?: any;
+  successfulAction?: () => void;
 }
 
 export const fetchData = async ({
@@ -32,7 +32,6 @@ export const fetchData = async ({
 
     if (response.ok) {
       const result = await response.json();
-      console.log("🚀 ~ result:", result);
       successfulAction?.();
 
       if (setData && isMountedRef.current) {
