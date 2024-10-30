@@ -1,11 +1,60 @@
+@font-face {
+  font-family: 'Aribau-Grotesk';
+  src:url(./assets/fonts/aribau-grotesk/AribauGrotesk-Lt-300.otf) format('otf');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Aribau Grotesk';
+  src: url(./assets/fonts/aribau-grotesk/AribauGrotesk-Rg-400.otf);
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Aribau-Grotesk';
+  src:url(./assets/fonts/aribau-grotesk/AribauGrotesk-Md-500.otf) format('otf');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Aribau-Grotesk';
+  src: url(./assets/fonts/aribau-grotesk/AribauGrotesk-Bd-700.otf) format('otf');
+  font-weight: 700;
+}
+
+
+*{
+  box-sizing: border-box;
+  list-style: none;
+  padding: 0;
+  margin:0;
+  font-family: 'Aribau Grotesk', sans-serif;
+}
+
 body {
   margin: 0;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Aribau Grotesk', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+button{
+  cursor:pointer;
+  outline:none;
+  border:none;
+  background:transparent;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.center-on-page {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  align-items: center;
+}
+
+
