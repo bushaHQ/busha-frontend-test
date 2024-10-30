@@ -1,6 +1,5 @@
-import React from "react";
-import BushaLogo from "../../../assets/logo/busha.svg";
-import Image from "../../shared/Image";
+import BushaLogo from "assets/logo/busha.svg";
+import Image from "components/others/Image";
 import { Container } from "../AppWrapper";
 import { HeaderWrapper } from "./Header.style";
 

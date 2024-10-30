@@ -1,12 +1,7 @@
-import React from "react";
 import styled from "styled-components";
-import Arrow from "../../assets/icons/arrow-down.svg";
+import Arrow from "assets/icons/arrow-down.svg";
 
-type SelectProps = {
-  label: string;
-};
-
-const SelectWrapper = styled.div`
+export const SelectWrapper = styled.div`
   label {
     display: block;
     font-size: 16px;
@@ -38,15 +33,3 @@ const SelectWrapper = styled.div`
     background-position-x: 96%;
   }
 `;
-
-export default function Select({ label }: SelectProps) {
-  return (
-    <SelectWrapper>
-      <label>{label}</label>
-      <select>
-        <option>BTC</option>
-        <option>DOGT</option>
-      </select>
-    </SelectWrapper>
-  );
-}

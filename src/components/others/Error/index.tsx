@@ -1,10 +1,9 @@
-import React from "react";
 import styled from "styled-components";
-import Image from "./Image";
-import ErrorSvg from "../../assets/icons/error.svg";
-import Error2Svg from "../../assets/icons/error-2.svg";
-import Cancel2 from "../../assets/icons/cancel-2.svg";
-import Button from "./Button";
+import Button from "components/form/Button";
+import ErrorSvg from "assets/icons/error.svg";
+import Error2Svg from "assets/icons/error-2.svg";
+import Cancel2 from "assets/icons/cancel-2.svg";
+import Image from "../Image";
 
 type ErrorProps = {
   message: string;

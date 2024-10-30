@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const AddWalletWrapper = styled.div`
   padding: 70px 20px;
+  min-height: 100vh;
+  height: 100%;
 
   .add-w-heading {
     display: flex;

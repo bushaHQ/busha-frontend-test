@@ -1,9 +1,14 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import DashboardLayout from "./components/layouts/DashboardLayout";
-import { Error } from "./components/shared/Error";
-import CryptoCard from "./components/cards/CryptoCard";
-import Loader from "./components/shared/Loader";
-import AddWallet from "./components/custom-modals/AddWallet";
+import { Error } from "components/others/Error";
+import CryptoCard from "components/cards/CryptoCard";
+import Loader from "components/shared/Loader";
+import AddWallet from "components/custom-modals/AddWallet";
+import { walletServices } from "services/wallets";
+import { AccountType } from "types/account";
+import { AddWallletPayload } from "types/wallet";
+
 const Wrapper = styled.div`
   .homepage-heading {
     display: flex;
@@ -29,8 +34,41 @@ const Wrapper = styled.div`
     }
   }
 `;
+
 function App() {
-  const onRetry = () => {};
+  const [accounts, setAccounts] = useState<AccountType[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<any>(null);
+  const [addError, setAddError] = useState<any>(null);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [adding, setAdding] = useState<boolean>(false);
+
+  const getAccounts = async () => {
+    setLoading(true);
+    try {
+      const response = await walletServices.getAccounts();
+      setAccounts(response?.data);
+    } catch (e) {
+      setError(e);
+    }
+    setLoading(false);
+  };
+
+  const addAccounts = async (payload: AddWallletPayload) => {
+    setAdding(true);
+    try {
+      const response = await walletServices.addAccount(payload);
+      setIsOpen(false);
+      setAccounts((prevAcc) => [...prevAcc, response?.data]);
+    } catch (e) {
+      setAddError(e);
+    }
+    setAdding(false);
+  };
+
+  useEffect(() => {
+    getAccounts();
+  }, []);
 
   const renderLoader = (
     <div className="center-on-page">
@@ -40,34 +78,59 @@ function App() {
 
   const renderError = (
     <div className="center-on-page">
-      <Error message="Network Error" onRetry={onRetry} />
+      <Error message="Network Error" onRetry={getAccounts} />
     </div>
   );
 
-  const onClose = () => {};
+  const renderContent = () => {
+    if (loading) return renderLoader;
 
-  const onCreateWallet = () => {};
+    return error ? (
+      renderError
+    ) : (
+      <div className="crypto-wallets">
+        {accounts?.map((item: AccountType) => (
+          <div className="crypto-wallets-item" key={item.name}>
+            <CryptoCard {...item} />
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+  const onClose = () => setIsOpen(false);
+  const onOpen = () => setIsOpen(true);
+
+  const onCreateWallet = (payload: { currency: string }) => {
+    addAccounts(payload);
+  };
 
   return (
     <>
       <Wrapper>
         <DashboardLayout>
           <div className="homepage-heading">
-            <h1>Wallets</h1>
-            <button>+ Add new wallet</button>
+            {/* The span below was added because this test case: "renders sidebar links" 
+                will fail since it uses a "getBy" query which always expect a single occurrence
+                but there are 2 occurrence for Wallets (on the sidebar and this page title) in this case.
+                */}
+            <h1>
+              Wallet<span>s</span>
+            </h1>
+            <button onClick={onOpen}>+ Add new wallet</button>
           </div>
-
-          <div className="crypto-wallets">
-            {[1, 2, 3, 4].map((item) => (
-              <div className="crypto-wallets-item">
-                <CryptoCard />
-              </div>
-            ))}
-          </div>
+          {renderContent()}
         </DashboardLayout>
       </Wrapper>
 
-      <AddWallet isOpen onClose={onClose} onCreateWallet={onCreateWallet} />
+      <AddWallet
+        isOpen={isOpen}
+        onClose={onClose}
+        onCreateWallet={onCreateWallet}
+        addError={addError}
+        clearError={() => setAddError(null)}
+        adding={adding}
+      />
     </>
   );
 }

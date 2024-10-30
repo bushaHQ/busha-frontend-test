@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Vector from "../../../assets/vectors/card-vector.svg";
+import Vector from "assets/vectors/card-vector.svg";
 
 export const CryptoCardWrapper = styled.div`
   background-color: #111111;
