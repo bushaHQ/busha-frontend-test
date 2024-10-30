@@ -6,7 +6,7 @@ export const SidebarWrapper = styled.div`
 
     .sidebar-link-item {
       font-size: 16px;
-      font-weight: 500;
+      font-weight: 400;
       line-height: 16px;
       list-style: none;
       padding: 14px 20px;
@@ -18,7 +18,7 @@ export const SidebarWrapper = styled.div`
     .sidebar-link-item:hover {
       background: #f5f7fa;
       border-radius: 3px;
-      font-weight: 700;
+      font-weight: 500;
       color: #000000;
     }
   }
