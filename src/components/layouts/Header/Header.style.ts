@@ -1,14 +1,16 @@
 import styled from "styled-components";
 
 export const HeaderWrapper = styled.div`
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
   .header-content {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 10px 0;
-    height: 56px;
+    gap: 10px;
+    height: fit-content;
+    flex-wrap: wrap;
 
     .busha-logo {
       width: 120.37px;

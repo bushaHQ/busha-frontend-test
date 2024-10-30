@@ -30,4 +30,10 @@ export const PageContainer = styled.div`
       color: #000000;
     }
   }
+
+  @media (max-width: 768px) {
+    .main-content-left {
+      display: none;
+    }
+  }
 `;

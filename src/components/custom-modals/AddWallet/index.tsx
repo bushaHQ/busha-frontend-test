@@ -36,7 +36,7 @@ export default function AddWallet({
     setLoading(true);
     try {
       const response = await walletServices.getWallets();
-      setWallets(response?.data);
+      setWallets(response);
     } catch (e) {
       setError(e);
     }

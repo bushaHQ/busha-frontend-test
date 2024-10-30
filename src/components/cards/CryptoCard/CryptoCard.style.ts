@@ -7,7 +7,6 @@ export const CryptoCardWrapper = styled.div`
   padding: 20px;
   height: 150px;
   position: relative;
-
   background-image: url(${Vector});
   background-repeat: no-repeat;
   background-size: contain;
@@ -25,10 +24,15 @@ export const CryptoCardWrapper = styled.div`
       font-weight: 400;
       line-height: 14px;
     }
+
+    img {
+      border-radius: 50%;
+      width: 34px;
+      height: 34px;
+    }
   }
 
   .wallet-balance {
-    // font-family: Inter;
     font-size: 16px;
     font-weight: 500;
     line-height: 16px;
@@ -55,4 +59,16 @@ export const CryptoCardWrapper = styled.div`
       height: 20px;
     }
   }
+`;
+
+export const DummyCryptoLogo = styled.div`
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 20px;
 `;

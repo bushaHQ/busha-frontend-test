@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import DashboardLayout from "./components/layouts/DashboardLayout";
+import DashboardLayout from "components/layouts/DashboardLayout";
 import { Error } from "components/others/Error";
 import CryptoCard from "components/cards/CryptoCard";
 import Loader from "components/shared/Loader";
@@ -12,6 +12,7 @@ import { AddWallletPayload } from "types/wallet";
 const Wrapper = styled.div`
   .homepage-heading {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     gap: 20px;
@@ -33,6 +34,22 @@ const Wrapper = styled.div`
       width: calc((100% / 3) - (70px / 3));
     }
   }
+
+  @media (max-width: 1000px) {
+    .crypto-wallets {
+      .crypto-wallets-item {
+        width: calc((100% / 2) - (35px / 2));
+      }
+    }
+  }
+
+  @media (max-width: 500px) {
+    .crypto-wallets {
+      .crypto-wallets-item {
+        width: 100%;
+      }
+    }
+  }
 `;
 
 function App() {
@@ -47,7 +64,7 @@ function App() {
     setLoading(true);
     try {
       const response = await walletServices.getAccounts();
-      setAccounts(response?.data);
+      setAccounts(response);
     } catch (e) {
       setError(e);
     }
@@ -59,7 +76,7 @@ function App() {
     try {
       const response = await walletServices.addAccount(payload);
       setIsOpen(false);
-      setAccounts((prevAcc) => [...prevAcc, response?.data]);
+      setAccounts((prevAcc) => [...prevAcc, response]);
     } catch (e) {
       setAddError(e);
     }

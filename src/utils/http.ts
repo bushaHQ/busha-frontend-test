@@ -29,10 +29,7 @@ function Http(
     const data = await response.json();
 
     if (response.ok) {
-      return Promise.resolve({
-        ok: response.ok,
-        data,
-      });
+      return Promise.resolve(data);
     }
 
     switch (response.status) {
