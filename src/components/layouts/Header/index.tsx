@@ -14,7 +14,7 @@ export default function Header({ fullname }: HeaderProps) {
       <Container>
         <div className="header-content">
           <Image src={BushaLogo} alt="Busha Logo" className="busha-logo" />
-          <div className="profile-area">
+          <div className="profile-area color-grey1">
             <div className="user-avatar">{initials}</div>
             <h4 className="user-fullname">{fullname}</h4>
           </div>

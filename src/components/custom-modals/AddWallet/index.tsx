@@ -33,6 +33,7 @@ export default function AddWallet({
   const [currency, setCurrency] = useState<string>("");
 
   const getWallets = async () => {
+    setError(null);
     setLoading(true);
     try {
       const response = await walletServices.getWallets();
@@ -81,12 +82,12 @@ export default function AddWallet({
     ) : (
       <div>
         <div className="add-w-heading">
-          <h2>Add new wallet</h2>
+          <h2 className="color-black">Add new wallet</h2>
           <button type="button" onClick={onClose} aria-label="Close Button">
             <Image src={CancelSvg} alt="Close Button" />
           </button>
         </div>
-        <p className="add-w-description">
+        <p className="add-w-description color-grey1">
           The crypto wallet will be created instantly and be available in your
           list of wallets.
         </p>

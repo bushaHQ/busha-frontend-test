@@ -14,12 +14,10 @@ export const AddWalletWrapper = styled.div`
       font-size: 24px;
       font-weight: 500;
       line-height: 32px;
-      color: #000000;
     }
   }
 
   .add-w-description {
-    color: #3e4c59;
     font-size: 18px;
     font-weight: 400;
     line-height: 26px;

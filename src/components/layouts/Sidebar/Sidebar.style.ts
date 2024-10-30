@@ -8,7 +8,6 @@ export const SidebarWrapper = styled.div`
       font-size: 16px;
       font-weight: 500;
       line-height: 16px;
-      color: #3e4c59;
       list-style: none;
       padding: 14px 20px;
       cursor: pointer;

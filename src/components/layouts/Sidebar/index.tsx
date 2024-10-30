@@ -7,7 +7,7 @@ export default function Sidebar() {
     <SidebarWrapper>
       <ul className="sidebar-links-ul">
         {links.map((item: string) => (
-          <li className="sidebar-link-item" key={item}>
+          <li className="sidebar-link-item color-grey1" key={item}>
             {item}
           </li>
         ))}

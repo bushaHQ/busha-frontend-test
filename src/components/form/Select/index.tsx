@@ -19,7 +19,7 @@ export default function Select({
 }: SelectProps) {
   return (
     <SelectWrapper>
-      <label>{label}</label>
+      <label className="color-grey1">{label}</label>
       <select
         defaultValue=""
         onChange={(e) => {

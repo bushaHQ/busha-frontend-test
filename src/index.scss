@@ -1,3 +1,13 @@
+$black: #000;
+$black2: #111111;
+$white: #fff;
+$grey1: #3E4C59;
+$grey2: #9AA5B1;
+$grey3: #F5F7FA;
+$red1: #D72C0D;
+$red2: #FFF4F4;
+
+
 @font-face {
   font-family: 'Aribau-Grotesk';
   src:url(./assets/fonts/aribau-grotesk/AribauGrotesk-Lt-300.otf) format('otf');
@@ -57,4 +67,39 @@ code {
   align-items: center;
 }
 
+.color-black{
+  color:$black;
+}
 
+.color-grey1{
+  color:$grey1;
+}
+
+.color-grey2{
+  color:$grey2;
+}
+
+.color-white{
+  color:$white;
+}
+
+.color-red1{
+  color:$red1;
+}
+
+.bg-white{
+  background: $white;
+}
+
+
+.bg-black2{
+  background: $black2;
+}
+
+.bg-grey3{
+  background:$grey3;
+}
+
+.bg-red2{
+  background:$red2;
+}

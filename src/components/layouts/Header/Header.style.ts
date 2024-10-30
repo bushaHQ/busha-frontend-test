@@ -20,7 +20,6 @@ export const HeaderWrapper = styled.div`
       display: flex;
       align-items: center;
       gap: 10px;
-      color: #3e4c59;
 
       .user-avatar {
         background: #9aa5b14d;

@@ -62,6 +62,7 @@ function App() {
 
   const getAccounts = async () => {
     setLoading(true);
+    setError(null);
     try {
       const response = await walletServices.getAccounts();
       setAccounts(response);
@@ -73,6 +74,7 @@ function App() {
 
   const addAccounts = async (payload: AddWallletPayload) => {
     setAdding(true);
+    setAddError(null);
     try {
       const response = await walletServices.addAccount(payload);
       setIsOpen(false);

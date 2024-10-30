@@ -7,9 +7,14 @@ type ButtonProps = {
   loading?: boolean;
 };
 
-export default function Button({ text, onClick, loading }: ButtonProps) {
+export default function Button({
+  text,
+  onClick,
+  loading,
+  ...rest
+}: ButtonProps) {
   return (
-    <ButtonComponent onClick={onClick}>
+    <ButtonComponent onClick={onClick} {...rest}>
       {loading ? <Loader /> : text}
     </ButtonComponent>
   );

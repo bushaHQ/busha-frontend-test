@@ -21,7 +21,6 @@ const ErrorWrapper = styled.div`
     font-weight: 400;
     line-height: 23.4px;
     text-align: center;
-    color: #3e4c59;
     outline: none;
     margin-bottom: 30px;
   }
@@ -32,7 +31,6 @@ const ToastErrorWrapper = styled.div`
   align-item: center;
   justify-content: space-between;
   gap: 20px;
-  background: #fff4f4;
   height: 50px;
   padding: 10px 20px;
   border-radius: 8px;
@@ -49,7 +47,6 @@ const ToastErrorWrapper = styled.div`
     }
 
     p {
-      color: #d72c0d;
       font-size: 16px;
       font-weight: 500;
       line-height: 24px;
@@ -61,7 +58,7 @@ export function Error({ message, onRetry }: ErrorProps) {
   return (
     <ErrorWrapper>
       <Image src={ErrorSvg} alt="error" className="error-img" />
-      <p className="error-message">{message}</p>
+      <p className="error-message color-grey1">{message}</p>
       <Button text="Try again" onClick={onRetry} />
     </ErrorWrapper>
   );
@@ -69,8 +66,8 @@ export function Error({ message, onRetry }: ErrorProps) {
 
 export function ToastError({ message, onRetry }: ErrorProps) {
   return (
-    <ToastErrorWrapper>
-      <div className="error-content">
+    <ToastErrorWrapper className="color-red2">
+      <div className="error-content color-red1">
         <Image src={Error2Svg} alt="error" className="error" />
         <p className="error-message">{message}</p>
       </div>

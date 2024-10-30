@@ -8,7 +8,6 @@ export const SelectWrapper = styled.div`
     font-weight: 500;
     line-height: 16px;
     margin-bottom: 10px;
-    color: #3e4c59;
   }
 
   select {

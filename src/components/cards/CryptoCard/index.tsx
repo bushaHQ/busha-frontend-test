@@ -6,7 +6,6 @@ import { CryptoCardWrapper, DummyCryptoLogo } from "./CryptoCard.style";
 
 export default function CryptoCard({
   name,
-  imgURL,
   balance,
   type,
   currency,
@@ -15,16 +14,16 @@ export default function CryptoCard({
   /* imgURL - The image links provided are broken */
 
   return (
-    <CryptoCardWrapper>
+    <CryptoCardWrapper className="bg-black2">
       <div className="wallet-asset">
         {localIcon ? (
           <Image src={localIcon} alt="crypto" />
         ) : (
-          <DummyCryptoLogo>{name[0]}</DummyCryptoLogo>
+          <DummyCryptoLogo className="bg-white">{name[0]}</DummyCryptoLogo>
         )}
-        <h3 className="wallet-asset-name">{name}</h3>
+        <h3 className="wallet-asset-name color-grey2">{name}</h3>
       </div>
-      <p className="wallet-balance">
+      <p className="wallet-balance color-white">
         {type === "fiat" && currency === "NGN" && "₦"} <span>{balance}</span>
         {type === "digital" && ` ${currency}`}
       </p>
