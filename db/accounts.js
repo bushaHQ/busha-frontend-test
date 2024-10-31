@@ -38,6 +38,19 @@ const accounts = [
     imgURL:
       "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000379/alice_v3/BTC.svg",
   },
+  {
+    currency: "XLM",
+    hold: "0",
+    pending_balance: "0",
+    balance: "0",
+    name: "Stellar",
+    type: "digital",
+    imgURL:
+      "https://res.cloudinary.com/dwoc5fknz/image/upload/v1593000381/alice_v3/XLM.svg",
+    id: "tRsxUbQ",
+    deposit: true,
+    payout: true,
+  },
 ];
 
 module.exports = accounts;

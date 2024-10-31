@@ -9,7 +9,7 @@ const db = {
 };
 
 try {
-  fs.writeFileSync("server/db.json", JSON.stringify(db, null, 2), "utf8");
+  fs.writeFileSync("db.json", JSON.stringify(db, null, 2), "utf8");
   console.log("Database reset successfully.");
 } catch (err) {
   console.err("Error resetting database.");

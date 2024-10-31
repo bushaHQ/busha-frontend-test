@@ -72,5 +72,6 @@
     "msw": "^0.34.0",
     "nodemon": "^2.0.12",
     "wait-on": "^6.0.0"
-  }
+  },
+  "packageManager": "yarn@1.22.21+sha1.1959a18351b811cdeedbd484a8f86c3cc3bbaf72"
 }
