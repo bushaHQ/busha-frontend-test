@@ -11,7 +11,7 @@ Create the screens for a Busha MVP application.
 
 ## Guidelines
 
-- Fulfil the requirements using TypeScript and React.
+- Satisfy the requirements using TypeScript and React.
 
 - Make use of, but don't change, the dependencies in [`package.json`](package.json).
 
@@ -21,11 +21,12 @@ Create the screens for a Busha MVP application.
 
 ## Submission
 
-When the tests pass, and the UI resembles the figma design, submit a PR and include your email address with a live url 🚀 to your solution .
+When the tests pass, and the UI resembles the figma design, archive your work in a `.zip` file and send it to bolaji@busha.co with your CV. _Do not include `node_modules` in the `.zip` file._
+Or submit a pull request
 
 ## Feedback
 
-Something we can improve? Email bolaji@busha.co or create an issue.
+Something we can improve? Email bolaji@busha.com.
 
 ## Available Scripts
 ### Setup
@@ -42,7 +43,11 @@ Requires [Node](https://nodejs.org) and [NPM](https://www.npmjs.com/).
 yarn start
 ```
 
-[JSON Server](https://github.com/typicode/json-server) will start on port 3090 and [Create React App](https://github.com/facebook/create-react-app) will start on port 3000.
+Use the exposed JSON server [API Docs](https://my-json-server.typicode.com/bushaHQ/busha-frontend-test)
+
+Alternatively, [JSON Server](https://github.com/typicode/json-server) will start on port 3090 and [Create React App](https://github.com/facebook/create-react-app) will start on port 3000.
+
+
 
 ### Reset Database
 ```sh
