@@ -24,7 +24,7 @@ export const handlers = [
     );
   }),
 
-  rest.get(`${BASE_URL}/wallets`, (req, res, ctx) => {
+  rest.get(`${BASE_URL}s`, (req, res, ctx) => {
     return res(ctx.json(wallets));
   }),
 ];
@@ -43,7 +43,7 @@ export const failedPostAccountRequest = rest.post(
 );
 
 export const failedWalletsRequest = rest.get(
-  `${BASE_URL}/wallets`,
+  `${BASE_URL}s`,
   (req, res, ctx) => {
     return res(ctx.status(500));
   }
