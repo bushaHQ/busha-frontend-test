@@ -1,5 +1,13 @@
+import Header from "./components/shared/Header";
+import Main from "./components/shared/Main";
+
 function App() {
-  return <h1>Busha</h1>;
+  return (
+    <>
+      <Header />
+      <Main />
+    </>
+  );
 }
 
 export default App;
