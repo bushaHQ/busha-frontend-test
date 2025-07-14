@@ -16,7 +16,7 @@ test("renders loading spinner while GET '/accounts' is in progress", async () =>
 });
 
 test("renders accounts when GET '/accounts' succeeds with records", async () => {
-  renderRoot();
+  await renderRoot();
 
   await waitForElementToBeRemoved(() => screen.getByLabelText("Loading..."));
 

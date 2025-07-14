@@ -8,25 +8,27 @@
     "@testing-library/user-event": "^12.1.10",
     "@types/jest": "^26.0.15",
     "@types/node": "^12.0.0",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
-    "node-sass": "^6.0.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "caniuse-lite": "1.0.30001727",
+    "minimatch": "^10.0.3",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "react-scripts": "4.0.3",
+    "sass": "^1.89.2",
     "styled-components": "^5.3.0",
-    "typescript": "^4.1.2",
+    "typescript": "^5.8.3",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "build": "react-scripts build",
+    "build": "react-scripts --openssl-legacy-provider build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server:dev": "nodemon server/index.js",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "db:reset": "node scripts/db-reset.js",
-    "start:client": "react-scripts start",
+    "start:client": "react-scripts --openssl-legacy-provider start",
     "start:server": "node server/index.js",
     "wait-on:server": "wait-on http://localhost:3090/",
     "start": "concurrently  \"npm run db:reset && npm run start:server\" \"npm run wait-on:server && npm run start:client\""
@@ -60,18 +62,26 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.28.0",
     "@storybook/addon-actions": "^6.3.7",
     "@storybook/addon-essentials": "^6.3.7",
     "@storybook/addon-links": "^6.3.7",
     "@storybook/node-logger": "^6.3.7",
     "@storybook/preset-create-react-app": "^3.2.0",
     "@storybook/react": "^6.3.7",
+    "@types/minimatch": "^6.0.0",
     "@types/styled-components": "^5.1.12",
+    "babel-loader": "^10.0.0",
     "concurrently": "^6.2.1",
     "json-server": "^0.16.3",
     "msw": "^0.34.0",
-    "nodemon": "^2.0.12",
-    "wait-on": "^6.0.0"
+    "nodemon": "^3.1.10",
+    "wait-on": "^6.0.0",
+    "webpack": "^5.100.1",
+    "webpack-cli": "^6.0.1"
+  },
+  "resolutions": {
+    "caniuse-lite": "1.0.30001632"
   },
   "packageManager": "yarn@1.22.21+sha1.1959a18351b811cdeedbd484a8f86c3cc3bbaf72"
 }
