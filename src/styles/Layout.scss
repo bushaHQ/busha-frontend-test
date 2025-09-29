@@ -1,0 +1,248 @@
+.layout {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  width: 100%;
+  height: 100vh;
+  background-color: #FFFFFF;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 120px;
+  gap: 48px;
+}
+
+.top-navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 64px;
+  background-color: #FFFFFF;
+  box-shadow: 0px 4px 12px 0px #0000000D;
+  padding: 0 24px;
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.top-navbar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.logo-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+.logo-section img {
+  width: 121px;
+  height: 28px;
+}
+
+.user-profile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0;
+  gap: 8px;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  background-color: #E5E7EB;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar span {
+  font-size: 14px;
+  font-weight: bold;
+  color: #1F2937;
+}
+
+.user-name {
+  font-size: 14px;
+  color: #4B5563;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  height: 100%;
+  background-color: #FFFFFF;
+  padding: 16px 0;
+  box-sizing: border-box;
+  transition: transform 0.3s ease-in-out;
+}
+
+.nav-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nav-item {
+  width: 100%;
+  height: 44px;
+  background-color: transparent;
+  font-size: 16px;
+  padding: 0 16px;
+  cursor: pointer;
+  border: none;
+  text-align: left;
+}
+
+.nav-item.active {
+  background-color: #F5F7FA;
+  color: #1F2937;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+  background-color: #FFFFFF;
+  padding: 16px 0 16px 24px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+
+.main-content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 24px;
+}
+
+.main-content-title {
+  font-weight: 900;
+  font-size: 32px;
+  line-height: 32px;
+  letter-spacing: 0%;
+  color: #1F2937;
+  margin: 0;
+}
+
+.add-wallet-button {
+  width: fit-content;
+  height: 40px;
+  background-color: transparent;
+  border: none;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 16px;
+  color: #000000;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin-right: 16px;
+  gap: 8px;
+}
+
+.add-wallet-icon {
+  display: inline;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .add-wallet-text {
+    display: none;
+  }
+
+  .add-wallet-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    background-color: #E5E7EB;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: bold;
+    color: #1F2937;
+  }
+
+  .add-wallet-button {
+    margin-right: 0;
+    gap: 0;
+  }
+}
+
+.title-divider {
+  width: 100%;
+  height: 1px;
+  background-color: #E5E7EB;
+  margin: 6px 0;
+}
+
+.main-content-body {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-top: 20px;
+  overflow-y: auto;
+}
+
+.hamburger-menu {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  margin-right: 16px;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 64px;
+    height: calc(100% - 64px);
+    transform: translateX(-100%);
+    z-index: 1001;
+    box-shadow: 0px 4px 12px 0px #0000000D;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .hamburger-menu {
+    display: block;
+  }
+
+  .user-name {
+    display: none;
+  }
+
+  .main-content {
+    padding: 16px 0;
+  }
+
+  .layout {
+    gap: 0;
+  }
+}

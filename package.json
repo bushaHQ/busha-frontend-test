@@ -1,77 +1,52 @@
 {
-  "name": "busha-fe-test",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "@types/jest": "^26.0.15",
-    "@types/node": "^12.0.0",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
-    "node-sass": "^6.0.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
-    "styled-components": "^5.3.0",
-    "typescript": "^4.1.2",
-    "web-vitals": "^1.0.1"
-  },
-  "scripts": {
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "server:dev": "nodemon server/index.js",
-    "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public",
-    "db:reset": "node scripts/db-reset.js",
-    "start:client": "react-scripts start",
-    "start:server": "node server/index.js",
-    "wait-on:server": "wait-on http://localhost:3090/",
-    "start": "concurrently  \"npm run db:reset && npm run start:server\" \"npm run wait-on:server && npm run start:client\""
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ],
-    "overrides": [
-      {
-        "files": [
-          "**/*.stories.*"
-        ],
-        "rules": {
-          "import/no-anonymous-default-export": "off"
-        }
-      }
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "@storybook/addon-actions": "^6.3.7",
-    "@storybook/addon-essentials": "^6.3.7",
-    "@storybook/addon-links": "^6.3.7",
-    "@storybook/node-logger": "^6.3.7",
-    "@storybook/preset-create-react-app": "^3.2.0",
-    "@storybook/react": "^6.3.7",
-    "@types/styled-components": "^5.1.12",
-    "concurrently": "^6.2.1",
-    "json-server": "^0.16.3",
-    "msw": "^0.34.0",
-    "nodemon": "^2.0.12",
-    "wait-on": "^6.0.0"
-  },
-  "packageManager": "yarn@1.22.21+sha1.1959a18351b811cdeedbd484a8f86c3cc3bbaf72"
+    "name": "busha-fe-test",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@testing-library/user-event": "^12.1.10",
+        "@types/jest": "^26.0.15",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "react-query": "^3.39.3",
+        "styled-components": "^5.3.0",
+        "uuid": "^13.0.0",
+        "web-vitals": "^1.0.1"
+    },
+    "scripts": {
+        "dev:client": "vite",
+        "build:client": "vite build",
+        "preview:client": "vite preview",
+        "test": "vitest",
+        "storybook": "start-storybook -p 6006 -s public",
+        "build-storybook": "build-storybook -s public",
+        "db:reset": "node scripts/db-reset.js",
+        "dev:server": "nodemon server/index.js",
+        "start:server": "node server/index.js",
+        "wait-on:server": "wait-on http://localhost:3090/",
+        "start": "concurrently \"npm run db:reset && npm run dev:server\" \"npm run wait-on:server && npm run dev:client\""
+    },
+    "devDependencies": {
+        "@storybook/addon-actions": "^6.3.7",
+        "@storybook/addon-essentials": "^6.3.7",
+        "@storybook/addon-links": "^6.3.7",
+        "@storybook/node-logger": "^6.3.7",
+        "@storybook/react": "^6.3.7",
+        "@testing-library/jest-dom": "^6.8.0",
+        "@testing-library/react": "^16.3.0",
+        "@types/node": "^22.18.6",
+        "@types/react": "^18.3.24",
+        "@types/react-dom": "^18.3.7",
+        "@types/styled-components": "^5.1.12",
+        "@vitejs/plugin-react": "^5.0.3",
+        "concurrently": "^6.2.1",
+        "jsdom": "^27.0.0",
+        "json-server": "^0.16.3",
+        "msw": "^0.34.0",
+        "nodemon": "^2.0.12",
+        "sass": "^1.93.2",
+        "typescript": "^5.9.2",
+        "vite": "^7.1.7",
+        "vitest": "^3.2.4",
+        "wait-on": "^6.0.0"
+    }
 }

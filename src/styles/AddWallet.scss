@@ -1,0 +1,120 @@
+.add-wallet-modal {
+  padding: 24px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 48px;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: 0%;
+  color: #000000;
+}
+
+.modal-info-text {
+  font-size: 18px;
+  color: #4B5563;
+  margin-bottom: 40px;
+  color: #3E4C59;
+}
+
+.modal-close-btn {
+  background: none;
+  border: none;
+  font-size: 32px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.add-wallet-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+}
+
+.select-label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: -16px;
+  width: 392px;
+}
+
+.wallet-select {
+  width: 392px;
+  height: 48px;
+  padding: 4px 30px 4px 12px;
+  border: 1px solid #CBD2D9;
+  border-radius: 8px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 16px;
+}
+
+.create-wallet-btn {
+  width: 180px;
+  height: 54px;
+  background-color: #000000;
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 27px;
+  cursor: pointer;
+  align-self: center;
+  margin-bottom: 18px;
+}
+
+.create-error-container {
+  width: 392px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #FFF4F4;
+  border: 1px solid #E0B3B2;
+  border-radius: 8px;
+  padding: 13px 20px;
+  margin: 0 auto;
+}
+
+.error-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.error-icon-small {
+  width: 24px;
+  height: 24px;
+}
+
+.create-error-text {
+  color: red;
+  font-weight: 500;
+}
+
+.error-close-btn {
+  background: none;
+  border: none;
+  color: red;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+@media (max-width: 768px) {
+  .select-label,
+  .wallet-select,
+  .create-error-container {
+    width: 100%;
+  }
+}

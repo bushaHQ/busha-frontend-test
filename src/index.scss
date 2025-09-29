@@ -1,8 +1,25 @@
-body {
-  margin: 0;
-  font-family: 'Montserrat', sans-serif;
+@use './styles/Layout.scss';
+@use './styles/AccountList.scss';
+@use './styles/StatusContainer.scss';
+@use './styles/AddWallet.scss';
+@use './styles/WalletDetail.scss';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+html {
+  font-family: 'AribauGrotesk-Regular', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  font: inherit;
 }
 
 code {
